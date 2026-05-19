@@ -8,6 +8,141 @@ body {
     max-width: 1300px;
 }
 
+.special-offer-sidebar {
+    position: fixed;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 9999;
+}
+/* 
+.special-offer-link {
+    position: relative;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 46px;
+    height: 220px;
+    padding: 12px 0;
+    background-color: #c4301c;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 24px;
+    overflow: hidden;
+} */
+.special-offer-link {
+    position: relative;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 56px;
+    height: 220px;
+    padding: 10px 0 8px;
+    background-color: #c4301c;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 24px;
+    overflow: hidden;
+}
+.special-offer-link::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+    transform: translateY(100%);
+    transition: transform 0.35s ease;
+    z-index: 1;
+}
+
+.special-offer-circle,
+.special-offer-close,
+.special-offer-text {
+    position: relative;
+    z-index: 2;
+}
+
+.special-offer-circle {
+    margin-bottom: 4px;
+}
+
+/* .special-offer-circle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    color: #c4301c;
+    font-weight: 700;
+    font-size: 14px;
+   
+  
+} */
+.special-offer-circle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    min-height: 28px;
+    padding: 0 6px;
+    border-radius: 9999px;
+    background-color: #ffffff;
+    color: #c4301c;
+    font-weight: 700;
+    font-size: 14px;
+}
+.offer-number {
+    display: inline-block;
+}
+.special-offer-close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    background-color: transparent;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.special-offer-text {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    white-space: nowrap;
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    line-height: 1.2;
+    text-align: center;
+    margin-top: 4px;
+}
+
+.special-offer-link:hover::before {
+    transform: translateY(0);
+}
+
+.special-offer-link:hover .special-offer-text,
+.special-offer-link:hover .special-offer-circle,
+.special-offer-link:hover .special-offer-close {
+    color: #c4301c;
+}
+
+/* .special-offer-link:hover .special-offer-circle {
+    transform: rotate(90deg);
+} */
+.special-offer-link:hover .special-offer-circle {
+    background-color: #c4301c;
+    color: #fff;
+}
 .border-bottom {
     border-bottom: none !important;
 }
