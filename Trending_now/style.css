@@ -87,7 +87,7 @@ body {
 .special-offer-circle {
     display: inline-flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     width: 36px;
     min-height: 28px;
     padding: 0 6px;
@@ -96,6 +96,12 @@ body {
     color: #c4301c;
     font-weight: 700;
     font-size: 14px;
+    
+    position: relative;
+    flex-direction: column;
+    height: 220px;
+    padding: 6px 0 8px;
+    overflow: hidden;
 }
 .offer-number {
     display: inline-block;
