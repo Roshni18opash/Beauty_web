@@ -1,5 +1,5 @@
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Figtree', sans-serif;
 }
 
 /* Container styling */
@@ -27,9 +27,25 @@ body {
     transition: transform 0.3s ease;
 }
 
-/* For the Sale item, just use the image directly without background color */
+/* For the Sale item, show a badge instead of an image */
 .swiper-slide:first-child .category-img-wrapper {
     background-color: transparent;
+}
+
+.sale-badge {
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    background-color: #c2362d;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Figtree', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
 }
 
 /* The sale image itself should fill the wrapper and not blend */
@@ -51,9 +67,12 @@ body {
 .category-text {
     position: relative;
     display: inline-block;
-    font-size: 14px;
+    font-family: 'Figtree', sans-serif;
+    font-size: 13px;
     font-weight: 500;
     color: #1a3b5c !important;
+    letter-spacing: 0;
+    line-height: 1.2;
     /* Dark blue text as in image */
     margin-top: 10px;
     transition: transform 0.3s ease;
