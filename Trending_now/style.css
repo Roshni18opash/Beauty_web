@@ -22,7 +22,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    width: 46px;
+    padding: 0 10px;
     height: 220px;
     padding: 12px 0;
     background-color: #c4301c;
@@ -39,7 +39,7 @@ body {
     justify-content: space-between;
     width: 56px;
     height: 220px;
-    padding: 10px 0 8px;
+    padding: 6px 0 8px;
     background-color: #c4301c;
     color: #ffffff;
     text-decoration: none;
@@ -99,6 +99,17 @@ body {
 }
 .offer-number {
     display: inline-block;
+    writing-mode: horizontal-tb;
+    transform: none;
+    line-height: 1;
+}
+
+/* Force horizontal number orientation and reset any transforms inherited or applied */
+.special-offer-circle, .special-offer-circle .offer-number {
+    writing-mode: horizontal-tb !important;
+    text-orientation: mixed !important;
+    transform: none !important;
+    -webkit-transform: none !important;
 }
 .special-offer-close {
     display: inline-flex;
@@ -123,7 +134,11 @@ body {
     text-transform: uppercase;
     line-height: 1.2;
     text-align: center;
-    margin-top: 4px;
+    margin-top: 8px;
+    /* subtle rounded background behind the vertical text to increase separation */
+    background: rgba(255,255,255,0.08);
+    padding: 6px 8px;
+    border-radius: 6px;
 }
 
 .special-offer-link:hover::before {
