@@ -1,0 +1,141 @@
+body {
+    font-family: 'Figtree', sans-serif;
+    background-color: #fff;
+}
+
+.trending-section {
+    padding: 60px 20px;
+    max-width: 1300px;
+}
+
+.border-bottom {
+    border-bottom: none !important;
+}
+
+.trending-title {
+    font-size: 32px;
+    font-weight: 400;
+    color: #1a2c3a;
+    font-family: 'Playfair Display', serif;
+}
+
+/* Header link underline effect */
+.shop-trending-link {
+    font-size: 14px;
+    font-weight: 600; /* Made link bold */
+    color: #1a2c3a !important;
+    position: relative;
+    padding-bottom: 4px;
+    display: inline-block;
+}
+
+/* The line element */
+.shop-trending-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0; 
+    width: 0;
+    height: 1px;
+    background-color: #1a2c3a;
+    transition: width 0.3s ease, right 0s ease 0.3s;
+}
+
+/* On hover, line expands from left */
+.shop-trending-link:hover::after {
+    left: 0;
+    right: auto;
+    width: 100%;
+    transition: width 0.3s ease;
+}
+
+.trending-item {
+    display: block;
+    cursor: pointer;
+    background-color: #f7f7f5; /* Updated background color */
+    border-radius: 8px;
+    /* padding: 10px; Removed padding so background doesn't show behind/around image */
+    transition: background-color 0.3s ease;
+    overflow: hidden; /* Ensure image stays inside rounded corners */
+}
+
+.trending-item:hover {
+    background-color: #ebebe9; /* Slightly darker hover color */
+}
+
+.trending-img-wrapper {
+    width: 100%;
+    aspect-ratio: 1 / 1; 
+    /* border-radius: 6px; Removed inner radius to match outer card */
+    overflow: hidden;
+}
+
+.trending-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+/* Text Wrapper */
+.trending-text-wrap {
+    padding: 20px; /* Padding only around text now */
+    position: relative;
+}
+
+.trending-text {
+    font-size: 16px; /* Slightly larger */
+    font-weight: 600; /* Bold text */
+    color: #1a2c3a;
+}
+
+/* The arrow button beside the text */
+.trending-bottom-btn {
+    width: 28px;
+    height: 28px;
+    background-color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #1a2c3a;
+    font-size: 10px; 
+    font-weight: 600; /* Made arrow bold */
+    opacity: 1;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Hover effect on arrow button */
+.trending-bottom-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #1a2c3a;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    z-index: 1;
+}
+
+.trending-bottom-btn span {
+    position: relative;
+    z-index: 2;
+    transition: color 0.3s ease;
+}
+
+.trending-item:hover .trending-bottom-btn::before {
+    transform: translateX(0);
+}
+
+.trending-item:hover .trending-bottom-btn span {
+    color: #fff;
+}
+
+/* Hover Effects on the whole item */
+.trending-item:hover .trending-img {
+    transform: scale(1.05); /* Slight zoom on image hover */
+}
