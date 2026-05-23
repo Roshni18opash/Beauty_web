@@ -1,0 +1,236 @@
+<style>
+	$_section{
+		background-color: {{= &section_bg_color}};
+		.category-slider-container {
+			overflow: hidden;
+			{{if &p_l_r_md == 'custom'}}
+				padding-left: {{= &custom_padding}}px !important;
+				padding-right: {{= &custom_padding}}px !important;
+			{{endif}}
+
+		}
+
+		/* Wrapper for the image */
+		.category-img-wrapper {
+			overflow: hidden;
+			transition: transform 0.3s ease;
+		}
+		/* For the Sale item, show a badge instead of an image */
+		.swiper-slide:first-child .category-img-wrapper {
+			background-color: transparent;
+		}
+
+		.category-img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			border-radius: {{= &image_radious}}%;
+
+		}
+
+		.category-text {
+			position: relative;
+			{{if  &title != 'y' }}
+				display: none;
+			{{endif}}
+			font-family: 'Figtree', sans-serif;
+			font-size: {{= &text_size}}px;
+			font-weight: {{= &text_weight }};
+			color: {{= &text_color}} !important ;
+			letter-spacing: 0;
+			line-height: 1.2;
+			margin-top: 10px;
+			transition: transform 0.3s ease;
+		}
+
+		/* Arrow that comes out from the text on hover */
+		.category-text::after {
+			content: '\276F';
+			position: absolute;
+			right: -10px;
+			top: 50%;
+			transform: translateY(-50%);
+			font-size: 14px;
+			font-weight: 800;
+			line-height: 1;
+			opacity: 0;
+			transition: all 0.3s ease;
+		}
+
+
+		.category-item:hover .category-img-wrapper {
+			transform: scale(1.05);
+		}
+		.swiper-pagination{
+			background-color: {{= &m_indicator_background_color}};
+		}
+
+		.category-item:hover .category-text {
+			transform: translateX(-6px);
+		}
+
+		.category-item:hover .category-text::after {
+			opacity: 1;
+			right: -16px;
+		}
+
+		/* Custom Navigation Buttons */
+		.custom-nav-btn {
+			width: 40px;
+			height: 40px;
+			background-color: rgb(from {{= &arrow_bg_color}} r g b / {{= &arrow_bg_opacity}}%) !important;
+			border-radius: 50%;
+			box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+			top: 40%;
+			margin-top: -20px;
+			color:{{= &arrow_color}} !important;
+			opacity: 0;
+
+			transition: all 0.4s ease;
+			z-index: 10;
+			overflow: hidden;
+		}
+
+		/* Position buttons outside initially */
+		.swiper-button-prev.custom-nav-btn {
+			left: -20px;
+
+		}
+
+		.swiper-button-next.custom-nav-btn {
+			right: -20px;
+
+		}
+
+
+		.category-slider-container:hover .custom-nav-btn.swiper-button-disabled {
+			opacity: 0.35 !important;
+			pointer-events: none !important;
+		}
+
+		.custom-nav-btn.swiper-button-disabled {
+			opacity: 0 !important;
+		}
+
+		/* Swiper default icon size adjustment */
+		.custom-nav-btn::after {
+			font-size: 14px !important;
+			font-weight: bold;
+			position: relative;
+			z-index: 2;
+			transition: color 0.4s ease;
+		}
+
+
+		.category-slider-container:hover .swiper-button-prev.custom-nav-btn {
+			left: 10px;
+			opacity: 1;
+		}
+
+		.category-slider-container:hover .swiper-button-next.custom-nav-btn {
+			right: 10px;
+			opacity: 1;
+		}
+
+		.custom-nav-btn::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background-color: #000;
+			transform: translateX(-100%);
+			transition: transform 0.4s ease;
+			z-index: 1;
+		}
+		.custom-nav-btn:hover::before {
+			transform: translateX(0);
+		}
+		.custom-nav-btn:hover::after {
+			color: #fff;
+
+		}
+	}
+	$_section{
+		{{= &custom_css}}
+	}
+</style>
+
+
+<div class="container">
+	<div class="category-slider-container pt-md{{= &p_md_top}} pb-md-{{= &p_md_bottom}} px-md-{{= &p_l_r_md}}  position-relative">
+		<!-- Swiper -->
+		<div class="swiper mySwiper $_s_class-mySwiper   category-swiper">
+			<div class="swiper-wrapper">
+				{{with each &collection as  $slideimage at $index}}
+					{{use component $slideimage}}
+				{{endwith}}
+			</div>
+		</div>
+
+		<!-- Navigation buttons -->
+		{{if &indicator_options == "indicator" || &indicator_options == "both" || &mobile_indicator_options == "indicator" ||
+			&mobile_indicator_options =="both" }}
+			<div class="swiper-pagination"></div>
+		{{endif}}
+		{{if &indicator_options == "arrow" || &indicator_options == "both" || &mobile_indicator_options == "arrow" || &mobile_indicator_options=="both"}}
+			<div class="swiper-button-prev custom-nav-btn "></div>
+			<div class="swiper-button-next custom-nav-btn"></div>
+		{{endif}}
+	</div>
+</div>
+</div>
+<!-- <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script> -->
+
+
+<script>
+	var swiper = new Swiper(".$_s_class-mySwiper", {
+		slidesPerView: {{= &slidepreview}},
+		spaceBetween: 10,
+		slidesPerGroup: 1,
+		loop: {{= &slide_looping == 'y' ? "true" : "false" }},
+		autoplay: {{= &auto_play == 'y'
+				? "{ delay: " + (&auto_play_speed * 1000) + ", disableOnInteraction: false }"
+				: "false"
+		}},
+
+		breakpoints: {
+			0:{
+				slidesPerView: {{= &item_to_show_mobile }},
+				pagination: {
+					el: ".swiper-pagination",
+					clickable: true,
+					enabled: {{= &mobile_indicator_options == "indicator" || &mobile_indicator_options == "both" ? "true" : "false" }},
+				},
+				navigation: {
+					nextEl: ".swiper-button-next",
+					prevEl: ".swiper-button-prev",
+					enabled: {{= &mobile_indicator_options == "arrow" || &mobile_indicator_options == "both" ? "true" : "false" }},
+				},
+			}
+			768: {
+				slidesPerView:  {{= &slidepreview}},
+				spaceBetween: {{= &spacebetween}},
+				navigation: {
+					nextEl: ".swiper-button-next",
+					prevEl: ".swiper-button-prev",
+					enabled: {{= &indicator_options == "arrow" || &indicator_options == "both" ? "true" : "false" }},
+				},
+				pagination:{
+					el: ".swiper-pagination",
+					enabled: {{= &indicator_options == "indicator" || &indicator_options == "both" ? "true" : "false" }},
+				},
+				mousewheel: true,
+				keyboard: true,
+
+			},
+		},
+	},
+
+	)
+</script>
+
+
+			background-color: rgb(from {{= &arrow_bg_color}} r g b / {{= &arrow_bg_opacity}}%) !important;
+
