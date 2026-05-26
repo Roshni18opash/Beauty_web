@@ -19,7 +19,7 @@ const slides = [
         subHeading: "New Arrivals",
         title: "Nurturing Your<br> Creative Spirit",
         description: "Elevate your makeup game with our professional range of<br>cruelty-free cosmetics.",
-        btnText: "Shop Cosmetics",
+        btnText: "Shop Makeup",
         btnLink: "#",
         image: "images/h3.webp"
     }
