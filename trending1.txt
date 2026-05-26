@@ -1,0 +1,260 @@
+<style>
+	$_section{
+		
+		html {
+			scroll-behavior: smooth;
+		}
+
+		.trending-section {
+			padding: 60px 20px;
+			max-width: 1300px; 
+			/* add */
+			width: 100%;
+			margin: 0 auto;
+		}
+		.trending-title {
+			font-size: 32px;
+			font-weight: 400;
+			color: #1a2c3a;
+			font-family: 'Playfair Display', serif;
+		}
+
+		/* Header link underline effect */
+		.shop-trending-link {
+			font-size: 14px;
+			font-weight: 600;
+			color: #1a2c3a !important;
+			position: relative;
+			padding-bottom: 4px;
+			display: inline-block;
+		}
+
+		/* Underline animation - expands left to right on hover, shrinks right to left on leave */
+		.shop-trending-link::after {
+			content: '';
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			width: 100%;
+			height: 1px;
+			background-color: #1a2c3a;
+			transform: scaleX(0);
+			transform-origin: right center;
+			transition: transform 0.35s ease;
+		}
+
+		/* On hover, line expands from left to right */
+		.shop-trending-link:hover::after {
+			transform-origin: left center;
+			transform: scaleX(1);
+			transition: transform 0.35s ease;
+		}
+
+		.trending-item {
+			cursor: pointer;
+			background-color: {{= &section_bg_color}};
+			border-radius: {{= &image_radius}}px;
+			transition: background-color 0.3s ease;
+			overflow: hidden;
+		}
+
+		.trending-item:hover {
+			background-color: #ebebe9;
+		}
+
+		.trending-img-wrapper {
+			width: 100%;
+			aspect-ratio: 1 / 1;
+			overflow: hidden;
+		}
+
+		.trending-img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			transition: transform 0.4s ease;
+		}
+
+		/* Text Wrapper */
+		.trending-text-wrap {
+			padding: 20px; /* Padding only around text now */
+			position: relative;
+		}
+
+		.trending-text {
+			font-size: {{= &text_size}}px; 
+			font-weight: {{= &text_weight}}; 
+			color: {{= &text_color}};
+			{{if &title != 'y'}}
+				display: none;
+			{{endif}}
+		}
+
+		/* The arrow button beside the text */
+		.trending-bottom-btn {
+			width: 28px;
+			height: 28px;
+			background-color: #fff;
+			border-radius: 50%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			color: #1a2c3a;
+			font-size: 10px;
+			font-weight: 600; /* Made arrow bold */
+			opacity: 1;
+			transition: all 0.3s ease;
+			position: relative;
+			overflow: hidden;
+		}
+
+		/* Hover effect on arrow button */
+		.trending-bottom-btn::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background-color: #1a2c3a;
+			transform: translateX(-100%);
+			transition: transform 0.3s ease;
+			z-index: 1;
+		}
+
+		.trending-bottom-btn span {
+			position: relative;
+			z-index: 2;
+			transition: color 0.3s ease;
+		}
+
+		.trending-item:hover .trending-bottom-btn::before {
+			transform: translateX(0);
+		}
+
+		.trending-item:hover .trending-bottom-btn span {
+			color: #fff;
+		}
+
+		/* Hover Effects on the whole item */
+		.trending-item:hover .trending-img {
+			transform: scale(1.05); /* Slight zoom on image hover */
+		}
+
+		/* Responsive tablet and mobile adjustments */
+		@media (max-width: 992px) {
+			/*================ Tablet styles================= */
+			.trending-section {
+				padding: 40px 16px;
+			}
+
+			.trending-title {
+				font-size: 28px;
+			}
+
+			.shop-trending-link {
+				font-size: 13px;
+			}
+
+			.trending-text-wrap {
+				padding: 16px;
+			}
+		}
+
+		@media (max-width: 767px) {
+			/*===============Mobile styles ================*/
+			.trending-section {
+				padding: 20px 12px;
+			}
+
+			/* Wrap the header title and link */
+			.trending-section > .d-flex {
+				flex-wrap: wrap;
+				gap: 12px;
+			}
+
+			.header-right {
+				width: 100%;
+				text-align: left;
+			}
+
+			.trending-title {
+				font-size: 24px;
+			}
+
+			/* Full-width link with static underline */
+			.shop-trending-link {
+				display: inline-flex;
+				align-items: center;
+				justify-content: space-between;
+				width: 100%;
+				font-size: 14px;
+			}
+
+			.shop-trending-link::after {
+				left: 0;
+				right: auto;
+				width: 100%;
+				transition: none;
+			}
+
+			/* Reduce grid gap */
+			.row.g-4 {
+				gap: 0.75rem;
+			}
+
+			/* Stack text and adjust padding */
+			.trending-text-wrap {
+				flex-direction: column;
+				align-items: flex-start;
+				gap: 8px;
+				padding: 12px 12px 14px;
+			}
+
+			.trending-text {
+				font-size: 14px;
+			}
+
+			/* Taller images for mobile */
+			.trending-img-wrapper {
+				aspect-ratio: 3 / 4;
+				min-height: 240px;
+			}
+
+			/* Hide arrow button */
+			.trending-bottom-btn {
+				display: none;
+			}
+		}
+
+
+
+	}
+	$_section{
+		{{= &custom_css}}
+	}
+
+</style>
+
+
+<div class=" trending-section position-relative ">
+	<!-- Header -->
+	<div class="d-flex justify-content-between align-items-center pt-md-{{= &p_md_top}} pb-md-{{= &p_md_bottom}} px-md-{{= &p_l_r_md}} ">
+		<h2 class="trending-title m-0">Trending Now</h2>
+		<div class="header-right">
+			<a href="#" class="shop-trending-link text-dark text-decoration-none d-flex align-items-center">
+				Shop Trending Now
+				<span class="ms-2" style="font-size: 14px;">&#10095;</span>
+			</a>
+		</div>
+	</div>
+
+	<!-- Grid -->
+	<div class="row {{= &section_spacing}}  row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 g-4">
+
+		{{with each &collection as $slideimage at $index}}
+			{{use component $slideimage}}
+		{{endwith}}
+
+	</div>
+</div>

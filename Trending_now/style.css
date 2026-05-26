@@ -51,21 +51,19 @@ body {
 
 .trending-item {
     cursor: pointer;
-    background-color: #f7f7f5; /* Updated background color */
+    background-color: #f7f7f5; 
     border-radius: 8px;
-    /* padding: 10px; Removed padding so background doesn't show behind/around image */
     transition: background-color 0.3s ease;
-    overflow: hidden; /* Ensure image stays inside rounded corners */
+    overflow: hidden; 
 }
 
 .trending-item:hover {
-    background-color: #ebebe9; /* Slightly darker hover color */
+    background-color: #ebebe9; 
 }
 
 .trending-img-wrapper {
     width: 100%;
     aspect-ratio: 1 / 1; 
-    /* border-radius: 6px; Removed inner radius to match outer card */
     overflow: hidden;
 }
 
