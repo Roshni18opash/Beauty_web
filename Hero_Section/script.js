@@ -1,14 +1,26 @@
 const slides = [
     {
+        subHeading: "Grab The Deals",
         title: "Getting Your<br>Natural Beauty",
+        description: "Our industry leading standards for product safety give<br>you the power to make better.",
+        btnText: "Shop Skincare",
+        btnLink: "#",
         image: "images/h1.webp"
     },
     {
+        subHeading: "Exclusive Collection",
         title: "Finding Your<br>Unique Style",
+        description: "Explore organic ingredients crafted for your daily skincare<br>routine to bring out your glow.",
+        btnText: "Explore Collection",
+        btnLink: "#",
         image: "images/h2.webp"
     },
     {
+        subHeading: "New Arrivals",
         title: "Discover Your<br>Creative Spirit",
+        description: "Elevate your makeup game with our professional range of<br>cruelty-free cosmetics.",
+        btnText: "Shop Cosmetics",
+        btnLink: "#",
         image: "images/h3.webp"
     }
 ];
@@ -17,7 +29,10 @@ let currentSlide = 0;
 const slideDuration = 5000; // 5 seconds
 let slideInterval;
 
+const subHeadingElement = document.querySelector('.sub-heading');
 const titleElement = document.getElementById('hero-title');
+const descriptionElement = document.querySelector('.description');
+const shopBtnElement = document.querySelector('.shop-btn');
 const imageElement = document.getElementById('hero-image');
 const dots = document.querySelectorAll('.dot');
 const prevBtn = document.getElementById('prev-btn');
@@ -32,27 +47,44 @@ function updateSlide(index) {
         currentSlide = index;
     }
 
-    // Add fade out classes
-    titleElement.classList.add('fade-out');
+    // Add exit classes to trigger fade-out animation
+    subHeadingElement.classList.add('slide-exit');
+    titleElement.classList.add('slide-exit');
+    descriptionElement.classList.add('slide-exit');
+    shopBtnElement.classList.add('slide-exit');
     imageElement.classList.add('image-fade-out');
 
-    // Wait for fade out to complete
+    // Wait for fade out to complete (400ms matches exit animation duration)
     setTimeout(() => {
         // Update content
+        subHeadingElement.textContent = slides[currentSlide].subHeading;
         titleElement.innerHTML = slides[currentSlide].title;
+        descriptionElement.innerHTML = slides[currentSlide].description;
+        shopBtnElement.textContent = slides[currentSlide].btnText;
+        shopBtnElement.setAttribute('href', slides[currentSlide].btnLink);
         imageElement.src = slides[currentSlide].image;
 
-        // Remove fade out, add fade in
-        titleElement.classList.remove('fade-out');
+        // Remove exit classes and add enter classes
+        subHeadingElement.classList.remove('slide-exit');
+        titleElement.classList.remove('slide-exit');
+        descriptionElement.classList.remove('slide-exit');
+        shopBtnElement.classList.remove('slide-exit');
         imageElement.classList.remove('image-fade-out');
-        titleElement.classList.add('fade-in');
+
+        subHeadingElement.classList.add('slide-enter');
+        titleElement.classList.add('slide-enter');
+        descriptionElement.classList.add('slide-enter');
+        shopBtnElement.classList.add('slide-enter');
         imageElement.classList.add('image-fade-in');
 
-        // Clean up fade in classes after animation completes
+        // Clean up enter classes after all animations complete (600ms duration + 240ms max delay = 840ms)
         setTimeout(() => {
-            titleElement.classList.remove('fade-in');
+            subHeadingElement.classList.remove('slide-enter');
+            titleElement.classList.remove('slide-enter');
+            descriptionElement.classList.remove('slide-enter');
+            shopBtnElement.classList.remove('slide-enter');
             imageElement.classList.remove('image-fade-in');
-        }, 400); // 400ms matches css transition duration
+        }, 900);
 
     }, 400);
 

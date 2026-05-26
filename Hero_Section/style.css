@@ -156,26 +156,62 @@ body {
 }
 
 /* Transitions for fading */
-.fade-out {
-    opacity: 0;
-    transform: translateY(10px);
-    transition: opacity 0.4s ease, transform 0.4s ease;
+.slide-exit {
+    animation: fadeOutUp 0.4s cubic-bezier(0.4, 0, 1, 1) both;
 }
 
-.fade-in {
-    opacity: 1;
-    transform: translateY(0);
-    transition: opacity 0.4s ease, transform 0.4s ease;
+.slide-enter {
+    animation: fadeInUp 0.6s cubic-bezier(0.25, 1, 0.5, 1) both;
+}
+
+/* Stagger delays for entering slide content */
+.sub-heading.slide-enter {
+    animation-delay: 0ms;
+}
+
+.main-heading.slide-enter {
+    animation-delay: 80ms;
+}
+
+.description.slide-enter {
+    animation-delay: 160ms;
+}
+
+.shop-btn.slide-enter {
+    animation-delay: 240ms;
 }
 
 .image-fade-out {
     opacity: 0;
-    transition: opacity 0.4s ease;
+    transform: scale(0.96);
 }
 
 .image-fade-in {
     opacity: 1;
-    transition: opacity 0.4s ease;
+    transform: scale(1);
+}
+
+/* Keyframes */
+@keyframes fadeOutUp {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-15px);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* Right Image */
@@ -194,6 +230,7 @@ body {
     object-fit: cover;
     object-position: center;
     display: block;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.6s ease;
 }
 
 /* Right Banner */
