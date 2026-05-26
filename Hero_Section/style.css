@@ -190,11 +190,6 @@ body {
     transform: scale(0.96);
 }
 
-.image-fade-in {
-    opacity: 1;
-    transform: scale(1);
-}
-
 /* Keyframes */
 @keyframes fadeOutUp {
     from {
@@ -327,10 +322,6 @@ body {
 
 /* Responsive Design */
 @media (max-width: 1024px) {
-    .main-heading {
-        font-size: 3.5rem;
-    }
-
     .hero-container {
         padding: 40px 20px;
         padding-right: 80px;
