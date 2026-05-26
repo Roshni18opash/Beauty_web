@@ -14,7 +14,8 @@ body {
 
 /* Typography Variables */
 :root {
-    --color-primary-dark: #0f2e3c; /* Dark blue/green for text and button */
+    --color-primary-dark: #0f2e3c;
+    /* Dark blue/green for text and button */
     --color-accent-red: #c13b31;
     --color-text-muted: #6b7280;
     --font-serif: 'Playfair Display', serif;
@@ -24,22 +25,23 @@ body {
 /* Hero Container */
 .hero-container {
     display: flex;
-    max-width: 1536px;
+    max-width: 1440px;
     margin: 0 auto;
-    padding: 40px 20px;
-    padding-right: 120px; /* Increased space for the banner */
+    padding: 50px 30px;
+    padding-right: 90px;
+    /* Space for the narrower side banner */
     align-items: center;
     position: relative;
-    gap: 60px;
+    gap: 4%;
 }
 
 /* Left Content */
 .hero-content {
-    flex: 0 0 38%;
+    flex: 0 0 34%;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding-left: 20px;
+    padding-left: 10px;
 }
 
 .sub-heading {
@@ -52,7 +54,7 @@ body {
 
 .main-heading {
     font-family: var(--font-serif);
-    font-size: 4.2rem;
+    font-size: 3.5rem;
     line-height: 1.15;
     color: var(--color-primary-dark);
     margin-bottom: 24px;
@@ -61,11 +63,13 @@ body {
 
 .description {
     font-family: var(--font-sans);
-    font-size: 1rem;
-    color: var(--color-text-muted);
-    line-height: 1.6;
+    font-size: 1.02rem;
+    color: #5a6f80;
+    line-height: 1.7;
+    letter-spacing: 0.2px;
+    font-weight: 400;
     margin-bottom: 40px;
-    max-width: 90%;
+    max-width: 100%;
 }
 
 .shop-btn {
@@ -197,6 +201,7 @@ body {
         opacity: 1;
         transform: translateY(0);
     }
+
     to {
         opacity: 0;
         transform: translateY(-15px);
@@ -208,6 +213,7 @@ body {
         opacity: 0;
         transform: translateY(20px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -216,12 +222,12 @@ body {
 
 /* Right Image */
 .hero-image-wrapper {
-    flex: 0 0 60%;
+    flex: 0 0 62%;
     position: relative;
     border-radius: 16px;
     overflow: hidden;
-    height: 520px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.06);
+    height: 460px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06);
 }
 
 .hero-image {
@@ -236,43 +242,44 @@ body {
 /* Right Banner */
 .side-banner {
     position: absolute;
-    right: 11px;
+    right: -24px;
     top: 50%;
     transform: translateY(-50%);
     background: linear-gradient(to top, white 50%, var(--color-accent-red) 50%);
     background-size: 100% 200%;
     background-position: top;
     color: white;
-    width: 48px;
+    width: 36px;
     height: auto;
-    padding: 20px 0;
+    padding: 16px 0;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 20px;
+    gap: 16px;
     border-top-left-radius: 6px;
     border-bottom-left-radius: 6px;
     z-index: 100;
-    transition: background-position 0.4s ease, color 0.3s ease;
+    transition: right 0.3s cubic-bezier(0.25, 1, 0.5, 1), background-position 0.4s ease, color 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
 }
 
 .side-banner:hover {
+    right: 0;
     background-position: bottom;
     color: var(--color-accent-red);
-    box-shadow: -4px 0 15px rgba(0,0,0,0.08);
+    box-shadow: -4px 0 15px rgba(0, 0, 0, 0.08);
 }
 
 .badge {
     background-color: white;
     color: var(--color-primary-dark);
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 0.85rem;
+    font-size: 0.7rem;
     font-weight: bold;
     transition: background-color 0.3s ease, color 0.3s ease;
     transform: rotate(90deg);
@@ -286,9 +293,9 @@ body {
 .banner-text {
     writing-mode: vertical-rl;
     text-orientation: mixed;
-    font-size: 1.05rem;
+    font-size: 0.8rem;
     font-weight: 500;
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
     white-space: nowrap;
     margin: 0;
 }
@@ -301,8 +308,13 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 8px;
+    padding: 4px;
     transition: opacity 0.2s ease, color 0.3s ease;
+}
+
+.close-banner svg {
+    width: 16px;
+    height: 16px;
 }
 
 .side-banner:hover .close-banner {
@@ -318,15 +330,18 @@ body {
     .main-heading {
         font-size: 3.5rem;
     }
+
     .hero-container {
         padding: 40px 20px;
         padding-right: 80px;
         gap: 30px;
     }
+
     .hero-image-wrapper {
         flex: 0 0 50%;
         height: 480px;
     }
+
     .hero-content {
         flex: 0 0 45%;
     }
@@ -334,9 +349,11 @@ body {
 
 @media (max-width: 768px) {
     .hero-container {
-        flex-direction: column;
+        flex-direction: column-reverse;
         padding: 40px 20px;
+        gap: 30px;
     }
+
     .hero-content {
         flex: none;
         width: 100%;
@@ -344,14 +361,17 @@ body {
         text-align: center;
         align-items: center;
     }
+
     .description {
         max-width: 100%;
     }
+
     .hero-image-wrapper {
         flex: none;
         width: 100%;
-        height: 400px;
+        height: 350px;
     }
+
     .side-banner {
         display: none;
     }

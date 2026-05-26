@@ -8,16 +8,16 @@ const slides = [
         image: "images/h1.webp"
     },
     {
-        subHeading: "Exclusive Collection",
+        subHeading: "Take The Chance",
         title: "Finding Your<br>Unique Style",
-        description: "Explore organic ingredients crafted for your daily skincare<br>routine to bring out your glow.",
-        btnText: "Explore Collection",
+        description: "Our industry leading standards for product safety give<br>you the power to make better.",
+        btnText: "Shop Body",
         btnLink: "#",
         image: "images/h2.webp"
     },
     {
         subHeading: "New Arrivals",
-        title: "Discover Your<br>Creative Spirit",
+        title: "Nurturing Your<br> Creative Spirit",
         description: "Elevate your makeup game with our professional range of<br>cruelty-free cosmetics.",
         btnText: "Shop Cosmetics",
         btnLink: "#",
@@ -96,13 +96,13 @@ function updateDots() {
     dots.forEach((dot, idx) => {
         dot.classList.remove('active');
         dot.classList.remove('animate-progress');
-        
+
         if (idx === currentSlide) {
             dot.classList.add('active');
-            
+
             // Force reflow to restart animation reliably
             void dot.offsetWidth;
-            
+
             // Add animate-progress class after a tiny delay to ensure transition triggers from 0
             setTimeout(() => {
                 dot.classList.add('animate-progress');
