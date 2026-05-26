@@ -2,23 +2,28 @@ const slides = [
     {
         subHeading: "Grab The Deals",
         title: "Getting Your<br>Natural Beauty",
-        description: "Our industry leading standards for product safety give<br>you the power to make better.",
+        description:
+            "Our industry leading standards for product safety give<br>you the power to make better.",
         btnText: "Shop Skincare",
         btnLink: "#",
         image: "images/h1.webp"
     },
+
     {
         subHeading: "Take The Chance",
         title: "Finding Your<br>Unique Style",
-        description: "Our industry leading standards for product safety give<br>you the power to make better.",
+        description:
+            "Our industry leading standards for product safety give<br>you the power to make better.",
         btnText: "Shop Body",
         btnLink: "#",
         image: "images/h2.webp"
     },
+
     {
         subHeading: "New Arrivals",
-        title: "Nurturing Your<br> Creative Spirit",
-        description: "Elevate your makeup game with our professional range of<br>cruelty-free cosmetics.",
+        title: "Nurturing Your<br>Creative Spirit",
+        description:
+            "Elevate your makeup game with our professional range of<br>cruelty-free cosmetics.",
         btnText: "Shop Makeup",
         btnLink: "#",
         image: "images/h3.webp"
@@ -26,108 +31,141 @@ const slides = [
 ];
 
 let currentSlide = 0;
-const slideDuration = 5000; // 5 seconds
-let slideInterval;
+let interval;
 
-// DOM Elements
-const subHeadingElement = document.querySelector('.sub-heading');
-const titleElement = document.getElementById('hero-title');
-const descriptionElement = document.querySelector('.description');
-const shopBtnElement = document.querySelector('.shop-btn');
-const imageElement = document.getElementById('hero-image');
-const dots = document.querySelectorAll('.dot');
-const prevBtn = document.getElementById('prev-btn');
-const nextBtn = document.getElementById('next-btn');
+/* Elements */
 
-// Group text elements to simplify staggered animations
-const animatedTextElements = [subHeadingElement, titleElement, descriptionElement, shopBtnElement];
+const subHeading = document.querySelector(".sub-heading");
+const title = document.getElementById("hero-title");
+const description = document.querySelector(".description");
+const button = document.querySelector(".shop-btn");
+const image = document.getElementById("hero-image");
 
-function updateSlide(index) {
-    if (index < 0) {
-        currentSlide = slides.length - 1;
-    } else if (index >= slides.length) {
-        currentSlide = 0;
-    } else {
-        currentSlide = index;
-    }
+const dots = document.querySelectorAll(".dot");
 
-    // Trigger exit animation for text elements and image
-    animatedTextElements.forEach(el => el.classList.add('slide-exit'));
-    imageElement.classList.add('image-fade-out');
+const prevBtn = document.getElementById("prev-btn");
+const nextBtn = document.getElementById("next-btn");
 
-    // Wait for exit animation to complete (400ms matches CSS exit duration)
-    setTimeout(() => {
-        // Update slide texts, links, and image source
-        subHeadingElement.textContent = slides[currentSlide].subHeading;
-        titleElement.innerHTML = slides[currentSlide].title;
-        descriptionElement.innerHTML = slides[currentSlide].description;
-        shopBtnElement.textContent = slides[currentSlide].btnText;
-        shopBtnElement.href = slides[currentSlide].btnLink;
-        imageElement.src = slides[currentSlide].image;
+/* Render Slide */
 
-        // Transition elements to enter animation state
-        animatedTextElements.forEach(el => {
-            el.classList.remove('slide-exit');
-            el.classList.add('slide-enter');
-        });
-        imageElement.classList.remove('image-fade-out');
+function renderSlide() {
 
-        // Clean up enter classes once animations complete (900ms covers duration + staggered delays)
-        setTimeout(() => {
-            animatedTextElements.forEach(el => el.classList.remove('slide-enter'));
-        }, 900);
+    const slide = slides[currentSlide];
 
-    }, 400);
+    subHeading.innerHTML = slide.subHeading;
+    title.innerHTML = slide.title;
+    description.innerHTML = slide.description;
 
-    // Update navigation dots progress indicator
+    button.innerHTML = slide.btnText;
+    button.href = slide.btnLink;
+
+    image.src = slide.image;
+
+    animateContent();
+
     updateDots();
 }
 
+/* Animation */
+
+function animateContent() {
+
+    const elements = [
+        subHeading,
+        title,
+        description,
+        button,
+        image
+    ];
+
+    elements.forEach(el => {
+
+        el.classList.remove("fade-in");
+
+        void el.offsetWidth;
+
+        el.classList.add("fade-in");
+    });
+}
+
+/* Dots */
+
 function updateDots() {
-    dots.forEach((dot, idx) => {
-        dot.classList.remove('active');
-        dot.classList.remove('animate-progress');
 
-        if (idx === currentSlide) {
-            dot.classList.add('active');
+    dots.forEach((dot, index) => {
 
-            // Force reflow to restart animation reliably
-            void dot.offsetWidth;
+        dot.classList.remove("active", "animate");
 
-            // Add animate-progress class after a tiny delay to ensure transition triggers from 0
+        if (index === currentSlide) {
+
+            dot.classList.add("active");
+
             setTimeout(() => {
-                dot.classList.add('animate-progress');
+                dot.classList.add("animate");
             }, 10);
         }
     });
-
-    resetTimer();
 }
+
+/* Next */
 
 function nextSlide() {
-    updateSlide(currentSlide + 1);
+
+    currentSlide =
+        (currentSlide + 1) % slides.length;
+
+    renderSlide();
+
+    resetInterval();
 }
+
+/* Previous */
 
 function prevSlide() {
-    updateSlide(currentSlide - 1);
+
+    currentSlide =
+        (currentSlide - 1 + slides.length) %
+        slides.length;
+
+    renderSlide();
+
+    resetInterval();
 }
 
-function resetTimer() {
-    clearInterval(slideInterval);
-    slideInterval = setInterval(nextSlide, slideDuration);
+/* Auto Slide */
+
+function startSlider() {
+
+    interval = setInterval(nextSlide, 5000);
 }
 
-// Event Listeners
-prevBtn.addEventListener('click', prevSlide);
-nextBtn.addEventListener('click', nextSlide);
+function resetInterval() {
 
-dots.forEach((dot, idx) => {
-    dot.addEventListener('click', () => {
-        if (currentSlide !== idx) {
-            updateSlide(idx);
-        }
+    clearInterval(interval);
+
+    startSlider();
+}
+
+/* Events */
+
+nextBtn.addEventListener("click", nextSlide);
+
+prevBtn.addEventListener("click", prevSlide);
+
+dots.forEach((dot, index) => {
+
+    dot.addEventListener("click", () => {
+
+        currentSlide = index;
+
+        renderSlide();
+
+        resetInterval();
     });
 });
 
-// Initialize first slide progress animation and timer
-updateDots();
+/* Init */
+
+renderSlide();
+
+startSlider();
