@@ -1,0 +1,662 @@
+detail:  Our industry leading standards for product safety give  you the power to make better  
+subheading:Grab The Deal
+main heading:Getting Your Natural Beauty
+btn:shop body
+
+description:
+subheading:
+main heading:
+btn:
+
+<style>
+	/* SECTION BACKGROUND */
+	$_section{
+
+
+		font-family: 'Inter', sans-serif;
+		background: {{= &section_bg}};
+		color: #333;
+		overflow-x: hidden;
+
+
+		/* Hero */
+
+		.hero-container {
+
+			max-width: 1440px;
+
+			margin: auto;
+
+			padding: 50px 30px;
+			padding-right: 90px;
+
+			display: flex;
+			align-items: center;
+			gap: 4%;
+
+			position: relative;
+
+			overflow: hidden;
+		}
+
+		/* Left Content */
+
+		.hero-content {
+			flex: 0 0 34%;
+
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+		}
+
+		.sub-heading {
+			font-family: 'Playfair Display', serif;
+			font-size: {{= &sub_heading_size}}px;
+			font-style: italic;
+			color: {{= &sub_heading_color}};
+			font-weight: {{= &sub_heading_weight}};
+			margin-bottom: 20px;
+		}
+
+		.main-heading {
+			font-family: 'Playfair Display', serif;
+			font-size: {{= &main_heading_size}}px;
+			line-height: 1.15;
+			font-weight: {{= &main_heading_weight}};
+
+			color: {{= &main_heading_color}};
+
+			margin-bottom: 24px;
+		}
+
+		.description {
+			font-size: {{= &desc_size}}px;
+			line-height: 1.7;
+
+			color: {{= &desc_color}};
+			font-weight: {{= &desc_weight}};
+			margin-bottom: 40px;
+		}
+
+		.shop-btn {
+			width: max-content;
+
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+
+			padding: 16px 36px;
+
+			border-radius:{{= &btn_radius}}px;
+
+			background: {{= &btn_bg}};
+			color: {{= &btn_color}};
+
+			text-decoration: none;
+			font-weight: 600;
+
+			margin-bottom: 80px;
+
+			transition: 0.3s ease;
+		}
+
+		.shop-btn:hover {
+			transform: translateY(-2px);
+			background: {{= &btn_bg}};
+		}
+
+		/* Controls */
+
+		.slider-controls {
+			display: flex;
+			align-items: center;
+			gap: 16px;
+		}
+
+		.arrow-btn {
+			border: none;
+			background: transparent;
+
+			display: flex;
+			align-items: center;
+			justify-content: center;
+
+			cursor: pointer;
+
+			color: #0f2e3c;
+
+			transition: 0.2s ease;
+		}
+
+		.arrow-btn:hover {
+			opacity: 0.7;
+		}
+
+		/* Dots */
+
+		.dots {
+			display: flex;
+			gap: 8px;
+		}
+
+		.dot {
+			width: 6px;
+			height: 6px;
+
+			border-radius: 50%;
+
+			background: #b0bac3;
+
+			position: relative;
+			overflow: hidden;
+
+			cursor: pointer;
+
+			transition: 0.3s ease;
+		}
+
+		.dot.active {
+			width: 32px;
+			border-radius: 4px;
+			background: #e0e5e9;
+		}
+
+		.progress {
+			position: absolute;
+			inset: 0;
+
+			width: 0%;
+
+			background: #0f2e3c;
+		}
+
+		.dot.active.animate .progress {
+			width: 100%;
+			transition: width 5s linear;
+		}
+
+		/* Image */
+
+		.hero-image-wrapper {
+			flex: 0 0 62%;
+
+			height: 460px;
+
+			overflow: hidden;
+			border-radius: {{= &img_radius}}px;
+
+			box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06);
+		}
+
+		.hero-image {
+			width: 100%;
+			height: 100%;
+
+			object-fit: cover;
+			transition: 0.5s ease;
+		}
+
+		/* Animations */
+
+		.fade-out {
+			opacity: 0;
+			transform: translateY(-10px);
+		}
+
+		.fade-in {
+			animation: fadeIn 0.5s ease;
+		}
+
+		@keyframes fadeIn {
+
+			from {
+				opacity: 0;
+				transform: translateY(20px);
+			}
+
+			to {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
+
+		/* Side Banner */
+
+		/* .side-banner  */
+		/*     position: absolute; */
+
+		/*     top: 50%; */
+		/*     right: -24px; */
+
+		/*     transform: translateY(-50%); */
+
+		/*     width: 36px; */
+
+		/*     padding: 16px 0; */
+
+		/*     border-top-left-radius: 6px; */
+		/*     border-bottom-left-radius: 6px; */
+
+		/*     display: flex; */
+		/*     flex-direction: column; */
+		/*     align-items: center; */
+		/*     gap: 16px; */
+
+		/*     cursor: pointer; */
+
+		/*     background: linear-gradient(to top, white 50%, #c13b31 50%); */
+		/*     background-size: 100% 200%; */
+		/*     background-position: top; */
+
+		/*     color: white; */
+
+		/*     transition: 0.3s ease; */
+		/* } */
+		.side-banner {
+
+			position: absolute;
+
+			top: 50%;
+			right: 33px;
+
+			transform: translate(50%, -50%);
+
+			width: 36px;
+
+			padding: 16px 0;
+
+			border-top-left-radius: 6px;
+			border-bottom-left-radius: 6px;
+
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			gap: 16px;
+
+			cursor: pointer;
+
+			background: linear-gradient(to top, white 50%, #c13b31 50%);
+			background-size: 100% 200%;
+			background-position: top;
+
+			color: white;
+
+			transition: 0.3s ease;
+		}
+
+		.side-banner:hover {
+			right: 0;
+
+			background-position: bottom;
+
+			color: #c13b31;
+
+			box-shadow: -4px 0 15px rgba(0, 0, 0, 0.08);
+		}
+
+		.badge {
+			width: 20px;
+			height: 20px;
+
+			border-radius: 50%;
+
+			display: flex;
+			align-items: center;
+			justify-content: center;
+
+			background: white;
+			color:#0f2e3c;
+
+			font-size: 0.7rem;
+			font-weight: bold;
+
+			transform: rotate(90deg);
+		}
+
+		.banner-text {
+			writing-mode: vertical-rl;
+			text-orientation: mixed;
+
+			font-size: 0.8rem;
+			font-weight: 500;
+		}
+
+		.close-banner {
+			border: none;
+			background: transparent;
+
+			color: inherit;
+
+			cursor: pointer;
+		}
+
+		/* Responsive */
+
+		@media (max-width: 1024px) {
+
+			.hero-container {
+				padding: 40px 20px;
+				padding-right: 80px;
+			}
+
+			.hero-content {
+				flex: 0 0 45%;
+			}
+
+			.hero-image-wrapper {
+				flex: 0 0 50%;
+				height: 480px;
+			}
+		}
+
+		@media (max-width: 768px) {
+
+			.hero-container {
+				flex-direction: column-reverse;
+				padding: 40px 20px;
+			}
+
+			.hero-content {
+				width: 100%;
+				text-align: center;
+				align-items: center;
+			}
+
+			.hero-image-wrapper {
+				width: 100%;
+				height: 350px;
+			}
+
+			.side-banner {
+				display: none;
+			}
+		}
+
+
+	}
+
+	/* custom css */
+
+	$_section{
+		{{= &custom_css}}
+	}
+</style>
+
+
+<div class="hero-container {{= &section_spacing}}">
+
+	<!-- Left Content -->
+	<div class="hero-content">
+
+		<span class="sub-heading"></span>
+
+		<h1 class="main-heading" id="hero-title"></h1>
+
+		<p class="description"></p>
+
+		<a href="#" class="shop-btn"></a>
+
+		<!-- Slider Controls -->
+		<div class="slider-controls">
+
+			<button class="arrow-btn" id="prev-btn" aria-label="Previous Slide">
+
+				<svg
+				width="20"
+				height="20"
+				viewBox="0 0 24 24"
+				fill="none"
+				stroke="currentColor"
+				stroke-width="2"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				>
+				<path d="m15 18-6-6 6-6" />
+			</svg>
+
+		</button>
+
+		<div class="dots">
+
+			<div class="dot active" data-index="0">
+				<div class="progress"></div>
+			</div>
+
+			<div class="dot" data-index="1">
+				<div class="progress"></div>
+			</div>
+
+			<div class="dot" data-index="2">
+				<div class="progress"></div>
+			</div>
+
+		</div>
+
+		<button class="arrow-btn" id="next-btn" aria-label="Next Slide">
+
+			<svg
+			width="20"
+			height="20"
+			viewBox="0 0 24 24"
+			fill="none"
+			stroke="currentColor"
+			stroke-width="2"
+			stroke-linecap="round"
+			stroke-linejoin="round"
+			>
+			<path d="m9 18 6-6-6-6" />
+		</svg>
+
+	</button>
+
+</div>
+
+</div>
+
+<!-- Right Image -->
+<div class="hero-image-wrapper">
+
+	<img
+	src=""
+	alt="Beauty Product"
+	class="hero-image"
+	id="hero-image"
+	/>
+
+</div>
+
+<!-- Side Banner -->
+<div class="side-banner">
+
+	<span class="badge">4</span>
+
+	<span class="banner-text">
+		Special Offers For You
+	</span>
+
+	<button class="close-banner" aria-label="Close Banner">
+
+		<svg
+		width="20"
+		height="20"
+		viewBox="0 0 24 24"
+		fill="none"
+		stroke="currentColor"
+		stroke-width="2"
+		stroke-linecap="round"
+		stroke-linejoin="round"
+		>
+		<path d="M18 6 6 18" />
+		<path d="m6 6 12 12" />
+	</svg>
+
+</button>
+
+</div>
+
+</div>
+<script>
+	document.addEventListener("DOMContentLoaded", () => {
+		const $_s_class_slides = [
+
+
+		];
+
+		{{with each &slide_component as $slide}}
+			$_s_class_slides.push({{use component $slide}})
+		{{endwith}}
+
+		console.log("slides: "+$_s_class_slides)
+
+
+
+		let currentSlide = 0;
+		let interval;
+
+		/* Elements */
+
+		const subHeading = document.querySelector(".sub-heading");
+		const title = document.getElementById("hero-title");
+		const description = document.querySelector(".description");
+		const button = document.querySelector(".shop-btn");
+		const image = document.getElementById("hero-image");
+
+		const dots = document.querySelectorAll(".dot");
+
+		const prevBtn = document.getElementById("prev-btn");
+		const nextBtn = document.getElementById("next-btn");
+
+		/* Render Slide */
+
+		function renderSlide() {
+
+			const slide = $_s_class_slides[currentSlide];
+
+			subHeading.innerHTML = slide.subHeading;
+			title.innerHTML = slide.title;
+			description.innerHTML = slide.description;
+
+			button.innerHTML = slide.btnText;
+			button.href = slide.btnLink;
+
+			image.src = slide.image;
+
+			animateContent();
+
+			updateDots();
+		}
+
+		/* Animation */
+
+		function animateContent() {
+
+			const elements = [
+			subHeading,
+			title,
+			description,
+			button,
+			image
+			];
+
+			elements.forEach(el => {
+
+				el.classList.remove("fade-in");
+
+				void el.offsetWidth;
+
+				el.classList.add("fade-in");
+			});
+		}
+
+		/* Dots */
+
+		function updateDots() {
+
+			dots.forEach((dot, index) => {
+
+				dot.classList.remove("active", "animate");
+
+				if (index === currentSlide) {
+
+					dot.classList.add("active");
+
+					setTimeout(() => {
+						dot.classList.add("animate");
+					}, 10);
+				}
+			});
+		}
+
+		/* Next */
+
+		function nextSlide() {
+
+			currentSlide =
+			(currentSlide + 1) % $_s_class_slides.length;
+
+			renderSlide();
+
+			resetInterval();
+		}
+
+		/* Previous */
+
+		function prevSlide() {
+
+			currentSlide =
+			(currentSlide - 1 + $_s_class_slides.length) %
+			$_s_class_slides.length;
+
+			renderSlide();
+
+			resetInterval();
+		}
+
+		/* Auto Slide */
+
+		function startSlider() {
+
+			interval = setInterval(nextSlide, 5000);
+		}
+
+		function resetInterval() {
+
+			clearInterval(interval);
+
+			startSlider();
+		}
+
+		/* Events */
+
+		nextBtn.addEventListener("click", nextSlide);
+
+		prevBtn.addEventListener("click", prevSlide);
+
+		dots.forEach((dot, index) => {
+
+			dot.addEventListener("click", () => {
+
+				currentSlide = index;
+
+				renderSlide();
+
+				resetInterval();
+			});
+		});
+
+		/* Init */
+
+		renderSlide();
+
+		startSlider();
+	});
+</script>   
+{
+		'subHeading': "{{= &sub_heading}}",
+		'title': "{{= &main_heading}}",
+		'description':
+		"{{= &description}}",
+		'btnText': "{{= &btn_text}}",
+		'btnLink': "{{= system.advanced.get_link(&btn_link)}}",
+		'image': "https://cdn.flicksell.com/{{= &img}}"
+	}, 
