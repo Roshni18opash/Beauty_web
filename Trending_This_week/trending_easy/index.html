@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trending This Week | Premium Skincare & Cosmetics</title>
+  <meta name="description" content="Discover this week's trending beauty, makeup, and skincare essentials. Shop top-rated mascara, creams, hair serums, conditioners, and highlights.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="container">
+    <!-- Header Section -->
+    <header class="trending-header">
+      <h1 class="trending-title">Trending This Week</h1>
+      <a href="#" class="shop-trending-link" id="link-shop-all" aria-label="Shop all products">
+        Shop All Products
+        <span class="ms-2" style="font-size: 14px;">&#10095;</span>
+      </a>
+    </header>
+
+    <!-- Product Grid Section -->
+    <section class="trending-grid mobile-collapsed" id="trending-products-grid">
+      
+      <!-- Card 1: Waterproof Mascara -->
+      <a href="#" class="product-card has-discount" id="product-waterproof-mascara" aria-label="Waterproof Mascara - Eyeliner - $40.00 (regularly $64.00)">
+        <div class="product-img-wrapper">
+          <img src="images/tw-1.webp" alt="Waterproof Mascara Eyeliner tube and brush" loading="lazy">
+        </div>
+        <div class="product-details">
+          <span class="product-category">Eyeliner</span>
+          <h2 class="product-name">Waterproof Mascara</h2>
+          <div class="product-price-container">
+            <span class="price-current">$40.00</span>
+            <span class="price-original">$64.00</span>
+          </div>
+        </div>
+        <div class="trending-bottom-btn" aria-hidden="true">
+          <span>&#10095;</span>
+        </div>
+      </a>
+
+      <!-- Card 2: Vital Balm Cream -->
+      <a href="#" class="product-card" id="product-vital-balm-cream" aria-label="Vital Balm Cream - Lotions - $35.00">
+        <div class="product-img-wrapper">
+          <img src="images/tw-2.avif" alt="Vital Balm Cream green lotion pump bottle" loading="lazy">
+        </div>
+        <div class="product-details">
+          <span class="product-category">Lotions</span>
+          <h2 class="product-name">Vital Balm Cream</h2>
+          <div class="product-price-container">
+            <span class="price-current">$35.00</span>
+          </div>
+        </div>
+        <div class="trending-bottom-btn" aria-hidden="true">
+          <span>&#10095;</span>
+        </div>
+      </a>
+
+      <!-- Card 3: Turn Chair Soft -->
+      <a href="#" class="product-card" id="product-turn-chair-soft" aria-label="Turn Chair Soft - Serum - $40.00">
+        <div class="product-img-wrapper">
+          <img src="images/tw-3.avif" alt="Turn Chair Soft blue serum bottle" loading="lazy">
+        </div>
+        <div class="product-details">
+          <span class="product-category">Serum</span>
+          <h2 class="product-name">Turn Chair Soft</h2>
+          <div class="product-price-container">
+            <span class="price-current">$40.00</span>
+          </div>
+        </div>
+        <div class="trending-bottom-btn" aria-hidden="true">
+          <span>&#10095;</span>
+        </div>
+      </a>
+
+      <!-- Card 4: Tinted Highlight -->
+      <a href="#" class="product-card has-discount" id="product-tinted-highlight" aria-label="Tinted Highlight - Blush - $33.00 (regularly $55.00)">
+        <div class="product-img-wrapper">
+          <img src="images/tw-4.avif" alt="Tinted Highlight pink blush compact open" loading="lazy">
+        </div>
+        <div class="product-details">
+          <span class="product-category">Blush</span>
+          <h2 class="product-name">Tinted Highlight</h2>
+          <div class="product-price-container">
+            <span class="price-current">$33.00</span>
+            <span class="price-original">$55.00</span>
+          </div>
+        </div>
+        <div class="trending-bottom-btn" aria-hidden="true">
+          <span>&#10095;</span>
+        </div>
+      </a>
+
+      <!-- Card 5: Touch Concealer (Hidden on Mobile initially) -->
+      <a href="#" class="product-card has-discount hidden-mobile" id="product-touch-concealer" aria-label="Touch Concealer - Blush - $40.00 (regularly $64.00)">
+        <div class="product-img-wrapper">
+          <img src="images/tw-5.avif" alt="Touch Concealer blush palette with six shades" loading="lazy">
+        </div>
+        <div class="product-details">
+          <span class="product-category">Blush</span>
+          <h2 class="product-name">Touch Concealer</h2>
+          <div class="product-price-container">
+            <span class="price-current">$40.00</span>
+            <span class="price-original">$64.00</span>
+          </div>
+        </div>
+        <div class="trending-bottom-btn" aria-hidden="true">
+          <span>&#10095;</span>
+        </div>
+      </a>
+
+      <!-- Card 6: Hand Cream (Hidden on Mobile initially) -->
+      <a href="#" class="product-card hidden-mobile" id="product-hand-cream" aria-label="Hand Cream - Cream - $35.00">
+        <div class="product-img-wrapper">
+          <img src="images/tw-6.webp" alt="Hand Cream squeeze tube white" loading="lazy">
+        </div>
+        <div class="product-details">
+          <span class="product-category">Cream</span>
+          <h2 class="product-name">Hand Cream</h2>
+          <div class="product-price-container">
+            <span class="price-current">$35.00</span>
+          </div>
+        </div>
+        <div class="trending-bottom-btn" aria-hidden="true">
+          <span>&#10095;</span>
+        </div>
+      </a>
+
+      <!-- Card 7: Hair Serum (Hidden on Mobile initially) -->
+      <a href="#" class="product-card hidden-mobile" id="product-hair-serum" aria-label="Hair Serum - Hair Styling - $32.00">
+        <div class="product-img-wrapper">
+          <img src="images/tw-7.avif" alt="Hair Serum amber glass bottle with dropper cap" loading="lazy">
+        </div>
+        <div class="product-details">
+          <span class="product-category">Hair Styling</span>
+          <h2 class="product-name">Hair Serum</h2>
+          <div class="product-price-container">
+            <span class="price-current">$32.00</span>
+          </div>
+        </div>
+        <div class="trending-bottom-btn" aria-hidden="true">
+          <span>&#10095;</span>
+        </div>
+      </a>
+
+      <!-- Card 8: Fresh A Peel (Hidden on Mobile initially) -->
+      <a href="#" class="product-card hidden-mobile" id="product-fresh-a-peel" aria-label="Fresh A Peel - Peel - $40.00">
+        <div class="product-img-wrapper">
+          <img src="images/tw-8.webp" alt="Fresh A Peel grey skin exfoliant bottle" loading="lazy">
+        </div>
+        <div class="product-details">
+          <span class="product-category">Peel</span>
+          <h2 class="product-name">Fresh A Peel</h2>
+          <div class="product-price-container">
+            <span class="price-current">$40.00</span>
+          </div>
+        </div>
+        <div class="trending-bottom-btn" aria-hidden="true">
+          <span>&#10095;</span>
+        </div>
+      </a>
+
+      <!-- Card 9: Smoothing Conditioner (Hidden on Mobile initially) -->
+      <a href="#" class="product-card hidden-mobile" id="product-smoothing-conditioner" aria-label="Smoothing Conditioner - Conditioners - $38.00">
+        <div class="product-img-wrapper">
+          <img src="images/tw-9.avif" alt="Smoothing Conditioner pink hair treatment bottle" loading="lazy">
+        </div>
+        <div class="product-details">
+          <span class="product-category">Conditioners</span>
+          <h2 class="product-name">Smoothing Conditioner</h2>
+          <div class="product-price-container">
+            <span class="price-current">$38.00</span>
+          </div>
+        </div>
+        <div class="trending-bottom-btn" aria-hidden="true">
+          <span>&#10095;</span>
+        </div>
+      </a>
+
+    </section>
+
+    <!-- Mobile Show More Button Container -->
+    <div class="mobile-btn-container">
+      <button class="show-more-btn" id="btn-show-more" aria-expanded="false" aria-controls="trending-products-grid">
+        Show More
+      </button>
+    </div>
+  </main>
+<div id="toast-container"></div>
+  <script src="script.js"></script>
+</body>
+</html>
