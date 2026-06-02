@@ -1,44 +1,35 @@
 const track = document.getElementById('productsTrack');
 const thumb = document.getElementById('scrollThumb');
-const prevBtn = document.getElementById('prevBtn');
-const nextBtn = document.getElementById('nextBtn');
-const tabs = document.querySelectorAll('.tab');
 
-// Cart button fill text wrap
 document.querySelectorAll('.btn-cart').forEach((btn) => {
   btn.innerHTML = '<span>' + btn.textContent.trim() + '</span>';
 });
 
-// Scroll arrows
-prevBtn.addEventListener('click', () => {
-  const card = track.querySelector('.product-card');
-  track.scrollBy({ left: -(card.offsetWidth + 14), behavior: 'smooth' });
-});
+document.getElementById('prevBtn').onclick = () => {
+  const w = track.querySelector('.product-card').offsetWidth + 16;
+  track.scrollBy({ left: -w, behavior: 'smooth' });
+};
 
-nextBtn.addEventListener('click', () => {
-  const card = track.querySelector('.product-card');
-  track.scrollBy({ left: card.offsetWidth + 14, behavior: 'smooth' });
-});
+document.getElementById('nextBtn').onclick = () => {
+  const w = track.querySelector('.product-card').offsetWidth + 16;
+  track.scrollBy({ left: w, behavior: 'smooth' });
+};
 
-// Progress bar
-function updateThumb() {
+function updateBar() {
   const max = track.scrollWidth - track.clientWidth;
-  if (max <= 0) {
-    thumb.style.left = '0';
-    return;
-  }
-  const percent = track.scrollLeft / max;
-  thumb.style.left = percent * 65 + '%';
+  if (max <= 0) return;
+  const w = (track.clientWidth / track.scrollWidth) * 100;
+  thumb.style.width = w + '%';
+  thumb.style.left = (track.scrollLeft / max) * (100 - w) + '%';
 }
 
-track.addEventListener('scroll', updateThumb);
-window.addEventListener('resize', updateThumb);
-updateThumb();
+track.onscroll = updateBar;
+window.onresize = updateBar;
+updateBar();
 
-// Tabs
-tabs.forEach((tab) => {
-  tab.addEventListener('click', () => {
-    tabs.forEach((t) => t.classList.remove('active'));
+document.querySelectorAll('.tab').forEach((tab) => {
+  tab.onclick = () => {
+    document.querySelectorAll('.tab').forEach((t) => t.classList.remove('active'));
     tab.classList.add('active');
-  });
+  };
 });
