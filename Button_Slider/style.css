@@ -42,12 +42,34 @@ body {
     min-height: 56px;
     box-sizing: border-box;
     width: 100%;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+/* Sliding Background Hover Overlay */
+.category-pill-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    transform: translateX(-101%);
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    z-index: 1;
+    border-radius: 50px;
+}
+
+.category-pill-item:hover::before {
+    transform: translateX(0);
 }
 
 .category-pill-item:hover {
-    border-color: #1a3b5c;
+    border-color: #000;
     transform: translateY(-2px);
-    box-shadow: 0 6px 15px rgba(26, 59, 92, 0.08);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
 }
 
 /* Wrapper for the image / badge inside the pill */
@@ -62,6 +84,8 @@ body {
     justify-content: center;
     background-color: transparent;
     transition: transform 0.3s ease;
+    position: relative;
+    z-index: 2;
 }
 
 .category-pill-item:hover .category-pill-img-wrapper {
@@ -103,10 +127,12 @@ body {
     overflow: hidden;
     text-overflow: ellipsis;
     transition: color 0.3s ease;
+    position: relative;
+    z-index: 2;
 }
 
 .category-pill-item:hover .category-pill-text {
-    color: #0b1a29;
+    color: #ffffff;
 }
 
 /* Custom Navigation Buttons */
