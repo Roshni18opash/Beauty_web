@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop By Brands | Premium Skincare & Cosmetics</title>
+  <meta name="description" content="Shop your favorite skincare, cosmetics, and beauty brands. Explore our curated selection of high-quality products.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="container">
+    <!-- Schema Control Panel (Admin/Creator View Demo) -->
+    <section class="schema-panel" aria-label="Schema Customizer Control Panel">
+      <div class="panel-header">
+        <h2 class="panel-title">Component Schema Configurator</h2>
+        <span class="panel-subtitle">Simulate real-time CMS customizations</span>
+      </div>
+
+      <div class="panel-grid">
+        <!-- Layout Mode Setting -->
+        <div class="panel-card">
+          <h3>Layout Display</h3>
+          <div class="layout-btn-group">
+            <button type="button" class="layout-btn active" id="btn-grid" aria-pressed="true">Grid View</button>
+            <button type="button" class="layout-btn" id="btn-slider" aria-pressed="false">Auto Slider</button>
+          </div>
+          <p class="setting-desc">Auto-slider scrolls continuously without controls, using a smart pause-on-hover effect.</p>
+        </div>
+
+        <!-- Style Properties Schema -->
+        <div class="panel-card">
+          <h3>Design Variables</h3>
+          <div class="slider-control">
+            <div class="slider-info">
+              <label for="range-radius">Border Radius</label>
+              <span id="radius-val">12px</span>
+            </div>
+            <input type="range" id="range-radius" min="0" max="30" value="12">
+          </div>
+
+          <div class="slider-control">
+            <div class="slider-info">
+              <label for="range-height">Cell Height</label>
+              <span id="height-val">115px</span>
+            </div>
+            <input type="range" id="range-height" min="80" max="160" value="115">
+          </div>
+
+          <div class="color-controls">
+            <div class="color-item">
+              <input type="color" id="color-border" value="#e5e3de">
+              <label for="color-border">Border</label>
+            </div>
+            <div class="color-item">
+              <input type="color" id="color-cell-bg" value="#ffffff">
+              <label for="color-cell-bg">Cell BG</label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dynamic Brand Addition -->
+        <div class="panel-card">
+          <h3>Add Brand Item</h3>
+          <form id="brand-form" class="brand-add-form" onsubmit="return false;">
+            <input type="text" id="brand-name" placeholder="Brand Name (e.g. GLOW)" required aria-label="Brand Name">
+            <select id="brand-logo-select" aria-label="Select Brand Logo">
+              <option value="s-brand-logo-1.avif">Preset 1 (OLIVEA)</option>
+              <option value="s-brand-logo-2.avif">Preset 2 (Libreria)</option>
+              <option value="s-brand-logo-3.avif">Preset 3 (Blanca)</option>
+              <option value="s-brand-logo-4.avif">Preset 4 (LALIBU)</option>
+              <option value="s-brand-logo-5.avif">Preset 5 (GLOWAURA)</option>
+              <option value="s-brand-logo-6.avif">Preset 6 (AVOCADO)</option>
+              <option value="s-brand-logo-7.avif">Preset 7 (Ceramide)</option>
+              <option value="s-brand-logo-8.avif">Preset 8 (Some Times)</option>
+              <option value="s-brand-logo-9.avif">Preset 9 (amore)</option>
+              <option value="s-brand-logo-10.avif">Preset 10 (GOOD NESS)</option>
+            </select>
+            <button type="submit" class="submit-btn">Add to Section</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Component Presentation View -->
+    <div class="component-presentation">
+      <!-- Header Section -->
+      <header class="brands-header">
+        <h1 class="brands-title">Shop By Brands</h1>
+        <a href="#" class="shop-brands-link" id="link-shop-all-brands" aria-label="Shop all brands">
+          Shop All Brands
+          <span class="arrow-icon" aria-hidden="true">&#10095;</span>
+        </a>
+      </header>
+
+      <!-- Brands Grid Container -->
+      <section class="brands-grid" id="brands-grid">
+        <a href="#" class="brand-item" id="brand-olivea" aria-label="Shop Olivea products">
+          <img src="s-brand-logo-1.avif" alt="Olivea Logo" loading="lazy">
+        </a>
+        <a href="#" class="brand-item" id="brand-libreria" aria-label="Shop Libreria products">
+          <img src="s-brand-logo-2.avif" alt="Libreria Logo" loading="lazy">
+        </a>
+        <a href="#" class="brand-item" id="brand-blanca" aria-label="Shop Blanca products">
+          <img src="s-brand-logo-3.avif" alt="Blanca Logo" loading="lazy">
+        </a>
+        <a href="#" class="brand-item" id="brand-lalibu" aria-label="Shop Lalibu products">
+          <img src="s-brand-logo-4.avif" alt="Lalibu Logo" loading="lazy">
+        </a>
+        <a href="#" class="brand-item" id="brand-glowaura" aria-label="Shop Glowaura products">
+          <img src="s-brand-logo-5.avif" alt="Glowaura Logo" loading="lazy">
+        </a>
+        <a href="#" class="brand-item" id="brand-avocado" aria-label="Shop Avocado products">
+          <img src="s-brand-logo-6.avif" alt="Avocado Logo" loading="lazy">
+        </a>
+        <a href="#" class="brand-item" id="brand-ceramide" aria-label="Shop Ceramide Cosmetic products">
+          <img src="s-brand-logo-7.avif" alt="Ceramide Cosmetic Logo" loading="lazy">
+        </a>
+        <a href="#" class="brand-item" id="brand-sometimes" aria-label="Shop Some Times products">
+          <img src="s-brand-logo-8.avif" alt="Some Times Logo" loading="lazy">
+        </a>
+        <a href="#" class="brand-item" id="brand-amore" aria-label="Shop Amore products">
+          <img src="s-brand-logo-9.avif" alt="Amore Logo" loading="lazy">
+        </a>
+        <a href="#" class="brand-item" id="brand-goodness" aria-label="Shop Goodness products">
+          <img src="s-brand-logo-10.avif" alt="Goodness Logo" loading="lazy">
+        </a>
+      </section>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
