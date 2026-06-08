@@ -1,0 +1,501 @@
+<style>
+	/* SECTION BACKGROUND */
+	$_section {
+		background-color: {{= &section_bg_color}};
+
+		/* slider spacing */
+		.swiper{
+			padding: 20px !important;
+			padding-bottom: 45px !important;
+		}
+
+		.swiper-slide{
+			padding-bottom: 5px;
+		}
+
+		/* main container */
+		.category-slider-container{
+			position: relative;
+			padding-inline: 55px; /* space for arrows */
+			overflow: hidden; /* remove scrolling */
+		}
+
+		/* image wrapper */
+		.category-img-wrapper{
+			width: 100%;
+			max-width: 92px;
+			aspect-ratio: 1 / 1;
+
+			margin: auto;
+			border-radius: {{= &image_radious}}%;
+			overflow: hidden;
+
+			display: flex;
+			align-items: center;
+			justify-content: center;
+
+			transition: transform .3s ease;
+		}
+
+		/* actual image */
+		.category-img{
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			border-radius: {{= &image_radious}}%;
+		}
+
+		/* category text */
+		.category-text{
+
+			{{if &title != 'y'}}
+				display: none;
+			{{endif}}
+
+			font-size: 15px !important;
+			margin-top: 10px !important;
+			font-family: 'Figtree', sans-serif;
+			font-weight: {{= &text_weight}};
+			color: {{= &text_color}} !important;
+			line-height: 1.2;
+			transition: .3s ease;
+		}
+
+		/* image hover */
+		.category-item:hover .category-img-wrapper{
+			transform: scale(1.05);
+		}
+
+		/* text hover */
+		.category-item:hover .category-text{
+			transform: translateX(-4px);
+		}
+
+		/* PAGINATION */
+
+		.swiper-pagination-bullet{
+			background-color: {{= &bullet_bg}} !important;
+
+		}
+
+		/* .swiper-pagination*/
+		/* 	position: absolute !important; */
+		/* 	bottom: 0; */
+		/* 	width: 100%; */
+		/* 	display: flex; */
+		/* 	justify-content: = &indicator_position}}; */
+		/* } */
+		.swiper-pagination{
+			position: absolute !important;
+			bottom: 30px;
+			width: 100%;
+			display: flex;
+			justify-content: {{= &indicator_position}};
+		}
+		.swiper-button-lock{
+			display: none !important;
+		}
+
+		/* NAVIGATION BUTTON */
+
+		.custom-nav-btn{
+			border-radius: 50%;
+
+			background-color: rgb(
+			from {{= &arrow_bg_color}}
+			r g b / {{= &arrow_bg_opacity}}%
+			) !important;
+
+			color: {{= &arrow_color}} !important;
+
+			box-shadow: 0 2px 5px rgba(0,0,0,.2);
+
+			position: absolute;
+			top: 40%;
+			z-index: 10;
+			overflow: hidden;
+
+			opacity: 0;
+
+			transition:
+			left .4s ease,
+			right .4s ease,
+			opacity .4s ease;
+		}
+
+		/* hidden position */
+
+		.swiper-button-prev.custom-nav-btn{
+			left: 0;
+			opacity: 0;
+		}
+
+		.swiper-button-next.custom-nav-btn{
+			right: 0;
+			opacity: 0;
+		}
+
+		/* show on hover */
+
+		.category-slider-container:hover .swiper-button-prev.custom-nav-btn{
+			left: 10px;
+			opacity: 1;
+		}
+
+		.category-slider-container:hover .swiper-button-next.custom-nav-btn{
+			right: 10px;
+			opacity: 1;
+		}
+
+		/* disabled button */
+
+		.category-slider-container:hover .custom-nav-btn.swiper-button-disabled{
+			opacity: .5 !important;
+			pointer-events: auto !important;
+			cursor: not-allowed;
+		}
+
+		/* arrow icon */
+
+		.custom-nav-btn::after{
+			font-size: 14px !important;
+			font-weight: bold;
+			color: {{= &arrow_color}} !important;
+			position: relative;
+			z-index: 3;
+			transition: color .3s ease;
+		}
+
+		/* hover background */
+
+		.custom-nav-btn::before{
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background-color: {{= &arrow_color}} !important;
+			transform: translateX(-100%);
+			transition: transform .4s ease;
+			z-index: 1;
+		}
+
+		/* hover animation */
+
+		.custom-nav-btn:hover::before{
+			transform: translateX(0);
+		}
+
+		/* hover icon color */
+
+		.custom-nav-btn:hover::after{
+			color: {{= &arrow_bg_color}} !important;
+		}
+
+		/* blocked icon */
+
+		.blocked-icon{
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			font-size: 18px;
+			font-weight: bold;
+			color: red;
+			z-index: 20;
+			pointer-events: none;
+		}
+
+		/* =========================
+		MOBILE CSS
+		========================= */
+
+		@media (max-width: 767px){
+
+			.category-slider-container{
+				padding-inline: 40px;
+			}
+
+			.category-text{
+				font-size: calc({{= &mob_text_size}}px * .70) !important;
+				margin-top: 6px !important;
+			}
+
+			.custom-nav-btn{
+				width: 32px;
+				height: 32px;
+				margin-top: -16px;
+
+				background-color: rgb(
+				from {{= &m_arrow_back_color}}
+				r g b / {{= &m_arrow_back_opacity}}%
+				) !important;
+			}
+
+			.custom-nav-btn::before{
+				background-color: {{= &m_arrow_color}} !important;
+			}
+
+			.category-img-wrapper{
+				max-width: 72px;
+			}
+
+			.category-text{
+				font-size: 12px !important;
+				margin-top: 5px !important;
+			}
+
+			.custom-nav-btn::after{
+				font-size: 12px !important;
+				color: {{= &m_arrow_color}} !important;
+			}
+
+			.custom-nav-btn:hover::after,
+			.custom-nav-btn:active::after{
+				color: {{= &m_arrow_back_color}} !important;
+			}
+
+			/* mobile arrow position */
+
+			.swiper-button-prev.custom-nav-btn{
+				left: 0;
+			}
+
+			.swiper-button-next.custom-nav-btn{
+				right: 0;
+			}
+
+			/* show mobile */
+
+			.category-slider-container:hover .swiper-button-prev.custom-nav-btn{
+				left: 5px;
+				opacity: calc({{= &m_arrow_back_opacity}} / 100);
+			}
+
+			.category-slider-container:hover .swiper-button-next.custom-nav-btn{
+				right: 5px;
+				opacity: calc({{= &m_arrow_back_opacity}} / 100);
+			}
+
+			/* mobile bullets */
+
+			.category-slider-container .swiper-pagination-bullet{
+				background-color: {{= &m_indicator_background_color}} !important;
+			}
+
+			/* hide arrows */
+
+			{{if &mobile_indicator_options == "none"
+				|| &mobile_indicator_options == "indicator"}}
+
+				.swiper-button-prev,
+				.swiper-button-next{
+					display: none !important;
+				}
+
+			{{endif}}
+
+			/* hide bullets */
+
+			{{if &mobile_indicator_options == "none"
+				|| &mobile_indicator_options == "arrow"}}
+
+				.swiper-pagination{
+					display: none !important;
+				}
+
+			{{endif}}
+
+			.swiper-pagination-bullet-active{
+				background-color: {{= &m_indicator_color}} !important;
+				opacity: 1 !important;
+			}
+		}
+
+		/* =========================
+		TABLET CSS
+		========================= */
+
+		@media (min-width: 768px) and (max-width: 1023px){
+
+			.category-text{
+				font-size: {{= &text_size}}px;
+				margin-top: 10px;
+			}
+
+			.custom-nav-btn{
+				width: 40px;
+				height: 40px;
+				margin-top: -20px;
+			}
+
+			.custom-nav-btn::after{
+				font-size: 14px !important;
+			}
+		}
+
+		/* =========================
+		DESKTOP CSS
+		========================= */
+
+		@media (min-width: 1024px){
+
+			.category-img:hover{
+				opacity: .95;
+			}
+
+			.category-text{
+				font-size: {{= &text_size}}px;
+				margin-top: 10px;
+			}
+
+			.custom-nav-btn{
+				width: 42px;
+				height: 42px;
+				margin-top: -21px;
+			}
+
+			.custom-nav-btn::after{
+				font-size: 15px !important;
+			}
+		}
+	}
+
+	/* custom css */
+
+	$_section{
+		{{= &custom_css}}
+	}
+</style>
+
+
+
+<div class="{{= &section_spacing}}">
+	<div class="category-slider-container pt-md-{{= &p_md_top}} pb-md-{{= &p_md_bottom}} px-md-{{= &p_l_r_md}} position-relative">
+
+		<!-- Swiper -->
+		<div class="swiper mySwiper $_s_class-mySwiper category-swiper">
+			<div class="swiper-wrapper">
+				{{with each &collection as $slideimage at $index}}
+					{{use component $slideimage}}
+				{{endwith}}
+			</div>
+		</div>
+
+		<!-- Pagination -->
+		{{if &indicator_options == "indicator"
+			|| &indicator_options == "both"
+			|| &mobile_indicator_options == "indicator"
+			|| &mobile_indicator_options == "both"}}
+
+			<div class="swiper-pagination"></div>
+
+		{{endif}}
+		<!-- Navigation -->
+		{{if &indicator_options == "arrow"
+			|| &indicator_options == "both"
+			|| &mobile_indicator_options == "arrow"
+			|| &mobile_indicator_options == "both"}}
+
+			<div class="$_s_class-swiper-button-prev swiper-button-prev custom-nav-btn"></div>
+			<div class="$_s_class-swiper-button-next swiper-button-next custom-nav-btn"></div>
+
+		{{endif}}
+	</div>
+</div>
+
+<script>
+	document.addEventListener("DOMContentLoaded", ()=> {
+		let swiper = new Swiper("$_section-mySwiper", {
+
+			slidesPerView: {{= &slidepreview}},
+			spaceBetween: 10,
+			slidesPerGroup: 1,
+
+			loop: {{= &slide_looping == 'y' ? "true" : "false"}},
+
+			autoplay: {{= &auto_play == 'y'
+					? "{ delay: " + (&auto_play_speed * 1000) + ", disableOnInteraction: false }"
+					: "false"
+			}},
+
+			breakpoints: {
+
+				0: {
+					slidesPerView: {{= &item_to_show_mobile}},
+					spaceBetween: 10,
+
+					pagination: {
+						el: ".swiper-pagination",
+						clickable: true,
+						enabled: {{= &mobile_indicator_options == "indicator" || &mobile_indicator_options == "both" ? "true" : "false"}}
+					},
+
+					navigation: {
+						nextEl: ".$_s_class-swiper-button-next",
+						prevEl: ".$_s_class-swiper-button-prev",
+						enabled: {{= &mobile_indicator_options == "arrow" || &mobile_indicator_options == "both" ? "true" : "false"}}
+					}
+				},
+
+				768: {
+					slidesPerView: {{= &slidepreview}},
+					spaceBetween: {{= &spacebetween}},
+
+					pagination: {
+						el: ".swiper-pagination",
+						enabled: {{= &indicator_options == "indicator" || &indicator_options == "both" ? "true" : "false"}},
+						clickable: true,
+					},
+
+					navigation: {
+						nextEl: ".$_s_class-swiper-button-next",
+						prevEl: ".$_s_class-swiper-button-prev",
+						enabled: {{= &indicator_options == "arrow" || &indicator_options == "both" ? "true" : "false"}}
+					},
+
+					mousewheel: true,
+					keyboard: true
+				}
+			}
+		});
+
+	})
+	/* disabled click animation */
+
+
+	document.addEventListener('click', function(e){
+
+		const button = e.target.closest('.custom-nav-btn');
+
+		if(!button) return;
+
+		/* only disabled button */
+		if(button.classList.contains('swiper-button-disabled')){
+
+			/* avoid duplicate */
+			if(button.querySelector('.blocked-icon')) return;
+
+			/* create icon */
+			const icon = document.createElement('span');
+
+			icon.className = 'blocked-icon';
+
+			icon.innerHTML = '⊘';
+
+			/* add icon */
+			button.appendChild(icon);
+
+			/* remove after delay */
+			setTimeout(() => {
+				icon.remove();
+			}, 700);
+		}
+	});
+
+
+
+
+
+</script>

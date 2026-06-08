@@ -1,0 +1,508 @@
+/* Reset & Base Styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #fdfdfd;
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    color: #1a2638;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── SECTION: Full width, no padding ─── */
+.favorite-section {
+    width: 100%;
+    height: auto;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    background-color: transparent; /* No white background on section */
+}
+
+/* ─── WRAPPER: Full width grid, left 60% / right 40% ─── */
+.favorite-wrapper {
+    position: relative;
+    width: 100%;
+    height: auto;
+    display: grid;
+    grid-template-columns: 60% 40%;
+    overflow: visible;
+}
+
+/* ─── LEFT COLUMN: Mint green panel ─── */
+.left-column {
+    padding: 80px 160px 80px 100px; /* right padding keeps text away from card */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 500px;
+    transition: background-color 0.5s ease;
+}
+
+/* ─── TEXT SLIDER ─── */
+.text-slider-container {
+    width: 100%;
+    overflow: hidden;
+    flex-grow: 1;
+}
+
+.text-slider-track {
+    display: flex;
+    width: 200%;
+    height: 100%;
+    transition: transform 0.65s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.text-slide {
+    width: 50%;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    opacity: 0.35;
+    transition: opacity 0.45s ease;
+}
+
+.text-slide.active {
+    opacity: 1;
+}
+
+/* ─── SUBTITLE ─── */
+.section-subtitle {
+    font-family: Fraunces, serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 20px;
+    color: #072835;
+    letter-spacing: 0.2px;
+    margin-bottom: 36px;
+    display: inline-block;
+}
+
+/* ─── QUOTE BLOCK ─── */
+.slider-quote-container {
+    margin-top: 8px;
+    margin-bottom: 36px;
+}
+
+.testimonial-quote {
+    font-family: Fraunces, serif;
+    font-size: 30px;
+    line-height: 1.35;
+    color: #1a2638;
+    font-weight: 500;
+    letter-spacing: -0.4px;
+    margin-bottom: 24px;
+}
+
+.author-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.author-name {
+    font-family: Fraunces, serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: #1a2638;
+    font-style: normal;
+}
+
+.author-location {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 13px;
+    color: #707e94;
+    font-weight: 500;
+}
+
+/* ─── NAV CONTROLS ─── */
+.slider-navigation {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-top: auto;
+    padding-top: 32px;
+}
+
+.nav-btn {
+    background: transparent;
+    border: none;
+    padding: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #1a2638;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.nav-btn:hover {
+    transform: scale(1.2);
+    opacity: 0.7;
+}
+
+.nav-btn:active {
+    transform: scale(0.95);
+}
+
+.nav-btn svg {
+    width: 18px;
+    height: 18px;
+    stroke-width: 2.5px;
+}
+
+.slider-counter {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #1a2638;
+    letter-spacing: 0.5px;
+    user-select: none;
+    min-width: 28px;
+    text-align: center;
+}
+
+/* ─── RIGHT COLUMN: Background image panel ─── */
+.right-column {
+    min-height: 500px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* ─── BACKGROUND SLIDER TRACK ─── */
+.bg-slider-track {
+    display: flex;
+    width: 200%;
+    height: 100%;
+    transition: transform 0.65s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.bg-slide {
+    width: 50%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    flex-shrink: 0;
+}
+
+/* ─── PRODUCT CARD: Sits on the dividing line ─── */
+.product-card {
+    position: absolute;
+    top: 50%;
+    left: 60%;
+    transform: translate(-50%, -50%);
+    width: 220px; /* Decreased width */
+    background-color: #ffffff; /* Pure white — matches product image white background perfectly */
+    border-radius: 18px;
+    padding: 24px 16px 22px 16px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1), 0 6px 18px rgba(0, 0, 0, 0.05);
+    z-index: 10;
+    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.product-card:hover {
+    transform: translate(-50%, -52%);
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.12), 0 12px 28px rgba(0, 0, 0, 0.06);
+}
+
+/* ─── CARD SLIDER ─── */
+.card-slider-container {
+    width: 100%;
+    position: relative; /* For absolute positioned card slides */
+    overflow: hidden;
+}
+
+.card-slider-track {
+    display: block; /* No longer flex — slides stack via position absolute */
+    width: 100%;
+    position: relative;
+}
+
+/* Each card slide is stacked, crossfades in/out */
+.card-slide {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute; /* Stack all slides on top of each other */
+    top: 0;
+    left: 0;
+    opacity: 0;                        /* Hidden by default */
+    pointer-events: none;
+    transition: opacity 0.5s ease;     /* Smooth crossfade */
+}
+
+/* Active slide is visible */
+.card-slide.card-slide-active {
+    opacity: 1;
+    pointer-events: auto;
+    position: relative; /* Active slide takes up space in layout */
+}
+
+/* ─── CARD IMAGE ─── */
+.card-image-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding-bottom: 12px;
+    min-height: 220px;
+    /* No background or border-radius — card background shows through cleanly */
+}
+
+.product-image {
+    max-width: 160px; /* Bigger image = taller card */
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 16px 28px rgba(0, 0, 0, 0.09));
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.4s ease;
+}
+
+.product-image.primary-img {
+    position: relative;
+    z-index: 2;
+    opacity: 1;
+}
+
+.product-image.hover-img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.95);
+    z-index: 3;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.product-card:hover .primary-img {
+    opacity: 0;
+    transform: scale(0.95);
+}
+
+.product-card:hover .hover-img {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.03);
+    pointer-events: auto;
+}
+
+/* ─── SEARCH BUTTON (hover reveal) ─── */
+.search-btn {
+    position: absolute;
+    right: 8px;
+    top: 8px;
+    width: 32px;
+    height: 32px;
+    background: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 18px rgba(25, 35, 50, 0.08);
+    border: 1px solid rgba(26, 38, 56, 0.06);
+    color: #1a2638;
+    z-index: 6;
+    transform: translateX(20px);
+    opacity: 0;
+    transition: transform 0.38s cubic-bezier(0.2, 0.9, 0.2, 1), opacity 0.28s ease,
+                background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+    pointer-events: none;
+    cursor: pointer;
+}
+
+.search-btn svg {
+    width: 14px;
+    height: 14px;
+}
+
+.search-btn:hover {
+    background: #10303a;
+    color: #fff;
+    border-color: #10303a;
+}
+
+/* ─── CHOOSE BUTTON (hover reveal) ─── */
+.choose-btn {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 120%);
+    bottom: 12px;
+    background: #fff;
+    color: #1a2638;
+    border: 1px solid rgba(26, 38, 56, 0.1);
+    padding: 8px 16px;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 11px;
+    z-index: 6;
+    opacity: 0;
+    transition: transform 0.38s cubic-bezier(0.2, 0.9, 0.2, 1), opacity 0.28s ease,
+                background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+    pointer-events: none;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.choose-btn:hover {
+    background: #10303a;
+    color: #fff;
+    border-color: #10303a;
+}
+
+/* Reveal on hover */
+.product-card:hover .search-btn,
+.product-card:focus-within .search-btn {
+    transform: translateX(0);
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.product-card:hover .choose-btn,
+.product-card:focus-within .choose-btn {
+    transform: translate(-50%, 0);
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* ─── BOTTLE SHADOW ─── */
+.product-shadow {
+    position: absolute;
+    bottom: 12px;
+    width: 60px;
+    height: 8px;
+    background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.12) 0%, rgba(0, 0, 0, 0) 70%);
+    filter: blur(2px);
+    z-index: 1;
+    pointer-events: none;
+    transition: transform 0.35s ease, opacity 0.35s ease;
+}
+
+.product-card:hover .product-shadow {
+    transform: scale(0.9);
+    opacity: 0.8;
+}
+
+/* ─── CARD TEXT DETAILS ─── */
+.card-details {
+    width: 100%;
+    text-align: left;
+    margin-top: 10px;
+}
+
+.product-category {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 9px;
+    font-weight: 700;
+    color: #707e94;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.product-title {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: #10303a;
+    margin-top: 0;
+    margin-bottom: 5px;
+    line-height: 1.3;
+}
+
+.product-price {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: #10303a;
+    display: block;
+}
+
+/* ─── RESPONSIVE: Tablet ─── */
+@media (max-width: 1024px) {
+    .left-column {
+        padding: 70px 120px 70px 60px;
+    }
+
+    .testimonial-quote {
+        font-size: 30px;
+    }
+
+    .product-card {
+        width: 240px;
+        padding: 18px 18px 16px 18px;
+    }
+
+    .product-image {
+        max-width: 100px;
+    }
+
+    .card-image-container {
+        min-height: 150px;
+    }
+}
+
+/* ─── RESPONSIVE: Mobile ─── */
+@media (max-width: 768px) {
+    .favorite-wrapper {
+        grid-template-columns: 1fr;
+    }
+
+    .left-column {
+        padding: 50px 30px 110px 30px;
+        min-height: auto;
+    }
+
+    .testimonial-quote {
+        font-size: 26px;
+        margin-bottom: 20px;
+    }
+
+    .slider-quote-container {
+        margin-bottom: 30px;
+    }
+
+    .right-column {
+        min-height: 260px;
+    }
+
+    .product-card {
+        position: relative;
+        top: auto;
+        left: 50%;
+        transform: translate(-50%, -70px);
+        margin-bottom: -50px;
+        width: 90%;
+        max-width: 260px;
+        padding: 18px 18px 16px 18px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    }
+
+    .product-card:hover {
+        transform: translate(-50%, -74px);
+    }
+
+    .product-image {
+        max-width: 100px;
+    }
+
+    .card-image-container {
+        min-height: 150px;
+    }
+
+    .slider-navigation {
+        padding-top: 24px;
+    }
+}

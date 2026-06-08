@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Favorite Products - Beauty & Theme System</title>
+    <!-- Google Fonts: Cormorant Garamond for Serif Editorial quotes, Plus Jakarta Sans for Sans-Serif clean text -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <section class="favorite-section" id="favorite-section">
+        <div class="favorite-wrapper">
+            
+            <!-- Left Side (Lavender/Sage text panel - stationary container) -->
+            <div class="left-column" id="left-panel">
+                
+                <!-- Text Slider Container (overflow hidden) -->
+                <div class="text-slider-container">
+                    <div class="text-slider-track" id="text-slider-track">
+                        
+                        <!-- Slide 1 Text -->
+                        <div class="text-slide">
+                            <span class="section-subtitle">Our Favorite Products</span>
+                            <div class="slider-quote-container">
+                                <blockquote class="testimonial-quote">
+                                    &ldquo;The story behind, sustainable production, and the risk-free feeling with the return policy make this a great choice.&rdquo;
+                                </blockquote>
+                                <div class="author-meta">
+                                    <cite class="author-name">Jenny Wilson</cite>
+                                    <span class="author-location">New Mexico</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Slide 2 Text -->
+                        <div class="text-slide">
+                            <span class="section-subtitle">Our Favorite Products</span>
+                            <div class="slider-quote-container">
+                                <blockquote class="testimonial-quote">
+                                    &ldquo;With an intriguing backstory, sustainable practices, and a hassle-free return policy, this product stands out as a top choice.&rdquo;
+                                </blockquote>
+                                <div class="author-meta">
+                                    <cite class="author-name">Jenny Thompson</cite>
+                                    <span class="author-location">New Colorado</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+                
+                <!-- Navigation Controls (Static at the bottom of the left column) -->
+                <div class="slider-navigation">
+                    <button class="nav-btn" id="prev-btn" aria-label="Previous Slide">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="15 18 9 12 15 6"></polyline>
+                        </svg>
+                    </button>
+                    <span class="slider-counter" id="slider-counter">1/2</span>
+                    <button class="nav-btn" id="next-btn" aria-label="Next Slide">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Right Side (Cream texture background panel with horizontal slide track) -->
+            <div class="right-column">
+                <div class="bg-slider-track" id="bg-slider-track">
+                    <div class="bg-slide" style="background-image: url('Images/facewash.webp');"></div>
+                    <div class="bg-slide" style="background-image: url('Images/MoistureRepairShampoo-35a.webp');"></div>
+                </div>
+            </div>
+            
+            <!-- Overlapping Product Card (Sits on center dividing line - stationary card box) -->
+            <div class="product-card" id="product-card">
+                <div class="card-slider-container">
+                    <div class="card-slider-track" id="card-slider-track">
+                        
+                        <!-- Slide 1 Card Content -->
+                        <div class="card-slide">
+                            <div class="card-image-container">
+                                <div class="product-shadow"></div>
+                                <img src="Images/Purifyingfacewash-3.webp" alt="Purifying Face Wash" class="product-image primary-img">
+                                <img src="Images/Purifyingfacewash-3a.webp" alt="Purifying Face Wash Hover" class="product-image hover-img">
+                                <button class="search-btn" aria-label="Search">
+                                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <circle cx="11" cy="11" r="7"></circle>
+                                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                    </svg>
+                                </button>
+                                <button class="choose-btn">Choose Options</button>
+                            </div>
+                            <div class="card-details">
+                                <span class="product-category">FACIAL CLEANSERS</span>
+                                <h3 class="product-title">Purifying Face Wash</h3>
+                                <span class="product-price">$20.00</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Slide 2 Card Content -->
+                        <div class="card-slide">
+                            <div class="card-image-container">
+                                <div class="product-shadow"></div>
+                                <img src="Images/body_cleanser-67.webp" alt="Moisture Repair Shampoo" class="product-image primary-img">
+                                <img src="Images/body_cleanser-67a.webp" alt="Moisture Repair Shampoo Hover" class="product-image hover-img">
+                                <button class="search-btn" aria-label="Search">
+                                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <circle cx="11" cy="11" r="7"></circle>
+                                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                    </svg>
+                                </button>
+                                <button class="choose-btn">Choose Options</button>
+                            </div>
+                            <div class="card-details">
+                                <span class="product-category">SHAMPOO</span>
+                                <h3 class="product-title">Moisture Repair Shampoo</h3>
+                                <span class="product-price">$32.00</span>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>

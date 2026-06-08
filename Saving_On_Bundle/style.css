@@ -1,0 +1,405 @@
+/* ─────────────────────────────────────────
+   Reset & Base
+───────────────────────────────────────── */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background-color: #ffffff;
+    color: #1a2638;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* ─────────────────────────────────────────
+   Section Wrapper
+───────────────────────────────────────── */
+.bundle-section {
+    width: 100%;
+    background-color: #ffffff;
+    padding: 0;
+}
+
+.bundle-wrapper {
+    display: flex;
+    width: 100%;
+    min-height: 720px;
+    max-width: 1400px;
+    margin: 0 auto;
+    align-items: center;
+    gap: 10px;
+}
+
+/* ─────────────────────────────────────────
+   LEFT PANEL
+───────────────────────────────────────── */
+.bundle-left {
+    flex: 0 0 60%;
+    padding: 56px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 36px;
+    background-color: #ffffff;
+}
+
+/* Header */
+.bundle-header {
+    text-align: center;
+}
+
+.bundle-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 40px;
+    font-weight: 600;
+    color: #1a2638;
+    letter-spacing: -0.3px;
+    line-height: 1.2;
+    margin-bottom: 10px;
+}
+
+.bundle-subtitle {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: #999999;
+    letter-spacing: 0.1px;
+}
+
+/* ─────────────────────────────────────────
+   Product Cards Row
+───────────────────────────────────────── */
+.bundle-products {
+    display: flex;
+    gap: 12px;
+    max-width: 760px;
+    margin: 0 auto;
+}
+
+.bundle-card {
+    flex: 1;
+    background-color: #ffffff;
+    border: 1px solid #eeeeee;
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    cursor: pointer;
+}
+
+.bundle-card:hover {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.09);
+    transform: translateY(-3px);
+}
+
+/* Card Image Area */
+.card-image-wrap {
+    background-color: #f7f6f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 24px 16px;
+    position: relative;
+    min-height: 200px;
+    padding-top: 30px 20px;
+}
+
+.card-product-img {
+    max-width: 105px;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    transition: transform 0.35s ease;
+}
+
+.bundle-card:hover .card-product-img {
+    transform: scale(1.06);
+}
+
+/* Sale Badge */
+.sale-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: #e63946;
+    color: #ffffff;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 9px;
+    border-radius: 4px;
+    letter-spacing: 0.3px;
+    z-index: 2;
+}
+
+/* Card Text Info */
+.card-info {
+    padding: 14px 14px 16px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    flex-grow: 1;
+}
+
+.card-category {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    color: #aaaaaa;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+}
+
+.card-name {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: #1a2638;
+    line-height: 1.35;
+    margin-top: 2px;
+}
+
+/* Price */
+.card-price {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin-top: 2px;
+}
+
+.price-sale {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: #e63946;
+}
+
+.price-original {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    color: #aaaaaa;
+    text-decoration: line-through;
+}
+
+.price-regular {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: #1a2638;
+}
+
+/* Size Dropdown */
+.size-dropdown-wrap {
+    position: relative;
+    margin-top: 8px;
+}
+
+.size-select {
+    width: 100%;
+    appearance: none;
+    -webkit-appearance: none;
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    border-radius: 6px;
+    padding: 8px 32px 8px 12px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: #1a2638;
+    cursor: pointer;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+.size-select:hover,
+.size-select:focus {
+    border-color: #1a2638;
+}
+
+.dropdown-arrow {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 10px;
+    height: 6px;
+    pointer-events: none;
+}
+
+/* ─────────────────────────────────────────
+   CTA Button
+───────────────────────────────────────── */
+.bundle-cta {
+    display: flex;
+    justify-content: center;
+    min-width: 210px;
+}
+
+.add-cart-btn {
+    background-color: #10303a;
+    color: #ffffff;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 14px 40px;
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    letter-spacing: 0.3px;
+    transition: background-color 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
+}
+
+.add-cart-btn:hover {
+    background-color: #1a4455;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(16, 48, 58, 0.25);
+}
+
+.add-cart-btn:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+/* ─────────────────────────────────────────
+   RIGHT PANEL
+───────────────────────────────────────── */
+.bundle-right {
+    flex: 0 0 35%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.bundle-right-img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 24px;
+    display: block;
+}
+
+.bundle-right-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+/* Ceramide Text Overlay */
+.ceramide-overlay {
+    position: absolute;
+    top: 28px;
+    left: 28px;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 72px;
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1;
+    letter-spacing: -1px;
+    z-index: 2;
+    pointer-events: none;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.12);
+}
+
+/* ─────────────────────────────────────────
+   RESPONSIVE — Tablet (≤ 1024px)
+───────────────────────────────────────── */
+@media (max-width: 1024px) {
+    .bundle-left {
+        flex: 0 0 55%;
+        padding: 44px 32px 44px 40px;
+        gap: 28px;
+    }
+
+    .bundle-right {
+        flex: 0 0 45%;
+    }
+
+    .bundle-title {
+        font-size: 32px;
+    }
+
+    .ceramide-overlay {
+        font-size: 54px;
+    }
+
+    .card-image-wrap {
+        min-height: 130px;
+    }
+
+    .card-product-img {
+        max-width: 65px;
+    }
+}
+
+/* ─────────────────────────────────────────
+   RESPONSIVE — Mobile (≤ 768px)
+───────────────────────────────────────── */
+@media (max-width: 768px) {
+    .bundle-wrapper {
+        flex-direction: column;
+        min-height: auto;
+    }
+
+    .bundle-left {
+        flex: none;
+        padding: 40px 20px 36px 20px;
+        gap: 24px;
+    }
+
+    .bundle-right {
+        flex: none;
+        min-height: 280px;
+    }
+
+.bundle-right-img {
+    width: 100%;
+    height: auto;
+    border-radius: 24px;
+}
+
+    .bundle-title {
+        font-size: 28px;
+    }
+
+    .ceramide-overlay {
+        font-size: 42px;
+        top: 20px;
+        left: 20px;
+    }
+
+    .bundle-products {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .card-image-wrap {
+        min-height: 140px;
+    }
+
+    .card-product-img {
+        max-width: 80px;
+    }
+}
+
+/* ─────────────────────────────────────────
+   RESPONSIVE — Small Mobile (≤ 480px)
+───────────────────────────────────────── */
+@media (max-width: 480px) {
+    .bundle-left {
+        padding: 32px 16px;
+    }
+
+    .bundle-title {
+        font-size: 26px;
+    }
+
+    .add-cart-btn {
+        width: 100%;
+        padding: 14px 20px;
+    }
+}

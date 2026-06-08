@@ -1,0 +1,290 @@
+<style>
+	$_section{
+		background-color: #ffffff;
+
+		/* Container styling */
+		.button-slider-container{
+			padding: 20px 60px;
+			background-color: {{= &section_bg_color}};
+			overflow: visible;
+			max-width: 1400px;
+			margin: 0 auto;
+			/* To hide buttons when they move out */
+		}
+
+		/* Swiper styling to prevent clipping on item hover transition */
+		.category-swiper {
+		   padding: 15px !important;
+		}
+
+		/* Fading Overlay on the Right Edge */
+		.category-fade-overlay {
+			position: absolute;
+			top: 0;
+			right: 0;
+			height: 100%;
+			width: 140px;
+			background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 85%);
+			pointer-events: none; /* Let clicks pass through */
+			z-index: 8; /* Above slides, below navigation arrows */
+		}
+
+		/* Category Pill Item Styling */
+		.category-pill-item {
+			/* display: flex; */
+			display:flex;
+			align-items: center;
+			background-color: {{= &pill_bg}};
+			border: 1px solid {{= &pill_border_color}};
+			border-radius: {{= &pill_radius}}px;
+			padding: 6px 20px 6px 6px;
+			text-decoration: none;
+			transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+			/* min-height: 56px; */
+			/* min-width: 180px; */
+			/* max-width: 280px; */
+			box-sizing: border-box;
+			/* width:80%;  */
+			position: relative;
+			overflow: hidden;
+			z-index: 1;
+		}
+
+		/* Sliding Background Hover Overlay */
+		.category-pill-item::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background-color:{{= &hover_bg}};
+			transform: translateX(-101%);
+			transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+			z-index: 1;
+			border-radius: 50px;
+		}
+
+		.category-pill-item:hover::before {
+			transform: translateX(0);
+		}
+
+		.category-pill-item:hover {
+			border-color: #000;
+			transform: translateY(-2px);
+			box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+		}
+
+		/* Wrapper for the image */
+		.category-pill-img-wrapper {
+			width: 44px;
+			height: 44px;
+			border-radius: 50%;
+			overflow: hidden;
+			flex-shrink: 0;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			background-color: transparent;
+			transition: transform 0.3s ease;
+			position: relative;
+			z-index: 2;
+
+		}
+
+		.category-pill-item:hover .category-pill-img-wrapper {
+			transform: scale(1.05);
+		}
+
+		.category-pill-img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			border-radius: 50%;
+		}
+
+
+
+		/* Category Text Inside the Pill */
+		.category-pill-text {
+			font-family: 'Figtree', sans-serif;
+			font-size: {{= &text_size}}px;
+			font-weight:{{= &text_weight}};
+			color: {{= &text_color}};
+			margin-left: 12px;
+			display: flex;
+			flex-wrap: wrap;
+			/* white-space: nowrap; */
+			/* overflow: visible; */
+			/* text-overflow: unset; */
+			transition: color 0.3s ease;
+			position: relative;
+			z-index: 2;
+		}
+
+		.category-pill-item:hover .category-pill-text {
+			color: {{= &hover_text_color}};
+		}
+
+		/* Custom Navigation Buttons */
+		.custom-nav-btn {
+			width: 40px;
+			height: 40px;
+			background-color: {{= &arw_bg}}!important;
+			border-radius: 50%;
+			box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+			top: 50%;
+			margin-top: -20px;
+			color:{{= &arw_color}}!important;
+			opacity: 0 !important;
+			transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+			z-index: 10;
+			overflow: hidden;
+			display: flex !important;
+			align-items: center;
+			justify-content: center;
+			border: none;
+			outline: none;
+			cursor: pointer;
+		}
+
+		/* Position buttons outside initially */
+		.swiper-button-prev.custom-nav-btn {
+			left: 0;
+		}
+
+		.swiper-button-next.custom-nav-btn {
+			right: 0;
+		}
+
+		/* Apply light color (low opacity) when the button is disabled at the end/start AND container is hovered */
+		.category-slider-container:hover .custom-nav-btn.swiper-button-disabled {
+			opacity: 0.35 !important;
+			pointer-events: none !important;
+		}
+
+		/* Ensure disabled buttons remain completely hidden when NOT hovering the container */
+		.custom-nav-btn.swiper-button-disabled {
+			opacity: 0 !important;
+		}
+
+		/* Swiper default icon size adjustment */
+		.custom-nav-btn::after {
+			font-size: 14px !important;
+			font-weight: bold;
+			position: relative;
+			z-index: 2;
+			transition: color 0.4s ease;
+		}
+
+		/* Show and move buttons in on container hover */
+		.button-slider-container:hover .swiper-button-prev.custom-nav-btn {
+			left: -8px;
+			opacity: calc({{= &arw_opacity}} / 100) !important;
+		}
+
+		.button-slider-container:hover .swiper-button-next.custom-nav-btn {
+			right: -8px;
+			opacity: calc({{= &arw_opacity}} / 100) !important;
+		}
+		/* Button Hover Effect - Background changing to black from left to right */
+		.custom-nav-btn::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background-color:{{= &arw_color}};
+			transform: translateX(-100%);
+			transition: transform 0.4s ease;
+			z-index: 1;
+			border-radius: 50%;
+		}
+
+		.custom-nav-btn:hover::before {
+			transform: translateX(0);
+		}
+
+		.custom-nav-btn:hover::after {
+			color:{{= &arw_bg}}!important;
+
+		}
+	}
+	$_section{
+		{{= &custom_css}}
+	}
+</style>
+
+
+<div class="{{= &section_spacing}}">
+	<div class="$_s_class button-slider-container pt-md-{{= &p_md_top}} pb-md-{{= &p_md_bottom}} px-md-{{= &p_l_r_md}} position-relative">
+		<!-- Swiper -->
+		<div class="swiper $_s_class-mySwiper mySwiper category-swiper">
+			<div class="swiper-wrapper">
+				<!-- Slide -->
+				{{with each &collection as $slideimages at $index}}
+					{{use component $slideimages}}
+				{{endwith}}
+
+
+			</div>
+		</div>
+
+
+		<!-- Navigation buttons -->
+
+
+		<div class="$_s_class-swiper-button-prev swiper-button-prev custom-nav-btn" ></div>
+		<div class="$_s_class-swiper-button-next swiper-button-next custom-nav-btn"></div>
+
+
+		<!-- Fading Overlay -->
+		<div class="category-fade-overlay"></div>
+	</div>
+</div>
+<script>
+	document.addEventListener("DOMContentLoaded", () =>{
+		let swiper = new Swiper("$_section-mySwiper", {
+			slidesPerView: {{= &slidepreview}},
+			spaceBetween: {{= &spacebetween}},
+			slidesPerGroup: 1,
+
+			loop: {{= &slide_looping == 'y' ? "true" : "false"}},
+
+			autoplay: {{= &auto_play == 'y'
+					? "{ delay: " + (&auto_play_speed * 1000) + ", disableOnInteraction: false }"
+					: "false"
+			}},
+
+			navigation: {
+				nextEl: ".$_s_class-swiper-button-next",
+				prevEl: ".$_s_class-swiper-button-prev",
+			},
+			breakpoints: {
+				0: {
+					slidesPerView: {{= &item_to_show_mobile}},
+					spaceBetween: 10,
+					navigation: {
+						nextEl: ".$_s_class-swiper-button-next",
+						prevEl: ".$_s_class-swiper-button-prev",
+						enabled: true
+					}
+				},
+
+				768: {
+					slidesPerView: {{= &slidepreview}},
+					spaceBetween: {{= &spacebetween}},
+					navigation: {
+						nextEl: ".$_s_class-swiper-button-next",
+						prevEl: ".$_s_class-swiper-button-prev",
+						enabled: true
+					},
+
+					mousewheel: true,
+					keyboard: true
+				}
+			},
+		});
+	})
+</script>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saving 20% On Bundle</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<section class="bundle-section" id="bundle-section">
+    <div class="bundle-wrapper">
+
+        <!-- LEFT: Title + Cards + Button -->
+        <div class="bundle-left">
+
+            <!-- Header -->
+            <div class="bundle-header">
+                <h2 class="bundle-title">Saving 20% On Bundle</h2>
+                <p class="bundle-subtitle">Select 4 products &amp; get 20% discount on bundle</p>
+            </div>
+
+            <!-- Product Cards Row -->
+            <div class="bundle-products">
+
+                <!-- Card 1: Shampoo (Sale) -->
+                <div class="bundle-card" id="card-shampoo">
+                    <div class="card-image-wrap">
+                        <span class="sale-badge">Sale</span>
+                        <img src="Images/saving1.webp" alt="Smoothing Shampoo" class="card-product-img">
+                    </div>
+                    <div class="card-info">
+                        <span class="card-category">SHAMPOO</span>
+                        <h3 class="card-name">Smoothing Shampoo</h3>
+                        <div class="card-price">
+                            <span class="price-sale">$45.00</span>
+                            <span class="price-original">$50.00</span>
+                        </div>
+                        <div class="size-dropdown-wrap">
+                            <select class="size-select" aria-label="Select size">
+                                <option>512ml</option>
+                                <option>250ml</option>
+                            </select>
+                            <svg class="dropdown-arrow" viewBox="0 0 10 6" fill="none">
+                                <path d="M1 1l4 4 4-4" stroke="#1a2638" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2: Hair Serum -->
+                <div class="bundle-card" id="card-serum">
+                    <div class="card-image-wrap">
+                        <img src="Images/HairSerum-40.webp" alt="Hair Serum" class="card-product-img">
+                    </div>
+                    <div class="card-info">
+                        <span class="card-category">HAIR STYLING</span>
+                        <h3 class="card-name">Hair Serum</h3>
+                        <div class="card-price">
+                            <span class="price-regular">$32.00</span>
+                        </div>
+                        <div class="size-dropdown-wrap">
+                            <select class="size-select" aria-label="Select size">
+                                <option>50ml</option>
+                                <option>100ml</option>
+                            </select>
+                            <svg class="dropdown-arrow" viewBox="0 0 10 6" fill="none">
+                                <path d="M1 1l4 4 4-4" stroke="#1a2638" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3: Detox Mask -->
+                <div class="bundle-card" id="card-mask">
+                    <div class="card-image-wrap">
+                        <img src="Images/detoxmask-29.webp" alt="Detox Mask" class="card-product-img">
+                    </div>
+                    <div class="card-info">
+                        <span class="card-category">MASK</span>
+                        <h3 class="card-name">Detox Mask</h3>
+                        <div class="card-price">
+                            <span class="price-regular">$34.00</span>
+                        </div>
+                        <div class="size-dropdown-wrap">
+                            <select class="size-select" aria-label="Select size">
+                                <option>50ml</option>
+                                <option>100ml</option>
+                            </select>
+                            <svg class="dropdown-arrow" viewBox="0 0 10 6" fill="none">
+                                <path d="M1 1l4 4 4-4" stroke="#1a2638" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+            </div><!-- /bundle-products -->
+
+            <!-- CTA Button -->
+            <div class="bundle-cta">
+                <button class="add-cart-btn" id="add-cart-btn">Add All To Cart</button>
+            </div>
+
+        </div><!-- /bundle-left -->
+
+        <!-- RIGHT: Large Image Panel -->
+        <div class="bundle-right">
+            <div class="bundle-right-inner">
+             
+                <img src="Images/product-bundle.webp" alt="Ceramide Skincare Products" class="bundle-right-img">
+            </div>
+        </div>
+
+    </div><!-- /bundle-wrapper -->
+</section>
+
+<script src="script.js"></script>
+</body>
+</html>
