@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
 
 * {
   box-sizing: border-box;
@@ -23,191 +23,6 @@ body {
 }
 
 /* ==========================================================================
-   Schema Control Panel Styling
-   ========================================================================== */
-.schema-panel {
-  background-color: #fcfbfa;
-  border: 1px dashed #d1cfc9;
-  border-radius: 16px;
-  padding: 24px;
-  margin-bottom: 50px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
-}
-
-.panel-header {
-  margin-bottom: 20px;
-  border-bottom: 1px solid #e5e3de;
-  padding-bottom: 12px;
-}
-
-.panel-title {
-  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  font-size: 1.15rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: #0d2a38;
-}
-
-.panel-subtitle {
-  font-size: 0.8rem;
-  color: #8c8c8c;
-}
-
-.panel-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-}
-
-.panel-card {
-  background: #ffffff;
-  border: 1px solid #e5e3de;
-  border-radius: 12px;
-  padding: 18px;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-
-.panel-card h3 {
-  font-size: 0.9rem;
-  font-weight: 700;
-  color: #0d2a38;
-  border-left: 3px solid #0d2a38;
-  padding-left: 8px;
-  margin-bottom: 4px;
-}
-
-.setting-desc {
-  font-size: 0.75rem;
-  color: #8c8c8c;
-  line-height: 1.4;
-}
-
-/* Buttons inside customizer */
-.layout-btn-group {
-  display: flex;
-  gap: 8px;
-}
-
-.layout-btn {
-  flex: 1;
-  background-color: #f8f7f5;
-  border: 1px solid #e5e3de;
-  color: #0d2a38;
-  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  font-size: 0.85rem;
-  font-weight: 600;
-  padding: 10px 14px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.25s ease;
-}
-
-.layout-btn:hover {
-  background-color: #fcfbfa;
-  border-color: #d1cfc9;
-}
-
-.layout-btn.active {
-  background-color: #0d2a38;
-  border-color: #0d2a38;
-  color: #ffffff;
-}
-
-/* Customizer Sliders */
-.slider-control {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.slider-info {
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.8rem;
-  font-weight: 600;
-}
-
-.slider-info span {
-  color: #d25d38;
-}
-
-.slider-control input[type="range"] {
-  width: 100%;
-  accent-color: #0d2a38;
-  cursor: pointer;
-}
-
-/* Color controls */
-.color-controls {
-  display: flex;
-  gap: 16px;
-  margin-top: 4px;
-}
-
-.color-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.8rem;
-  font-weight: 600;
-}
-
-.color-item input[type="color"] {
-  border: none;
-  width: 24px;
-  height: 24px;
-  border-radius: 4px;
-  cursor: pointer;
-  background: none;
-}
-
-/* Dynamic Add Brand Form */
-.brand-add-form {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.brand-add-form input,
-.brand-add-form select {
-  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  font-size: 0.85rem;
-  padding: 10px 12px;
-  border: 1px solid #e5e3de;
-  border-radius: 8px;
-  background-color: #fcfbfa;
-  color: #0d2a38;
-  outline: none;
-  transition: border-color 0.25s ease;
-}
-
-.brand-add-form input:focus,
-.brand-add-form select:focus {
-  border-color: #d1cfc9;
-}
-
-.submit-btn {
-  background-color: #0d2a38;
-  color: #ffffff;
-  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  font-size: 0.85rem;
-  font-weight: 600;
-  padding: 10px 14px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.25s ease;
-}
-
-.submit-btn:hover {
-  background-color: #164054;
-}
-
-
-/* ==========================================================================
    Shop By Brands Component Styles
    ========================================================================== */
 
@@ -217,6 +32,8 @@ body {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 40px;
+  flex-wrap: wrap;
+  gap: 20px;
 }
 
 .brands-title {
@@ -226,6 +43,14 @@ body {
   letter-spacing: -0.01em;
   color: #0d2a38;
 }
+
+.brands-header-right {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
 
 .shop-brands-link {
   display: inline-flex;
@@ -268,8 +93,14 @@ body {
   transform: scaleX(1);
 }
 
-/* Grid Mode: Default layout */
-.brands-grid {
+/* ==========================================================================
+   Layout 1: GRID MODE
+   ========================================================================== */
+.brands-swiper.layout-grid {
+  overflow: visible;
+}
+
+.brands-swiper.layout-grid .swiper-wrapper {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 1px;
@@ -277,52 +108,76 @@ body {
   border: 1px solid #e5e3de;
   border-radius: 12px;
   overflow: hidden;
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: none !important; /* Block Swiper transform */
+  width: 100% !important;
 }
 
-/* Slider Mode: Activated dynamically */
-.brands-grid.slider-mode {
-  display: flex;
-  grid-template-columns: none; /* Reset grid */
-  overflow-x: auto;
-  scroll-behavior: smooth;
-  -ms-overflow-style: none;  /* Hide scrollbars for IE/Edge */
-  scrollbar-width: none;  /* Hide scrollbars for Firefox */
-}
-
-.brands-grid.slider-mode::-webkit-scrollbar {
-  display: none; /* Hide scrollbars for Chrome/Safari */
-}
-
-/* Individual Brand Item */
-.brand-item {
+.brands-swiper.layout-grid .swiper-slide {
   background-color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 115px; /* height auto but visually identical to the design aspect ratio */
+  height: auto !important; /* height is auto so user styles dictate */
+  aspect-ratio: 16 / 9;
+  min-height: 100px;
   padding: 20px 30px;
   transition: background-color 0.35s ease, transform 0.35s ease;
   text-decoration: none;
-}
-
-.brands-grid.slider-mode .brand-item {
-  flex: 0 0 20%; /* Show exactly 5 items at a time on desktop */
-  min-width: 200px;
   box-sizing: border-box;
+  width: auto !important;
+  margin-right: 0 !important;
 }
 
+/* Hide Swiper Pagination and Buttons in Grid Mode */
+.brands-swiper.layout-grid .swiper-button-prev,
+.brands-swiper.layout-grid .swiper-button-next,
+.brands-swiper.layout-grid .swiper-pagination {
+  display: none !important;
+}
+
+/* ==========================================================================
+   Layout 2: SLIDER MODE (Swiper Active)
+   ========================================================================== */
+.brands-swiper.layout-slider {
+  position: relative;
+  border: 1px solid #e5e3de;
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: #ffffff; /* White background to frame the pagination area */
+  padding-bottom: 54px; /* Space for pagination bullets at bottom */
+}
+
+.brands-swiper.layout-slider .swiper-wrapper {
+  display: flex;
+  flex-wrap: nowrap;
+  background-color: #e5e3de; /* Border color between slides */
+}
+
+.brands-swiper.layout-slider .swiper-slide {
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  min-height: 100px;
+  padding: 20px 30px;
+  box-sizing: border-box;
+  text-decoration: none;
+  transition: background-color 0.35s ease;
+}
+
+/* Brand Logo Image Styles */
 .brand-item img {
-  max-width: 100%;
-  max-height: 100%;
+  max-width: 75%;
+  max-height: 55%;
   object-fit: contain;
-  opacity: 0.9;
+  opacity: 0.85;
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
 }
 
-/* Hover & Active Effects */
 .brand-item:hover {
-  background-color: #fafafa;
+  background-color: #fbfbfa;
 }
 
 .brand-item:hover img {
@@ -334,62 +189,193 @@ body {
   transform: scale(0.98);
 }
 
+/* Custom Swiper Navigation Buttons */
+.brands-swiper.layout-slider .swiper-button-prev,
+.brands-swiper.layout-slider .swiper-button-next {
+  color: #0d2a38;
+  background-color: rgba(255, 255, 255, 0.95);
+  border: 1px solid #e5e3de;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  top: calc(50% - 27px); /* Adjust vertical alignment to center on slides, ignoring pagination height */
+}
+
+.brands-swiper.layout-slider .swiper-button-prev:after,
+.brands-swiper.layout-slider .swiper-button-next:after {
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.brands-swiper.layout-slider .swiper-button-prev:hover,
+.brands-swiper.layout-slider .swiper-button-next:hover {
+  background-color: #0d2a38;
+  color: #ffffff;
+  border-color: #0d2a38;
+  transform: scale(1.05);
+}
+
+.brands-swiper.layout-slider .swiper-button-disabled {
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+/* Custom Swiper Pagination Bullets */
+.brands-swiper.layout-slider .swiper-pagination {
+  position: absolute;
+  bottom: 20px !important;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  line-height: 1;
+}
+
+.brands-swiper.layout-slider .swiper-pagination-bullet {
+  background: #c7c5be;
+  opacity: 0.6;
+  width: 7px;
+  height: 7px;
+  margin: 0 !important;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  border-radius: 50%;
+}
+
+.brands-swiper.layout-slider .swiper-pagination-bullet-hover,
+.brands-swiper.layout-slider .swiper-pagination-bullet:hover {
+  opacity: 1;
+  background: #0d2a38;
+}
+
+.brands-swiper.layout-slider .swiper-pagination-bullet-active {
+  background: #0d2a38;
+  opacity: 1;
+  width: 18px;
+  border-radius: 4px;
+}
 
 /* ==========================================================================
-   Responsive Media Queries
+   Responsive Media Queries for both Grid and Slider Layouts
    ========================================================================== */
+
+/* Tablet Screens (max-width: 992px) */
 @media (max-width: 992px) {
-  .panel-grid {
-    grid-template-columns: repeat(2, 1fr);
+  .container {
+    padding: 50px 24px;
   }
 
   .brands-title {
     font-size: 2rem;
   }
 
-  .brands-grid.slider-mode .brand-item {
-    flex: 0 0 33.333%; /* Show 3 items at a time on tablet */
+  /* Grid mode columns override: 4 columns */
+  .brands-swiper.layout-grid .swiper-wrapper {
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 
+/* Small Tablet Screens (max-width: 768px) */
 @media (max-width: 768px) {
   .container {
-    padding: 40px 24px;
-  }
-
-  .panel-grid {
-    grid-template-columns: 1fr;
+    padding: 40px 20px;
   }
 
   .brands-header {
-    margin-bottom: 28px;
+    margin-bottom: 30px;
   }
 
   .brands-title {
     font-size: 1.75rem;
   }
 
-  /* Default Grid mode changes to 2 cols on mobile/tablet */
-  .brands-grid:not(.slider-mode) {
-    grid-template-columns: repeat(2, 1fr);
+  /* Grid mode columns override: 3 columns */
+  .brands-swiper.layout-grid .swiper-wrapper {
+    grid-template-columns: repeat(3, 1fr);
   }
-
-  .brands-grid.slider-mode .brand-item {
-    flex: 0 0 50%; /* Show exactly 2 items at a time on mobile */
-    min-width: 150px;
+  
+  .brands-swiper.layout-grid .swiper-slide {
+    padding: 15px 20px;
+  }
+  
+  .brands-swiper.layout-slider .swiper-slide {
+    padding: 15px 20px;
   }
 }
 
-@media (max-width: 480px) {
+/* Mobile Screens (max-width: 576px) */
+@media (max-width: 576px) {
   .container {
     padding: 30px 16px;
+  }
+
+  .brands-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .brands-header-right {
+    width: 100%;
+    justify-content: space-between;
+    gap: 12px;
   }
 
   .brands-title {
     font-size: 1.5rem;
   }
 
-  .shop-brands-link {
-    font-size: 0.8125rem;
+  /* Grid mode columns override: 2 columns */
+  .brands-swiper.layout-grid .swiper-wrapper {
+    grid-template-columns: repeat(2, 1fr);
+    border-radius: 8px;
+  }
+  
+  .brands-swiper.layout-slider {
+    border-radius: 8px;
+    padding-bottom: 44px;
+  }
+  
+  .brands-swiper.layout-slider .swiper-pagination {
+    bottom: 16px !important;
+  }
+
+  .brands-swiper.layout-slider .swiper-button-prev,
+  .brands-swiper.layout-slider .swiper-button-next {
+    width: 32px;
+    height: 32px;
+    top: calc(50% - 22px);
+  }
+
+  .brands-swiper.layout-slider .swiper-button-prev:after,
+  .brands-swiper.layout-slider .swiper-button-next:after {
+    font-size: 11px;
+  }
+  
+  .brands-swiper.layout-grid .swiper-slide,
+  .brands-swiper.layout-slider .swiper-slide {
+    padding: 12px 16px;
+    aspect-ratio: 4 / 3; /* slightly taller on mobile for logos to fit nicely */
+  }
+}
+
+/* Extra Small Screens (max-width: 360px) */
+@media (max-width: 360px) {
+  .brands-header-right {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    gap: 16px;
+  }
+  
+  .layout-toggle {
+    width: 100%;
+  }
+  
+  .layout-toggle .toggle-btn {
+    flex: 1;
+    justify-content: center;
   }
 }

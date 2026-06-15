@@ -1,0 +1,734 @@
+<style>
+	html {
+		scroll-behavior: smooth;
+	}
+	$_section{
+
+		.trending-section {
+			padding: 20px 0 10px;
+			width: 100%;
+			margin: 0 auto;
+			background-color: {{= &section_bg_color}} !important;
+		}
+		.trending-title {
+			font-size:{{= &title_size}}px;
+			font-weight: {{= &title_text_weight}};
+			color:{{= &title_color}};
+			font-family: 'Playfair Display', serif;
+
+		}
+		.sub-title{font-size:{{= &sub_title_size}}px !important;}
+		.trending-section .container-fluid{
+			/* max-width: 1400px; */
+			margin: 0 auto;
+		}
+		/* Header link underline effect */
+		.shop-trending-link {
+			font-size:{{= &right_size}}px;
+			font-weight:{{= &right_weight}};
+			color: {{= &title_color}} !important;
+			position: relative;
+			padding-bottom: 4px;
+
+		}
+
+		/* Underline animation - expands left to right on hover, shrinks right to left on leave */
+		.shop-trending-link::after {
+			content: '';
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			width: 100%;
+			height: 1px;
+			background-color: #1a2c3a;
+			transform: scaleX(0);
+			transform-origin: right center;
+			transition: transform 0.35s ease;
+		}
+
+		/* On hover, line expands from left to right */
+		.shop-trending-link:hover::after {
+			transform-origin: left center;
+			transform: scaleX(1);
+			transition: transform 0.35s ease;
+		}
+
+		.trending-item {
+			cursor: pointer;
+			background-color:{{= &card_bg}};
+			border-radius: {{= &image_radius}}px;
+			transition: background-color 0.3s ease;
+			overflow: hidden;
+			height: 100%;
+		}
+
+		.trending-item:hover {
+			background-color: rgb(
+			from {{= &card_bg}}
+			r g b / 70%
+			);
+		}
+
+		.trending-img-wrapper {
+			width: 100%;
+			aspect-ratio: 1 / 1;
+			overflow: hidden;
+			border-radius: {{= &image_radius}}px {{= &image_radius}}px 0 0;
+		}
+
+		.trending-img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			transition: transform 0.4s ease;
+		}
+
+		/* Text Wrapper */
+		.trending-text-wrap {
+			padding: 20px;
+			position: relative;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+
+		}
+
+		.trending-text {
+			font-size: {{= &text_size}}px;
+			font-weight: {{= &pro_name_weight}};
+			font-family: 'Playfair Display', serif;
+			color: {{= &text_color}};
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+
+		}
+
+		/* The arrow button beside the text */
+		.trending-bottom-btn{
+			width: 28px;
+			height: 28px;
+
+			background-color: {{= &c_arw_bgcolor}};
+			border-radius: 50%;
+
+			display: flex;
+			align-items: center;
+			justify-content: center;
+
+			color: {{= &c_arw_color}};
+			font-size: 10px;
+			font-weight: 600;
+
+			/* Dynamic Opacity */
+			opacity: calc({{= &c_arw_bg_opacity}} / 100);
+
+			transition: all 0.3s ease;
+			position: relative;
+			overflow: hidden;
+			margin-left: auto;
+		}
+
+		/* Hover effect on arrow button */
+		.trending-bottom-btn::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+
+			background-color:{{= &c_arw_color}};
+			transform: translateX(-100%);
+			transition: transform 0.3s ease;
+			z-index: 1;
+		}
+		.custom-trending-prev.swiper-button-disabled,
+		.custom-trending-next.swiper-button-disabled{
+			opacity: .5;
+			cursor: not-allowed !important;
+			pointer-events: auto !important;
+		}
+		.trending-bottom-btn span {
+			position: relative;
+			z-index: 2;
+			transition: color 0.3s ease;
+		}
+
+		.trending-item:hover .trending-bottom-btn::before {
+			transform: translateX(0);
+		}
+
+		.trending-item:hover .trending-bottom-btn span {
+			color:{{= &c_arw_bgcolor}};
+		}
+
+		/* Hover Effects on the whole item */
+		.trending-item:hover .trending-img {
+			transform: scale(1.05); /* Slight zoom on image hover */
+		}
+
+		.trending-slider-container{
+			position: relative;
+			margin-top: 30px;
+			width: 100%;
+			overflow: hidden;
+		}
+
+		.$_s_class-trendingSwiper{
+			padding-bottom: 50px;
+		}
+
+		/* arrows */
+
+		.custom-trending-prev,
+		.custom-trending-next{
+
+			width: 42px;
+			height: 42px;
+			border-radius: 50%;
+			background: #fff;
+			box-shadow: 0 2px 10px rgba(0,0,0,.12);
+
+			color:{{= &arrow_color}};
+		}
+		.$_s_class-trendingSwiper .trending-item{
+			width:100%;
+		}
+
+		.$_s_class-trendingSwiper .swiper-slide{
+			display:flex;
+			height:auto;
+		}
+
+		.$_s_class-trendingSwiper .swiper-wrapper{
+			align-items:stretch;
+		}
+
+
+		.swiper-button-lock{
+			display:none !important;
+		}
+		.custom-trending-prev::after,
+		.custom-trending-next::after{
+			font-size: 14px;
+			font-weight: bold;
+		}
+		.swiper-wrapper.static-grid{
+			display:flex;
+			flex-wrap: wrap;
+			gap: 16px;
+			justify-content: flex-start;
+		}
+
+
+		.swiper-wrapper.static-grid .swiper-slide{
+			width: calc((100% - 64px) / 5) !important;
+		}
+
+		/* bullets */
+
+		.swiper-pagination{
+			gap: 8px;
+			display: flex;
+			justify-content:{{= &indicator_position}};
+		}
+
+		.$_s_class-trendingSwiper .swiper-pagination-bullet {
+			width: 6px !important;
+			height: 6px !important;
+			min-height: 6px !important;
+			border-radius: 50% !important;
+			background:{{= &bullet_bg}} !important;
+			opacity: 0.25 !important;
+			position: relative;
+			overflow: hidden;
+			display: flex !important;
+			align-items: center;
+			margin: 0 !important;
+			transition: width 0.3s ease, border-radius 0.3s ease, background 0.3s ease, opacity 0.3s ease;
+		}
+
+		.$_s_class-trendingSwiper .swiper-pagination-bullet-active {
+			width: 32px !important;
+			border-radius: 4px !important;
+			background: #e0e5e9 !important;
+			opacity: 1 !important;
+		}
+
+		.$_s_class-trendingSwiper .swiper-pagination-bullet .progress {
+			position: absolute;
+			top: 0;
+			left: 0;
+			height: 100%;
+			width: 0%;
+			border-radius: inherit;
+			background:{{= &bullet_bg}} !important;
+			opacity: 1;
+		}
+
+		.$_s_class-trendingSwiper .swiper-pagination-bullet-active.animate .progress {
+			width: 100%;
+			{{if &auto_play == 'y'}}
+				transition: width {{= &auto_play_speed}}s linear;
+			{{else}}
+				transition: width 5s linear;
+			{{endif}}
+		}
+
+		/* Responsive tablet and mobile adjustments */
+		@media (max-width: 992px) {
+			/*================ Tablet styles================= */
+			.trending-section {
+				padding: 40px 0;
+			}
+
+			.trending-title {
+				font-size: 28px;
+			}
+
+			.shop-trending-link {
+				font-size: 13px;
+			}
+
+			.trending-text-wrap {
+				padding: 16px;
+			}
+		}
+
+		@media (max-width: 767px) {
+			/*===============Mobile styles ================*/
+			.trending-section {
+				padding: 20px 0 10px;
+				width: 100%;
+				margin: 0 auto;
+				overflow-x: hidden;
+			}
+			/* Disable all hover effects on mobile */
+
+			.trending-item:hover {
+				background-color: {{= &section_bg_color}} !important;
+			}
+
+			.trending-item:hover .trending-img {
+				transform: none !important;
+			}
+
+			.trending-item:hover .trending-bottom-btn::before {
+				transform: translateX(-100%) !important;
+			}
+
+			.trending-item:hover .trending-bottom-btn span {
+				color: #1a2c3a !important;
+			}
+
+			.shop-trending-link:hover::after {
+				transform: scaleX(0) !important;
+			}
+
+			.shop-trending-link::after {
+				display: none !important;
+			}
+			.swiper-wrapper.static-grid .swiper-slide{
+				width: calc(50% - 8px) !important;
+			}
+
+			/* Wrap the header title and link */
+			.trending-section > div > .d-flex {
+				flex-wrap: nowrap;
+				gap: 10px;
+				justify-content: space-between;
+				align-items: center;
+			}
+
+			.header-right {
+				width: auto;
+				text-align: right;
+				flex-shrink: 0;
+			}
+
+			.trending-title {
+				font-size: {{= &m_heading_size}}px;
+				flex: 1;
+				min-width: 0;
+			}
+
+			/* Full-width link with static underline */
+			.shop-trending-link {
+				/* display: inline-flex; */
+				align-items: center;
+				justify-content: space-between;
+				width: auto;
+				font-size: {{= &m_right_header_size}}px;
+			}
+
+			.shop-trending-link::after {
+				left: 0;
+				right: auto;
+				width: 100%;
+				transition: none;
+			}
+
+			/* Reduce grid gap */
+			.row.g-4 {
+				gap: 0.75rem;
+			}
+
+			/* Stack text and adjust padding */
+			.trending-text-wrap {
+				flex-direction: column;
+				align-items: flex-start;
+				gap: 8px;
+				padding: 12px 12px 14px;
+			}
+
+			.trending-text {
+				font-size: {{= &m_product_name_size}}px;
+			}
+
+			/* Taller images for mobile */
+
+
+			/* .trending-img-wrapper  */
+			/* 	width: 100%; */
+			/* 	overflow: hidden; */
+			/* } */
+
+			.trending-img {
+				width: 100%;
+				height: auto;
+				object-fit: cover;
+			}
+
+			.trending-bottom-btn {
+				display: flex;
+			}
+
+
+
+			{{if &m_indicator_option == "none"
+				|| &m_indicator_option == "indicator"}}
+
+				.custom-trending-prev,
+				.custom-trending-next{
+					display:none !important;
+				}
+
+			{{endif}}
+
+			{{if &m_indicator_option == "none"
+				|| &m_indicator_option == "arrow"}}
+
+				.swiper-pagination{
+					display:none !important;
+				}
+
+			{{endif}}
+
+			/* Mobile Arrow Colors */
+			.custom-trending-prev,
+			.custom-trending-next{
+				background: {{= &m_arw_bg_color}} !important;
+				color: {{= &m_arrow_color}} !important;
+			}
+
+			.custom-trending-prev::after,
+			.custom-trending-next::after{
+				color: {{= &m_arrow_color}} !important;
+			}
+
+			/* Mobile Bullet Colors */
+
+			.$_s_class-trendingSwiper .swiper-pagination-bullet {
+				background: {{= &m_bullet_color}} !important;
+				opacity: 0.25 !important;
+			}
+
+			.$_s_class-trendingSwiper .swiper-pagination-bullet .progress {
+				background: {{= &m_active_bullet_color}} !important;
+			}
+
+			/* Mobile Active Bullet */
+			.$_s_class-trendingSwiper .swiper-pagination-bullet-active {
+				background: #e0e5e9 !important;
+				opacity: 1 !important;
+			}
+
+			{{if &m_indicator_option == "none"}}
+
+				.custom-trending-prev,
+				.custom-trending-next,
+				.swiper-pagination{
+					display:none !important;
+				}
+
+			{{endif}}
+
+			{{if &m_indicator_option == "indicator"}}
+
+				.custom-trending-prev,
+				.custom-trending-next{
+					display:none !important;
+				}
+
+			{{endif}}
+
+			{{if &m_indicator_option == "arrow"}}
+
+				.swiper-pagination{
+					display:none !important;
+				}
+
+			{{endif}}
+			.trending-bottom-btn::before {
+				display: none !important;
+			}
+
+			.trending-item:hover .trending-img {
+				transform: none !important;
+			}
+
+			.trending-item:hover .trending-bottom-btn span {
+				color: {{= &c_arw_color}} !important;
+			}
+
+
+		}
+		{{if &main_title != 'y'}}
+			.trending-title {
+				visibility:hidden !important;
+			}
+		{{endif}}
+
+		{{if &title != 'y'}}
+
+			.trending-text-wrap{
+				display:none !important;
+			}
+
+			.trending-item{
+				background: transparent !important;
+				height: 100%;
+			}
+
+			.trending-img-wrapper{
+				border-radius: {{= &image_radius}}px !important;
+				height:100%;
+				aspect-ratio: unset;
+			}
+			.trending-text{
+				display: none;
+			}
+			.trending-bottom-btn{
+				display: none;
+			}
+			.trending-img{
+				height: 100%;
+				width: 100%;
+				object-fit: cover;
+			}
+
+		{{endif}}
+
+
+	}
+	$_section{
+		{{= &custom_css}}
+	}
+
+</style>
+<div class="trending-section position-relative pt-md-{{= &p_md_top}} pb-md-{{= &p_md_bottom}} px-md-{{= &p_l_r_md}}">
+	<div class="{{= &section_spacing}} px-3 px-md-4">
+		<!-- Header -->
+		<div class="d-flex justify-content-between align-items-center">
+			<h2 class="trending-title m-0">{{= &header_name}}</h2>
+			{{if &trending_now == 'y'}}
+				<div class="header-right">
+					<a href="#" class="shop-trending-link text-dark text-decoration-none d-flex align-items-center" alt="Enter Right Header">
+						{{= &right_header}}
+						<span class="ms-2 sub-title">&#10095;</span>
+					</a>
+				</div>
+			{{endif}}
+		</div>
+
+		<!-- Grid -->
+
+		<div class="trending-slider-container">
+
+			<div class="swiper $_s_class-trendingSwiper">
+
+				<div class="swiper-wrapper">
+
+					{{with each &collection as $slideimage at $index}}
+
+						<div class="swiper-slide">
+							{{use component $slideimage}}
+						</div>
+
+					{{endwith}}
+
+				</div>
+
+
+				<!-- Pagination -->
+
+				{{if &indicator_options == "indicator"
+					|| &indicator_options == "both"
+					|| &m_indicator_option == "indicator"
+					|| &m_indicator_option == "both"}}
+
+					<div class="swiper-pagination"></div>
+
+				{{endif}}
+
+				<!-- Navigation -->
+
+				{{if &indicator_options == "arrow"
+					|| &indicator_options == "both"
+					|| &m_indicator_option == "arrow"
+					|| &m_indicator_option == "both"}}
+
+					<div class="swiper-button-prev custom-trending-prev"></div>
+					<div class="swiper-button-next custom-trending-next"></div>
+
+				{{endif}}
+
+			</div>
+
+		</div>
+
+
+
+	</div>
+</div>
+<script>
+	document.addEventListener("DOMContentLoaded", function(){
+
+		const totalItems =
+		document.querySelectorAll("$_section .swiper-slide").length;
+
+		const isMobile = window.innerWidth < 768;
+
+		const enableSlider = isMobile
+		? totalItems > {{= &m_slideperview}}
+		: totalItems > {{= &slidepreview}};
+
+
+		if(enableSlider){
+			document
+			.querySelector(".$_s_class-trendingSwiper")
+			.classList.add("slider-enabled");
+		}
+
+		/* IF SLIDER ENABLED */
+		if(enableSlider){
+
+			new Swiper(".$_s_class-trendingSwiper", {
+
+				slidesPerView: {{= &slidepreview}},
+				spaceBetween: 16,
+				slidesPerGroup: 1,
+
+				loop: {{= &slide_looping == 'y' ? "true" : "false"}},
+
+				autoplay: {{= &auto_play == 'y'
+						? "{ delay: " + (&auto_play_speed * 1000) + ", disableOnInteraction: false }"
+						: "false"
+				}},
+
+				on: {
+					init: function () {
+						setTimeout(() => {
+							if(this.pagination && this.pagination.el) {
+								const activeEl = this.pagination.el.querySelector('.swiper-pagination-bullet-active');
+								if (activeEl) activeEl.classList.add('animate');
+							}
+						}, 10);
+					},
+					slideChange: function () {
+						if(this.pagination && this.pagination.el) {
+							const bullets = this.pagination.el.querySelectorAll('.swiper-pagination-bullet');
+							bullets.forEach(b => b.classList.remove('animate'));
+							setTimeout(() => {
+								const activeEl = this.pagination.el.querySelector('.swiper-pagination-bullet-active');
+								if (activeEl) activeEl.classList.add('animate');
+							}, 10);
+						}
+					}
+				},
+
+				breakpoints: {
+
+					0: {
+
+						slidesPerView: {{= &m_slideperview}},
+						spaceBetween: 10,
+						centerInsufficientSlides: true,
+						centeredSlides: false,
+
+						pagination: {
+							el: ".swiper-pagination",
+							clickable: true,
+							enabled: {{= &m_indicator_option == "indicator" || &m_indicator_option == "both" ? "true" : "false"}},
+							renderBullet: function (index, className) {
+								return '<span class="' + className + '"><span class="progress"></span></span>';
+							}
+						},
+
+						navigation: {
+							nextEl: ".custom-trending-next",
+							prevEl: ".custom-trending-prev",
+							enabled: {{= &m_indicator_option == "arrow" || &m_indicator_option == "both" ? "true" : "false"}}
+						}
+					},
+					768: {
+
+						slidesPerView: {{= &slidepreview}},
+						spaceBetween: {{= &spacebetween}},
+						centeredSlides: false,
+						pagination: {
+							el: ".swiper-pagination",
+							clickable: true,
+							enabled: {{= &indicator_options == "indicator" || &indicator_options == "both" ? "true" : "false"}},
+							renderBullet: function (index, className) {
+								return '<span class="' + className + '"><span class="progress"></span></span>';
+							}
+						},
+
+						navigation: {
+							nextEl: ".custom-trending-next",
+							prevEl: ".custom-trending-prev",
+							enabled: {{= &indicator_options == "arrow" || &indicator_options == "both" ? "true" : "false"}}
+						},
+
+						mousewheel: true,
+						keyboard: true
+					}
+				}
+			});
+
+		} else {
+
+			/* STATIC GRID */
+			document
+			.querySelector("$_section .swiper-wrapper")
+			.classList.add("static-grid");
+
+			const pagination =
+			document.querySelector("$_section .swiper-pagination");
+
+			const prev =
+			document.querySelector("$_section .custom-trending-prev");
+
+			const next =
+			document.querySelector("$_section .custom-trending-next");
+
+			if(pagination) pagination.style.display = "none";
+			if(prev) prev.style.display = "none";
+			if(next) next.style.display = "none";
+		}
+
+	});
+
+</script>

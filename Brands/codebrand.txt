@@ -1,0 +1,503 @@
+<style>
+	$_section {
+
+
+		background-color: #ffffff;
+		color: #0d2a38;
+		font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+		margin: 0;
+		padding: 0;
+
+		.container {
+			max-width: 1240px;
+			margin: 0 auto;
+			padding: 60px 24px;
+			background-color:{{= &section_bg_color}};
+		}
+
+		/* ==========================================================================
+		Shop By Brands Component Styles
+		========================================================================== */
+
+		/* Brands Header Section */
+		.brands-header {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			margin-bottom: 40px;
+			flex-wrap: wrap;
+			gap: 20px;
+		}
+
+		.brands-title {
+			font-family: 'Playfair Display', Georgia, serif;
+			font-size: 2.25rem; /* 36px */
+			font-weight: 600;
+			letter-spacing: -0.01em;
+			color:{{= &title_color}};
+		}
+		{{if &main_title != 'y'}}
+			.brands-title {
+				visibility: hidden !important;
+			}
+		{{endif}}
+		.brands-header-right {
+			display: flex;
+			align-items: center;
+			gap: 24px;
+			flex-wrap: wrap;
+		}
+
+
+		.shop-brands-link {
+			display: inline-flex;
+			align-items: center;
+			gap: 8px;
+			font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+			font-size: 0.875rem; /* 14px */
+			font-weight: 600;
+			color:{{= &title_color}};
+			text-decoration: none;
+			position: relative;
+			padding-bottom: 4px;
+			transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+		}
+
+		.shop-brands-link .arrow-icon {
+			font-size: 11px;
+			transition: transform 0.3s ease;
+		}
+
+		.shop-brands-link:hover .arrow-icon {
+			transform: translateX(3px);
+		}
+
+		.shop-brands-link::after {
+			content: '';
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			width: 100%;
+			height: 1px;
+			background-color: #0d2a38;
+			transform: scaleX(0);
+			transform-origin: right center;
+			transition: transform 0.35s ease;
+		}
+
+		.shop-brands-link:hover::after {
+			transform-origin: left center;
+			transform: scaleX(1);
+		}
+
+		/* ==========================================================================
+		Layout 1: GRID MODE
+		========================================================================== */
+		.brands-swiper.layout-grid {
+			overflow: visible;
+		}
+
+		.brands-swiper.layout-grid .swiper-wrapper {
+			display: grid;
+			grid-template-columns: repeat(5, 1fr);
+			gap: 1px;
+			background-color: #e5e3de;
+			border: 1px solid #e5e3de;
+			border-radius: 12px;
+			overflow: hidden;
+			transform: none !important; /* Block Swiper transform */
+			width: 100% !important;
+		}
+
+		.brands-swiper.layout-grid .swiper-slide {
+			background-color: #ffffff;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			height: auto !important; /* height is auto so user styles dictate */
+			aspect-ratio: 16 / 9;
+			min-height: 100px;
+			padding: 20px 30px;
+			transition: background-color 0.35s ease, transform 0.35s ease;
+			text-decoration: none;
+			box-sizing: border-box;
+			width: auto !important;
+			margin-right: 0 !important;
+		}
+
+		/* Hide Swiper Pagination and Buttons in Grid Mode */
+		.brands-swiper.layout-grid .swiper-button-prev,
+		.brands-swiper.layout-grid .swiper-button-next,
+		.brands-swiper.layout-grid .swiper-pagination {
+			display: none !important;
+		}
+
+		/* ==========================================================================
+		Layout 2: SLIDER MODE (Swiper Active)
+		========================================================================== */
+		.brands-swiper.layout-slider {
+			position: relative;
+			border: 1px solid #e5e3de;
+			border-radius: 12px;
+			overflow: hidden;
+			background-color: #ffffff; /* White background to frame the pagination area */
+			padding-bottom: 54px; /* Space for pagination bullets at bottom */
+		}
+
+		.brands-swiper.layout-slider .swiper-wrapper {
+			display: flex;
+			flex-wrap: nowrap;
+			background-color: #e5e3de; /* Border color between slides */
+		}
+
+		.brands-swiper.layout-slider .swiper-slide {
+			background-color: #ffffff;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			height: auto;
+			aspect-ratio: 16 / 9;
+			min-height: 100px;
+			padding: 20px 30px;
+			box-sizing: border-box;
+			text-decoration: none;
+			transition: background-color 0.35s ease;
+		}
+
+		/* Brand Logo Image Styles */
+		.brand-item img {
+			max-width: 75%;
+			max-height: 55%;
+			object-fit: contain;
+			opacity: 0.85;
+			transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+		}
+
+		.brand-item:hover {
+			background-color: #fbfbfa;
+		}
+
+		.brand-item:hover img {
+			transform: scale(1.06);
+			opacity: 1;
+		}
+
+		.brand-item:active img {
+			transform: scale(0.98);
+		}
+
+		/* Custom Swiper Navigation Buttons */
+		.brands-swiper.layout-slider .swiper-button-prev,
+		.brands-swiper.layout-slider .swiper-button-next {
+			color: #0d2a38;
+			background-color: rgba(255, 255, 255, 0.95);
+			border: 1px solid #e5e3de;
+			width: 40px;
+			height: 40px;
+			border-radius: 50%;
+			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+			transition: all 0.3s ease;
+			top: calc(50% - 27px); /* Adjust vertical alignment to center on slides, ignoring pagination height */
+		}
+
+		.brands-swiper.layout-slider .swiper-button-prev:after,
+		.brands-swiper.layout-slider .swiper-button-next:after {
+			font-size: 14px;
+			font-weight: 800;
+		}
+
+		.brands-swiper.layout-slider .swiper-button-prev:hover,
+		.brands-swiper.layout-slider .swiper-button-next:hover {
+			background-color: #0d2a38;
+			color: #ffffff;
+			border-color: #0d2a38;
+			transform: scale(1.05);
+		}
+
+		.brands-swiper.layout-slider .swiper-button-disabled {
+			opacity: 0.35;
+			pointer-events: none;
+		}
+
+		/* Custom Swiper Pagination Bullets */
+		.brands-swiper.layout-slider .swiper-pagination {
+			position: absolute;
+			bottom: 20px !important;
+			left: 0;
+			width: 100%;
+			display: flex;
+			justify-content: center;
+			gap: 6px;
+			line-height: 1;
+		}
+
+		.brands-swiper.layout-slider .swiper-pagination-bullet {
+			background: #c7c5be;
+			opacity: 0.6;
+			width: 7px;
+			height: 7px;
+			margin: 0 !important;
+			transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+			border-radius: 50%;
+		}
+
+		.brands-swiper.layout-slider .swiper-pagination-bullet-hover,
+		.brands-swiper.layout-slider .swiper-pagination-bullet:hover {
+			opacity: 1;
+			background: #0d2a38;
+		}
+
+		.brands-swiper.layout-slider .swiper-pagination-bullet-active {
+			background: #0d2a38;
+			opacity: 1;
+			width: 18px;
+			border-radius: 4px;
+		}
+
+		/* ==========================================================================
+		Responsive Media Queries for both Grid and Slider Layouts
+		========================================================================== */
+
+		/* Tablet Screens (max-width: 992px) */
+		@media (max-width: 992px) {
+			.container {
+				padding: 50px 24px;
+			}
+
+			.brands-title {
+				font-size: 2rem;
+			}
+
+			/* Grid mode columns override: 4 columns */
+			.brands-swiper.layout-grid .swiper-wrapper {
+				grid-template-columns: repeat(4, 1fr);
+			}
+		}
+
+		/* Small Tablet Screens (max-width: 768px) */
+		@media (max-width: 768px) {
+			.container {
+				padding: 40px 20px;
+			}
+
+			.brands-header {
+				margin-bottom: 30px;
+			}
+
+			.brands-title {
+				font-size: 1.75rem;
+			}
+
+			/* Grid mode columns override: 3 columns */
+			.brands-swiper.layout-grid .swiper-wrapper {
+				grid-template-columns: repeat(3, 1fr);
+			}
+
+			.brands-swiper.layout-grid .swiper-slide {
+				padding: 15px 20px;
+			}
+
+			.brands-swiper.layout-slider .swiper-slide {
+				padding: 15px 20px;
+			}
+		}
+
+		/* Mobile Screens (max-width: 576px) */
+		@media (max-width: 576px) {
+			.container {
+				padding: 30px 16px;
+			}
+
+			.brands-header {
+				flex-direction: column;
+				align-items: flex-start;
+				gap: 16px;
+			}
+
+			.brands-header-right {
+				width: 100%;
+				justify-content: space-between;
+				gap: 12px;
+			}
+
+			.brands-title {
+				font-size: 1.5rem;
+			}
+
+			/* Grid mode columns override: 2 columns */
+			.brands-swiper.layout-grid .swiper-wrapper {
+				grid-template-columns: repeat(2, 1fr);
+				border-radius: 8px;
+			}
+
+			.brands-swiper.layout-slider {
+				border-radius: 8px;
+				padding-bottom: 44px;
+			}
+
+			.brands-swiper.layout-slider .swiper-pagination {
+				bottom: 16px !important;
+			}
+
+			.brands-swiper.layout-slider .swiper-button-prev,
+			.brands-swiper.layout-slider .swiper-button-next {
+				width: 32px;
+				height: 32px;
+				top: calc(50% - 22px);
+			}
+
+			.brands-swiper.layout-slider .swiper-button-prev:after,
+			.brands-swiper.layout-slider .swiper-button-next:after {
+				font-size: 11px;
+			}
+
+			.brands-swiper.layout-grid .swiper-slide,
+			.brands-swiper.layout-slider .swiper-slide {
+				padding: 12px 16px;
+				aspect-ratio: 4 / 3; /* slightly taller on mobile for logos to fit nicely */
+			}
+		}
+
+		/* Extra Small Screens (max-width: 360px) */
+		@media (max-width: 360px) {
+			.brands-header-right {
+				flex-direction: column;
+				align-items: flex-start;
+				width: 100%;
+				gap: 16px;
+			}
+
+			.layout-toggle {
+				width: 100%;
+			}
+
+			.layout-toggle .toggle-btn {
+				flex: 1;
+				justify-content: center;
+			}
+		}
+
+	}
+	$_section{
+		{{= &custom_css}}
+	}
+</style>
+
+
+
+<section class="container pt-md-{{= &p_md_top}}  pb-md-{{= &p_md_bottom }} {{if p_l_r_md != 'custom'}} px-md-{{= &p_l_r_md }} {{endif}}  pt-{{= &p_top }}  pb-{{= &p_bottom }} {{if p_l_r != 'm_custom'}} px-{{= &p_l_r }} {{endif}}">
+	<!-- Component Presentation View -->
+	<div class="component-presentation {{= &section_spacing}}">
+		<!-- Header Section -->
+		<header class="brands-header">
+			<h1 class="brands-title">{{= &title_name}}</h1>
+			<div class="brands-header-right">
+				<a
+				href="#"
+				class="shop-brands-link"
+				id="link-shop-all-brands"
+				aria-label="Shop all brands"
+				>
+				{{= &right_header}}
+				<span class="arrow-icon" aria-hidden="true">&#10095;</span>
+			</a>
+		</div>
+	</header>
+
+	<!-- Brands Swiper Container -->
+	<section class="brands-swiper-container">
+		<div class="swiper brands-swiper layout-grid" id="brands-swiper">
+			<div class="swiper-wrapper">
+
+				{{with each &brands as $slideimage at $index}}
+					{{use component $slideimage}}
+				{{endwith}}
+
+				<!-- <a
+				href="#"
+				class="swiper-slide brand-item"
+				id="brand-olivea"
+				aria-label="Shop Olivea products"
+				>
+				<img
+				src="images/s-brand-logo-1.avif"
+				alt="Olivea Logo"
+				loading="lazy"
+				/>
+				</a> -->
+			</div>
+
+			<!-- Swiper Navigation (Arrows) -->
+			<div class="swiper-button-prev"></div>
+			<div class="swiper-button-next"></div>
+
+			<!-- Swiper Pagination (Bullets) -->
+			<div class="swiper-pagination"></div>
+		</div>
+	</section>
+</div>
+</section>
+
+
+<script>
+	window.addEventListener("DOMContentLoaded", function () {
+		if (document.querySelector(".$_s_class-slider")) {
+			const swiper = new Swiper(".$_s_class-slider", {
+				loop: {{= &slide_looping == 'y' ? 'true' : 'false'}},
+				{{if &auto_play == 'y'}}
+					autoplay: {
+						delay: {{= &a_p_speed * 1000}},
+						disableOnInteraction: false,
+					},
+				{{endif}}
+				speed: 500,
+				spaceBetween: {{= &space_between}},
+				centeredSlides: false,
+				autoHeight: true,
+				observer: true,
+				observeParents: true,
+				// Navigation arrows
+				navigation: {
+					nextEl: '.swiper-button-next',
+					prevEl: '.swiper-button-prev',
+				},
+				// Pagination (dots)
+				pagination: {
+					el: '.swiper-pagination',
+					clickable: true,
+				},
+				// Responsive settings
+				breakpoints: {
+					0: {
+						slidesPerView: {{= &slide_to_show_mobile}},
+						pagination: {
+							el: ".swiper-pagination",
+							clickable: true,
+							enabled: {{= &mobile_indicator_options == "indicator" || &mobile_indicator_options == "both" ? "true" : "false"}},
+						},
+						navigation: {
+							nextEl: ".swiper-button-next",
+							prevEl: ".swiper-button-prev",
+							enabled: {{= &mobile_indicator_options == "arrow" || &mobile_indicator_options == "both" ? "true" : "false"}},
+						},
+					},
+					768: {
+						slidesPerView: {{= &slide_to_show}},
+						pagination: {
+							el: ".swiper-pagination",
+							clickable: true,
+							enabled: {{= &indicator_options == "indicator" || &indicator_options == "both" ? "true" : "false"}},
+						},
+						navigation: {
+							nextEl: ".swiper-button-next",
+							prevEl: ".swiper-button-prev",
+							enabled: {{= &indicator_options == "arrow" || &indicator_options == "both" ? "true" : "false"}},
+						},
+					}
+				}
+			});
+		}
+	});
+</script>

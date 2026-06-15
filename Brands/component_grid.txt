@@ -1,0 +1,5 @@
+
+<!-- components -->
+<a href="#" class="swiper-slide brand-item" id="brand-olivea" aria-label="Shop Olivea products">
+<img src="{{= &brandimg == '' ? 'https://placehold.co/1920x630' : 'https://cdn.flicksell.com/'.&brandimg}}" alt="Brand" loading="lazy">
+</a>
