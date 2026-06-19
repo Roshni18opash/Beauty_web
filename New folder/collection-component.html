@@ -1,0 +1,78 @@
+{{$render_mode = $pass_val[0]}}
+{{$slide_index = $pass_val[1]}}
+
+{{* ─────────────────────────────────────────────────
+    MODE 0 → TEXT SLIDE (Left Column)
+───────────────────────────────────────────────── *}}
+{{if $render_mode == 0}}
+	<div class="section-subtitle">{{= &slideimage.subtitle}}</div>
+	<div class="slider-quote-container">
+		<p class="testimonial-quote">{{= &slideimage.quote}}</p>
+	</div>
+	<div class="author-meta">
+		<span class="author-name">{{= &slideimage.author_name}}</span>
+		<span class="author-location">{{= &slideimage.author_location}}</span>
+	</div>
+	{{* Store bg color for JS to pick up *}}
+	<span class="slide-bg-color" data-color="{{= &slideimage.bg_color}}" style="display:none;"></span>
+{{endif}}
+
+{{* ─────────────────────────────────────────────────
+    MODE 1 → BACKGROUND SLIDE (Right Column)
+───────────────────────────────────────────────── *}}
+{{if $render_mode == 1}}
+	<div class="bg-slide"
+		style="background-image: url('{{= &slideimage.bg_image}}'); width: 100%;">
+	</div>
+{{endif}}
+
+{{* ─────────────────────────────────────────────────
+    MODE 2 → PRODUCT CARD SLIDE (Floating Card)
+───────────────────────────────────────────────── *}}
+{{if $render_mode == 2}}
+	<div class="card-slide">
+		<div class="card-image-container">
+
+			{{* Search / Quick View Button *}}
+			<a href="{{= &slideimage.product_url}}" class="search-btn" aria-label="View product" tabindex="0">
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+					stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+					<circle cx="11" cy="11" r="8"/>
+					<line x1="21" y1="21" x2="16.65" y2="16.65"/>
+				</svg>
+			</a>
+
+			{{* Primary product image *}}
+			<img
+				class="product-image primary-img"
+				src="{{= &slideimage.product_image}}"
+				alt="{{= &slideimage.product_title}}"
+				loading="lazy"
+			/>
+
+			{{* Hover (alternate) product image *}}
+			{{if &slideimage.product_image_hover != ''}}
+				<img
+					class="product-image hover-img"
+					src="{{= &slideimage.product_image_hover}}"
+					alt="{{= &slideimage.product_title}}"
+					loading="lazy"
+				/>
+			{{endif}}
+
+			{{* Product shadow *}}
+			<div class="product-shadow"></div>
+
+			{{* Choose Options button *}}
+			<a href="{{= &slideimage.product_url}}" class="choose-btn" tabindex="0">
+				{{= &slideimage.btn_label ? &slideimage.btn_label : 'Choose Options'}}
+			</a>
+		</div>
+
+		<div class="card-details">
+			<span class="product-category">{{= &slideimage.product_category}}</span>
+			<p class="product-title">{{= &slideimage.product_title}}</p>
+			<span class="product-price">{{= &slideimage.product_price}}</span>
+		</div>
+	</div>
+{{endif}}

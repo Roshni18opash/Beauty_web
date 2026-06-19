@@ -1,0 +1,18 @@
+<div class="swiper-slide text-center">
+	<a href="{{= &link != '' ? &link : '#'}}" class="category-item text-decoration-none">
+
+		<div class="category-img-wrapper mx-auto">
+			<img
+				src="{{= &collectionimg == '' ? 'https://placehold.co/92x92' : 'https://cdn.flicksell.com/'.&collectionimg}}"
+				alt="{{= &text}}"
+				class="category-img"
+				loading="lazy"
+			>
+		</div>
+
+		{{if &text}}
+			<span class="category-text">{{= &text}}</span>
+		{{endif}}
+
+	</a>
+</div>

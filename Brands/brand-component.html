@@ -1,0 +1,12 @@
+<a
+	href="{{= &brand_link != '' ? &brand_link : '#'}}"
+	class="swiper-slide brand-item"
+	id="brand-{{= &brand_id}}"
+	aria-label="Shop {{= &brand_name}} products"
+>
+	<img
+		src="{{= &brandimg == '' ? 'https://placehold.co/300x120' : 'https://cdn.flicksell.com/'.&brandimg}}"
+		alt="{{= &brand_name}}"
+		loading="lazy"
+	/>
+</a>
