@@ -27,10 +27,69 @@ body {
 }
 
 /* Grid Container */
-.beauty-cards-container {
+.beauty-cards-container,
+.beauty-cards-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 24px;
+    width: 100%;
+}
+
+.beauty-cards-wrapper {
+    position: relative;
+}
+
+.beauty-cards-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.layout-toggle {
+    border: 1.5px solid #d9d3cd;
+    background: #ffffff;
+    color: #1a1a1a;
+    padding: 10px 18px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background-color 0.25s ease, color 0.25s ease, transform 0.25s ease;
+}
+
+.layout-toggle:hover,
+.layout-toggle.active {
+    background-color: #1a1a1a;
+    color: #ffffff;
+}
+
+.beauty-cards-slider {
+    width: 100%;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.beauty-cards-slider.hidden,
+.beauty-cards-grid.hidden {
+    display: none !important;
+}
+
+.beauty-cards-slider .swiper {
+    width: 100%;
+}
+
+.beauty-cards-slider .swiper-wrapper {
+    display: flex;
+    align-items: stretch;
+}
+
+.beauty-cards-slider .swiper-slide {
+    display: flex;
+    width: auto;
+}
+
+.beauty-cards-slider .swiper-slide .beauty-card {
     width: 100%;
 }
 
@@ -56,7 +115,7 @@ body {
 
 /* Image Section */
 .card-image-section {
-    height: 360px;
+    min-height: 300px;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -284,7 +343,7 @@ body {
     }
 
     .card-image-section {
-        height: 320px;
+        min-height: 320px;
     }
 }
 
@@ -300,7 +359,7 @@ body {
     }
 
     .card-image-section {
-        height: 300px;
+        min-height: 300px;
     }
 
     .card-title {
@@ -318,20 +377,62 @@ body {
 
 /* Mobile Devices (max-width: 500px) */
 @media (max-width: 500px) {
-    .beauty-cards-container {
+    body {
+        padding: 24px 14px;
+    }
+
+    .beauty-cards-container,
+    .beauty-cards-grid {
         grid-template-columns: 1fr;
-        gap: 20px;
+        gap: 18px;
+    }
+
+    .beauty-cards-slider .swiper-slide {
+        width: 100%;
     }
 
     .card-image-section {
-        height: 340px;
+        min-height: 260px;
     }
 
     .card-title {
-        font-size: 1.6rem;
+        font-size: 1.5rem;
     }
 
     .shop-btn {
         padding: 8px 20px;
+    }
+
+    .beauty-card,
+    .beauty-card:hover,
+    .card-bottom-section:hover .shop-btn::before,
+    .card-bottom-section:hover .shop-btn span,
+    .card-bottom-section:hover .shop-btn {
+        transform: none !important;
+        box-shadow: 0 10px 25px rgba(45, 38, 33, 0.08) !important;
+    }
+
+    .shop-btn::before {
+        transform: translateX(-102%) !important;
+    }
+
+    .beauty-card {
+        transition: none !important;
+    }
+}
+
+/* Small desktop / tablet breakpoint */
+@media (max-width: 900px) {
+    .beauty-cards-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    .beauty-cards-slider .swiper-slide {
+        width: calc(50% - 10px);
+    }
+
+    .card-image-section {
+        min-height: 280px;
     }
 }

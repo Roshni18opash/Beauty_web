@@ -1,3 +1,5 @@
+
+
 const track = document.getElementById('productsTrack');
 const thumb = document.getElementById('scrollThumb');
 const prevBtn = document.getElementById('prevBtn');
@@ -73,7 +75,30 @@ updateButtons();
 
 document.querySelectorAll('.tab').forEach((tab) => {
   tab.onclick = () => {
+    const selectedCollection = tab.getAttribute('data-collection');
+    
+    // Remove active class from all tabs
     document.querySelectorAll('.tab').forEach((t) => t.classList.remove('active'));
+    // Add active class to clicked tab
     tab.classList.add('active');
+    
+    // Filter and show/hide products based on collection
+    const allCards = document.querySelectorAll('.product-card');
+    allCards.forEach((card) => {
+      const cardCollection = card.getAttribute('data-collection');
+      if (cardCollection === selectedCollection) {
+        card.style.display = '';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+    
+    // Reset scroll position when switching collections
+    track.scrollLeft = 0;
+    thumb.style.width = MIN_THUMB_WIDTH + '%';
+    thumb.style.left = '0%';
+    
+    // Update button states
+    setTimeout(updateButtons, 100);
   };
 });

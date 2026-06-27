@@ -8,15 +8,24 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css">
     <!-- CSS stylesheet -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <section class="beauty-cards-section">
-        <div class="beauty-cards-container">
-            
-            <!-- Card 1: Skin Care -->
+        <div class="beauty-cards-controls">
+            <button class="layout-toggle active" data-layout="auto">Auto</button>
+            <button class="layout-toggle" data-layout="grid">Grid</button>
+            <button class="layout-toggle" data-layout="slider">Slider</button>
+        </div>
+
+        <div class="beauty-cards-wrapper">
+            <div class="beauty-cards-grid beauty-cards-container">
+                
+                <!-- Card 1: Skin Care -->
             <div class="beauty-card" id="card-skincare">
                 <div class="card-image-section" style="background-image: url('Images/imgcard-1.webp');">
                     <div class="card-text-overlay">
@@ -113,8 +122,19 @@
             </div>
 
         </div>
+
+            <div class="beauty-cards-slider hidden">
+                <div class="swiper beauty-swiper">
+                    <div class="swiper-wrapper"></div>
+                    <div class="swiper-pagination"></div>
+                    <div class="swiper-button-prev" aria-label="Previous slide"></div>
+                    <div class="swiper-button-next" aria-label="Next slide"></div>
+                </div>
+            </div>
+        </div>
     </section>
 
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
     <!-- JavaScript script -->
     <script src="script.js"></script>
 </body>

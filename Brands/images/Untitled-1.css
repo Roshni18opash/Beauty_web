@@ -1,0 +1,713 @@
+<style>
+	$_section {
+
+		background-color: {{= &section_bg_color}};
+
+		.container {
+			max-width: 1240px;
+			margin: 0 auto;
+			padding: 60px 24px;
+			background-color: {{= &section_bg_color}};
+		}
+
+		{{if &p_l_r == 'custom'}}
+			.container {
+				padding-left: {{= &custom_padding}}px !important;
+				padding-right: {{= &custom_padding}}px !important;
+			}
+		{{endif}}
+
+		{{if &desktop != 'y'}}
+			.container { display: none !important; }
+		{{endif}}
+
+		/* ── Header ── */
+		.brands-header {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			margin-bottom: 32px;
+			flex-wrap: wrap;
+			gap: 16px;
+		}
+
+		.brands-title {
+			font-family: 'Playfair Display', Georgia, serif;
+			font-size: {{= &title_size}}px;
+			font-weight: {{= &title_text_weight}};
+			color: {{= &title_color}};
+			letter-spacing: -0.01em;
+		}
+
+		{{if &main_title != 'y'}}
+			.brands-title { visibility: hidden !important; }
+		{{endif}}
+
+		.shop-brands-link {
+			display: inline-flex;
+			align-items: center;
+			gap: 6px;
+			font-size: {{= &sub_size}}px;
+			font-weight: {{= &sub_weight}};
+			color: {{= &title_color}};
+			text-decoration: none;
+		}
+
+		/* ── Brand Card ── */
+		.brand-item {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			background:{{= &card_bg}};
+			height: 120px;
+			padding: 20px 24px;
+			text-decoration: none;
+			box-sizing: border-box;
+			transition: background 0.3s ease;
+		}
+
+		.brand-item img {
+			max-width: 80%;
+			max-height: 75px;
+			width: auto;
+			height: auto;
+			object-fit: contain;
+			opacity: 0.85;
+			transition: transform 0.3s ease, opacity 0.3s ease;
+			border-radius:{{= &img_radius}}px;
+
+		}
+
+		.brand-item:hover { background: #f9f9f7; }
+		.brand-item:hover img { transform: scale(1.05); opacity: 1; }
+		.brand-item:active img { transform: scale(0.97); }
+
+		/* ── GRID MODE — 5 columns fixed ── */
+		.$_s_class-brands-grid {
+			display: grid;
+			grid-template-columns: repeat(5, 1fr);
+			gap: 1px;
+			background: #e5e3de;
+			border: 1px solid #e5e3de;
+			border-radius: 12px;
+			overflow: hidden;
+		}
+
+		@media (max-width: 992px) {
+			.$_s_class-brands-grid { grid-template-columns: repeat(4, 1fr); }
+		}
+		@media (max-width: 768px) {
+			.$_s_class-brands-grid { grid-template-columns: repeat(3, 1fr); }
+		}
+		@media (max-width: 576px) {
+			.$_s_class-brands-grid { grid-template-columns: repeat(2, 1fr); }
+		}
+
+		/* ── SLIDER MODE ── */
+		.$_s_class-brands-swiper,
+		.$_s_class-brands-swiper-mobile {
+			position: relative;
+			border: 1px solid #ddd8d0;
+			border-radius: 12px;
+			overflow: hidden;
+			background: #fff;
+		}
+
+		/* gap color between slides */
+		.$_s_class-brands-swiper .swiper-wrapper,
+		.$_s_class-brands-swiper-mobile .swiper-wrapper {
+			background: #e5e3de;
+		}
+
+		/* Hide nav lock */
+		.swiper-button-lock { display: none !important; }
+
+		/* Hide arrows by default */
+		.swiper-button-prev,
+		.swiper-button-next {
+			display: none !important;
+		}
+
+		{{if &indicator_options == "arrow" || &indicator_options == "both"}}
+			.swiper-button-prev,
+			.swiper-button-next {
+				display: flex !important;
+			}
+		{{endif}}
+
+		/* Arrow base */
+		.custom-nav-btn {
+			border-radius: {{= &arw_radius != '' ? &arw_radius + 'px' : '50%'}} !important;
+			background-color: {{= &arrow_bg != '' ? &arrow_bg : '#ffffff'}} !important;
+			color: {{= &arrow_color != '' ? &arrow_color : '#0d2a38'}} !important;
+			box-shadow: 0 2px 5px rgba(0,0,0,.2);
+			position: absolute;
+			top: 50%;
+			z-index: 10;
+			overflow: hidden;
+			transition: left .4s ease, right .4s ease, opacity .4s ease;
+			width: 42px;
+			height: 42px;
+			margin-top: -21px;
+		}
+
+		/* Hidden by default, slide in on hover */
+		.swiper-button-prev.custom-nav-btn { left: 0; opacity: 0; }
+		.swiper-button-next.custom-nav-btn { right: 0; opacity: 0; }
+
+		.component-presentation:hover .swiper-button-prev.custom-nav-btn {
+			left: 10px;
+			opacity: 1;
+		}
+		.component-presentation:hover .swiper-button-next.custom-nav-btn {
+			right: 10px;
+			opacity: 1;
+		}
+
+		.component-presentation:hover .custom-nav-btn.swiper-button-disabled {
+			opacity: .3 !important;
+			pointer-events: auto !important;
+			cursor: not-allowed;
+		}
+
+		/* Arrow icon */
+		.custom-nav-btn::after {
+			font-size: 14px !important;
+			font-weight: bold;
+			color: {{= &arrow_color != '' ? &arrow_color : '#0d2a38'}} !important;
+			position: relative;
+			z-index: 3;
+			transition: color .3s ease;
+		}
+
+		/* Hover fill animation */
+		.custom-nav-btn::before {
+			content: '';
+			position: absolute;
+			inset: 0;
+			background-color: {{= &arrow_color != '' ? &arrow_color : '#0d2a38'}} !important;
+			transform: translateX(-100%);
+			transition: transform .4s ease;
+			z-index: 1;
+		}
+
+		.custom-nav-btn:hover::before { transform: translateX(0); }
+		.custom-nav-btn:hover::after { color: {{= &arrow_bg != '' ? &arrow_bg : '#ffffff'}} !important; }
+
+		/* Blocked icon (disabled click) */
+		.blocked-icon {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			font-size: 18px;
+			font-weight: bold;
+			color: red;
+			z-index: 20;
+			pointer-events: none;
+		}
+
+		.mobile-btn-container {
+			display: none;
+		}
+
+		/* ── Pagination — OUTSIDE card, below slider ── */
+		.brands-pagination-wrap {
+			display: flex;
+			justify-content: {{= &indicator_position}};
+			align-items: center;
+			margin-top: 18px;
+		}
+
+		.brands-pagination-wrap .swiper-pagination {
+			position: static;
+			display: flex;
+			align-items: center;
+			gap: 8px;
+			width: auto;
+		}
+
+		.brands-pagination-wrap .swiper-pagination-bullet {
+			width: 6px !important;
+			height: 6px !important;
+			min-height: 6px !important;
+			border-radius: 50% !important;
+			background: {{= &bullet_bg}} !important;
+			opacity: 0.25 !important;
+			position: relative;
+			overflow: hidden;
+			display: flex !important;
+			align-items: center;
+			margin: 0 !important;
+			cursor: pointer;
+			transition: width 0.3s ease, border-radius 0.3s ease, background 0.3s ease, opacity 0.3s ease;
+		}
+
+		.brands-pagination-wrap .swiper-pagination-bullet-active {
+			width: 32px !important;
+			border-radius: 4px !important;
+			background: #e0e5e9 !important;
+			opacity: 1 !important;
+		}
+
+		.brands-pagination-wrap .swiper-pagination-bullet .progress {
+			position: absolute;
+			top: 0;
+			left: 0;
+			height: 100%;
+			width: 0%;
+			border-radius: inherit;
+			background: {{= &bullet_bg}} !important;
+			opacity: 1;
+		}
+
+		.brands-pagination-wrap .swiper-pagination-bullet-active.animate .progress {
+			width: 100%;
+			{{if &auto_play == 'y'}}
+				transition: width {{= &auto_play_speed}}s linear;
+			{{else}}
+				transition: width 5s linear;
+			{{endif}}
+		}
+
+		@media (max-width: 767px) {
+			.custom-nav-btn {
+				width: 32px;
+				height: 32px;
+				margin-top: -16px;
+				color: {{= &m_arrow_color != '' ? &arrow_color : '#0d2a38'}} !important;
+				background-color: {{= &m_arrow_back_color != '' ? &arrow_bg : '#ffffff'}} !important;
+			}
+
+			.shop-brands-link {
+
+				font-size: {{= &m_sub_size}}px;
+				font-weight: {{= &m_sub_weight}};
+				color: {{= &m_title_color}};
+				text-decoration: none;
+			}
+
+			.brands-pagination-wrap .swiper-pagination-bullet {
+				background: {{= &m_bullet_bg}} !important;
+			}
+
+			.brands-title {
+				font-family: 'Playfair Display', Georgia, serif;
+				font-size: {{= &m_title_size}}px;
+				font-weight: {{= &m_title_weight}};
+				color: {{= &m_title_color}};
+				letter-spacing: -0.01em;
+			}
+
+			.custom-nav-btn::before {
+				background-color: {{= &arrow_color != '' ? &arrow_color : '#0d2a38'}} !important;
+			}
+
+			.custom-nav-btn::after {
+				font-size: 12px !important;
+				color: {{= &arrow_color != '' ? &arrow_color : '#0d2a38'}} !important;
+			}
+
+			/* No hover on mobile */
+			.custom-nav-btn:hover::before {
+				transform: translateX(-100%) !important;
+			}
+			.custom-nav-btn:hover::after,
+			.custom-nav-btn:active::after {
+				color: {{= &arrow_color != '' ? &arrow_color : '#0d2a38'}} !important;
+			}
+
+			/* Always visible on mobile */
+			.swiper-button-prev.custom-nav-btn,
+			.component-presentation:hover .swiper-button-prev.custom-nav-btn {
+				left: 0 !important;
+				opacity: 1 !important;
+			}
+
+			.swiper-button-next.custom-nav-btn,
+			.component-presentation:hover .swiper-button-next.custom-nav-btn {
+				right: 0 !important;
+				opacity: 1 !important;
+			}
+
+			.custom-nav-btn.swiper-button-disabled,
+			.component-presentation:hover .custom-nav-btn.swiper-button-disabled {
+				opacity: 0.3 !important;
+				cursor: not-allowed !important;
+			}
+
+			/* Hide arrows on mobile if not needed */
+			{{if &m_indicator_options == "none" || &m_indicator_options == "indicator"}}
+				.swiper-button-prev,
+				.swiper-button-next {
+					display: none !important;
+				}
+			{{endif}}
+
+			{{if &mobile_indicator_options == "arrow" || &mobile_indicator_options == "both" || &m_indicator_options == "arrow" || &m_indicator_options == "both"}}
+				.swiper-button-prev,
+				.swiper-button-next {
+					display: flex !important;
+				}
+			{{endif}}
+
+			/* Mobile bullet colors */
+			.brands-pagination-wrap .swiper-pagination-bullet {
+				background: {{= &m_indicator_background_color}} !important;
+			}
+
+			.brands-pagination-wrap .swiper-pagination-bullet .progress {
+				background: {{= &m_indicator_color}} !important;
+			}
+
+			.brands-pagination-wrap .swiper-pagination-bullet-active {
+				background: #e0e5e9 !important;
+				opacity: 1 !important;
+			}
+
+			/* Mobile Toggle Button */
+			.mobile-btn-container {
+				display: flex;
+				justify-content: center;
+				margin-top: 24px;
+			}
+
+			.show-more-btn {
+				background-color: {{= &arrow_bg != '' ? &arrow_bg : '#0d2a38'}} !important;
+				color: {{= &arrow_color != '' ? &arrow_color : '#ffffff'}} !important;
+				border: none;
+				font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+				font-size: 0.95rem;
+				font-weight: 600;
+				padding: 12px 32px;
+				border-radius: {{= &arw_radius != '' ? &arw_radius + 'px' : '50px'}} !important;
+				cursor: pointer;
+				box-shadow: 0 4px 15px rgba(13, 42, 56, 0.15) !important;
+				transition: none !important;
+				display: inline-flex;
+				align-items: center;
+				gap: 8px;
+			}
+
+			/* Mobile grid collapse/expand */
+			.$_s_class-brands-grid.mobile-collapsed {
+				max-height: 500px;
+				overflow: hidden;
+			}
+
+			.$_s_class-brands-grid.mobile-collapsed .brand-item:nth-child(n+7) {
+				display: none !important;
+			}
+
+			.$_s_class-brands-grid.mobile-expanded {
+				max-height: none;
+			}
+
+			.$_s_class-brands-grid.mobile-expanded .brand-item {
+				display: flex !important;
+			}
+
+			{{if &mobile != 'y'}}
+				.container { display: none; }
+			{{endif}}
+		}
+	}
+
+	$_section {
+		{{= &custom_css}}
+	}
+</style>
+
+<section class="container pt-md-{{= &p_md_top}} pb-md-{{= &p_md_bottom}} {{if p_l_r_md != 'custom'}}px-md-{{= &p_l_r_md}}{{endif}} pt-{{= &p_top}} pb-{{= &p_bottom}} {{if p_l_r != 'm_custom'}}px-{{= &p_l_r}}{{endif}}">
+
+	<div class="component-presentation {{= &section_spacing}}">
+
+		<!-- Header -->
+		<header class="brands-header">
+			<h2 class="brands-title">{{= &title_name}}</h2>
+			<a href="#" class="shop-brands-link" id="link-shop-all-brands" aria-label="Shop all brands">
+				{{= &sub_title}} <span>&#10095;</span>
+			</a>
+		</header>
+
+		<!-- Desktop: Slider or Grid -->
+		{{if &type == 'slider'}}
+
+			<div class="swiper $_s_class-brands-swiper d-none d-md-block">
+				<div class="swiper-wrapper">
+					{{if &brands}}
+						{{with each &brands as $brand at $index}}
+							{{use component $brand}}
+						{{endwith}}
+					{{endif}}
+				</div>
+				{{if &indicator_options == "arrow" || &indicator_options == "both"
+					|| &m_indicator_options == "arrow" || &m_indicator_options == "both"}}
+					<div class="swiper-button-prev custom-nav-btn"></div>
+					<div class="swiper-button-next custom-nav-btn"></div>
+				{{endif}}
+			</div>
+
+			{{if &indicator_options == "indicator" || &indicator_options == "both"}}
+				<div class="brands-pagination-wrap d-none d-md-flex">
+					<div class="$_s_class-brands-pg-desktop swiper-pagination"></div>
+				</div>
+			{{endif}}
+
+		{{else}}
+
+			<div class="$_s_class-brands-grid d-none d-md-grid">
+				{{if &brands}}
+					{{with each &brands as $brand at $index}}
+						{{use component $brand}}
+					{{endwith}}
+				{{endif}}
+			</div>
+
+		{{endif}}
+
+		<!-- Mobile: Slider or Grid -->
+		{{if &type == 'slider'}}
+			{{if &m_type == 'm_slider'}}
+
+				<div class="swiper $_s_class-brands-swiper-mobile d-md-none">
+					<div class="swiper-wrapper">
+						{{if &brands}}
+							{{with each &brands as $brand at $index}}
+								{{use component $brand}}
+							{{endwith}}
+						{{endif}}
+					</div>
+					{{if &mobile_indicator_options == "arrow" || &mobile_indicator_options == "both"
+						|| &m_indicator_options == "arrow" || &m_indicator_options == "both"}}
+						<div class="swiper-button-prev custom-nav-btn"></div>
+						<div class="swiper-button-next custom-nav-btn"></div>
+					{{endif}}
+				</div>
+
+				{{if &mobile_indicator_options == "indicator" || &mobile_indicator_options == "both"
+					|| &m_indicator_options == "indicator" || &m_indicator_options == "both"}}
+					<div class="brands-pagination-wrap d-md-none">
+						<div class="$_s_class-brands-pg-mobile swiper-pagination"></div>
+					</div>
+				{{endif}}
+
+			{{else}}
+
+				<div class="$_s_class-brands-grid d-md-none mobile-collapsed" id="brands-grid-mobile">
+					{{if &brands}}
+						{{with each &brands as $brand at $index}}
+							{{use component $brand}}
+						{{endwith}}
+					{{endif}}
+				</div>
+
+				<div class="mobile-btn-container">
+					<button class="show-more-btn" id="btn-show-more" aria-expanded="false" aria-controls="brands-grid-mobile">
+						Show More
+					</button>
+				</div>
+
+			{{endif}}
+		{{else}}
+
+			<div class="$_s_class-brands-grid d-md-none mobile-collapsed" id="brands-grid-mobile">
+				{{if &brands}}
+					{{with each &brands as $brand at $index}}
+						{{use component $brand}}
+					{{endwith}}
+				{{endif}}
+			</div>
+
+			<div class="mobile-btn-container">
+
+				<button
+				type="button"
+				class="show-more-btn"
+				id="btn-show-more"
+				aria-expanded="false"
+				aria-controls="brands-grid-mobile">
+				Show More
+			</button>
+		</div>
+
+	{{endif}}
+
+</div>
+</section>
+
+<script>
+	document.addEventListener("DOMContentLoaded", function () {
+
+		// Trigger progress animation on active bullet
+		function animateBullet(paginationEl) {
+			if (!paginationEl) return;
+			// remove animate from all
+			paginationEl.querySelectorAll(".swiper-pagination-bullet").forEach(function (b) {
+				b.classList.remove("animate");
+			});
+			// add animate to active after short delay (let swiper update DOM)
+			setTimeout(function () {
+				var active = paginationEl.querySelector(".swiper-pagination-bullet-active");
+				if (active) active.classList.add("animate");
+			}, 10);
+		}
+
+		function makeSwiper(swiperClass, paginationClass, slidesDesktop, slidesMobile, pgEnabledDesktop, pgEnabledMobile) {
+			var swiperEl = document.querySelector("." + swiperClass);
+			var pgEl = paginationClass ? document.querySelector("." + paginationClass) : null;
+			if (!swiperEl) return;
+
+			var swiper = new Swiper(swiperEl, {
+				loop: {{= &slide_looping == 'y' ? 'true' : 'false'}},
+				grabCursor: true,
+				spaceBetween: 1,
+
+				{{if &auto_play == 'y'}}
+					autoplay: {
+						delay: {{= &auto_play_speed * 1000}},
+						disableOnInteraction: false,
+					},
+				{{endif}}
+
+				on: {
+					init: function () {
+						animateBullet(pgEl);
+					},
+					slideChange: function () {
+						animateBullet(pgEl);
+					}
+				},
+
+				breakpoints: {
+					0: {
+						slidesPerView: slidesMobile,
+						spaceBetween: 1,
+						pagination: pgEl ? {
+							el: pgEl,
+							clickable: true,
+							enabled: pgEnabledMobile,
+							renderBullet: function (index, className) {
+								return '<span class="' + className + '"><span class="progress"></span></span>';
+							}
+						} : false,
+						navigation: {
+							nextEl: swiperEl.querySelector(".swiper-button-next"),
+							prevEl: swiperEl.querySelector(".swiper-button-prev"),
+							enabled: {{= &m_indicator_options == "arrow" || &m_indicator_options == "both" ? "true" : "false"}}
+						}
+					},
+					768: {
+						slidesPerView: slidesDesktop,
+						spaceBetween: 1,
+						pagination: pgEl ? {
+							el: pgEl,
+							clickable: true,
+							enabled: pgEnabledDesktop,
+							renderBullet: function (index, className) {
+								return '<span class="' + className + '"><span class="progress"></span></span>';
+							}
+						} : false,
+						navigation: {
+							nextEl: swiperEl.querySelector(".swiper-button-next"),
+							prevEl: swiperEl.querySelector(".swiper-button-prev"),
+							enabled: {{= &indicator_options == "arrow" || &indicator_options == "both" ? "true" : "false"}}
+						}
+					}
+				}
+			});
+		}
+
+		{{if &type == 'slider'}}
+			makeSwiper(
+			"$_s_class-brands-swiper",
+			"$_s_class-brands-pg-desktop",
+			{{= &items_to_show}},
+			{{= &item_to_show_mobile}},
+			{{= &indicator_options == "indicator" || &indicator_options == "both" ? "true" : "false"}},
+			false
+			);
+		{{endif}}
+
+		{{if &type == 'slider'}}
+			{{if &m_type == 'm_slider'}}
+				makeSwiper(
+				"$_s_class-brands-swiper-mobile",
+				"$_s_class-brands-pg-mobile",
+				{{= &items_to_show}},
+				{{= &item_to_show_mobile}},
+				false,
+				{{= &m_indicator_options == "indicator" || &m_indicator_options == "both" ? "true" : "false"}}
+				);
+			{{endif}}
+		{{endif}}
+
+		// Blocked icon on disabled arrow click
+		var container = document.querySelector("$_section .container");
+		if (container) {
+			container.addEventListener('click', function (e) {
+				var button = e.target.closest('.custom-nav-btn');
+				if (!button || !button.classList.contains('swiper-button-disabled')) return;
+				if (button.querySelector('.blocked-icon')) return;
+				var icon = document.createElement('span');
+				icon.className = 'blocked-icon';
+				icon.innerHTML = '\u2298';
+				button.appendChild(icon);
+				setTimeout(function () { icon.remove(); }, 700);
+			});
+		}
+		// Show More / Show Less (Mobile Grid)
+		// Show More / Show Less (Mobile Grid)
+document.addEventListener('click', function (e) {
+
+    const btn = e.target.closest('#btn-show-more');
+    if (!btn) return;
+
+    const brandsGrid = document.getElementById('brands-grid-mobile');
+    if (!brandsGrid) return;
+
+    const expanded = brandsGrid.classList.toggle('mobile-expanded');
+
+    brandsGrid.classList.toggle('mobile-collapsed', !expanded);
+
+    btn.textContent = expanded ? 'Show Less' : 'Show More';
+
+    btn.setAttribute('aria-expanded', expanded);
+});
+
+// Hide button if 4 or fewer items
+setTimeout(function () {
+    const brandsGrid = document.getElementById('brands-grid-mobile');
+    const showMoreBtn = document.getElementById('btn-show-more');
+
+    if (
+        brandsGrid &&
+        showMoreBtn &&
+        brandsGrid.querySelectorAll('.brand-item').length <= 4
+    ) {
+        showMoreBtn.style.display = 'none';
+    }
+}, 500);
+		// document.getElementById('btn-show-more').onclick = function () {
+		//     alert('Button Working');
+		// };
+
+	});
+
+</script> 
+    
+
+
+/* componet */
+<a
+	href="{{= &brand_link != '' ? &brand_link : '#'}}"
+	class="swiper-slide brand-item"
+	id="brand-{{= &brand_id}}"
+	aria-label="Shop {{= &brand_name}} products"
+>
+	<img
+		src="{{= &brandimg == '' ? 'https://placehold.co/1920x630' : 'https://cdn.flicksell.com/'.&brandimg}}"
+		alt="{{= &brand_name}}"
+		loading="lazy"
+	/>
+</a>

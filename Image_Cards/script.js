@@ -1,16 +1,92 @@
-// Simple JavaScript file for adding interactive behaviors and micro-interactions
 document.addEventListener('DOMContentLoaded', () => {
-    // Select all shop buttons
-    const shopButtons = document.querySelectorAll('.shop-btn');
-    
-    shopButtons.forEach(button => {
-        // Prevent default hash jump and simulate redirection
+    const layoutButtons = document.querySelectorAll('.layout-toggle');
+    const gridWrapper = document.querySelector('.beauty-cards-grid');
+    const sliderWrapper = document.querySelector('.beauty-cards-slider');
+    const cardElements = Array.from(document.querySelectorAll('.beauty-card'));
+    const swiperContainer = document.querySelector('.beauty-swiper .swiper-wrapper');
+    let swiperInstance = null;
+
+    const initSlider = () => {
+        if (swiperInstance) return;
+
+        swiperInstance = new Swiper('.beauty-swiper', {
+            slidesPerView: 1,
+            spaceBetween: 20,
+            loop: false,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            breakpoints: {
+                600: {
+                    slidesPerView: 1,
+                },
+                900: {
+                    slidesPerView: 2,
+                },
+                1200: {
+                    slidesPerView: 3,
+                },
+            },
+        });
+    };
+
+    const destroySlider = () => {
+        if (!swiperInstance) return;
+
+        swiperInstance.destroy(true, true);
+        swiperInstance = null;
+    };
+
+    const buildSliderSlides = () => {
+        swiperContainer.innerHTML = '';
+        cardElements.forEach(card => {
+            const slide = document.createElement('div');
+            slide.className = 'swiper-slide';
+            slide.appendChild(card.cloneNode(true));
+            swiperContainer.appendChild(slide);
+        });
+    };
+
+    const setLayout = (layout) => {
+        layoutButtons.forEach(button => {
+            button.classList.toggle('active', button.dataset.layout === layout);
+        });
+
+        if (layout === 'slider') {
+            gridWrapper.classList.add('hidden');
+            sliderWrapper.classList.remove('hidden');
+            buildSliderSlides();
+            initSlider();
+        } else {
+            sliderWrapper.classList.add('hidden');
+            gridWrapper.classList.remove('hidden');
+            destroySlider();
+        }
+
+        if (layout === 'grid') {
+            gridWrapper.style.gridTemplateColumns = 'repeat(4, 1fr)';
+        } else if (layout === 'auto') {
+            gridWrapper.style.gridTemplateColumns = 'repeat(auto-fit, minmax(250px, 1fr))';
+        }
+    };
+
+    const shouldStartSlider = () => cardElements.length > 4;
+    const defaultLayout = shouldStartSlider() ? 'slider' : 'auto';
+
+    layoutButtons.forEach(button => {
+        button.addEventListener('click', () => setLayout(button.dataset.layout));
+    });
+
+    setLayout(defaultLayout);
+
+    document.querySelectorAll('.shop-btn').forEach(button => {
         button.addEventListener('click', (event) => {
             event.preventDefault();
-            const productTitle = button.closest('.beauty-card').querySelector('.product-title').textContent;
-            console.log(`Product Selected: ${productTitle}. Opening shop page...`);
-            
-            // Add a subtle click visual feedback
             button.style.transform = 'scale(0.95)';
             setTimeout(() => {
                 button.style.transform = 'scale(1)';
@@ -18,13 +94,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Make the entire card body clickable to direct users to the respective card section
-    const beautyCards = document.querySelectorAll('.beauty-card');
-    beautyCards.forEach(card => {
+    document.querySelectorAll('.beauty-card').forEach(card => {
         card.addEventListener('click', (event) => {
-            // If the user clicks on the shop button specifically, ignore this event listener
             if (event.target.closest('.shop-btn')) return;
-            
             const category = card.querySelector('.card-subtitle').textContent;
             const conceptName = card.querySelector('.card-title').textContent;
             console.log(`Clicked on category section: ${category} - "${conceptName}"`);

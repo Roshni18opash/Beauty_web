@@ -1,0 +1,935 @@
+<style>
+	$_section{
+
+		.container {
+			max-width: 1440px;
+			margin: 0 auto;
+			padding: 50px 24px 36px;
+		}
+
+		/* Header */
+		.section-header {
+			display: flex;
+			justify-content: space-between;
+			align-items: flex-end;
+			margin-bottom: 28px;
+		}
+
+		.section-title {
+			font-family: 'Playfair Display', Georgia, serif;
+			color:{{= &title_color}};
+			font-size:{{= &title_size}}px;
+			font-weight:{{= &title_weight}};
+			margin-bottom: 8px;
+		}
+
+
+		{{if &main_title != 'y'}}
+			.section-title {
+				visibility: hidden !important;
+			}
+		{{endif}}
+
+		.section-desc {
+			font-size:{{= &desc_size}}px;
+			color:{{= &desc_clr}};
+			font-weight:{{= &desc_weight}};
+		}
+
+		{{if &description != 'y'}}
+			.section-desc {
+				visibility: hidden !important;
+			}
+		{{endif}}
+
+		.tabs {
+			display: flex;
+			gap: 22px;
+		}
+
+		.tab {
+			border: none;
+			background: none;
+			font-size:{{= &tab_size}}px;
+			font-weight:{{= &tab_weight}};
+			color:{{= &tab_color}};
+			cursor: pointer;
+			padding-bottom: 6px;
+			position: relative;
+		}
+
+		.tab.active {
+			color:{{= &tab_active_color}};
+		}
+
+		.tab.active::after {
+			content: '';
+			position: absolute;
+			left: 0;
+			bottom: 0;
+			width: 100%;
+			height: 2px;
+			background: #000;
+		}
+
+		/* Row — ~5 full cards + peek of 6th (like reference) */
+		.products-track {
+			display: flex;
+			align-items: stretch;
+			gap: 16px;
+			overflow-x: auto;
+			scroll-behavior: smooth;
+			scrollbar-width: none;
+			padding-bottom: 4px;
+		}
+		.products-track::-webkit-scrollbar {
+			display: none;
+		}
+
+		/* .product-card
+		flex: 0 0 var(--card-w);
+		width: var(--card-w);
+		height: auto;
+		background: var(--card-bg);
+		border-radius: 16px;
+		overflow: hidden;
+		display: flex;
+		flex-direction: column;
+		} */
+		.product-card {
+			flex: 0 0 220px;
+			width: 220px;
+			background: #fff;
+			border: 1px solid #f3f3f3;
+			border-radius: 24px;
+			overflow: hidden;
+			display: flex;
+			flex-direction: column;
+			box-shadow: 0 18px 55px rgba(15, 46, 60, 0.08);
+		}
+
+		.card-image {
+			position: relative;
+			min-height: 260px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			padding: 28px 16px 18px;
+			overflow: hidden;
+		}
+
+		.img-box {
+			position: relative;
+			width: 100%;
+			display: grid;
+			place-items: center;
+		}
+
+		.card-info {
+			padding: 18px 18px 20px;
+			display: flex;
+			flex-direction: column;
+			gap: 10px;
+			flex: 1;
+		}
+
+		.price-row {
+			display: inline-flex;
+			align-items: center;
+			gap: 10px;
+			flex-wrap: wrap;
+		}
+
+		.price {
+			font-size: 1rem;
+			font-weight: 700;
+			color: #0f2e3c;
+			margin: 0;
+		}
+
+		.price-sale {
+			font-size: 1rem;
+			font-weight: 700;
+			color: #d92f24;
+			margin: 0;
+		}
+
+		.price-original {
+			color: #707070;
+			font-size: 0.9rem;
+			text-decoration: line-through;
+			margin: 0;
+		}
+
+		/* Desktop: show 5 full cards + half of 6th */
+		@media (min-width: 769px) {
+			.product-card {
+				flex-basis: calc((100% - (16px * 5)) / 5.5);
+				width: calc((100% - (16px * 5)) / 5.5);
+			}
+		}
+
+		/* Default product image — centered, contained */
+		.img-main {
+			position: relative;
+			z-index: 1;
+			width: auto;
+			height: auto;
+			max-width: 90%;
+			max-height: 200px;
+			object-fit: contain;
+			transition: opacity 0.35s ease;
+		}
+
+		/* Hover image — stretches to fill the whole card-image area */
+		.img-alt {
+			position: absolute;
+			inset: 0;
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			opacity: 0;
+			z-index: 0;
+			transition: opacity 0.35s ease;
+		}
+
+		.card-image:hover .img-main {
+			opacity: 0;
+		}
+
+		.card-image:hover .img-alt {
+			opacity: 1;
+		}
+
+
+
+		.badge-new,
+		.badge-sale {
+			position: absolute;
+			top: 12px;
+			left: 12px;
+			color: #fff;
+			font-size: 0.65rem;
+			font-weight: 600;
+			padding: 5px 11px;
+			border-radius: 50px;
+			z-index: 2;
+		}
+
+		.badge-new {
+			background: #82b1a5;
+		}
+
+		.badge-sale {
+			background: #d92f24;
+		}
+
+		.price-row {
+			display: inline-flex;
+			align-items: center;
+			gap: 10px;
+			flex-wrap: wrap;
+		}
+
+		.price {
+			font-size: 1rem;
+			font-weight: 700;
+			color: #d92f24;
+		}
+
+		.price-original {
+			color: #707070;
+			font-size: 0.9rem;
+			text-decoration: line-through;
+		}
+
+		.selling-fast {
+			position: absolute;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background: #fff;
+			overflow: hidden;
+			padding: 6px 0;
+			z-index: 1;
+		}
+
+		.selling-fast-track {
+			display: flex;
+			width: max-content;
+			animation: marquee 15s linear infinite;
+		}
+
+		.selling-fast-track span {
+			display: inline-flex;
+			align-items: center;
+			gap: 10px;
+			padding-right: 10px;
+			font-size: 0.65rem;
+			font-weight: 600;
+			white-space: nowrap;
+		}
+
+		.selling-fast-track i {
+			font-style: normal;
+			color: #f5a623;
+		}
+
+		@keyframes marquee {
+			to { transform: translateX(-50%); }
+		}
+
+		/* Image hover */
+		.btn-search,
+		.btn-cart {
+			position: absolute;
+			border: none;
+			cursor: pointer;
+			opacity: 0;
+			transition: opacity 0.3s, transform 0.3s;
+			z-index: 3;
+		}
+
+		.btn-search {
+			top: 12px;
+			right: 12px;
+			width: 36px;
+			height: 36px;
+			border-radius: 50%;
+			background: #fff;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			transform: translate(8px, -8px);
+		}
+
+		.btn-cart {
+			left: 12px;
+			right: 12px;
+			bottom: 12px;
+			padding: 11px;
+			border-radius: 50px;
+			background: #fff;
+			font-size: 0.8rem;
+			font-weight: 600;
+			overflow: hidden;
+			transform: translateY(16px);
+		}
+
+		.card-image:has(.selling-fast) .btn-cart {
+			bottom: 34px;
+		}
+
+		.btn-cart::before {
+			content: '';
+			position: absolute;
+			inset: 0;
+			background: #0f2e3c;
+			transform: scaleX(0);
+			transform-origin: left;
+			transition: transform 0.3s;
+			z-index: 0;
+		}
+
+		.btn-cart span {
+			position: relative;
+			z-index: 1;
+		}
+
+		.btn-cart:hover::before {
+			transform: scaleX(1);
+		}
+
+		.btn-cart:hover {
+			color: #fff;
+		}
+
+		.card-image:hover .btn-search,
+		.card-image:hover .btn-cart {
+			opacity: 1;
+		}
+
+		.card-image:hover .btn-search {
+			transform: translate(0, 0);
+		}
+
+		.card-image:hover .btn-cart {
+			transform: translateY(0);
+		}
+
+		/* Text — grows with dynamic content */
+		/* .card-info
+		height: auto;
+		padding: 14px 16px 18px;
+		} */
+		.card-info {
+			padding: 18px 18px 20px;
+			display: flex;
+			flex-direction: column;
+			gap: 8px;
+			flex: 1;
+		}
+
+		.price {
+			font-size: 1rem;
+			font-weight: 700;
+			color: #0f2e3c;
+			margin: 0;
+		}
+		.category {
+			display: inline-block;
+			font-size: 0.7rem;
+			font-weight: 600;
+			letter-spacing: 0.12em;
+			text-transform: uppercase;
+			color: #707070;
+			margin-bottom: 6px;
+		}
+		.name {
+			display: inline-block;
+			font-family: 'Inter', sans-serif;
+			font-size: 15px;
+			font-weight: 600;
+			margin-bottom: 4px;
+			line-height: 1.3;
+			max-width: 100%;
+			word-wrap: break-word;
+		}
+
+		/* .name
+		display: block;
+		font-family: var(--serif);
+		font-size: 1.1rem;
+		font-weight: 500;
+		margin-bottom: 4px;
+		line-height: 1.3;
+		word-wrap: break-word;
+		} */
+
+		/* .price
+		font-size: 1rem;
+		font-weight: 500;
+		} */
+
+	.hover-line {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    overflow: visible;
+}
+
+.hover-line::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+}
+
+.hover-line:hover::after,
+.hover-line:focus-visible::after {
+    transform: scaleX(1);
+}
+
+		/* Footer */
+		.slider-footer {
+			display: flex;
+			align-items: center;
+			gap: 20px;
+			margin-top: 28px;
+		}
+
+		.scroll-bar-wrap {
+			flex: 1;
+			position: relative;
+			height: 4px;
+		}
+
+		.scroll-track {
+			width: 100%;
+			height: 1px;
+			background: #e4e4e4;
+		}
+
+		.scroll-thumb {
+			position: absolute;
+			left: 0;
+			top: 50%;
+			transform: translateY(-50%);
+			height: 3px;
+			width: 30%;
+			background: #1a1a1a;
+			transition: left 0.1s, width 0.3s ease;
+		}
+
+		.slider-nav {
+			display: flex;
+			gap: 8px;
+		}
+
+		.nav-btn {
+			position: relative;
+			overflow: hidden;
+			width: 40px;
+			height: 40px;
+			border-radius: 50%;
+			border: 1px solid #e5e5e5;
+			background: #fff;
+			color: #0f2e3c;
+			cursor: pointer;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			transition: color 0.3s ease, border-color 0.3s ease;
+		}
+
+		.nav-btn svg {
+			position: relative;
+			z-index: 1;
+			stroke: currentColor;
+			transition: stroke 0.3s ease;
+		}
+
+		.nav-btn::before {
+			content: '';
+			position: absolute;
+			left: -100%;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			background: #000;
+			transition: left 0.3s ease;
+			z-index: 0;
+		}
+
+		.nav-btn:hover::before {
+			left: 0;
+		}
+
+		.nav-btn:hover {
+			color: #fff;
+			border-color: #000;
+		}
+
+		.nav-btn:hover svg,
+		.nav-btn:hover svg path,
+		.nav-btn:hover svg circle {
+			stroke: #fff !important;
+		}
+
+		.nav-btn:disabled {
+			opacity: 0.35;
+			cursor: not-allowed;
+		}
+
+		.nav-btn:disabled::before {
+			left: -100%;
+		}
+
+		/* Ensure disabled buttons don't show the hover white stroke (keeps arrow visible)
+		and avoid hover color changes on disabled state. */
+		.nav-btn:disabled:hover,
+		.nav-btn[disabled]:hover {
+			color: #0f2e3c;
+			border-color: #e5e5e5;
+		}
+
+		.nav-btn:disabled svg,
+		.nav-btn[disabled] svg,
+		.nav-btn:disabled:hover svg,
+		.nav-btn[disabled]:hover svg,
+		.nav-btn:disabled svg path,
+		.nav-btn[disabled] svg path,
+		.nav-btn:disabled:hover svg path,
+		.nav-btn[disabled]:hover svg path {
+			stroke: currentColor !important;
+		}
+
+		/* Mobile */
+		@media (max-width: 768px) {
+
+
+			.section-header {
+				flex-direction: column;
+				align-items: flex-start;
+				gap: 16px;
+			}
+
+			.section-title {
+				font-size: 2rem;
+			}
+		}
+
+
+	}
+	$_section {
+		{{= &custom_css}}
+	}
+</style>
+
+
+
+
+<section class="new-arrivals">
+	<div class="container">
+
+		<header class="section-header">
+			<div>
+				<h2 class="section-title">{{= &title}}</h2>
+				<p class="section-desc">{{= &desc}}</p>
+			</div>
+
+
+
+			<div class="tabs">
+				{{$a=0}}
+				{{with each &collection as $btn at $i}}
+					{{$pass_val=[$a,$i]}}
+					{{use component $btn pass on [$pass_val]}}
+				{{endwith}}
+				<!-- <button class="tab active" type="button" data-collection="new">New Arrivals</button> -->
+				<!-- <button class="tab" type="button" data-collection="bestseller">Best Sellers</button> -->
+			</div>
+		</header>
+
+		<div class="slider-wrap">
+			<div class="products-track" id="productsTrack">
+				{{$a=1}}
+				{{with each &collection as $img at $i}}
+					{{$pass_val=[$a,$i]}}
+					{{use component $img pass on [$pass_val]}}
+				{{endwith}}
+
+				<!-- <article class="product-card" data-collection="new"> -->
+				<!-- 	<div class="card-image"> -->
+				<!-- 		<span class="badge-new">New</span> -->
+				<!-- 		<div class="img-box"> -->
+				<!-- 			<img class="img-main" src="images/new1.webp" alt="Cleansing Oil"> -->
+				<!-- 			<img class="img-alt" src="images/new-1.webp" alt=""> -->
+				<!-- 		</div> -->
+				<!-- 		<button class="btn-search" type="button" aria-label="Search"> -->
+				<!-- 			<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg> -->
+				<!-- 		</button> -->
+				<!-- 		<button class="btn-cart" type="button">Add To Cart</button> -->
+				<!-- 	</div> -->
+				<!-- 	<div class="card-info"> -->
+				<!-- 		<span class="category hover-line">Body Wash</span> -->
+				<!-- 		<h3 class="name hover-line">Cleansing Oil</h3> -->
+				<!-- 		<p class="price">$35.00</p> -->
+				<!-- 	</div> -->
+				<!-- </article> -->
+
+				<!-- <article class="product-card" data-collection="new"> -->
+				<!-- 	<div class="card-image"> -->
+				<!-- 		<span class="badge-new">New</span> -->
+				<!-- 		<div class="img-box"> -->
+				<!-- 			<img class="img-main" src="images/new2.webp" alt="Citrus Scrub"> -->
+				<!-- 			<img class="img-alt" src="images/new-2.webp" alt=""> -->
+				<!-- 		</div> -->
+				<!-- 		<button class="btn-search" type="button" aria-label="Search"> -->
+				<!-- 			<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg> -->
+				<!-- 		</button> -->
+				<!-- 		<button class="btn-cart" type="button">Add To Cart</button> -->
+				<!-- 	</div> -->
+				<!-- 	<div class="card-info"> -->
+				<!-- 		<span class="category hover-line">Makeup</span> -->
+				<!-- 		<h3 class="name hover-line">Citrus Scrub</h3> -->
+				<!-- 		<p class="price">$35.00</p> -->
+				<!-- 	</div> -->
+				<!-- </article> -->
+
+				<!-- <article class="product-card" data-collection="bestseller"> -->
+				<!-- 	<div class="card-image"> -->
+				<!-- 		<span class="badge-sale">Sale</span> -->
+				<!-- 		<div class="img-box"> -->
+				<!-- 			<img class="img-main" src="images/new3.webp" alt="Cheryl Lip Balm"> -->
+				<!-- 			<img class="img-alt" src="images/new-3.webp" alt=""> -->
+				<!-- 		</div> -->
+				<!-- 		<button class="btn-search" type="button" aria-label="Search"> -->
+				<!-- 			<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg> -->
+				<!-- 		</button> -->
+				<!-- 		<button class="btn-cart" type="button">Add To Cart</button> -->
+				<!-- 	</div> -->
+				<!-- 	<div class="card-info"> -->
+				<!-- 		<span class="category hover-line">Lipstick</span> -->
+				<!-- 		<h3 class="name hover-line">Cheryl Lip Balm</h3> -->
+				<!-- 		<div class="price-row"> -->
+				<!-- 			<span class="price-sale">$35.00</span> -->
+				<!-- 			<span class="price-original">$54.00</span> -->
+				<!-- 		</div> -->
+				<!-- 	</div> -->
+				<!-- </article> -->
+
+				<!-- <article class="product-card" data-collection="bestseller"> -->
+				<!-- 	<div class="card-image"> -->
+				<!-- 		<span class="badge-sale">Sale</span> -->
+				<!-- 		<div class="img-box"> -->
+				<!-- 			<img class="img-main" src="images/new4.webp" alt="Ceramide Lip Silk"> -->
+				<!-- 			<img class="img-alt" src="images/new-4.webp" alt=""> -->
+				<!-- 		</div> -->
+				<!-- 		<button class="btn-search" type="button" aria-label="Search"> -->
+				<!-- 			<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg> -->
+				<!-- 		</button> -->
+				<!-- 		<button class="btn-cart" type="button">Add To Cart</button> -->
+				<!-- 	</div> -->
+				<!-- 	<div class="card-info"> -->
+				<!-- 		<span class="category hover-line">Lipstick</span> -->
+				<!-- 		<h3 class="name hover-line">Ceramide Lip Silk</h3> -->
+				<!-- 		<div class="price-row"> -->
+				<!-- 			<span class="price-sale">$35.00</span> -->
+				<!-- 			<span class="price-original">$54.00</span> -->
+				<!-- 		</div> -->
+				<!-- 	</div> -->
+				<!-- </article> -->
+
+				<!-- <article class="product-card" data-collection="new"> -->
+				<!-- 	<div class="card-image"> -->
+				<!-- 		<div class="img-box"> -->
+				<!-- 			<img class="img-main" src="images/new5.webp" alt="Brow Pencil"> -->
+				<!-- 			<img class="img-alt" src="images/new-5.webp" alt=""> -->
+				<!-- 		</div> -->
+				<!-- 		<button class="btn-search" type="button" aria-label="Search"> -->
+				<!-- 			<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg> -->
+				<!-- 		</button> -->
+				<!-- 		<button class="btn-cart" type="button">Add To Cart</button> -->
+				<!-- 	</div> -->
+				<!-- 	<div class="card-info"> -->
+				<!-- 		<span class="category hover-line">Eyeliner</span> -->
+				<!-- 		<h3 class="name hover-line">Brow Pencil</h3> -->
+				<!-- 		<p class="price">$40.00</p> -->
+				<!-- 	</div> -->
+				<!-- </article> -->
+
+				<!-- <article class="product-card" data-collection="new"> -->
+				<!-- 	<div class="card-image"> -->
+				<!-- 		<span class="badge-new">New</span> -->
+				<!-- 		<div class="img-box"> -->
+				<!-- 			<img class="img-main" src="images/new6.webp" alt="Glow Face Oil"> -->
+				<!-- 			<img class="img-alt" src="images/new-6.webp" alt=""> -->
+				<!-- 		</div> -->
+				<!-- 		<button class="btn-search" type="button" aria-label="Search"> -->
+				<!-- 			<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg> -->
+				<!-- 		</button> -->
+				<!-- 		<button class="btn-cart" type="button">Add To Cart</button> -->
+				<!-- 	</div> -->
+				<!-- 	<div class="card-info"> -->
+				<!-- 		<span class="category hover-line">Oil</span> -->
+				<!-- 		<h3 class="name hover-line">Glow Face Oil</h3> -->
+				<!-- 		<p class="price">$45.00</p> -->
+				<!-- 	</div> -->
+				<!-- </article> -->
+
+				<!-- <article class="product-card" data-collection="bestseller"> -->
+				<!-- 	<div class="card-image"> -->
+				<!-- 		<div class="img-box"> -->
+				<!-- 			<img class="img-main" src="images/new7.webp" alt="Daily Moisture"> -->
+				<!-- 			<img class="img-alt" src="images/new-7.webp" alt=""> -->
+				<!-- 		</div> -->
+				<!-- 		<button class="btn-search" type="button" aria-label="Search"> -->
+				<!-- 			<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg> -->
+				<!-- 		</button> -->
+				<!-- 		<button class="btn-cart" type="button">Add To Cart</button> -->
+				<!-- 	</div> -->
+				<!-- 	<div class="card-info"> -->
+				<!-- 		<span class="category hover-line">Lotions</span> -->
+				<!-- 		<h3 class="name hover-line">Daily Moisture</h3> -->
+				<!-- 		<p class="price">$38.00</p> -->
+				<!-- 	</div> -->
+				<!-- </article> -->
+
+				<!-- <article class="product-card" data-collection="bestseller"> -->
+				<!-- 	<div class="card-image"> -->
+				<!-- 		<div class="img-box"> -->
+				<!-- 			<img class="img-main" src="images/new7.webp" alt="Daily Moisture"> -->
+				<!-- 			<img class="img-alt" src="images/new-7.webp" alt=""> -->
+				<!-- 		</div> -->
+				<!-- 		<button class="btn-search" type="button" aria-label="Search"> -->
+				<!-- 			<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg> -->
+				<!-- 		</button> -->
+				<!-- 		<button class="btn-cart" type="button">Add To Cart</button> -->
+				<!-- 	</div> -->
+				<!-- 	<div class="card-info"> -->
+				<!-- 		<span class="category hover-line">Lotions</span> -->
+				<!-- 		<h3 class="name hover-line">Daily Moisture</h3> -->
+				<!-- 		<p class="price">$38.00</p> -->
+				<!-- 	</div> -->
+				<!-- </article> -->
+
+			</div>
+		</div>
+
+		<div class="slider-footer">
+			<div class="scroll-bar-wrap">
+				<div class="scroll-track"></div>
+				<div class="scroll-thumb" id="scrollThumb"></div>
+			</div>
+			<div class="slider-nav">
+				<button class="nav-btn" id="prevBtn" type="button" aria-label="Previous">
+					<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
+				</button>
+				<button class="nav-btn" id="nextBtn" type="button" aria-label="Next">
+					<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+				</button>
+			</div>
+		</div>
+
+	</div>
+</section>
+
+
+<script>
+	const track = document.getElementById('productsTrack');
+	const thumb = document.getElementById('scrollThumb');
+	const prevBtn = document.getElementById('prevBtn');
+	const nextBtn = document.getElementById('nextBtn');
+
+	// thumb settings
+	const MIN_THUMB_WIDTH = 30; // start width in percent
+	const MAX_THUMB_WIDTH = 100; // maximum width in percent
+	const GAP_BETWEEN_CARDS = 16; // same as --gap in CSS
+
+	thumb.style.width = MIN_THUMB_WIDTH + '%';
+	thumb.style.left = '0%';
+
+	function setThumbWidth(width) {
+		const safeWidth = Math.min(MAX_THUMB_WIDTH, Math.max(MIN_THUMB_WIDTH, width));
+		thumb.style.width = safeWidth + '%';
+	}
+
+	function getThumbStep(scrollAmount) {
+		const totalWidth = track.scrollWidth;
+		return Math.round((scrollAmount / totalWidth) * 100 * 100) / 100;
+	}
+
+	function updateButtons() {
+		const maxScroll = track.scrollWidth - track.clientWidth;
+		const atStart = track.scrollLeft <= 1;
+		const atEnd = track.scrollLeft >= maxScroll - 1;
+
+		prevBtn.disabled = atStart;
+		nextBtn.disabled = atEnd;
+
+		if (atStart) {
+			setThumbWidth(MIN_THUMB_WIDTH);
+		} else if (atEnd) {
+			setThumbWidth(MAX_THUMB_WIDTH);
+		}
+	}
+
+	function scrollByCard(amount) {
+		track.scrollBy({ left: amount, behavior: 'smooth' });
+	}
+
+	prevBtn.onclick = () => {
+		if (track.scrollLeft <= 1) return;
+
+		const cardWidth = track.querySelector('.product-card').offsetWidth + GAP_BETWEEN_CARDS;
+		const scrollAmount = Math.min(cardWidth, track.scrollLeft);
+		scrollByCard(-scrollAmount);
+
+		const step = getThumbStep(scrollAmount);
+		setThumbWidth(parseFloat(thumb.style.width) - step);
+
+		setTimeout(updateButtons, 500);
+	};
+
+	nextBtn.onclick = () => {
+		const maxScroll = track.scrollWidth - track.clientWidth;
+		if (track.scrollLeft >= maxScroll - 1) return;
+
+		const cardWidth = track.querySelector('.product-card').offsetWidth + GAP_BETWEEN_CARDS;
+		const scrollAmount = Math.min(cardWidth, maxScroll - track.scrollLeft);
+		scrollByCard(scrollAmount);
+
+		const step = getThumbStep(scrollAmount);
+		setThumbWidth(parseFloat(thumb.style.width) + step);
+
+		setTimeout(updateButtons, 500);
+	};
+
+	track.addEventListener('scroll', updateButtons);
+	window.addEventListener('resize', updateButtons);
+	updateButtons();
+
+	document.querySelectorAll('.tab').forEach((tab) => {
+    tab.addEventListener('click', function () {
+
+        document.querySelectorAll('.tab').forEach((t) => {
+            t.classList.remove('active');
+        });
+
+        this.classList.add('active');
+
+        const selectedCollection = this.dataset.collection;
+
+        document.querySelectorAll('.product-card').forEach((card) => {
+            card.style.display =
+                card.dataset.collection === selectedCollection
+                    ? ''
+                    : 'none';
+        });
+
+        track.scrollLeft = 0;
+        thumb.style.width = MIN_THUMB_WIDTH + '%';
+        thumb.style.left = '0%';
+
+        setTimeout(updateButtons, 100);
+    });
+});
+
+</script>  
+
+
+
+
+<!-----Component----->
+
+{{$collection= system.collection.get_collection(&tab_coll)}}
+{{$collection_prods= system.collection.get_collection_products(&tab_coll)}}
+
+
+
+{{if $pass_val[0] == 0}}
+	<!-- <button class="tab" type="button" data-collection="tab-= $pass_val[1]}}">= &tabtext}}</button> -->
+	<button class="tab {{if $pass_val[1] == 0}}active{{endif}}"
+        type="button"
+        data-collection="tab-{{= $pass_val[1]}}">
+    {{= &tabtext}}
+</button>
+{{endif}}
+
+
+{{if $pass_val[0] == 1}}
+
+	{{with each $collection_prods as $collection}}
+		{{$prods=system.product.get_product($collection)}}
+		<article class="product-card" data-collection="tab-{{= $pass_val[1]}}" {{if $pass_val[1] != 0}}style="display:none;"{{endif}} >
+			<div class="card-image">
+				<span class="badge-new">New</span>
+				<div class="img-box">
+					<img class="img-main" src="https://cdn.flicksell.com/{{= $prods['main_img']}}"
+					alt="{{= $prods['name']}}">
+
+					<img class="img-alt" src= "https://cdn.flicksell.com/{{= $prods['images'][1]}}" alt="{{= $prods['name']}} Hover">
+				</div>
+				<button class="btn-search" type="button" aria-label="Search">
+					<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+				</button>
+				<button class="btn-cart" type="button">{{= &btn_txt}}</button>
+			</div>
+			<div class="card-info">
+				<span class="category hover-line">{{= &cat_name}}</span>
+				<h3 class="name hover-line">{{= $prods['name']}}</h3>
+				<!-- <p class="price">$45.00</p> -->
+				<flicksell-template-cart product-id="{{= $collection}}" no-auto-select>
+					<flicksell-template-product-mrp class="original-price price"></flicksell-template-product-mrp>
+					<flicksell-template-product-price class="discounted-price price-sale"></flicksell-template-product-price> 
+				</flicksell-template-cart>
+			</div>
+		</article>
+	{{endif}}       

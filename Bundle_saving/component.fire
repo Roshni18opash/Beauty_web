@@ -1,0 +1,32 @@
+{{$product_item=system.product.get_product(&product)}}
+{{-= $product_item}}
+{{$variant=system.product.get_lowest_priced_variant(&product)}}
+{{$price=$variant["price"]}}
+{{$mrp=$variant["mrp"]}}
+
+<div class="bundle-card" id="card-shampoo">
+	<div class="card-image-wrap">
+		<span class="sale-badge">Sale</span>
+		<img src="https://cdn.flicksell.com/{{= $product_item['main_img']}}" alt="Smoothing Shampoo"alt="{{= $product_item['name']}}" class="card-product-img">
+	</div>
+	<div class="card-info">
+		<span class="card-category">{{= &cat_title}}</span>
+		<h3 class="card-name">{{= $product_item['name']}}</h3>
+		<div class="card-price">
+			<span class="price-sale">₹{{= $price}}</span>
+			<span class="price-original">₹{{= $mrp}}</span>
+		</div>
+
+		<div class="size-dropdown-wrap">
+			<select class="size-select" aria-label="Select size">
+				<option>512ml</option>
+				<option>250ml</option>
+			</select>
+
+			<svg class="dropdown-arrow" viewBox="0 0 10 6" fill="none">
+				<path d="M1 1l4 4 4-4" stroke="#1a2638" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+			</svg>
+
+		</div>
+	</div>
+</div>
