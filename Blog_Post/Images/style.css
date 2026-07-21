@@ -1,0 +1,549 @@
+/* ============================================================
+   BLOG POST SECTION — style.css
+   Fonts  : Playfair Display (title) + Figtree (body) — same as project
+   Colors : #1a2c3a (dark navy), #5a8a7a (teal link), #888 (meta gray)
+   ============================================================ */
+
+/* ── Reset / Base ─────────────────────────────────────── */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Figtree', sans-serif;
+    background-color: #fff;
+    color: #1a2c3a;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* ── Section Wrapper ───────────────────────────────────── */
+.blog-section {
+    padding: 56px 0 60px;
+    background-color: #fff;
+}
+
+.blog-container {
+    width: 100%;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 40px;
+}
+
+/* ── Section Header ────────────────────────────────────── */
+.blog-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 28px;
+    gap: 12px;
+}
+
+/* Section Title — Playfair Display, matches screenshot exactly */
+.blog-section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 400;
+    color: #1a2c3a;
+    line-height: 1.2;
+}
+
+/* "View All Posts >" link — underline left→right on hover, reverse on leave */
+.blog-view-all {
+    font-family: 'Figtree', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #1a2c3a;
+    text-decoration: none;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    position: relative;
+    padding-bottom: 3px;
+}
+
+.blog-view-all::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: #1a2c3a;
+    /* Start collapsed from right side */
+    transform: scaleX(0);
+    transform-origin: right center;
+    transition: transform 0.35s ease;
+}
+
+/* Hover → expand from left to right */
+.blog-view-all:hover::after {
+    transform: scaleX(1);
+    transform-origin: left center;
+}
+
+.blog-arrow {
+    font-size: 12px;
+    display: inline-block;
+}
+
+/* ── Cards Outer (Slider wrapper) ──────────────────────── */
+.blog-cards-outer {
+    position: relative;
+    width: 100%;
+}
+
+/* ── Cards Track ───────────────────────────────────────── */
+/* DEFAULT = GRID mode */
+.blog-cards-track {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+/* ── Individual Card ───────────────────────────────────── */
+.blog-card {
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+/* ── Image Wrapper ─────────────────────────────────────── */
+/* NO aspect-ratio used. Height is auto via padding-bottom trick.
+   This keeps images same visual height without locking ratio unit. */
+.blog-img-wrapper {
+    width: 100%;
+    overflow: hidden;
+    border-radius: 10px;
+    /* Use padding-bottom to create a consistent image area without aspect-ratio property */
+    position: relative;
+    padding-bottom: 66%;   /* ~3:2 feel — same for every card */
+}
+
+.blog-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 10px;
+    display: block;
+    /* Smooth zoom on hover */
+    transition: transform 0.45s ease;
+}
+
+/* ── Image Zoom on hover (desktop only) ─────────────────── */
+.blog-card:hover .blog-img {
+    transform: scale(1.06);
+}
+
+/* ── Card Body ─────────────────────────────────────────── */
+.blog-card-body {
+    padding: 14px 2px 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+}
+
+/* ── Card Title ────────────────────────────────────────── */
+.blog-card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.35;
+    margin: 0;
+}
+
+/* Title link — teal color, underline left→right, reverse on leave */
+.blog-title-link {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 500;
+    color: #4a8b7f;       /* teal — matches screenshot */
+    text-decoration: none;
+    position: relative;
+    padding-bottom: 2px;
+    display: inline;
+}
+
+.blog-title-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: #4a8b7f;
+    transform: scaleX(0);
+    transform-origin: right center;
+    transition: transform 0.35s ease;
+}
+
+/* Hover → underline expands left to right */
+.blog-title-link:hover::after {
+    transform: scaleX(1);
+    transform-origin: left center;
+}
+
+/* ── Card Meta (date • brand) ──────────────────────────── */
+.blog-meta {
+    font-family: 'Figtree', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    color: #888;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin: 0;
+    line-height: 1;
+}
+
+.blog-date,
+.blog-brand {
+    color: #888;
+    font-size: 13px;
+}
+
+.blog-sep {
+    color: #aaa;
+    font-size: 12px;
+}
+
+/* ── Slider Nav Buttons (hidden in grid mode) ──────────── */
+.blog-slider-btn {
+    display: none;  /* Hidden in grid mode — JS shows them in slider mode */
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #1a2c3a;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transition: background 0.25s ease, box-shadow 0.25s ease;
+}
+
+.blog-slider-btn:hover {
+    background: #f5f5f3;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+}
+
+.blog-slider-prev { left: -20px; }
+.blog-slider-next { right: -20px; }
+
+/* ── Slider Dots (hidden in grid mode) ────────────────── */
+.blog-dots {
+    display: none;          /* Hidden in grid mode — JS shows in slider mode */
+    justify-content: center;
+    gap: 8px;
+    margin-top: 20px;
+}
+
+.blog-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #ccc;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.blog-dot.active {
+    background: #1a2c3a;
+    transform: scale(1.3);
+}
+
+/* ════════════════════════════════════════════════════════
+   SLIDER MODE — toggled by JS adding class="slider-mode"
+   to .blog-section
+   ════════════════════════════════════════════════════════ */
+.blog-section.slider-mode .blog-cards-track {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    gap: 24px;
+    padding-bottom: 4px;
+}
+
+.blog-section.slider-mode .blog-cards-track::-webkit-scrollbar {
+    display: none;
+}
+
+.blog-section.slider-mode .blog-card {
+    flex: 0 0 calc(33.333% - 16px);
+    scroll-snap-align: start;
+    min-width: 260px;
+}
+
+.blog-section.slider-mode .blog-slider-btn {
+    display: flex;
+}
+
+.blog-section.slider-mode .blog-dots {
+    display: flex;
+}
+
+/* ════════════════════════════════════════════════════════
+   RESPONSIVE BREAKPOINTS — all media query points
+   ════════════════════════════════════════════════════════ */
+
+/* ── XL ≥1400px ────────────────────────────────────────── */
+@media (min-width: 1400px) {
+    .blog-container {
+        padding: 0 60px;
+    }
+
+    .blog-section-title {
+        font-size: 34px;
+    }
+}
+
+/* ── LG 1200–1399px ────────────────────────────────────── */
+@media (max-width: 1399px) and (min-width: 1200px) {
+    .blog-cards-track {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 22px;
+    }
+}
+
+/* ── MD 992–1199px (Tablet landscape) ─────────────────── */
+@media (max-width: 1199px) and (min-width: 992px) {
+    .blog-section {
+        padding: 44px 0 48px;
+    }
+
+    .blog-container {
+        padding: 0 28px;
+    }
+
+    .blog-section-title {
+        font-size: 28px;
+    }
+
+    .blog-cards-track {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+    }
+
+    .blog-title-link {
+        font-size: 17px;
+    }
+}
+
+/* ── SM 768–991px (Tablet portrait) ───────────────────── */
+@media (max-width: 991px) and (min-width: 768px) {
+    .blog-section {
+        padding: 36px 0 40px;
+    }
+
+    .blog-container {
+        padding: 0 24px;
+    }
+
+    .blog-section-title {
+        font-size: 26px;
+    }
+
+    .blog-header {
+        margin-bottom: 22px;
+    }
+
+    /* 2 columns on tablet portrait */
+    .blog-cards-track {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+    }
+
+    /* Slider mode: show 2 cards */
+    .blog-section.slider-mode .blog-card {
+        flex: 0 0 calc(50% - 12px);
+    }
+
+    .blog-title-link {
+        font-size: 17px;
+    }
+
+    .blog-view-all {
+        font-size: 13px;
+    }
+
+    /* No hover on tablet */
+    .blog-card:hover .blog-img {
+        transform: none;
+    }
+
+    .blog-title-link:hover::after {
+        transform: scaleX(0);
+    }
+
+    .blog-view-all:hover::after {
+        transform: scaleX(0);
+    }
+}
+
+/* ── XS 576–767px (Mobile landscape) ──────────────────── */
+@media (max-width: 767px) and (min-width: 576px) {
+    .blog-section {
+        padding: 28px 0 32px;
+    }
+
+    .blog-container {
+        padding: 0 16px;
+    }
+
+    .blog-section-title {
+        font-size: 22px;
+    }
+
+    .blog-header {
+        margin-bottom: 18px;
+    }
+
+    /* 2 columns */
+    .blog-cards-track {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
+    }
+
+    /* Slider: show 1.5 cards */
+    .blog-section.slider-mode .blog-card {
+        flex: 0 0 calc(80% - 12px);
+    }
+
+    .blog-title-link {
+        font-size: 16px;
+    }
+
+    .blog-view-all {
+        font-size: 13px;
+    }
+
+    /* ── NO hover on mobile ── */
+    .blog-card:hover .blog-img {
+        transform: none;
+    }
+
+    .blog-title-link:hover::after {
+        transform: scaleX(0);
+        transition: none;
+    }
+
+    .blog-view-all:hover::after {
+        transform: scaleX(0);
+        transition: none;
+    }
+}
+
+/* ── XXS ≤575px (Mobile portrait) ─────────────────────── */
+@media (max-width: 575px) {
+    .blog-section {
+        padding: 24px 0 28px;
+    }
+
+    .blog-container {
+        padding: 0 14px;
+    }
+
+    .blog-section-title {
+        font-size: 20px;
+    }
+
+    .blog-header {
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 16px;
+    }
+
+    .blog-view-all {
+        font-size: 12px;
+    }
+
+    /* 1 column stacked */
+    .blog-cards-track {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .blog-img-wrapper {
+        padding-bottom: 60%;   /* slightly shorter on small screens */
+    }
+
+    .blog-title-link {
+        font-size: 16px;
+    }
+
+    .blog-meta {
+        font-size: 12px;
+    }
+
+    .blog-date,
+    .blog-brand {
+        font-size: 12px;
+    }
+
+    /* Slider: 1 card full width */
+    .blog-section.slider-mode .blog-card {
+        flex: 0 0 100%;
+        min-width: unset;
+    }
+
+    .blog-slider-prev { left: -14px; }
+    .blog-slider-next { right: -14px; }
+
+    /* ── NO hover on mobile ── */
+    .blog-card:hover .blog-img {
+        transform: none;
+    }
+
+    .blog-title-link:hover::after {
+        transform: scaleX(0);
+        transition: none;
+    }
+
+    .blog-view-all:hover::after {
+        transform: scaleX(0);
+        transition: none;
+    }
+}
+
+/* ── Media hover check: only apply hover on true pointer devices ── */
+/* This is the cleanest way to disable hover on touch devices */
+@media (hover: none) {
+    .blog-card:hover .blog-img {
+        transform: none !important;
+    }
+
+    .blog-title-link:hover::after {
+        transform: scaleX(0) !important;
+        transition: none !important;
+    }
+
+    .blog-view-all:hover::after {
+        transform: scaleX(0) !important;
+        transition: none !important;
+    }
+}

@@ -1,0 +1,301 @@
+/* ══════════════════════════════════════════════════════
+   DESIGN SYSTEM & VARIABLES - REMOVED :ROOT (INLINED)
+   ══════════════════════════════════════════════════════ */
+
+/* ══════════════════════════════════════════════════════
+   GLOBAL RESET
+   ══════════════════════════════════════════════════════ */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Figtree', system-ui, -apple-system, sans-serif;
+    background-color: #ffffff;
+    color: #0b2e3e;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* ══════════════════════════════════════════════════════
+   PROMO SECTION WRAPPER
+   ══════════════════════════════════════════════════════ */
+.promo-section {
+    padding: 32px 0;         /* top/bottom spacing */
+    background-color: #ffffff;
+}
+
+/* ══════════════════════════════════════════════════════
+   PROMO BANNER CARD
+   Pink rounded card — 4 columns on desktop, stacked on mobile
+   ══════════════════════════════════════════════════════ */
+.promo-banner {
+    background-color: #fce8e4;
+    border-radius: 18px;           /* smooth rounded corners like in image */
+    padding: 28px 36px;            /* internal spacing */
+    height: auto;                  /* height auto — no fixed height */
+
+    /* CSS Grid: equal gap between all 4 columns
+       1fr = label | 2fr = heading | 1fr = desc | auto = button */
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr auto;
+    align-items: center;
+    gap: 24px;                     /* same gap between EVERY column */
+}
+
+/* ══════════════════════════════════════════════════════
+   COLUMN 1 — "For A Limited Time" italic label
+   Same font-family: Fraunces (serif italic), same color
+   ══════════════════════════════════════════════════════ */
+.promo-label-wrap {
+    /* Grid handles sizing — no flex needed */
+}
+
+.promo-label {
+    font-family: 'Fraunces', Georgia, serif;   /* Fraunces — same as .gifts-title */
+    font-size: 0.85rem;                 /* same as .gift-card__category */
+    font-style: italic;                 /* italic — matches image exactly */
+    font-weight: 400;
+    color: #0b2e3e;        /* same dark navy */
+    line-height: 1.4;
+    display: block;
+}
+
+/* ══════════════════════════════════════════════════════
+   COLUMN 2 — "Free Makeup Samples" main heading
+   Same font-family: Fraunces, same size/weight as .gifts-title
+   ══════════════════════════════════════════════════════ */
+.promo-heading-wrap {
+    /* Grid handles sizing — no flex needed */
+}
+
+.promo-heading {
+    font-family: 'Fraunces', Georgia, serif;   /* Fraunces — same as .gifts-title */
+    font-size: 2.25rem;                 /* exactly same as .gifts-title */
+    font-weight: 600;                   /* bold like in image */
+    line-height: 1.25;
+    color: #0b2e3e;        /* same dark navy */
+    letter-spacing: -0.01em;           /* same as .gifts-title */
+    margin: 0;                          /* remove default h1 margin */
+}
+
+/* ══════════════════════════════════════════════════════
+   COLUMN 3 — Description paragraph
+   Same font-family: Figtree, same muted color
+   ══════════════════════════════════════════════════════ */
+.promo-desc-wrap {
+    /* Grid handles sizing — no flex needed */
+}
+
+.promo-desc {
+    font-family: 'Figtree', system-ui, -apple-system, sans-serif;      /* Figtree — same as body text */
+    font-size: 0.875rem;                /* same size as .shop-now-btn text */
+    font-weight: 400;
+    color: #333333;      /* slightly darker than muted */
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* ══════════════════════════════════════════════════════
+   COLUMN 4 — "Shop Now" Button
+   Same pill shape, same font, left-to-right hover animation
+   ══════════════════════════════════════════════════════ */
+.promo-btn-wrap {
+    display: flex;
+    justify-content: flex-end;  /* push button to the right edge */
+    align-items: center;
+}
+
+/* ── Button base style — same as .shop-now-btn in Holiday Gifts ── */
+.promo-btn {
+    position: relative;           /* needed for ::before pseudo-element */
+    background-color: #0b2e3e;   /* dark navy background */
+    color: #ffffff;                           /* white text */
+    border: none;
+    padding: 12px 28px;           /* same padding family as .shop-now-btn */
+    border-radius: 50px;          /* pill shape — same as all other buttons */
+    font-family: 'Figtree', system-ui, -apple-system, sans-serif; /* Figtree — same as .shop-now-btn */
+    font-size: 0.875rem;           /* same font-size as .shop-now-btn */
+    font-weight: 600;
+    cursor: pointer;
+    overflow: hidden;              /* clips the ::before fill animation */
+    z-index: 1;
+    display: inline-block;
+    text-decoration: none;
+    transition: color 0.35s ease;
+    white-space: nowrap;           /* keep text on one line */
+}
+
+/* ── Left-to-right background fill — same animation pattern ──
+   ::before sits behind the text and sweeps from left to right on hover */
+.promo-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #1a4d66;   /* slightly lighter navy on hover */
+    z-index: -1;                                /* behind button text */
+    transform: scaleX(0);                       /* hidden by default */
+    transform-origin: left center;              /* grows from left → right */
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* ══════════════════════════════════════════════════════
+   HOVER EFFECTS — DESKTOP ONLY
+   Mobile gets NO hover effects (touch devices)
+   Uses: @media (hover: hover) — only fires on real pointer devices
+   ══════════════════════════════════════════════════════ */
+@media (hover: hover) and (min-width: 768px) {
+    /* Button: trigger the left-to-right fill animation */
+    .promo-btn:hover::before {
+        transform: scaleX(1);       /* fill sweeps left → right */
+    }
+    /* Button text stays white (already white, no change needed) */
+    .promo-btn:hover {
+        color: #ffffff;
+    }
+}
+
+/* ── Mobile tap feedback (instead of hover) ── */
+.promo-btn:active {
+    background-color: #1a4d66;
+    color: #ffffff;
+}
+
+/* ══════════════════════════════════════════════════════
+   RESPONSIVE — ALL MEDIA QUERY POINTS
+   ══════════════════════════════════════════════════════ */
+
+/* ── Large: 992px – 1199px ── */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+    .promo-heading {
+        font-size: 2rem;
+    }
+    .promo-banner {
+        padding: 26px 30px;
+    }
+}
+
+/* ── Medium: 768px – 991px ── */
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .promo-banner {
+        padding: 24px 28px;
+        gap: 18px;
+        /* Adjust grid columns slightly for medium screens */
+        grid-template-columns: 1fr 2fr 1fr auto;
+    }
+
+    .promo-heading {
+        font-size: 1.75rem;
+    }
+
+    .promo-label {
+        font-size: 0.8rem;
+    }
+}
+
+/* ── Small: 576px – 767px ── */
+@media (min-width: 576px) and (max-width: 767.98px) {
+    .promo-banner {
+        padding: 22px 22px;
+        gap: 14px;
+        /* Switch to 2 rows:
+           Row 1: label | heading (spans 3 cols)
+           Row 2: desc | button  */
+        grid-template-columns: auto 1fr auto;
+        grid-template-rows: auto auto;
+    }
+
+    /* Row 1, Col 1: label */
+    .promo-label-wrap {
+        grid-column: 1;
+        grid-row: 1;
+    }
+
+    /* Row 1, Col 2-3: heading spans rest */
+    .promo-heading-wrap {
+        grid-column: 2 / -1;
+        grid-row: 1;
+    }
+
+    /* Row 2, Col 1-2: description */
+    .promo-desc-wrap {
+        grid-column: 1 / 3;
+        grid-row: 2;
+    }
+
+    /* Row 2, Col 3: button */
+    .promo-btn-wrap {
+        grid-column: 3;
+        grid-row: 2;
+        justify-content: flex-end;
+    }
+
+    .promo-heading {
+        font-size: 1.6rem;
+    }
+
+    .promo-label {
+        font-size: 0.8rem;
+    }
+
+    .promo-desc {
+        font-size: 0.82rem;
+    }
+}
+
+/* ── Extra-Small phones: < 576px — stack everything vertically ── */
+@media (max-width: 575.98px) {
+    .promo-section {
+        padding: 20px 0;
+    }
+
+    .promo-banner {
+        /* Stack all columns vertically on mobile */
+        flex-direction: column;
+        align-items: flex-start;   /* left aligned */
+        gap: 12px;
+        padding: 20px 20px;
+        border-radius: 14px;       /* slightly tighter radius on mobile */
+    }
+
+    .promo-label-wrap {
+        min-width: unset;
+    }
+
+    .promo-label {
+        font-size: 0.8rem;
+    }
+
+    .promo-heading {
+        font-size: 1.6rem;         /* same as .gift-card__heading on mobile */
+    }
+
+    .promo-desc-wrap {
+        max-width: 100%;           /* full width on mobile */
+    }
+
+    .promo-desc {
+        font-size: 0.82rem;
+    }
+
+    .promo-btn {
+        padding: 10px 22px;
+        font-size: 0.82rem;
+    }
+}
+
+/* ── Extra-Large: ≥ 1200px ── */
+@media (min-width: 1200px) {
+    .promo-heading {
+        font-size: 2.25rem;        /* keep same as base on xl screens */
+    }
+    .promo-banner {
+        padding: 30px 40px;
+    }
+}

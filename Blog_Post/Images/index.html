@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Read our latest beauty blog posts - tips, guides and inspiration for your skincare and beauty routine.">
+    <title>Our Blog Posts - Beauty</title>
+
+    <!-- Google Fonts: Playfair Display (title/serif) + Figtree (body/sans-serif) — matches project design system -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <section class="blog-section" id="blog-section" aria-label="Our Blog Posts">
+        <div class="blog-container">
+
+            <!-- ── Section Header ── -->
+            <div class="blog-header">
+                <h2 class="blog-section-title">Our Blog Posts</h2>
+                <a href="#" class="blog-view-all" id="blog-view-all-link" aria-label="View all blog posts">
+                    View All Posts <span class="blog-arrow" aria-hidden="true">&#10095;</span>
+                </a>
+            </div>
+
+            <!-- ── Cards Outer Wrapper ── -->
+            <!-- In GRID mode:  cards sit in a CSS grid, prev/next hidden -->
+            <!-- In SLIDER mode: cards scroll horizontally, prev/next visible -->
+            <div class="blog-cards-outer" id="blog-cards-outer">
+
+                <!-- Prev Button (slider mode only) -->
+                <button class="blog-slider-btn blog-slider-prev" id="blog-slider-prev" aria-label="Previous slide">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round" width="18" height="18">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                </button>
+
+                <!-- Cards Track -->
+                <div class="blog-cards-track" id="blog-cards-track">
+
+                    <!-- ═══════════════════════════════════════════════
+                         CARD 1
+                    ═══════════════════════════════════════════════ -->
+                    <article class="blog-card" id="blog-card-1">
+                        <div class="blog-img-wrapper">
+                            <img
+                                src="Images/blog01_eff3c056-7931-49a7-932f-2fef96f3b7da.webp"
+                                alt="Our Creative Director's Date - skincare products on tiled surface"
+                                class="blog-img"
+                                loading="lazy">
+                        </div>
+                        <div class="blog-card-body">
+                            <h3 class="blog-card-title">
+                                <a href="#" class="blog-title-link" id="blog-title-link-1">
+                                    Our Creative Director's Date
+                                </a>
+                            </h3>
+                            <p class="blog-meta">
+                                <span class="blog-date">Apr 26, 2025</span>
+                                <span class="blog-sep" aria-hidden="true">&bull;</span>
+                                <span class="blog-brand">FOXECOM</span>
+                            </p>
+                        </div>
+                    </article>
+
+                    <!-- ═══════════════════════════════════════════════
+                         CARD 2
+                    ═══════════════════════════════════════════════ -->
+                    <article class="blog-card" id="blog-card-2">
+                        <div class="blog-img-wrapper">
+                            <img
+                                src="Images/blog02_34effc15-af83-4999-850d-077c3cb75f9f.webp"
+                                alt="Everything You Need to Know - beauty portrait close-up"
+                                class="blog-img"
+                                loading="lazy">
+                        </div>
+                        <div class="blog-card-body">
+                            <h3 class="blog-card-title">
+                                <a href="#" class="blog-title-link" id="blog-title-link-2">
+                                    Everything You Need to Know
+                                </a>
+                            </h3>
+                            <p class="blog-meta">
+                                <span class="blog-date">Apr 25, 2025</span>
+                                <span class="blog-sep" aria-hidden="true">&bull;</span>
+                                <span class="blog-brand">FOXECOM</span>
+                            </p>
+                        </div>
+                    </article>
+
+                    <!-- ═══════════════════════════════════════════════
+                         CARD 3
+                    ═══════════════════════════════════════════════ -->
+                    <article class="blog-card" id="blog-card-3">
+                        <div class="blog-img-wrapper">
+                            <img
+                                src="Images/blog03_7ec1b2ec-b42f-409d-addc-20dca2bfa68c.webp"
+                                alt="The 2024 Holiday Gift Guide - L'Occitane hand cream with brush"
+                                class="blog-img"
+                                loading="lazy">
+                        </div>
+                        <div class="blog-card-body">
+                            <h3 class="blog-card-title">
+                                <a href="#" class="blog-title-link" id="blog-title-link-3">
+                                    The 2024 Holiday Gift Guide
+                                </a>
+                            </h3>
+                            <p class="blog-meta">
+                                <span class="blog-date">Apr 23, 2025</span>
+                                <span class="blog-sep" aria-hidden="true">&bull;</span>
+                                <span class="blog-brand">FOXECOM</span>
+                            </p>
+                        </div>
+                    </article>
+
+                    <!--
+                    ╔══════════════════════════════════════════════════════════╗
+                    ║  TO ADD MORE CARDS: Copy any <article class="blog-card"> ║
+                    ║  block above and paste here. Give it a unique id like    ║
+                    ║  id="blog-card-4". Grid AND Slider both auto-adjust.    ║
+                    ║  Design will NOT break regardless of card count.         ║
+                    ╚══════════════════════════════════════════════════════════╝
+                    -->
+
+                </div><!-- /blog-cards-track -->
+
+                <!-- Next Button (slider mode only) -->
+                <button class="blog-slider-btn blog-slider-next" id="blog-slider-next" aria-label="Next slide">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round" width="18" height="18">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </button>
+
+            </div><!-- /blog-cards-outer -->
+
+            <!-- Slider Dot Indicators (slider mode only) -->
+            <div class="blog-dots" id="blog-dots" role="tablist" aria-label="Slide indicators"></div>
+
+        </div><!-- /blog-container -->
+    </section>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="script.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,200 @@
+{{$menu = system.menu.get_menu(&menu)}}
+
+<style>
+	$_section {
+
+		.main-navbar {
+			background-color: #0f2027;
+			height: auto;
+			padding: 14px 0;
+
+			position: sticky;
+			top: 0;
+			left: 0;
+			width: 100%;
+			z-index: 1000;
+			transition: transform 0.35s ease;
+		}
+
+		/* Added/removed by JS on scroll direction */
+		.main-navbar.nav-hidden {
+			transform: translateY(-100%);
+		}
+
+		.main-navbar .nav-link {
+			color: #ffffff !important;
+			font-weight: 600;
+			font-size: 15px;
+			display: flex;
+			align-items: center;
+			gap: 6px;
+			padding: 6px 16px !important;
+		}
+
+		.main-navbar .nav-link:hover {
+			opacity: 0.8;
+		}
+
+		.main-navbar .nav-link::after {
+			display: none;
+		}
+
+		.dropdown-arrow {
+			font-size: 11px;
+			margin-left: 2px;
+		}
+
+		.btn-on-sale {
+			background-color: #c0392b;
+			color: #ffffff;
+			font-weight: 600;
+			font-size: 14px;
+			padding: 8px 22px;
+			border-radius: 50px;
+			border: none;
+			text-decoration: none;
+			white-space: nowrap;
+		}
+		.btn-on-sale:hover {
+			background-color: #a83224;
+			color: #ffffff;
+		}
+
+		.main-navbar .dropdown-menu {
+			display: block;
+			opacity: 0;
+			visibility: hidden;
+			transform: translateY(10px);
+			transition: all 0.3s ease;
+			pointer-events: none;
+			border: none;
+			border-radius: 10px;
+			margin-top: 10px;
+			padding: 10px 0;
+		}
+
+		.main-navbar .dropdown:hover > .dropdown-menu {
+			opacity: 1;
+			visibility: visible;
+			transform: translateY(0);
+			pointer-events: auto;
+		}
+
+		.main-navbar .dropend .dropdown-menu {
+			top: 0;
+			left: 100%;
+			margin-top: 0;
+			transform: translateX(10px);
+		}
+
+		.main-navbar .dropend:hover > .dropdown-menu {
+			transform: translateX(0);
+		}
+
+		.main-navbar .dropdown-item {
+			font-size: 14px;
+			padding: 8px 20px;
+		}
+		.main-navbar .dropdown-item:hover {
+			background-color: #f2f2f2;
+		}
+
+		.main-navbar .navbar-toggler {
+			border-color: rgba(255, 255, 255, 0.4);
+		}
+		.main-navbar .navbar-toggler-icon {
+			filter: invert(1);
+		}
+
+		@media (max-width: 991px) {
+			.main-navbar .navbar-nav {
+				gap: 6px;
+				padding-top: 12px;
+			}
+			.btn-on-sale {
+				display: inline-block;
+				margin-top: 8px;
+			}
+		}
+	}
+
+	$_section {
+		{{= &custom_css}}
+	}
+</style>
+
+<section class="$_s_class-mainheader">
+	<nav class="navbar navbar-expand-lg main-navbar" id="mainNavbar">
+		<div class="container">
+
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse justify-content-center" id="navMenu">
+				<ul class="navbar-nav align-items-lg-center gap-lg-2">
+
+		{{with each $menu as $m}}
+
+						{{$has_children = system.arr.has_key($m, "children")}}
+
+				<li class="nav-item dropdown">
+							<a class="nav-link {{if $has_children}}dropdown-toggle{{endif}}"
+							href="{{= system.advanced.get_link($m['link'])}}"
+						{{if $has_children}}data-bs-toggle="dropdown"{{endif}}>
+						{{= $m["content"]}}
+						{{if $has_children}}
+							<span class="dropdown-arrow">&#9660;</span>
+						{{endif}}
+					</a>
+
+
+
+					{{if $has_children}}
+						<ul class="dropdown-menu">
+							{{with each $m["children"] as $c}}
+
+								<li>
+									<a class="dropdown-item" href="{{= system.advanced.get_link($c['link'])}}">
+										{{= $c["content"]}}
+									</a>
+								</li>
+
+							{{endwith}}
+							
+						</ul>
+					{{endif}}
+				</li>
+		{{endwith}}
+
+			<li class="nav-item">
+				<a class="btn-on-sale" href="{{= &on_sale_link}}">{{= &on_sale_text}}</a>
+			</li>
+
+		</ul>
+	</div>
+
+</div>
+</nav>
+</section>
+
+<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		const navbar = document.getElementById('mainNavbar');
+		let lastScrollY = window.scrollY;
+
+		function handleScroll() {
+			const currentScrollY = window.scrollY;
+
+			if (currentScrollY > lastScrollY && currentScrollY > 80) {
+				navbar.classList.add('nav-hidden');
+			} else {
+				navbar.classList.remove('nav-hidden');
+			}
+
+			lastScrollY = currentScrollY;
+		}
+
+		window.addEventListener('scroll', handleScroll);
+	});
+</script>

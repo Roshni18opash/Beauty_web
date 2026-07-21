@@ -1,0 +1,25 @@
+<div class="gift-card">
+	<div class="gift-card__img-wrap {{= &bg == 'color' ? 'has-color-bg' : ''}}" {{if &bg == 'color'}}style="background: linear-gradient(135deg, {{= &bg_1}} 10%, {{= &bg_2}} 100%);"{{endif}}>
+		{{if &bg == 'collectionimg'}}
+			<img class="gift-card__img" src="{{= &collectionimg == '' ? 'https://placehold.co/1920x630' : 'https://cdn.flicksell.com/'.&collectionimg}}" alt="card-image" loading="lazy">
+		{{endif}}
+		<div class="gift-card__overlay"></div>
+	</div>
+
+	<div class="gift-card__content">
+		<div class="gift-card__top">
+			<span class="gift-card__category">{{= &sub_title}}</span>
+
+			<div class="gift-card__badge">
+				<span class="gift-card__badge-save">Save</span>
+				<span class="gift-card__badge-pct">{{= &discount}}%</span>
+			</div>
+		</div>
+
+		<h2 class="gift-card__heading">{{= &title}}</h2>
+
+		<div class="gift-card__bottom">
+			<a href="{{= &link}}" class="shop-now-btn">Shop Now</a>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,254 @@
+/* ══════════════════════════════════════════════════════
+   RESET & GLOBAL
+   ══════════════════════════════════════════════════════ */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Prevent any image from breaking layout */
+img {
+    max-width: 100%;
+    display: block;
+}
+
+/* Page centering wrapper */
+.container {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+body {
+    font-family: 'Figtree', system-ui, -apple-system, sans-serif;
+    background-color: #ffffff;
+    color: #0b2e3e;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* ══════════════════════════════════════════════════════
+   SECTION
+   ══════════════════════════════════════════════════════ */
+.reviews-section {
+    background-color: #ffffff;
+    padding: 60px 0 70px;
+    overflow: hidden; /* hides the carousel overflow on sides */
+}
+
+/* Section heading */
+.reviews-title {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 2.25rem;
+    font-weight: 500;
+    line-height: 1.3;
+    color: #0b2e3e;
+    text-align: center;
+    letter-spacing: -0.01em;
+    margin-bottom: 48px;
+}
+
+@media (max-width: 576px) {
+    .reviews-title {
+        font-size: 1.75rem;
+        margin-bottom: 36px;
+    }
+}
+
+/* ══════════════════════════════════════════════════════
+   CAROUSEL WRAPPER
+   ══════════════════════════════════════════════════════ */
+.carousel-wrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden; /* clips the scrolling track */
+}
+
+/* Left & right gradient fade to give "infinite" feel */
+.carousel-fade {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 80px;
+    z-index: 2;
+    pointer-events: none; /* don't block hover on cards */
+}
+
+.carousel-fade--left {
+    left: 0;
+    background: linear-gradient(to right, #ffffff, transparent);
+}
+
+.carousel-fade--right {
+    right: 0;
+    background: linear-gradient(to left, #ffffff, transparent);
+}
+
+/* ══════════════════════════════════════════════════════
+   CAROUSEL TRACK
+   The track holds all cards (original + clones) side by side.
+   JS sets the animation duration based on total width.
+   ══════════════════════════════════════════════════════ */
+.carousel-track {
+    display: flex;          /* cards sit in a row */
+    gap: 20px;
+    width: max-content;     /* track is as wide as all cards combined */
+    padding: 10px 20px;     /* breathing room so hover shadow isn't clipped */
+    animation: scrollLeft linear infinite;
+    animation-duration: var(--scroll-duration, 40s); /* JS sets this via CSS variable */
+}
+
+/* Pause the scroll when user hovers over any card */
+.carousel-track:hover {
+    animation-play-state: paused;
+}
+
+/* The scrolling animation — moves left by exactly half the track width
+   (because we cloned all cards once, half = one full set) */
+@keyframes scrollLeft {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+}
+
+/* ══════════════════════════════════════════════════════
+   REVIEW CARD
+   ══════════════════════════════════════════════════════ */
+.review-card {
+    /* Fixed card width — change this to resize all cards */
+    width: 320px;
+    flex-shrink: 0;         /* prevents cards from squishing */
+
+    background-color: #f7f7f5;
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: none;
+    cursor: default;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* Slight lift on hover */
+.review-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 28px rgba(11, 46, 62, 0.10);
+}
+
+/* ── Card Header: avatar + name + badge ── */
+.card-header-block {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+}
+
+/* Round profile photo */
+.reviewer-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    background-color: #e9ecef; /* shows while image loads */
+}
+
+.reviewer-info {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Reviewer name */
+.reviewer-name {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #0b2e3e;
+    margin: 0;
+    line-height: 1.2;
+}
+
+/* "Verified Buyer" green badge */
+.reviewer-status {
+    font-size: 0.72rem;
+    color: #6c757d;
+    margin-top: 3px;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+
+/* ── Review text ── */
+.review-text {
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: #333333;
+    margin-bottom: 16px;
+    font-weight: 400;
+    flex-grow: 1; /* pushes the product row to the bottom */
+}
+
+/* ── Product row at the bottom of each card ── */
+.card-product-divider {
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    margin-bottom: 14px;
+}
+
+.product-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: #0b2e3e;
+}
+
+/* Small product thumbnail */
+.product-icon-img {
+    width: 24px;
+    height: 24px;
+    object-fit: cover;
+    border-radius: 4px;
+    flex-shrink: 0;
+}
+
+/* Product name with animated underline on hover */
+.product-name {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #0b2e3e;
+    position: relative;
+    padding-bottom: 1px;
+}
+
+/* Underline draws left-to-right on hover */
+.product-name::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 1.5px;
+    bottom: 0;
+    left: 0;
+    background-color: #0b2e3e;
+    transform: scaleX(0);
+    transform-origin: right center;
+    transition: transform 0.3s ease;
+}
+
+.product-link:hover .product-name::after {
+    transform: scaleX(1);
+    transform-origin: left center;
+}
+
+/* ══════════════════════════════════════════════════════
+   RESPONSIVE — smaller cards on mobile
+   ══════════════════════════════════════════════════════ */
+@media (max-width: 575px) {
+    .review-card {
+        width: 270px;
+    }
+
+    .carousel-fade {
+        width: 40px;
+    }
+}

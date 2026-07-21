@@ -1,0 +1,91 @@
+/* Beginner-friendly styles for the announcement bar */
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  background: #fff;
+  color: #1f2937; /* dark gray */
+}
+
+.announce-bar {
+  background: #fdeef0; /* soft pink similar to image */
+  border-bottom: 1px solid rgba(0,0,0,0.03);
+  font-size: 14px;
+}
+
+.announce-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.left a {
+  color: #234; /* slightly darker */
+  text-decoration: none;
+  margin-right: 16px;
+  font-weight: 400;
+}
+.left a:hover { text-decoration: underline; }
+
+.center {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  justify-content: center;
+}
+.center .emoji { font-size: 18px; }
+.center .message {
+  font-weight: 600;
+  color: #102027; /* deep color for contrast */
+}
+
+.right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.country {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.country .flag { font-size: 18px; }
+.country img.flag { display: inline-block; vertical-align: middle; width: 22px; height: 14px; object-fit: cover; border-radius: 2px; }
+.country select {
+  border: none;
+  background: transparent;
+  font-size: 14px;
+  padding: 4px;
+  appearance: none;
+}
+
+.socials { display: flex; gap: 8px; }
+.social {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 6px;
+  text-decoration: none;
+  color: #102027;
+  background: transparent;
+}
+.social img { width: 16px; height: 16px; display: block; }
+.social.facebook img { width: 18px; height: 18px; }
+.social.instagram img { width: 16px; height: 16px; }
+.social.tiktok img { width: 16px; height: 16px; }
+.social.x img { width:16px; height:16px; }
+.social:hover { opacity: 0.85; }
+
+/* Responsive: stack on small screens */
+@media (max-width: 720px) {
+  .announce-inner { flex-wrap: wrap; padding: 12px; }
+  .center { order: 3; width: 100%; justify-content: center; margin-top: 6px; }
+  .left { order: 1; }
+  .right { order: 2; }
+}

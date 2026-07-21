@@ -1,0 +1,588 @@
+<style>
+	$_section{
+
+		/* ══════════════════════════════════════════════════════
+		BASE STYLES (no media queries)
+		══════════════════════════════════════════════════════ */
+
+		.gifts-section {
+			background-color: #ffffff;
+			overflow: hidden;
+		}
+
+		.gifts-slider-wrapper {
+			position: relative;
+			overflow: visible;
+			border-radius:{{= &card_radius}}px;
+		}
+
+		.swiper {
+			overflow: hidden;
+			width: 100%;
+			border-radius:{{= &card_radius}}px;
+		}
+
+		.swiper-wrapper {
+			display: flex !important;
+			flex-wrap: nowrap !important;
+		}
+
+		.swiper-slide {
+			height: auto;
+			flex-shrink: 0;
+		}
+
+		/* Static mode layout when Swiper is not active (2 or fewer cards) */
+		.swiper:not(.swiper-initialized) .swiper-wrapper {
+			display: flex;
+			gap: 20px;
+		}
+
+		.swiper:not(.swiper-initialized) .swiper-slide {
+			flex: 0 0 calc(50% - 10px);
+			width: calc(50% - 10px);
+		}
+
+		.swiper:not(.swiper-initialized).single-card .swiper-slide {
+			flex: 0 0 100%;
+			width: 100%;
+		}
+
+		.slider-arrow {
+			position: absolute;
+			top: 50%;
+			transform: translateY(-50%);
+			z-index: 10;
+			background-color:{{= &arw_bg}};
+			color:{{= &arw_color}};
+			border: none;
+			width: 42px;
+			height: 42px;
+			border-radius:{{= &arw_radius}}px;
+			display: none; /* Hide by default; show based on indicator_options */
+			align-items: center;
+			justify-content: center;
+			cursor: pointer;
+			box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+			opacity:{{= &arw_opacity}};
+			transition: opacity 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+		}
+
+		.slider-arrow--prev { left: 10px; }
+		.slider-arrow--next { right: 10px; }
+
+		{{if &indicator_options == "arrow" || &indicator_options == "both"}}
+			.slider-arrow {
+				display: flex;
+			}
+		{{endif}}
+
+		.slider-arrow:disabled,
+		.slider-arrow.swiper-button-disabled,
+		.swiper-button-lock {
+			cursor: not-allowed;
+		}
+
+		.slider-dots {
+			display: none; /* Hide by default; show based on indicator_options */
+			justify-content:{{= &indicator_position}};
+			gap: 8px;
+			margin-top: 18px;
+			height: 12px;
+		}
+
+		{{if &indicator_options == "indicator" || &indicator_options == "both" || &m_indicator_options == "indicator" || &m_indicator_options == "both"}}
+			.slider-dots {
+				display: flex;
+			}
+		{{endif}}
+
+		.swiper-pagination-lock {
+			display: none !important;
+		}
+
+		.swiper-pagination-bullet {
+			width: 6px !important;
+			height: 6px !important;
+			min-height: 6px !important;
+			border-radius: 50% !important;
+			background: {{= &bullet_bg == '' ? '#d0cdc9' : &bullet_bg}} !important;
+			opacity: 0.25 !important;
+			position: relative;
+			overflow: hidden;
+			display: flex !important;
+			align-items: center;
+			margin: 0 !important;
+			transition: width 0.3s ease, border-radius 0.3s ease, background 0.3s ease, opacity 0.3s ease;
+		}
+
+		.swiper-pagination-bullet-active {
+			width: 32px !important;
+			border-radius: 4px !important;
+			background: #e0e5e9 !important;
+			opacity: 1 !important;
+		}
+
+		.swiper-pagination-bullet .progress {
+			position: absolute;
+			top: 0;
+			left: 0;
+			height: 100%;
+			width: 0%;
+			border-radius: inherit;
+			background: {{= &bullet_bg == '' ? '#0b2e3e' : &bullet_bg}} !important;
+			opacity: 1;
+		}
+
+		.swiper-pagination-bullet-active.animate .progress {
+			width: 100%;
+			{{if &auto_play == 'y'}}
+				transition: width {{= &auto_play_speed}}s linear;
+			{{else}}
+				transition: width 5s linear;
+			{{endif}}
+		}
+
+		.has-color-bg {
+			height: 250px;
+		}
+
+		/* ── CARD STYLES ── */
+		.gift-card {
+			position: relative;
+			border-radius:{{= &card_radius}}px;
+			overflow: hidden;
+			min-height: 230px;
+			height: auto;
+			cursor: pointer;
+			background-color: #d6cfc8;
+			{{if &slidepreview == 1}}
+				max-width: 580px;
+			{{else}}
+				max-width: 100%;
+			{{endif}}
+			margin: 0 auto;
+		}
+
+		.gift-card__img-wrap {
+			position: relative;
+			width: 100%;
+			height: auto;
+			overflow: hidden;
+			border-radius:{{= &card_radius}}px;
+		}
+
+		.gift-card__img {
+			display: block;
+			width: 100%;
+			height: 250px;
+			object-fit: cover;
+			object-position: center;
+			border-radius:{{= &card_radius}}px;
+			transition: transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+			will-change: transform;
+
+		}
+
+		.gift-card__overlay {
+			position: absolute;
+			inset: 0;
+			border-radius:{{= &card_radius}}px;
+			background: linear-gradient(160deg, rgba(0,0,0,0.28) 0%, rgba(0,0,0,0.10) 50%, rgba(0,0,0,0.05) 100%);
+			pointer-events: none;
+		}
+
+		.gift-card__content {
+			position: absolute;
+			inset: 0;
+			padding: 1.6rem 1.75rem;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			border-radius: 14px;
+		}
+
+		.gift-card__top {
+			display: block;
+		}
+
+		.gift-card__category {
+			font-family: 'Fraunces',serif;
+			font-size:{{= &cat_size}}px;
+			font-style: italic;
+			font-weight:{{= &cat_weight}};
+			color:{{= &cat_color}};
+			line-height: 1.3;
+			text-shadow: 0 1px 4px rgba(0,0,0,0.25);
+			margin: 0;
+		}
+		{{if &cat_title != 'y'}}
+			.gift-card__category {
+				visibility: hidden !important;
+			}
+		{{endif}}
+
+		.gift-card__badge {
+			position: absolute;
+			top: 1.4rem;
+			right: 1.5rem;
+			background-color:{{= &badge_bg}};
+			color:{{= &badge_color}};
+			font-family: 'Figtree',sans-serif;
+			font-size:{{= &badge_size}}px;
+			font-weight:{{= &badge_weight}};
+			border-radius:{{= &badge_radius}}px;
+			width: 90px;
+			height: 90px;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			text-align: center;
+			line-height: 1.2;
+			flex-shrink: 0;
+			box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+		}
+		{{if &badge != 'y'}}
+			.gift-card__badge {
+				visibility: hidden !important;
+			}
+		{{endif}}
+
+		.gift-card__badge-save {
+			font-family: 'Fraunces',serif;
+			font-size:{{= &badge_size}}px;
+			font-weight:{{= &badge_weight}};
+			opacity: 0.75;
+		}
+
+		.gift-card__badge-pct {
+			font-family: 'Fraunces',serif;
+			font-size:{{= &dis_size}}px;
+			font-weight:{{= &dis_weight}};
+			color:{{= &dis_clr}};
+		}
+
+		.gift-card__bottom {
+			display: flex;
+			flex-direction: column;
+			align-items: flex-start;
+			margin-top: 1.5rem;
+		}
+
+		.gift-card__heading {
+			font-family: 'Fraunces',serif;
+			font-size:{{= &pro_size}}px;
+			font-weight:{{= &pro_weight}};
+			line-height: 1.25;
+			color:{{= &pro_color}};
+			letter-spacing: -0.01em;
+			text-shadow: 0 1px 6px rgba(0,0,0,0.3);
+			margin: 0.7rem 0 0 0;
+			max-width: 65%;
+			display: -webkit-box;
+			-webkit-line-clamp: 2;
+			-webkit-box-orient: vertical;
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
+
+		{{if &pro_title != 'y'}}
+			.gift-card__heading {
+				visibility: hidden !important;
+			}
+		{{endif}}
+
+		.shop-now-btn {
+			position: relative;
+			background-color: {{= &btn_bg}};
+			color: {{= &btn_txt_clr}};
+			border: none;
+			padding: 9px 24px;
+			border-radius: {{= &btn_radius}}px;
+			font-family: 'Figtree', sans-serif;
+			font-size: {{= &btn_text_size}}px;
+			font-weight: {{= &btn_weight}};
+			cursor: pointer;
+			overflow: hidden;
+			z-index: 1;
+			display: inline-block;
+			text-decoration: none;
+			transition: color 0.3s ease;
+			box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+		}
+
+		.shop-now-btn::before {
+			content: "";
+			position: absolute;
+			inset: 0;
+			background-color: {{= &btn_txt_clr}};
+			transform: scaleX(0);
+			transform-origin: left;
+			transition: transform 0.4s ease;
+			z-index: -1;
+		}
+
+		@media (hover: hover) {
+			.shop-now-btn:hover {
+				color: {{= &btn_bg}};
+			}
+
+			.shop-now-btn:hover::before {
+				transform: scaleX(1);
+			}
+			.slider-arrow:hover {
+				background-color: {{= &arw_color}};
+				color: {{= &arw_bg}};
+				border: none;
+				outline: none;
+			}
+		}
+
+		.shop-now-btn:active {
+			background-color: {{= &btn_txt_clr}};
+			color: {{= &btn_bg}};
+		}
+
+
+		/* ══════════════════════════════════════════════════════
+		RESPONSIVE BREAKPOINTS — smallest to largest
+		══════════════════════════════════════════════════════ */
+
+		/* ── Extra-Small phones: < 576px ── */
+		@media (max-width: 575.98px) {
+
+			.swiper:not(.swiper-initialized) .swiper-wrapper {
+				flex-direction: column;
+				gap: 16px;
+			}
+			.swiper:not(.swiper-initialized) .swiper-slide {
+				flex: 0 0 100%;
+				width: 100%;
+			}
+
+			/* Centering and sizing mobile cards */
+			.gift-card {
+				min-height: 180px;
+				{{if &item_to_show_mobile == 1}}
+					max-width: 320px;
+				{{else}}
+					max-width: 100%;
+				{{endif}}
+				margin: 0 auto;
+			}
+
+			.gift-card__img { height: 180px; }
+			.has-color-bg { height: 180px !important; }
+
+			.gift-card__content {
+				padding: 0.8rem 1rem;
+			}
+
+			.gift-card__heading {
+				font-size: 1.1rem !important;
+				max-width: 80%;
+			}
+
+			.gift-card__badge {
+				width: 50px;
+				height: 50px;
+				top: 1rem;
+				right: 1rem;
+			}
+			.gift-card__badge-save {
+				font-size: 0.55rem;
+			}
+			.gift-card__badge-pct  {
+				font-size: 0.85rem;
+			}
+
+			.shop-now-btn {
+				padding: 6px 14px;
+				font-size: 0.75rem;
+			}
+
+			/* Mobile indicator / navigation visibility */
+			{{if &m_indicator_options == "arrow" || &m_indicator_options == "both"}}
+				.swiper-initialized ~ .slider-arrow {
+					display: flex !important;
+					opacity: 1 !important;
+					pointer-events: auto !important;
+				}
+			{{else}}
+				.swiper-initialized ~ .slider-arrow {
+					display: none !important;
+				}
+			{{endif}}
+
+			{{if &m_indicator_options == "none" || &m_indicator_options == "arrow"}}
+				.slider-dots {
+					display: none !important;
+				}
+			{{endif}}
+
+			/* Mobile bullet colors */
+			.swiper-pagination-bullet {
+				background: {{= &m_indicator_background_color == '' ? '#d0cdc9' : &m_indicator_background_color}} !important;
+			}
+
+			.swiper-pagination-bullet .progress {
+				background: {{= &m_indicator_color == '' ? '#0b2e3e' : &m_indicator_color}} !important;
+			}
+
+			.swiper-pagination-bullet-active {
+				background: #e0e5e9 !important;
+				opacity: 1 !important;
+			}
+		}
+
+		/* ── Small: 576px – 767px ── */
+		@media (min-width: 576px) and (max-width: 767.98px) {
+			.gift-card__img { height: 250px; }
+			.has-color-bg { height: 250px !important; }
+		}
+
+		/* ── Medium: 768px – 991px ── */
+		@media (min-width: 768px) and (max-width: 991.98px) {
+			.gift-card__img { height: 270px; }
+			.has-color-bg { height: 270px !important; }
+		}
+
+		/* ── Large: 992px – 1199px ── */
+		@media (min-width: 992px) and (max-width: 1199.98px) {
+			.gift-card__img { height: 280px; }
+			.has-color-bg { height: 280px !important; }
+		}
+
+		/* ── Extra-Large: ≥ 1200px ── */
+		@media (min-width: 1200px) {
+			.gift-card__img { height: 300px; }
+			.has-color-bg { height: 300px !important; }
+		}
+
+	}
+
+	$_section { {{= &custom_css}} }
+
+</style>
+
+<section class="gifts-section py-5" id="gifts-section" aria-label="Holiday Gifts">
+	<div class="container">
+
+		<!-- <header class="gifts-header mb-4"> -->
+		<!-- 	<h1 class="gifts-title">Holiday Gifts</h1> -->
+		<!-- 	<p class="gifts-subtitle">Curated beauty sets, beautifully wrapped.</p> -->
+		<!-- </header> -->
+
+		<div class="gifts-slider-wrapper">
+
+			<div class="swiper $_s_class-mySwiper">
+				<div class="swiper-wrapper" id="gifts-track">
+					{{with each &collection as $slideimage at $index}}
+						<div class="swiper-slide">
+							{{use component $slideimage}}
+						</div>
+					{{endwith}}
+				</div>
+			</div>
+
+			<!-- Navigation Arrows (rendered based on indicator options) -->
+			{{if &indicator_options == "arrow" || &indicator_options == "both"
+				|| &m_indicator_options == "arrow" || &m_indicator_options == "both"}}
+				<button class="slider-arrow slider-arrow--prev $_s_class-swiper-button-prev" id="slider-prev" aria-label="Previous slide">
+					<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+						<polyline points="15 18 9 12 15 6"></polyline>
+					</svg>
+				</button>
+
+				<button class="slider-arrow slider-arrow--next $_s_class-swiper-button-next" id="slider-next" aria-label="Next slide">
+					<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+						<polyline points="9 18 15 12 9 6"></polyline>
+					</svg>
+				</button>
+			{{endif}}
+
+		</div>
+
+		<!-- Pagination Dots (rendered based on indicator options) -->
+		{{if &indicator_options == "indicator" || &indicator_options == "both"
+			|| &m_indicator_options == "indicator" || &m_indicator_options == "both"}}
+			<div class="slider-dots $_s_class-swiper-pagination" id="slider-dots" aria-label="Slide indicators"></div>
+		{{endif}}
+
+	</div>
+</section>
+
+<script>
+	document.addEventListener('DOMContentLoaded', function() {
+		const swiperContainer = document.querySelector('.$_s_class-mySwiper');
+		if (!swiperContainer) return;
+
+		const totalCards = swiperContainer.querySelectorAll('.swiper-slide').length;
+
+		new Swiper('.$_s_class-mySwiper', {
+			slidesPerView: {{= &slidepreview}},
+			spaceBetween: {{= &spacebetween}},
+			watchOverflow: true,
+			loop: {{= &slide_looping == 'y' ? "true" : "false"}},
+			autoplay: {{= &auto_play == 'y'
+					? "{ delay: " + (&auto_play_speed * 1000) + ", disableOnInteraction: false }"
+					: "false"
+			}},
+			on: {
+				init() {
+					setTimeout(() => {
+						const activeEl = this.pagination?.el?.querySelector('.swiper-pagination-bullet-active');
+						if (activeEl) activeEl.classList.add('animate');
+					}, 10);
+				},
+				slideChange() {
+					const bullets = this.pagination?.el?.querySelectorAll('.swiper-pagination-bullet');
+					bullets?.forEach(b => b.classList.remove('animate'));
+					setTimeout(() => {
+						const activeEl = this.pagination?.el?.querySelector('.swiper-pagination-bullet-active');
+						if (activeEl) activeEl.classList.add('animate');
+					}, 10);
+				}
+			},
+			breakpoints: {
+				0: {
+					slidesPerView:{{= &item_to_show_mobile}},
+					spaceBetween: 16,
+					pagination: {
+						el: '.$_s_class-swiper-pagination',
+						clickable: true,
+						enabled: {{= &m_indicator_options == "indicator" || &m_indicator_options == "both" ? "true" : "false"}},
+						renderBullet: (index, className) =>
+						`<span class="${className}"><span class="progress"></span></span>`
+					},
+					navigation: {
+						nextEl: '.$_s_class-swiper-button-next',
+						prevEl: '.$_s_class-swiper-button-prev',
+						enabled: {{= &m_indicator_options == "arrow" || &m_indicator_options == "both" ? "true" : "false"}},
+					}
+				},
+				768: {
+					slidesPerView: {{= &slidepreview}},
+					spaceBetween: {{= &spacebetween}},
+					pagination: {
+						el: '.$_s_class-swiper-pagination',
+						clickable: true,
+						enabled: {{= &indicator_options == "indicator" || &indicator_options == "both" ? "true" : "false"}},
+						renderBullet: (index, className) =>
+						`<span class="${className}"><span class="progress"></span></span>`
+					},
+					navigation: {
+						nextEl: '.$_s_class-swiper-button-next',
+						prevEl: '.$_s_class-swiper-button-prev',
+						enabled: {{= &indicator_options == "arrow" || &indicator_options == "both" ? "true" : "false"}},
+					}
+				}
+			}
+		});
+
+		if (totalCards === 1) {
+			swiperContainer.classList.add('single-card');
+		}
+	});
+</script>

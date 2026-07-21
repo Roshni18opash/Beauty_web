@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Essentials - Beauty Web</title>
+    <!-- Bootstrap 5 CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts: Fraunces (Titles), Figtree & Inter (Body/Text) -->
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Figtree:ital,wght@0,300..900;1,300..900&family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <!-- Custom Style Sheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Section Wrapper -->
+    <section class="daily-essentials-section py-5">
+        <div class="container-fluid px-4 px-md-5">
+            
+            <!-- Section Header: Title & Subtitle on left, Shop Link on right -->
+            <header class="section-header d-flex flex-column flex-md-row justify-content-between align-items-md-end mb-4">
+                <div class="header-left">
+                    <h2 class="section-title">Daily Essentials</h2>
+                    <p class="section-desc">Traditional divides between personal and professional space.</p>
+                </div>
+                <div class="header-right mt-3 mt-md-0">
+                    <a href="#" class="shop-all-link">
+                        Shop All Products 
+                        <svg class="ms-1" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </a>
+                </div>
+            </header>
+
+            <!-- Carousel Slider Wrapper -->
+            <div class="slider-container">
+                <!-- Products Track (Horizontal Scroll Container) -->
+                <div class="products-track" id="productsTrack">
+                    
+                    <!-- 1st Card: Banner Card (Promo Banner) -->
+                    <div class="banner-card">
+                        <!-- Cover Image -->
+                        <img class="banner-bg-img" src="../Images/s-fc-banner-3.webp" alt="Holiday Sets Promo">
+                        
+                        <!-- Content Overlay -->
+                        <div class="banner-content">
+                            <p class="banner-eyebrow">Big Saving</p>
+                            <h3 class="banner-headline">On Holiday Sets</h3>
+                            <a href="#" class="banner-cta">
+                                Explore Now 
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="9 18 15 12 9 6"></polyline>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- 2nd Card: Product Card (Hydrate Smoothing Serum) -->
+                    <article class="product-card">
+                        <div class="card-image-box">
+                            <div class="image-wrapper">
+                                <img class="img-main" src="../Images/HydrateSmoothingSerum-42.webp" alt="Hydrate Smoothing Serum">
+                                <img class="img-hover" src="../Images/HydrateSmoothingSerum-42a.webp" alt="Hydrate Smoothing Serum Alternate">
+                            </div>
+                            <!-- Hover Quick View Button -->
+                            <button class="btn-quick-view" type="button" aria-label="Quick View">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                </svg>
+                            </button>
+                            <!-- Hover Add to Cart Button -->
+                            <button class="btn-add-cart" type="button">
+                                <span>Add To Cart</span>
+                            </button>
+                        </div>
+                        <div class="card-info">
+                            <span class="product-category">Face Serums</span>
+                            <h3 class="product-name">Hydrate Smoothing Serum</h3>
+                            <div class="product-price-row">
+                                <span class="current-price">$40.00</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- 3rd Card: Product Card (Hydrate Smoothing Serum with Marquee Badge) -->
+                    <article class="product-card">
+                        <div class="card-image-box">
+                            <div class="image-wrapper">
+                                <img class="img-main" src="../Images/HydrateSmoothingSerum-43.webp" alt="Hydrate Smoothing Serum">
+                                <img class="img-hover" src="../Images/HydrateSmoothingSerum-43a.webp" alt="Hydrate Smoothing Serum Alternate">
+                            </div>
+                            <!-- Marquee Running Badge at bottom of image -->
+                            <div class="selling-fast-badge">
+                                <div class="marquee-track">
+                                    <span>Selling Fast ⚡ Selling Fast ⚡ Selling Fast ⚡ Selling Fast ⚡ </span>
+                                    <span>Selling Fast ⚡ Selling Fast ⚡ Selling Fast ⚡ Selling Fast ⚡ </span>
+                                </div>
+                            </div>
+                            <!-- Hover Quick View Button -->
+                            <button class="btn-quick-view" type="button" aria-label="Quick View">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                </svg>
+                            </button>
+                            <!-- Hover Add to Cart Button -->
+                            <button class="btn-add-cart" type="button">
+                                <span>Add To Cart</span>
+                            </button>
+                        </div>
+                        <div class="card-info">
+                            <span class="product-category">Face Serums</span>
+                            <h3 class="product-name">Hydrate Smoothing Serum</h3>
+                            <div class="product-price-row">
+                                <span class="current-price">$40.00</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- 4th Card: Product Card (Turmeric Mask with New Badge) -->
+                    <article class="product-card">
+                        <div class="card-image-box">
+                            <span class="badge-status badge-new">New</span>
+                            <div class="image-wrapper">
+                                <img class="img-main" src="../Images/TurmericMask-17.webp" alt="Turmeric Mask">
+                                <img class="img-hover" src="../Images/TurmericMask-17a.webp" alt="Turmeric Mask Alternate">
+                            </div>
+                            <!-- Hover Quick View Button -->
+                            <button class="btn-quick-view" type="button" aria-label="Quick View">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                </svg>
+                            </button>
+                            <!-- Hover Add to Cart Button -->
+                            <button class="btn-add-cart" type="button">
+                                <span>Add To Cart</span>
+                            </button>
+                        </div>
+                        <div class="card-info">
+                            <span class="product-category">Mask</span>
+                            <h3 class="product-name">Turmeric Mask</h3>
+                            <div class="product-price-row">
+                                <span class="current-price">$40.00</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- 5th Card: Product Card (Barrier Restore Serum) -->
+                    <article class="product-card">
+                        <div class="card-image-box">
+                            <div class="image-wrapper">
+                                <img class="img-main" src="../Images/BarrierRestoreSerum-10.webp" alt="Barrier Restore Serum">
+                                <img class="img-hover" src="../Images/BarrierRestoreSerum-10a.webp" alt="Barrier Restore Serum Alternate">
+                            </div>
+                            <!-- Hover Quick View Button -->
+                            <button class="btn-quick-view" type="button" aria-label="Quick View">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                </svg>
+                            </button>
+                            <!-- Hover Add to Cart Button -->
+                            <button class="btn-add-cart" type="button">
+                                <span>Add To Cart</span>
+                            </button>
+                        </div>
+                        <div class="card-info">
+                            <span class="product-category">Serum</span>
+                            <h3 class="product-name">Barrier Restore Serum</h3>
+                            <div class="product-price-row">
+                                <span class="current-price">$36.00</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- 6th Card: Product Card (Body Cleanser with Sale Badge) -->
+                    <article class="product-card">
+                        <div class="card-image-box">
+                            <span class="badge-status badge-sale">Sale</span>
+                            <div class="image-wrapper">
+                                <img class="img-main" src="../Images/body_cleanser-67.webp" alt="Body Cleanser">
+                                <img class="img-hover" src="../Images/body_cleanser-67a.webp" alt="Body Cleanser Alternate">
+                            </div>
+                            <!-- Hover Quick View Button -->
+                            <button class="btn-quick-view" type="button" aria-label="Quick View">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                </svg>
+                            </button>
+                            <!-- Hover Add to Cart Button -->
+                            <button class="btn-add-cart" type="button">
+                                <span>Add To Cart</span>
+                            </button>
+                        </div>
+                        <div class="card-info">
+                            <span class="product-category">Body Wash</span>
+                            <h3 class="product-name">Body Cleanser</h3>
+                            <div class="product-price-row">
+                                <span class="current-price-sale">$44.00</span>
+                                <span class="original-price">$77.00</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- 7th Card: Product Card (Body Scrub) -->
+                    <article class="product-card">
+                        <div class="card-image-box">
+                            <div class="image-wrapper">
+                                <img class="img-main" src="../Images/bodyscrub-61.webp" alt="Body Scrub">
+                                <img class="img-hover" src="../Images/bodyscrub-61a.webp" alt="Body Scrub Alternate">
+                            </div>
+                            <button class="btn-quick-view" type="button" aria-label="Quick View">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                </svg>
+                            </button>
+                            <button class="btn-add-cart" type="button">
+                                <span>Add To Cart</span>
+                            </button>
+                        </div>
+                        <div class="card-info">
+                            <span class="product-category">Body Wash</span>
+                            <h3 class="product-name">Exfoliating Body Scrub</h3>
+                            <div class="product-price-row">
+                                <span class="current-price">$28.00</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- 8th Card: Product Card (Body Serum) -->
+                    <article class="product-card">
+                        <div class="card-image-box">
+                            <div class="image-wrapper">
+                                <img class="img-main" src="../Images/bodyserum-69.webp" alt="Body Serum">
+                                <img class="img-hover" src="../Images/bodyserum-69a.webp" alt="Body Serum Alternate">
+                            </div>
+                            <button class="btn-quick-view" type="button" aria-label="Quick View">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                </svg>
+                            </button>
+                            <button class="btn-add-cart" type="button">
+                                <span>Add To Cart</span>
+                            </button>
+                        </div>
+                        <div class="card-info">
+                            <span class="product-category">Body Wash</span>
+                            <h3 class="product-name">Glow Body Serum</h3>
+                            <div class="product-price-row">
+                                <span class="current-price">$34.00</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- 9th Card: Product Card (Bottle Grinder) -->
+                    <article class="product-card">
+                        <div class="card-image-box">
+                            <div class="image-wrapper">
+                                <img class="img-main" src="../Images/bottlegrinder-68.webp" alt="Premium Bottle Grinder">
+                                <img class="img-hover" src="../Images/bottlegrinder-68a.webp" alt="Premium Bottle Grinder Alternate">
+                            </div>
+                            <button class="btn-quick-view" type="button" aria-label="Quick View">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                </svg>
+                            </button>
+                            <button class="btn-add-cart" type="button">
+                                <span>Add To Cart</span>
+                            </button>
+                        </div>
+                        <div class="card-info">
+                            <span class="product-category">Accessories</span>
+                            <h3 class="product-name">Premium Bottle Grinder</h3>
+                            <div class="product-price-row">
+                                <span class="current-price">$18.00</span>
+                            </div>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+
+            <!-- Slider Footer: Progress Bar and Navigation Buttons -->
+            <footer class="slider-footer d-flex align-items-center justify-content-between mt-4">
+                <!-- Scroll Progress Bar -->
+                <div class="scroll-bar-wrap">
+                    <div class="scroll-track"></div>
+                    <div class="scroll-thumb" id="scrollThumb"></div>
+                </div>
+
+                <!-- Circular Navigation Buttons -->
+                <div class="slider-navigation d-flex gap-2">
+                    <button class="nav-btn" id="prevBtn" type="button" aria-label="Previous Slide" disabled>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="15 18 9 12 15 6"></polyline>
+                        </svg>
+                    </button>
+                    <button class="nav-btn" id="nextBtn" type="button" aria-label="Next Slide">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </button>
+                </div>
+            </footer>
+
+        </div>
+    </section>
+
+    <!-- Custom JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>

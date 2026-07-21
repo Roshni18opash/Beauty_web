@@ -1,0 +1,18 @@
+
+
+<div class="accordion-item">
+	<h3 class="accordion-header" id="headingOne">
+		<button class="accordion-button" type="button"
+		data-bs-toggle="collapse" data-bs-target="#collapseOne"
+		aria-expanded="true" aria-controls="collapseOne" id="faq-btn-1">
+	{{= &que}}
+		<span class="faq-icon" aria-hidden="true">+</span>
+	</button>
+</h3>
+<div id="collapseOne" class="accordion-collapse collapse show"
+aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+<div class="accordion-body">
+{{= &ans}}
+</div>
+</div>
+</div>

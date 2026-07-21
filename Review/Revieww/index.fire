@@ -1,0 +1,417 @@
+<style>
+
+
+  $_section{
+
+  	/* ══════════════════════════════════════════════════════
+  	SECTION STYLING
+  	══════════════════════════════════════════════════════ */
+  	.reviews-section {
+  		background-color:{{= &section_bg}};
+  		overflow: hidden;
+  	}
+
+  	{{if &p_l_r_md == 'custom'}}
+  		.reviews-section {
+  			padding-left: {{= &custom_padding}}px !important;
+  			padding-right: {{= &custom_padding}}px !important;
+  		}
+  	{{endif}}
+
+  	.reviews-title {
+  		font-family: 'Fraunces', Georgia, serif;
+  		font-size: 2.25rem;
+  		font-weight: 500;
+  		line-height: 1.25;
+  		color: #0b2e3e;
+  		margin-bottom: 0;
+  		letter-spacing: -0.01em;
+  	}
+
+  	/* ══════════════════════════════════════════════════════
+  	REVIEW CARD STYLING
+  	══════════════════════════════════════════════════════ */
+  	.review-card {
+  		background-color: #f7f7f5;
+  		border-radius: 10px;
+  		padding: 1rem 1.25rem 1rem;
+  		height: auto;
+  		display: flex;
+  		flex-direction: column;
+  		justify-content: space-between;
+  		border: none;
+  		opacity: 1;
+  		transition: opacity 0.4s ease;
+  	}
+
+  	/* Bottom-row faded "peek" effect — hints more cards below Show More */
+  	.review-card.card-faded {
+  		mask-image: linear-gradient(to bottom, #000 70%, rgba(0, 0, 0, 0.5) 100%);
+  		-webkit-mask-image: linear-gradient(to bottom, #000 70%, rgba(0, 0, 0, 0.5) 100%);
+  	}
+
+  	/* Extra cards shown via show more fade in smoothly */
+  	.review-card.fade-in {
+  		animation: cardFadeIn 0.4s ease forwards;
+  	}
+
+  	@keyframes cardFadeIn {
+  		from { opacity: 0; transform: translateY(12px); }
+  		to   { opacity: 1; transform: translateY(0); }
+  	}
+
+  	/* Review Card Header */
+  	.card-header-block {
+  		display: flex;
+  		align-items: center;
+  		gap: 10px;
+  		margin-bottom: 0.9rem;
+  	}
+
+  	.reviewer-avatar {
+  		width: 38px;
+  		height: 38px;
+  		border-radius: 50%;
+  		object-fit: cover;
+  		flex-shrink: 0;
+  		background-color: #e9ecef;
+  	}
+
+  	.reviewer-info {
+  		display: flex;
+  		flex-direction: column;
+  	}
+
+  	.reviewer-name {
+  		font-family: 'Fraunces', Georgia, serif;
+  		font-size: 0.95rem;
+  		font-weight:{{= &name_weight}};
+  		/* 400 */
+  		color: #0b2e3e;
+  		margin: 0;
+  		line-height: 1.2;
+  	}
+
+  	.reviewer-status {
+  		font-size: 0.7rem;
+  		color: #6c757d;
+  		margin: 0;
+  		margin-top: 1px;
+  		font-weight: 400;
+  		display: flex;
+  		align-items: center;
+  		gap: 3px;
+  	}
+
+  	/* Review content */
+  	.review-text {
+  		font-size: 0.875rem;
+  		line-height: 1.55;
+  		color: #333333;
+  		margin-bottom: 1rem;
+  		font-weight: 400;
+  		letter-spacing: -0.005em;
+  		flex-grow: 1;
+  	}
+
+  	/* ══════════════════════════════════════════════════════
+  	PRODUCT LINK & HOVER UNDERLINE ANIMATION
+  	══════════════════════════════════════════════════════ */
+  	.card-product-divider {
+  		border-top: 1px solid rgba(0, 0, 0, 0.07);
+  		margin-bottom: 0.85rem;
+  	}
+
+  	.product-link {
+  		display: inline-flex;
+  		align-items: center;
+  		gap: 8px;
+  		text-decoration: none;
+  		color: #0b2e3e;
+  		transition: opacity 0.2s ease;
+  	}
+
+  	.product-icon-img {
+  		width: 24px;
+  		height: 24px;
+  		object-fit: cover;
+  		border-radius: 4px;
+  	}
+
+  	.product-name {
+  		font-size: 0.85rem;
+  		font-weight: 500;
+  		color: #0b2e3e;
+  		position: relative;
+  		padding-bottom: 1px;
+  	}
+
+  	/* Custom Underline: Left-to-Right Draw & Rightwards-Shrink Reverse */
+  	.product-name::after {
+  		content: '';
+  		position: absolute;
+  		width: 100%;
+  		height: 1.5px;
+  		bottom: 0;
+  		left: 0;
+  		background-color: #0b2e3e;
+  		transform: scaleX(0);
+  		transform-origin: bottom right;
+  		transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  	}
+
+  	/* Hover rule: only enabled on hover-supportable desktop/tablet viewports */
+  	@media (hover: hover) and (min-width: 768px) {
+  		.product-link:hover .product-name::after {
+  			transform: scaleX(1);
+  			transform-origin: bottom left;
+  		}
+  	}
+
+  	/* ══════════════════════════════════════════════════════
+  	SHOW MORE BUTTON WITH BACKGROUND TRANSITION
+  	══════════════════════════════════════════════════════ */
+  	.show-more-btn {
+  		position: relative;
+  		background-color: #0b2e3e;
+  		color: #EA2727;
+  		border: none;
+  		padding: 12px 42px;
+  		border-radius: 50px;
+  		font-family: 'Figtree', system-ui, -apple-system, sans-serif;
+  		font-size: 0.95rem;
+  		font-weight: 600;
+  		cursor: pointer;
+  		overflow: hidden;
+  		z-index: 1;
+  		display: inline-block;
+  		transition: color 0.3s ease;
+  	}
+
+  	/* Left-to-right background animation element */
+  	.show-more-btn::before {
+  		content: '';
+  		position: absolute;
+  		top: 0;
+  		left: 0;
+  		width: 100%;
+  		height: 100%;
+  		background-color: #1a4d66;
+  		z-index: -1;
+  		transform: scaleX(0);
+  		transform-origin: bottom left;
+  		transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  	}
+
+  	/* Desktop/tablet-only hover states (hover-capable devices) */
+  	@media (hover: hover) and (min-width: 768px) {
+  		.show-more-btn:hover {
+  			color: #ffffff;
+  		}
+
+  		.show-more-btn:hover::before {
+  			transform: scaleX(1);
+  		}
+  	}
+
+  	/* Mobile active tapping state */
+  	.show-more-btn:active {
+  		background-color: #1a4d66;
+  	}
+
+  	/* ══════════════════════════════════════
+  	DESKTOP — 992px aur usse upar
+  	══════════════════════════════════════ */
+  	@media (min-width: 992px) {
+  		{{if &desktop != 'y'}}
+  			.reviews-section {
+  				display: none !important;
+  			}
+  		{{endif}}
+  	}
+
+  	/* ══════════════════════════════════════
+  	TABLET — 768px se 991px
+  	══════════════════════════════════════ */
+  	@media (min-width: 768px) and (max-width: 991px) {
+  		.reviews-title { font-size: 2rem; }
+  	}
+
+  	/* ══════════════════════════════════════
+  	MOBILE — 767px se neeche
+  	══════════════════════════════════════ */
+  	@media (max-width: 767px) {
+  		.reviews-title { font-size: 1.75rem; }
+
+  		{{if &mobile != 'y'}}
+  			.reviews-section {
+  				display: none !important;
+  			}
+  		{{endif}}
+
+  		{{if &p_l_r == 'm_custom'}}
+  			.reviews-section {
+  				padding-left: {{= &m_custom_padding}}px !important;
+  				padding-right: {{= &m_custom_padding}}px !important;
+  			}
+  		{{endif}}
+  	}
+
+  }
+
+  $_section { {{= &custom_css}} }
+</style>
+
+<section
+  class="reviews-section pt-md-{{= &p_md_top}} pb-md-{{= &p_md_bottom}} {{if p_l_r_md != 'custom'}}px-md-{{= &p_l_r_md}}{{
+    endif
+  }} pt-{{= &p_top}} pb-{{= &p_bottom}} {{if p_l_r != 'm_custom'}}px-{{= &p_l_r}}{{
+    endif
+  }}"
+  id="reviews-section"
+  aria-label="Customer Reviews"
+>
+  <div class="{{= &section_spacing}}">
+    <!-- Section Header -->
+    <header class="text-center mb-5">
+      <h1 class="reviews-title">
+        Over 2000 Positive Reviews <br class="d-none d-sm-inline" />
+        From Client Hubs
+      </h1>
+    </header>
+
+    <!-- Dynamic Reviews Grid Container -->
+    <div class="row g-4 justify-content-center" id="reviews-grid">
+      {{with each &collection as $content}}
+      {{use component $content}}
+      {{ endwith }}
+    </div>
+
+    <!-- Show More Button Container -->
+    <div class="text-center mt-5">
+      <button
+        class="show-more-btn"
+        id="show-more-btn"
+        aria-label="Show more reviews"
+      >
+        Show More
+      </button>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    // ══════════════════════════════════════════════════════
+    // DOM ELEMENTS & GLOBAL STATE
+    // ══════════════════════════════════════════════════════
+    const showMoreBtn = document.getElementById("show-more-btn");
+    const cardWrappers = Array.from(
+      document.querySelectorAll(".review-card-wrapper"),
+    );
+    let isExpanded = false;
+
+    if (!showMoreBtn || cardWrappers.length === 0) return;
+
+    // ══════════════════════════════════════════════════════
+    // Kitne cards initially dikhane hain — screen size ke hisaab se
+    // Mobile (< 768px) → 3 cards | Tablet/Desktop → 6 cards
+    // ══════════════════════════════════════════════════════
+    function getInitialCount() {
+      return window.innerWidth < 768 ? 3 : 6;
+    }
+
+    // ══════════════════════════════════════════════════════
+    // Page load par sahi cards dikhao, baaki hide karo
+    // ══════════════════════════════════════════════════════
+    function applyInitialState() {
+      const initialCount = getInitialCount();
+
+      cardWrappers.forEach((wrapper, idx) => {
+        const card = wrapper.querySelector(".review-card");
+
+        if (idx < initialCount) {
+          wrapper.classList.remove("d-none");
+          if (card) {
+            card.classList.remove("card-faded", "fade-in");
+            // Last visible card par faded "peek" effect (agar aur cards hidden hain)
+            if (
+              idx === initialCount - 1 &&
+              cardWrappers.length > initialCount
+            ) {
+              card.classList.add("card-faded");
+            }
+          }
+        } else {
+          wrapper.classList.add("d-none");
+          if (card) card.classList.remove("fade-in", "card-faded");
+        }
+      });
+
+      // Agar total cards hi initial count se kam/equal hain to button hide karo
+      showMoreBtn.style.display =
+        cardWrappers.length <= initialCount ? "none" : "inline-block";
+      showMoreBtn.textContent = "Show More";
+      isExpanded = false;
+    }
+
+    // ══════════════════════════════════════════════════════
+    // Show More / Show Less toggle
+    // ══════════════════════════════════════════════════════
+    function toggleReviews() {
+      const initialCount = getInitialCount();
+
+      if (!isExpanded) {
+        // ── SHOW MORE: baaki saare cards dikhao ──
+        cardWrappers.forEach((wrapper, idx) => {
+          const card = wrapper.querySelector(".review-card");
+          wrapper.classList.remove("d-none");
+          if (card) card.classList.remove("card-faded");
+
+          if (idx >= initialCount && card) {
+            card.style.animationDelay = (idx - initialCount) * 0.08 + "s";
+            card.classList.add("fade-in");
+          }
+        });
+
+        showMoreBtn.textContent = "Show Less";
+        isExpanded = true;
+      } else {
+        // ── SHOW LESS: wapas initial count par le aao ──
+        cardWrappers.forEach((wrapper, idx) => {
+          const card = wrapper.querySelector(".review-card");
+          if (card) card.classList.remove("fade-in");
+
+          if (idx >= initialCount) {
+            wrapper.classList.add("d-none");
+          } else if (idx === initialCount - 1 && card) {
+            card.classList.add("card-faded");
+          }
+        });
+
+        document.getElementById("reviews-section").scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+
+        showMoreBtn.textContent = "Show More";
+        isExpanded = false;
+      }
+    }
+
+    // ══════════════════════════════════════════════════════
+    // INITIALIZE
+    // ══════════════════════════════════════════════════════
+    applyInitialState();
+    showMoreBtn.addEventListener("click", toggleReviews);
+
+    // Screen resize hone par (mobile↔desktop switch) — sirf collapsed state me re-check karo
+    let resizeTimer;
+    window.addEventListener("resize", () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        if (!isExpanded) applyInitialState();
+      }, 200);
+    });
+  });
+</script>

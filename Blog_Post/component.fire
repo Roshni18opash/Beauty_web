@@ -1,0 +1,21 @@
+<article class="blog-card" id="blog-card-2">
+				<div class="blog-img-wrapper">
+					<img
+					src="Images/blog02_34effc15-af83-4999-850d-077c3cb75f9f.webp"
+					alt="Everything You Need to Know - beauty portrait close-up"
+					class="blog-img"
+					loading="lazy">
+				</div>
+				<div class="blog-card-body">
+					<h3 class="blog-card-title">
+						<a href="#" class="blog-title-link" id="blog-title-link-2">
+							Everything You Need to Know
+						</a>
+					</h3>
+					<p class="blog-meta">
+						<span class="blog-date">Apr 25, 2025</span>
+						<span class="blog-sep" aria-hidden="true">&bull;</span>
+						<span class="blog-brand">FOXECOM</span>
+					</p>
+				</div>
+			</article>

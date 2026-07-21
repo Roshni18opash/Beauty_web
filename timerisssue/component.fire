@@ -1,0 +1,10 @@
+<div class="category-card">
+	<div class="category-img-wrapper">
+		<img src="{{= &collectionimg == '' ? 'https://placehold.co/1920x630' : 'https://cdn.flicksell.com/'.&collectionimg}}" alt="Sale Product" class="category-img">
+	</div>
+
+	{{if &pro_title == 'y'}}
+		<span class="category-label">{{= &pro_name}}</span>
+	{{endif}}
+
+</div>

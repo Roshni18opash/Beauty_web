@@ -1,0 +1,551 @@
+<style>
+	$_section{
+		/* Section Styling */
+		.seasons-sales-section {
+			width: 100%;
+			height: auto; /* Natural height determined by content */
+			padding: 60px 40px;
+			background-color:{{= &section_bg_color}};
+		}
+
+		{{if &p_l_r == 'custom'}}
+			.seasons-sales-section {
+				padding-left: {{= &custom_padding}}px !important;
+				padding-right: {{= &custom_padding}}px !important;
+			}
+		{{endif}}
+
+		{{if &desktop != 'y'}}
+			.seasons-sales-section{
+				display:none;
+			}
+		{{endif}}
+
+		/* Flex Container holding Banner & Grid */
+		.seasons-sales-container {
+			display: flex;
+			gap: 16px;
+			align-items: stretch;
+		}
+
+		/* Left Column: Countdown Banner Card */
+		.countdown-banner-card {
+			flex: 0 0 29%;
+			min-width: 420px;
+			min-height:700px;
+			border-radius:{{= &card_radius}}px;
+			position: relative;
+			overflow: hidden;
+			display: flex;
+			flex-direction: column;
+			justify-content: flex-start;
+			align-items: center;
+			padding: 55px 24px 40px 24px;
+			text-align: center;
+			cursor: pointer;
+		}
+
+		/* Zoomable Background Image using Pseudo-element */
+		.countdown-banner-card::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background-image:url('{{= &img == '' ? 'https://placehold.co/1920x630' : 'https://cdn.flicksell.com/'.&img}}');
+
+			{{if &bg == 'color'}}
+				background: linear-gradient(135deg, {{= &bg_1}} 10%, {{= &bg_2}} 100%);
+			{{endif}}
+			background-size: cover;
+			background-position: center;
+			transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+			z-index: 1;
+		}
+
+		/* Dark Overlay for contrast */
+		.countdown-banner-card::after {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background-color: rgba(11, 45, 36, 0.08); /* Soft overlay to keep banner clean */
+			z-index: 2;
+		}
+
+		/* Hover Zoom Effect on Background */
+		.countdown-banner-card:hover::before {
+			transform: scale(1.05);
+		}
+
+		/* Content inside Banner */
+		.countdown-content {
+			position: relative;
+			z-index: 3; /* Displays above overlays */
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			width: 100%;
+		}
+		{{if &sub_titlehs != 'y'}}
+			.countdown-subtitle {
+				visibility: hidden !important;
+			}
+		{{endif}}
+
+		.countdown-subtitle {
+			font-family: 'Fraunces', serif;
+			font-style: italic;
+			font-weight:{{= &sub_weight}};
+			font-size:{{= &sub_size}}px;
+			color:{{= &title_color}};
+			margin-bottom: 10px;
+			display: block;
+		}
+
+		{{if &card_title != 'y'}}
+			.countdown-title  {
+				visibility: hidden !important;
+			}
+		{{endif}}
+		.countdown-title {
+			font-family: 'Fraunces', serif;
+			font-weight:{{= &title_weight}};
+			font-size:{{= &title_size}}px;
+			color:{{= &title_color}};
+			line-height: 1.25;
+			margin-bottom: 20px;
+			letter-spacing: -0.3px;
+		}
+
+		/* Countdown Timer layout */
+		.countdown-timer {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			margin-bottom: 28px;
+			gap: 4px;
+		}
+
+		.timer-segment {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+
+		.timer-value {
+			font-family: 'Fraunces', serif;
+			font-weight:{{= &timer_weight}};
+			font-size:{{= &timer_size}}px;
+			color:{{= &timer_clr}};
+			min-width: 44px;
+			display: inline-block;
+			text-align: center;
+		}
+
+		.timer-separator {
+			font-family: 'Fraunces', serif;
+			font-weight:{{= &timer_weight}};
+			font-size:{{= &timer_size}}px;
+			color:{{= &timer_clr}};
+
+		}
+
+		/* Pill-shaped Action Button with Slide Animation */
+		.shop-sale-btn {
+			display: inline-block;
+			background-color:{{= &btn_bg}};
+			color:{{= &btn_color}};
+			font-family: 'Figtree', sans-serif;
+			font-size:{{= &btn_tsize}}px;
+			font-weight:{{= &btn_weight}};
+			text-transform: capitalize;
+			text-decoration: none;
+			padding: 10px 28px;
+			border-radius:{{= &btn_radius}}px;
+			border: 1.5px solid {{= &btn_border_color}};
+			position: relative;
+			overflow: hidden;
+			z-index: 1;
+			transition: color 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+			border-color 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+		}
+
+		.shop-sale-btn span {
+			position: relative;
+			z-index: 2;
+			transition: color 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+		}
+
+		.shop-sale-btn::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background-color: {{= &btn_color}};
+			z-index: 1;
+			transform: translateX(-102%);
+			transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+		}
+
+		/* Trigger animation on Card Hover or Button Hover */
+		.countdown-banner-card:hover .shop-sale-btn::before,
+		.shop-sale-btn:hover::before {
+			transform: translateX(0);
+		}
+
+		.countdown-banner-card:hover .shop-sale-btn span,
+		.shop-sale-btn:hover span {
+			color: {{= &btn_bg}} !important;
+		}
+
+		.countdown-banner-card:hover .shop-sale-btn,
+		.shop-sale-btn:hover {
+			border-color: {{= &btn_color}} !important;
+		}
+
+
+		/* Right Column: Categories Grid */
+		.categories-grid {
+			flex: 1;
+			display: grid;
+			grid-template-columns: repeat(4, 1fr);
+			gap: 16px;
+		}
+
+		/* Individual Category Card */
+		.category-card {
+			background-color:{{= &procard_bg}} !important;
+			border-radius: {{= &procard_radius}}px;
+			padding: 16px 12px 12px 12px;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: space-between;
+			text-align: center;
+			cursor: pointer;
+			transition: background-color 0.3s ease, transform 0.3s ease;
+		}
+
+		/* Image wrapper styling */
+		/* .category-img-wrapper { */
+		/* 	width: 100%; */
+		/* 	height: 160px; */
+		/* 	display: flex; */
+		/* 	align-items: center; */
+		/* 	justify-content: center; */
+		/* 	margin-bottom: 8px; */
+		/* } */
+
+		.category-img-wrapper img {
+			max-width: 100%;
+			max-height: 100%;
+			width: auto;
+			height: auto;
+			object-fit: cover;
+			transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+		}
+
+		.category-img-wrapper {
+			width: 100%;
+			/* height: 160px; */
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			margin-bottom: 8px;
+			/* background-color:#EA4242;   */
+
+		}
+
+		.category-card:hover .category-img-wrapper img {
+			transform: scale(0.92);
+		}
+
+		/* Category Label */
+		.category-label {
+			font-family: 'Figtree', sans-serif;
+			font-weight:{{= &title_weight}};
+			font-size:{{= &title_size}}px;
+			color:{{= &title_color}};
+			letter-spacing: 0.2px;
+		}
+
+		{{if &pro_title != 'y'}}
+			.category-label  {
+				visibility: hidden !important;
+			}
+		{{endif}}
+
+
+		/* Responsive Layout Styles */
+
+		/* Laptops & Small Desktops (max-width: 1120px) */
+		@media (max-width: 1120px) {
+			.seasons-sales-container {
+				flex-direction: column;
+				align-items: stretch;
+			}
+
+			.countdown-banner-card {
+				width: 100%;
+				flex: none;
+				padding: 50px 24px;
+				min-height: 280px;
+			}
+		}
+
+		/* Tablets & Smaller Layouts (max-width: 768px) */
+		@media (max-width: 768px) {
+			.seasons-sales-section {
+				padding: 40px 20px;
+			}
+
+			.categories-grid {
+				grid-template-columns: repeat(2, 1fr);
+				gap: 12px;
+			}
+		}
+
+		/* Mobile Devices (max-width: 480px) */
+		@media (max-width: 767px) {
+
+			.seasons-sales-section{
+				padding: 20px 12px;
+			}
+
+			.countdown-subtitle {
+				font-size:{{= &m_sub_title_size}}px;
+			}
+
+
+			.countdown-title {
+				font-size:{{= &m_title_size}}px;
+			}
+
+			{{if &mpro_title != 'y'}}
+				.category-label  {
+					visibility: hidden !important;
+				}
+			{{endif}}
+			
+			.category-label{
+				font-size:{{= &protitle_size}}px;
+				line-height: 1.2;
+			}
+
+			{{if &p_l_r == 'm_custom'}}
+				.seasons-sales-section {
+					padding-left: {{= &m_custom_padding}}px !important;
+					padding-right: {{= &m_custom_padding}}px !important;
+				}
+			{{endif}}
+
+
+			{{if &mobile != 'y'}}
+				.seasons-sales-section{
+					display:none;
+				}
+			{{endif}}
+
+			.timer-separator {
+				font-size:{{= &m_timer_size}}px;
+
+			}
+
+			.timer-value {
+				font-size:{{= &m_timer_size}}px;
+			}
+			.shop-sale-btn {
+				font-size:{{= &mbtn_tsize}}px;
+			}
+			.seasons-sales-container{
+				flex-direction: column;
+				gap: 12px;
+			}
+
+			.countdown-banner-card{
+				border-radius:{{= &m_card_radius}}px;
+				width: 100%;
+				min-width: 100%;
+				min-height: 550px;
+				padding: 40px 20px;
+			}
+
+			.categories-grid{
+				grid-template-columns: repeat(3, 1fr);
+				gap: 8px;
+			}
+
+			.category-card{
+				aspect-ratio: 1/1;
+				padding: 10px;
+				border-radius: 50px;
+			}
+
+			.category-img-wrapper{
+				height: 70px;
+				margin-bottom: 6px;
+			}
+
+			.category-img-wrapper img{
+				max-width: 70%;
+				max-height: 70%;
+				object-fit: contain;
+			}
+
+			
+			/* Remove hover effects on mobile */
+
+
+			.countdown-banner-card::before{
+				background-size: cover;
+				background-position: center top;
+				background-repeat: no-repeat;
+			}
+
+			.countdown-banner-card:hover::before{
+				transform: none;
+			}
+
+
+
+			.category-card:hover .category-img-wrapper img {
+				transform: none;
+			}
+
+			.countdown-banner-card:hover .shop-sale-btn::before,
+			.shop-sale-btn:hover::before {
+				transform: translateX(-102%);
+			}
+
+			.countdown-banner-card:hover .shop-sale-btn span,
+			.shop-sale-btn:hover span {
+				color: inherit !important;
+			}
+
+			.countdown-banner-card:hover .shop-sale-btn,
+			.shop-sale-btn:hover {
+				border-color: inherit !important;
+			}
+
+		}
+
+	}
+
+	$_section{
+		{{= &custom_css}}
+	}
+
+</style>
+
+
+<section class="seasons-sales-section pt-md-{{= &p_md_top}} pb-md-{{= &p_md_bottom}} {{if p_l_r_md != 'custom'}}px-md-{{= &p_l_r_md}}{{endif}} pt-{{= &p_top}} pb-{{= &p_bottom}} {{if p_l_r != 'm_custom'}}px-{{= &p_l_r}}{{endif}}">
+
+	<div class="seasons-sales-container {{= &section_spacing}}">
+
+		<!-- Left Column: Countdown Banner -->
+		<div class="countdown-banner-card">
+
+			<div class="countdown-content">
+				<span class="countdown-subtitle">{{= &sub_title}}</span>
+				<h2 class="countdown-title">{{= &mtitle}}</h2>
+
+				<!-- Timer displays days, hours, minutes, seconds separated by colons -->
+				<div class="countdown-timer" id="countdown-timer">
+					<div class="timer-segment">
+						<span class="timer-value" id="days">00</span>
+					</div>
+					<span class="timer-separator">:</span>
+					<div class="timer-segment">
+						<span class="timer-value" id="hours">00</span>
+					</div>
+					<span class="timer-separator">:</span>
+					<div class="timer-segment">
+						<span class="timer-value" id="minutes">00</span>
+					</div>
+					<span class="timer-separator">:</span>
+					<div class="timer-segment">
+						<span class="timer-value" id="seconds">00</span>
+					</div>
+				</div>
+
+				<a href="#" class="shop-sale-btn"><span>{{= &btn_text}}</span></a>
+			</div>
+		</div>
+
+		<!-- Right Column: Categories Grid (4x3 layout) -->
+		<div class="categories-grid">
+
+			{{with each &collection as $slideimage}}
+				{{use component $slideimage}}
+			{{endwith}}
+
+		</div>
+
+	</div>
+</section>
+
+
+<script>
+	// Sale ki end date/time - &time variable se aati hai (backend se)
+	var selectedDate = {{= system.date.to_time(&time) }};
+
+	// Total seconds ko days, hours, minutes, seconds me convert karo
+	function convertSecondsToDHMS(totalSeconds) {
+		const days = Math.floor(totalSeconds / (24 * 3600));
+		totalSeconds %= (24 * 3600);
+
+		const hours = Math.floor(totalSeconds / 3600);
+		totalSeconds %= 3600;
+
+		const minutes = Math.floor(totalSeconds / 60);
+		const seconds = totalSeconds % 60;
+
+		return {
+			days: days,
+			hours: hours,
+			minutes: minutes,
+			seconds: seconds
+		};
+	}
+
+	// Bacha hua time calculate karo
+	function timerStart() {
+		const currentTime = Math.floor(Date.now() / 1000);
+		const diff = selectedDate - currentTime;
+
+		// Agar time khatam ho gaya toh null return karo
+		if (diff < 0) {
+			return null;
+		}
+		return convertSecondsToDHMS(diff);
+	}
+
+	// Timer display update karo
+	function setCountdown(days, hours, minutes, seconds) {
+		document.getElementById('days').textContent = String(days).padStart(2, '0');
+		document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+		document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+		document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+	}
+
+	// Har 1 second mein timer update hoga
+	let countdownInterval = setInterval(() => {
+		const time = timerStart();
+
+		// Agar sale khatam ho gayi toh 00:00:00:00 dikhao aur timer rokdo
+		if (time === null) {
+			clearInterval(countdownInterval);
+			setCountdown(0, 0, 0, 0);
+			return;
+		}
+
+		setCountdown(time.days, time.hours, time.minutes, time.seconds);
+	}, 1000);
+
+</script>

@@ -1,0 +1,1089 @@
+<style>
+	$_section{
+
+
+		/* ─── SECTION WRAPPER ─── */
+		.daily-essentials-section {
+			background-color: #ffffff;
+			padding-top: 60px;
+			padding-bottom: 60px;
+			overflow-x: hidden;
+		}
+
+		/* ─── SECTION HEADER ─── */
+		.section-header {
+			margin-bottom: 30px;
+		}
+
+		.section-title {
+			font-family: 'Fraunces', serif;
+			font-size: 38px;
+			font-weight: 700;
+			color: #0f2e3c;
+			margin-bottom: 10px;
+		}
+
+		.section-desc {
+			font-family: 'Figtree', sans-serif;
+			font-size: 16px;
+			color: #596b73;
+			margin: 0;
+		}
+
+		/* Shop All Products Link */
+		.shop-all-link {
+			font-family: 'Figtree', sans-serif;
+			font-size: 15px;
+			font-weight: 700;
+			color: #0f2e3c;
+			text-decoration: none;
+			display: inline-flex;
+			align-items: center;
+			position: relative;
+			padding-bottom: 4px;
+			transition: color 0.3s ease;
+		}
+
+		.shop-all-link::after {
+			content: '';
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			width: 100%;
+			height: 2px;
+			background-color: #0f2e3c;
+			transform: scaleX(0);
+			transform-origin: right center;
+			transition: transform 0.35s ease;
+		}
+
+		.shop-all-link:hover {
+			color: #000000;
+		}
+
+		.shop-all-link:hover::after {
+			transform-origin: left center;
+			transform: scaleX(1);
+		}
+
+		/* ─── SLIDER CONTAINER & PRODUCTS TRACK ─── */
+		.slider-container {
+			position: relative;
+			width: 100%;
+		}
+
+		.products-track {
+			display: flex;
+			gap: 16px;
+			overflow-x: auto;
+			scroll-behavior: smooth;
+			scrollbar-width: none; /* Hide default scrollbar for Firefox */
+			padding-bottom: 15px;
+			margin-bottom: 10px;
+		}
+
+		/* Hide default scrollbar for Chrome, Safari and Opera */
+		.products-track::-webkit-scrollbar {
+			display: none;
+		}
+
+		/* ─── CARDS RESPONSIVE WIDTHS (Desktop & Tablet) ─── */
+		/* Default for Desktop View (screens larger than 991px) */
+		@media (min-width: 992px) {
+			.product-card,
+			.banner-card {
+				flex: 0 0 calc((100% - (16px * 5)) / 5.5);
+				width: calc((100% - (16px * 5)) / 5.5);
+			}
+		}
+
+		/* Tablet View (screens between 576px and 991px) */
+		@media (min-width: 576px) and (max-width: 991px) {
+			.product-card,
+			.banner-card {
+				flex: 0 0 calc((100% - (16px * 2)) / 2.6);
+				width: calc((100% - (16px * 2)) / 2.6);
+			}
+		}
+
+		/* Mobile View (screens smaller than 576px) */
+		@media (max-width: 575px) {
+			.product-card,
+			.banner-card {
+				flex: 0 0 calc((100% - (16px * 1)) / 1.4);
+				width: calc((100% - (16px * 1)) / 1.4);
+			}
+		}
+
+		/* ─── 1. BANNER CARD (First card in the track) ─── */
+		.banner-card {
+			border-radius: 12px;
+			overflow: hidden;
+			position: relative;
+			display: flex;
+			flex-direction: column;
+			justify-content: flex-end; /* Push text content to the bottom */
+			background-color: #3d6b5e; /* Fallback green background */
+			box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+			height: 380px; /* Fixed height instead of aspect-ratio */
+		}
+
+		/* Background image filling banner */
+		.banner-bg-img {
+			position: absolute;
+			inset: 0;
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			object-position: center top;
+			z-index: 0;
+		}
+
+		/* Dark gradient overlay for text readability */
+		.banner-card::after {
+			content: '';
+			position: absolute;
+			inset: 0;
+			background: linear-gradient(to bottom, rgba(0, 0, 0, 0.02) 0%, rgba(0, 0, 0, 0.55) 100%);
+			z-index: 1;
+		}
+
+		/* Content block */
+		.banner-content {
+			position: relative;
+			z-index: 2;
+			padding: 24px 20px;
+			color: #ffffff;
+		}
+
+		.banner-eyebrow {
+			font-family: 'Figtree', sans-serif;
+			font-size: 14px;
+			font-style: italic;
+			font-weight: 400;
+			margin-bottom: 6px;
+			opacity: 0.9;
+		}
+
+		.banner-headline {
+			font-family: 'Fraunces', serif;
+			font-size: 26px;
+			font-weight: 700;
+			line-height: 1.25;
+			margin-bottom: 20px;
+		}
+
+		.banner-cta {
+			font-family: 'Figtree', sans-serif;
+			font-size: 13px;
+			font-weight: 700;
+			color: #ffffff;
+			text-decoration: none;
+			display: inline-flex;
+			align-items: center;
+			position: relative;
+			padding-bottom: 3px;
+		}
+
+		.banner-cta::after {
+			content: '';
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			width: 100%;
+			height: 1.5px;
+			background-color: #ffffff;
+			transform: scaleX(0);
+			transform-origin: right center;
+			transition: transform 0.35s ease;
+		}
+
+		.banner-cta:hover::after {
+			transform-origin: left center;
+			transform: scaleX(1);
+		}
+
+		/* ─── 2. PRODUCT CARD ─── */
+		.product-card {
+			background-color: #ffffff;
+			border: 1px solid #f0f0f0;
+			border-radius: 12px;
+			overflow: hidden;
+			display: flex;
+			flex-direction: column;
+			box-shadow: 0 12px 40px rgba(15, 46, 60, 0.04);
+			transition: transform 0.3s ease, box-shadow 0.3s ease;
+			height: 380px; /* Matching banner card height */
+		}
+
+		.product-card:hover {
+			transform: translateY(-4px);
+			box-shadow: 0 16px 45px rgba(15, 46, 60, 0.08);
+		}
+
+		/* Image Container */
+		.card-image-box {
+			position: relative;
+			height: 250px; /* Explicit height for layout consistency */
+			background-color: #f7f7f7;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			padding: 20px;
+			overflow: hidden;
+		}
+
+		/* Image wrapper to manage transitions */
+		/* Image wrapper */
+		.image-wrapper {
+			position: relative;
+			width: 100%;
+			height: 100%;
+			overflow: hidden;
+		}
+
+		/* Main image & Hover image */
+		.img-main,
+		.img-hover {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+
+			max-width: 90%;
+			max-height: 190px;
+			width: auto;
+			height: auto;
+
+			object-fit: contain;
+
+			transform: translate(-50%, -50%);
+			transition: opacity 0.4s ease;
+		}
+
+		/* Hover image hidden initially */
+		.img-hover {
+			opacity: 0;
+			z-index: 1;
+		}
+
+		/* Main image visible initially */
+		.img-main {
+			opacity: 1;
+			z-index: 2;
+		}
+
+		/* Hover effect */
+		.product-card:hover .img-main {
+			opacity: 0;
+		}
+
+		.product-card:hover .img-hover {
+			opacity: 1;
+		}
+
+		/* Status Badges (New, Sale) */
+		.badge-status {
+			position: absolute;
+			top: 12px;
+			left: 12px;
+			color: #ffffff;
+			font-family: 'Figtree', sans-serif;
+			font-size: 11px;
+			font-weight: 700;
+			padding: 5px 12px;
+			border-radius: 50px;
+			z-index: 2;
+			text-transform: uppercase;
+		}
+
+		.badge-new {
+			background-color: #82b1a5; /* Pastel Green */
+		}
+
+		.badge-sale {
+			background-color: #d92f24; /* Red */
+		}
+
+		/* ─── HOVER BUTTONS ON CARD IMAGE ─── */
+
+		/* Quick View search button */
+		.btn-quick-view {
+			position: absolute;
+			top: 12px;
+			right: 12px;
+			width: 36px;
+			height: 36px;
+			border: none;
+			border-radius: 50%;
+			background-color: #ffffff;
+			color: #0f2e3c;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			cursor: pointer;
+			opacity: 0;
+			transform: translate(8px, -8px);
+			transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+			z-index: 3;
+			box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+		}
+
+		.btn-quick-view:hover {
+			background-color: #0f2e3c;
+			color: #ffffff;
+		}
+
+		/* Add to Cart button (slides up from bottom) */
+		.btn-add-cart {
+			position: absolute;
+			left: 12px;
+			right: 12px;
+			bottom: 12px;
+			padding: 10px;
+			border: none;
+			border-radius: 6px;
+			background-color: #0f2e3c;
+			color: #ffffff;
+			font-family: 'Figtree', sans-serif;
+			font-size: 12px;
+			font-weight: 700;
+			cursor: pointer;
+			overflow: hidden;
+			opacity: 0;
+			transform: translateY(16px);
+			transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
+			z-index: 3;
+		}
+
+		.btn-add-cart::before {
+			content: '';
+			position: absolute;
+			inset: 0;
+			background-color: #ffffff;
+			transform: scaleX(0);
+			transform-origin: left;
+			transition: transform 0.3s ease;
+			z-index: 0;
+		}
+
+		.btn-add-cart span {
+			position: relative;
+			z-index: 1;
+			transition: color 0.3s ease;
+		}
+
+		.btn-add-cart:hover::before {
+			transform: scaleX(1);
+		}
+
+		.btn-add-cart:hover span {
+			color: #0f2e3c;
+		}
+
+		/* Show buttons on Card Image Hover (Desktop Only) */
+		@media (min-width: 769px) {
+			.card-image-box:hover .btn-quick-view {
+				opacity: 1;
+				transform: translate(0, 0);
+			}
+
+			.card-image-box:hover .btn-add-cart {
+				opacity: 1;
+				transform: translateY(0);
+			}
+
+			/* Shift Cart Button up slightly if marquee is active */
+			.card-image-box:has(.selling-fast-badge):hover .btn-add-cart {
+				bottom: 36px;
+			}
+		}
+
+		/* ─── MARQUEE "SELLING FAST" BADGE ─── */
+		.selling-fast-badge {
+			position: absolute;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background-color: #ffffff;
+			padding: 6px 0;
+			z-index: 1;
+			overflow: hidden;
+			border-top: 1px solid #f0f0f0;
+		}
+
+		.marquee-track {
+			display: flex;
+			width: max-content;
+			animation: run-marquee 15s linear infinite;
+		}
+
+		.marquee-track span {
+			display: inline-flex;
+			align-items: center;
+			gap: 8px;
+			padding-right: 8px;
+			font-family: 'Figtree', sans-serif;
+			font-size: 10px;
+			font-weight: 700;
+			color: #0f2e3c;
+			text-transform: uppercase;
+			white-space: nowrap;
+		}
+
+		@keyframes run-marquee {
+			0% {
+				transform: translateX(0%);
+			}
+			100% {
+				transform: translateX(-50%);
+			}
+		}
+
+		/* ─── CARD TEXT INFO ─── */
+		.card-info {
+			padding: 16px;
+			display: flex;
+			flex-direction: column;
+			flex-grow: 1;
+		}
+
+		.product-category {
+			font-family: 'Figtree', sans-serif;
+			font-size: 10px;
+			font-weight: 700;
+			text-transform: uppercase;
+			color: #8c9fa6;
+			letter-spacing: 0.08em;
+			margin-bottom: 6px;
+			/* Underline animation setup */
+			display: inline-block;
+			position: relative;
+			padding-bottom: 2px;
+			width: fit-content;
+			cursor: pointer;
+		}
+
+		/* Animated underline for category — grows from right to left on hover */
+		.product-category::after {
+			content: '';
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			width: 100%;
+			height: 0.5px;
+			background: currentColor;
+			transform: scaleX(0);
+			transform-origin: right center;
+			transition: transform 0.35s ease;
+		}
+
+		.product-category:hover::after {
+			transform-origin: left center;
+			transform: scaleX(1);
+		}
+
+		.product-name {
+			font-family: 'Inter', sans-serif;
+			font-size: 15px;
+			font-weight: 600;
+			color: #0f2e3c;
+			margin: 0 0 8px 0;
+			line-height: 1.35;
+			/* Underline animation setup */
+			display: inline-block;
+			position: relative;
+			padding-bottom: 2px;
+			width: fit-content;
+			max-width: 100%;
+			cursor: pointer;
+		}
+
+		/* Animated underline for product name — grows from right to left on hover */
+		.product-name::after {
+			content: '';
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			width: 100%;
+			height: 0.5px;
+			background: currentColor;
+			transform: scaleX(0);
+			transform-origin: right center;
+			transition: transform 0.35s ease;
+		}
+
+		.product-name:hover::after {
+			transform-origin: left center;
+			transform: scaleX(1);
+		}
+
+		.product-price-row {
+			margin-top: auto; /* Push price to bottom */
+			display: flex;
+			align-items: center;
+			gap: 8px;
+		}
+
+		.current-price {
+			font-family: 'Inter', sans-serif;
+			font-size: 15px;
+			font-weight: 700;
+			color: #0f2e3c;
+		}
+
+		.current-price-sale {
+			font-family: 'Inter', sans-serif;
+			font-size: 15px;
+			font-weight: 700;
+			color: #d92f24; /* Sale red color */
+		}
+
+		.original-price {
+			font-family: 'Inter', sans-serif;
+			font-size: 13px;
+			font-weight: 400;
+			text-decoration: line-through;
+			color: #8c9fa6;
+		}
+
+		/* ─── SLIDER FOOTER: PROGRESS & NAVIGATION ─── */
+		.slider-footer {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			margin-top: 25px;
+		}
+
+		/* Progress bar wrapper */
+		.scroll-bar-wrap {
+			flex: 1;
+			position: relative;
+			height: 4px;
+			margin-right: 24px;
+		}
+
+		.scroll-track {
+			width: 100%;
+			height: 2px;
+			background-color: #e5e5e5;
+			border-radius: 2px;
+		}
+
+		.scroll-thumb {
+			position: absolute;
+			left: 0;          /* Always anchored to left — never moves */
+			top: 50%;
+			transform: translateY(-50%);
+			height: 3px;
+			width: 15%;       /* Grows wider as you scroll — controlled by JS */
+			background-color: #0f2e3c;
+			border-radius: 3px;
+			transition: width 0.2s ease-out; /* Only width animates, not left */
+		}
+
+		/* Navigation Round Buttons */
+		.nav-btn {
+			width: 44px;
+			height: 44px;
+			border: 1px solid #e2e8f0;
+			border-radius: 50%;
+			background-color: #ffffff;
+			color: #0f2e3c;
+			cursor: pointer;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, opacity 0.3s ease;
+			box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+		}
+
+		.nav-btn:hover:not(:disabled) {
+			background-color: #0f2e3c;
+			border-color: #0f2e3c;
+			color: #ffffff;
+		}
+
+		.nav-btn:disabled {
+			opacity: 0.35;
+			cursor: not-allowed;
+		}
+
+		/* ─── MOBILE VIEW STYLING UPDATES ─── */
+		@media (max-width: 768px) {
+			.daily-essentials-section {
+				padding-top: 40px;
+				padding-bottom: 40px;
+			}
+
+			.section-title {
+				font-size: 28px;
+			}
+
+			.section-desc {
+				font-size: 14px;
+			}
+
+			/* Disable hover cards lifting on mobile */
+			.product-card:hover {
+				transform: none;
+				box-shadow: 0 10px 30px rgba(15, 46, 60, 0.04);
+			}
+
+			/* Always hide hover buttons on touch screens to prevent interference */
+			.btn-quick-view,
+			.btn-add-cart {
+				display: none !important;
+			}
+
+			/* Adjust cards height slightly for mobile */
+			.product-card,
+			.banner-card {
+				height: 360px;
+			}
+
+			.card-image-box {
+				height: 230px;
+			}
+
+			.img-main,
+			.img-hover {
+				max-height: 170px;
+			}
+		}
+
+
+	}
+
+	$_section { {{= &custom_css}} }
+</style>
+<!-- Section Wrapper -->
+<section class="daily-essentials-section pt-md-{{= &p_md_top}} pb-md-{{= &p_md_bottom}} {{if p_l_r_md != 'custom'}}px-md-{{= &p_l_r_md}}{{endif}} pt-{{= &p_top}} pb-{{= &p_bottom}} {{if p_l_r != 'm_custom'}}px-{{= &p_l_r}}{{endif}}">
+	<div class="{{= &section_spacing}}">
+
+		<!-- Section Header: Title & Subtitle on left, Shop Link on right -->
+		<header class="section-header d-flex flex-column flex-md-row justify-content-between align-items-md-end mb-4">
+			<div class="header-left">
+				<h2 class="section-title">{{= &title}}</h2>
+				<p class="section-desc">{{= &desc}}</p>
+			</div>
+			<div class="header-right mt-3 mt-md-0">
+				<a href="#" class="shop-all-link">
+					Shop All Products
+					<svg class="ms-1" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+						<polyline points="9 18 15 12 9 6"></polyline>
+					</svg>
+				</a>
+			</div>
+		</header>
+
+		<!-- Carousel Slider Wrapper -->
+		<div class="slider-container">
+			<!-- Products Track (Horizontal Scroll Container) -->
+			<div class="products-track" id="productsTrack">
+
+				<!-- 1st Card: Banner Card (Promo Banner) -->
+				<div class="banner-card">
+					<!-- Cover Image -->
+					<img class="banner-bg-img" src="{{= &img == '' ? 'https://placehold.co/1920x630' : 'https://cdn.flicksell.com/'.&img}}" alt="Banner Image">
+
+
+
+					<!-- Content Overlay -->
+					<div class="banner-content">
+						<p class="banner-eyebrow">Big Saving</p>
+						<h3 class="banner-headline">On Holiday Sets</h3>
+						<a href="#" class="banner-cta">
+							Explore Now
+							<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+								<polyline points="9 18 15 12 9 6"></polyline>
+							</svg>
+						</a>
+					</div>
+				</div>
+
+				<!-- 2nd Card: Product Card (Hydrate Smoothing Serum) -->
+				{{with each &collection as $img }}
+
+					{{use component $img }}
+				{{endwith}}
+
+
+			</div>
+		</div>
+
+		<!-- Slider Footer: Progress Bar and Navigation Buttons -->
+		<footer class="slider-footer d-flex align-items-center justify-content-between mt-4">
+			<!-- Scroll Progress Bar -->
+			<div class="scroll-bar-wrap">
+				<div class="scroll-track"></div>
+				<div class="scroll-thumb" id="scrollThumb"></div>
+			</div>
+
+			<!-- Circular Navigation Buttons -->
+			<div class="slider-navigation d-flex gap-2">
+				<button class="nav-btn" id="prevBtn" type="button" aria-label="Previous Slide" disabled>
+					<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+						<polyline points="15 18 9 12 15 6"></polyline>
+					</svg>
+				</button>
+				<button class="nav-btn" id="nextBtn" type="button" aria-label="Next Slide">
+					<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+						<polyline points="9 18 15 12 9 6"></polyline>
+					</svg>
+				</button>
+			</div>
+		</footer>
+
+	</div>
+</section>
+
+<script>
+
+	// ─────────────────────────────────────────────────────────────
+	// STEP 1: Find the elements we need on the page
+	// ─────────────────────────────────────────────────────────────
+	var track   = document.getElementById('productsTrack'); // the scrollable row of cards
+	var thumb   = document.getElementById('scrollThumb');   // the growing progress bar line
+	var prevBtn = document.getElementById('prevBtn');       // the ← left arrow button
+	var nextBtn = document.getElementById('nextBtn');       // the → right arrow button
+
+
+	// ─────────────────────────────────────────────────────────────
+	// STEP 2: Settings — change these to tune the behaviour
+	// ─────────────────────────────────────────────────────────────
+	var CARD_GAP      = 16;   // space between cards in pixels (must match CSS gap)
+	var BAR_MIN_WIDTH = 15;   // progress bar starts at 15% wide (at the beginning)
+	var BAR_MAX_WIDTH = 100;  // progress bar grows to 100% wide (when fully scrolled)
+	var SCROLL_SPEED  = 8;    // smoothness of scroll animation (higher = faster)
+
+
+	// ─────────────────────────────────────────────────────────────
+	// STEP 3: Smooth scroll animation
+	// We do NOT use scrollBy({behavior:'smooth'}) because it can
+	// silently fail on some platforms (like Flicksell).
+	// Instead, we animate scrollLeft directly — works everywhere.
+	// ─────────────────────────────────────────────────────────────
+	function smoothScrollTo(targetLeft) {
+
+		// If a previous animation is still running, cancel it first
+		if (track._anim) {
+			cancelAnimationFrame(track._anim);
+		}
+
+		function step() {
+			var current   = track.scrollLeft;     // where we are now
+			var remaining = targetLeft - current; // how far left to go
+
+			// Close enough? Snap exactly and stop.
+			if (Math.abs(remaining) < 1) {
+				track.scrollLeft = targetLeft;
+				updateBar();
+				return;
+			}
+
+			// Move a fraction of the remaining distance (creates easing)
+			track.scrollLeft = current + remaining / SCROLL_SPEED;
+
+			// Update the progress bar on every frame
+			updateBar();
+
+			// Ask the browser to call step() again on the next paint
+			track._anim = requestAnimationFrame(step);
+		}
+
+		track._anim = requestAnimationFrame(step);
+	}
+
+
+	// ─────────────────────────────────────────────────────────────
+	// STEP 4: How many pixels to scroll on each button click
+	// We read the real rendered width of the first card + gap
+	// ─────────────────────────────────────────────────────────────
+	function getScrollAmount() {
+		// Works for both hyphen (.product-card) and underscore (.product_card) class names
+		var card = track.querySelector('.product-card, .product_card, .banner-card');
+		return card ? (card.offsetWidth + CARD_GAP) : (236 + CARD_GAP);
+	}
+
+
+	// ─────────────────────────────────────────────────────────────
+	// STEP 5: Update the progress bar width and button states
+	// Called on every scroll event and after each button click
+	// ─────────────────────────────────────────────────────────────
+	function updateBar() {
+
+		// Total pixels the user CAN scroll
+		var maxScroll = track.scrollWidth - track.clientWidth;
+
+		// Pixels the user HAS scrolled so far
+		var pos = track.scrollLeft;
+
+		// Scroll progress from 0.0 (start) to 1.0 (end)
+		var ratio = (maxScroll > 0) ? (pos / maxScroll) : 0;
+
+		// Map ratio to a bar width between MIN and MAX
+		// e.g. ratio=0.5 → 15 + 0.5 × 85 = 57.5%
+		thumb.style.width = (BAR_MIN_WIDTH + ratio * (BAR_MAX_WIDTH - BAR_MIN_WIDTH)) + '%';
+
+		// Disable ← when at the very beginning
+		prevBtn.disabled = (pos <= 2);
+
+		// Disable → when at the very end
+		nextBtn.disabled = (pos >= maxScroll - 2);
+	}
+
+
+	// ─────────────────────────────────────────────────────────────
+	// STEP 6: Wire up the ← and → button clicks
+	// ─────────────────────────────────────────────────────────────
+
+	// ← Previous button
+	prevBtn.addEventListener('click', function () {
+		var target = track.scrollLeft - getScrollAmount();
+		if (target < 0) { target = 0; }       // never go past the start
+		smoothScrollTo(target);
+	});
+
+	// → Next button
+	nextBtn.addEventListener('click', function () {
+		var maxScroll = track.scrollWidth - track.clientWidth;
+		var target    = track.scrollLeft + getScrollAmount();
+		if (target > maxScroll) { target = maxScroll; }  // never go past the end
+		smoothScrollTo(target);
+	});
+
+
+	// ─────────────────────────────────────────────────────────────
+	// STEP 7: Keep bar in sync when the user manually swipes/scrolls
+	// ─────────────────────────────────────────────────────────────
+	track.addEventListener('scroll', updateBar);
+	window.addEventListener('resize', updateBar);
+
+
+	// ─────────────────────────────────────────────────────────────
+	// STEP 8: Run the first update after 200ms delay.
+	// This gives the browser time to finish rendering all the cards
+	// so that scrollWidth is correctly calculated.
+	// Without this delay the Next button wrongly gets disabled on load.
+	// ─────────────────────────────────────────────────────────────
+	setTimeout(updateBar, 200);
+
+</script>
+
+
+	// ─────────────────────────────────────────────────────────────
+	// STEP 3: Smooth scroll animation
+	// scrollBy with behavior:'smooth' can fail on some platforms.
+	// This manual version directly moves scrollLeft step-by-step
+	// using requestAnimationFrame — works everywhere.
+	// ─────────────────────────────────────────────────────────────
+	function smoothScrollTo(targetLeft) {
+
+		// Cancel any animation already running
+		if (track._scrollAnim) {
+			cancelAnimationFrame(track._scrollAnim);
+		}
+
+		function animate() {
+			// Current scroll position
+			var current = track.scrollLeft;
+
+			// Distance left to travel
+			var remaining = targetLeft - current;
+
+			// If close enough, just snap to target and stop
+			if (Math.abs(remaining) < 1) {
+				track.scrollLeft = targetLeft;
+				updateProgressBar();
+				return;
+			}
+
+			// Move a fraction of remaining distance each frame (easing effect)
+			track.scrollLeft = current + remaining / SCROLL_SPEED;
+
+			// Update progress bar while animating
+			updateProgressBar();
+
+			// Schedule next frame
+			track._scrollAnim = requestAnimationFrame(animate);
+		}
+
+		track._scrollAnim = requestAnimationFrame(animate);
+	}
+
+
+	// ─────────────────────────────────────────────────────────────
+	// STEP 4: Helper — how many pixels to scroll per button click
+	// Measures the first card's actual width on screen + gap
+	// ─────────────────────────────────────────────────────────────
+	function getScrollAmount() {
+		// Try to find any card in the track
+		var firstCard = track.querySelector('.product-card, .product_card, .banner-card');
+
+		if (firstCard) {
+			return firstCard.offsetWidth + CARD_GAP;
+		}
+
+		// Fallback if no card found yet
+		return 236 + CARD_GAP;
+	}
+
+
+	// ─────────────────────────────────────────────────────────────
+	// STEP 5: Update progress bar width + enable/disable buttons
+	// This runs every time the carousel position changes
+	// ─────────────────────────────────────────────────────────────
+	function updateProgressBar() {
+
+		// Total scrollable distance
+		var maxScroll = track.scrollWidth - track.clientWidth;
+
+		// Current scroll position
+		var currentPos = track.scrollLeft;
+
+		// How far scrolled as a fraction: 0.0 = start, 1.0 = end
+		var ratio = (maxScroll > 0) ? (currentPos / maxScroll) : 0;
+
+		// Convert ratio to bar width between MIN and MAX
+		var newWidth = BAR_MIN_WIDTH + ratio * (BAR_MAX_WIDTH - BAR_MIN_WIDTH);
+		thumb.style.width = newWidth + '%';
+
+		// Disable ← button at the very start
+		prevBtn.disabled = (currentPos <= 2);
+
+		// Disable → button at the very end
+		nextBtn.disabled = (currentPos >= maxScroll - 2);
+	}
+
+
+	// ─────────────────────────────────────────────────────────────
+	// STEP 6: Button click handlers
+	// ─────────────────────────────────────────────────────────────
+
+	// ← Previous: scroll left by one card width
+	prevBtn.addEventListener('click', function () {
+		var amount     = getScrollAmount();
+		var targetLeft = track.scrollLeft - amount;
+
+		// Don't scroll past the beginning
+		if (targetLeft < 0) { targetLeft = 0; }
+
+		smoothScrollTo(targetLeft);
+	});
+
+	// → Next: scroll right by one card width
+	nextBtn.addEventListener('click', function () {
+		var amount     = getScrollAmount();
+		var targetLeft = track.scrollLeft + amount;
+
+		// Don't scroll past the end
+		var maxScroll = track.scrollWidth - track.clientWidth;
+		if (targetLeft > maxScroll) { targetLeft = maxScroll; }
+
+		smoothScrollTo(targetLeft);
+	});
+
+
+	// ─────────────────────────────────────────────────────────────
+	// STEP 7: Update bar when user manually swipes/scrolls the track
+	// ─────────────────────────────────────────────────────────────
+	track.addEventListener('scroll', updateProgressBar);
+
+	// Recalculate if window is resized
+	window.addEventListener('resize', updateProgressBar);
+
+
+	// ─────────────────────────────────────────────────────────────
+	// STEP 8: Wait 200ms before first run so the browser has time
+	// to fully render all cards and measure their widths.
+	// Without this, maxScroll = 0 and next button gets wrongly disabled.
+	// ─────────────────────────────────────────────────────────────
+	setTimeout(updateProgressBar, 200);
+
+</script>
+
+
+	// ─────────────────────────────────────────────────────────────
+	// STEP 3: Helper — how many pixels to scroll per button click
+	// We measure the first card's actual width on screen, then add the gap
+	// ─────────────────────────────────────────────────────────────
+	function getScrollAmount() {
+		var firstCard = track.querySelector('.product-card, .banner-card');
+
+		if (firstCard) {
+			// offsetWidth gives us the rendered width of the card
+			return firstCard.offsetWidth + CARD_GAP;
+		}
+
+		// Fallback: if no card found yet, use a sensible default
+		return 236 + CARD_GAP;
+	}
+
+
+	// ─────────────────────────────────────────────────────────────
+	// STEP 4: Helper — update the progress bar and button states
+	// This runs every time the user scrolls or clicks a button
+	// ─────────────────────────────────────────────────────────────
+	function updateProgressBar() {
+
+		// How far CAN the user scroll in total?
+		var maxScroll = track.scrollWidth - track.clientWidth;
+
+		// How far HAS the user scrolled right now?
+		var currentPos = track.scrollLeft;
+
+		// Calculate how much of the bar to fill (0.0 = start, 1.0 = end)
+		var scrollRatio = (maxScroll > 0) ? (currentPos / maxScroll) : 0;
+
+		// Convert ratio to a width % between BAR_MIN_WIDTH and BAR_MAX_WIDTH
+		// Example: ratio 0.5 → 15 + 0.5 × (100-15) = 57.5%
+		var newWidth = BAR_MIN_WIDTH + scrollRatio * (BAR_MAX_WIDTH - BAR_MIN_WIDTH);
+		thumb.style.width = newWidth + '%';
+
+		// Disable the ← button when we are all the way at the start
+		prevBtn.disabled = (currentPos <= 2);
+
+		// Disable the → button when we are all the way at the end
+		nextBtn.disabled = (currentPos >= maxScroll - 2);
+	}
+
+
+	// ─────────────────────────────────────────────────────────────
+	// STEP 5: Button click handlers
+	// ─────────────────────────────────────────────────────────────
+
+	// ← Previous button: scroll left by one card
+	prevBtn.addEventListener('click', function () {
+		track.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
+
+		// Wait for smooth scroll to finish (≈ 400ms), then update bar
+		setTimeout(updateProgressBar, 420);
+	});
+
+	// → Next button: scroll right by one card
+	nextBtn.addEventListener('click', function () {
+		track.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
+
+		// Wait for smooth scroll to finish (≈ 400ms), then update bar
+		setTimeout(updateProgressBar, 420);
+	});
+
+
+	// ─────────────────────────────────────────────────────────────
+	// STEP 6: Also update the bar when the user manually drags/scrolls
+	// ─────────────────────────────────────────────────────────────
+	track.addEventListener('scroll', updateProgressBar);
+
+	// If the browser window is resized, recalculate everything
+	window.addEventListener('resize', updateProgressBar);
+
+
+	// ─────────────────────────────────────────────────────────────
+	// STEP 7: Run once after a short delay so the browser has time
+	// to fully render all cards and calculate their widths correctly.
+	// Without this delay, scrollWidth may equal clientWidth (= 0 scrollable area)
+	// and the Next button would get disabled immediately by mistake.
+	// ─────────────────────────────────────────────────────────────
+	setTimeout(updateProgressBar, 200);
+
+</script>

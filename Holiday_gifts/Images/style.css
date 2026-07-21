@@ -1,0 +1,450 @@
+/* ══════════════════════════════════════════════════════
+   DESIGN SYSTEM & VARIABLES
+   Matched exactly to the Review section variables
+   ══════════════════════════════════════════════════════ */
+/* ══════════════════════════════════════════════════════
+   GLOBAL RESET
+   ══════════════════════════════════════════════════════ */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Figtree', system-ui, -apple-system, sans-serif;
+    background-color: #ffffff;
+    color: #0b2e3e;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* ══════════════════════════════════════════════════════
+   SECTION HEADER
+   Same font-size / font-family / color as Review section
+   ══════════════════════════════════════════════════════ */
+.gifts-section {
+    background-color: #ffffff;
+    overflow: hidden;
+}
+
+/* Section title — same style as .reviews-title */
+.gifts-title {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 2.25rem;       /* Exactly same as .reviews-title */
+    font-weight: 500;
+    line-height: 1.25;
+    color: #0b2e3e;
+    margin-bottom: 0.25rem;
+    letter-spacing: -0.01em;
+}
+
+/* Subtitle below heading */
+.gifts-subtitle {
+    font-family: 'Figtree', system-ui, -apple-system, sans-serif;
+    font-size: 0.95rem;       /* Same as .show-more-btn font-size */
+    font-weight: 400;
+    color: #6c757d;
+    margin-bottom: 0;
+}
+
+/* Responsive heading — same breakpoint as Review section */
+@media (max-width: 576px) {
+    .gifts-title {
+        font-size: 1.75rem;
+    }
+}
+
+/* ══════════════════════════════════════════════════════
+   SLIDER WRAPPER
+   Holds the track + the prev/next arrow buttons
+   ══════════════════════════════════════════════════════ */
+.gifts-slider-wrapper {
+    position: relative;       /* Arrows positioned relative to this */
+    overflow: hidden;         /* Hides cards outside viewport when sliding */
+    border-radius: 14px;      /* Rounded corners on the outer wrapper */
+}
+
+/* ══════════════════════════════════════════════════════
+   SLIDER TRACK
+   Flex row — cards sit side by side.
+   When > 2 cards, JS adds .slider-active and the
+   track scrolls by translating on X axis.
+   ══════════════════════════════════════════════════════ */
+.gifts-track {
+    display: flex;
+    gap: 20px;                 /* Space between cards */
+    transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    /* Width is set dynamically by JS when slider is active */
+}
+
+/* ── Static mode (2 or fewer cards): each card takes equal half ── */
+.gifts-track .gift-card {
+    flex: 0 0 calc(50% - 10px);    /* 50% minus half the gap */
+    min-width: 0;
+}
+
+/* ── On mobile (< 576px): stack cards vertically when NOT in slider mode ── */
+@media (max-width: 575.98px) {
+    .gifts-track:not(.slider-active) {
+        flex-direction: column;   /* Stack cards on top of each other */
+    }
+    .gifts-track:not(.slider-active) .gift-card {
+        flex: 0 0 100%;          /* Full width on mobile */
+        width: 100%;
+    }
+}
+
+/* ── Slider mode (> 2 cards): JS adds .slider-active to the track ── */
+.gifts-track.slider-active .gift-card {
+    /* Each card width = (100% / cardsPerView) - gap adjustments */
+    flex: 0 0 calc(50% - 10px);
+}
+
+/* ══════════════════════════════════════════════════════
+   GIFT CARD
+   Image fills the card. Text overlaid on top.
+   No aspect-ratio property used — height: auto.
+   ══════════════════════════════════════════════════════ */
+.gift-card {
+    position: relative;
+    border-radius: 14px;
+    overflow: hidden;           /* Clips the zooming image inside */
+    min-height: 280px;
+    height: auto;
+    cursor: pointer;
+    background-color: #d6cfc8;  /* Fallback color while image loads */
+}
+
+/* ── Image container — clips zoom effect ── */
+.gift-card__img-wrap {
+    position: relative;
+    width: 100%;
+    height: auto;               /* Height auto — no fixed height */
+    overflow: hidden;
+    border-radius: 14px;
+}
+
+/* ── Background image ── */
+.gift-card__img {
+    display: block;
+    width: 100%;
+    height: 320px;   /* All cards same image height */
+    object-fit: cover;
+    object-position: center;
+    border-radius: 14px;
+    transition: transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);   /* Smooth zoom */
+    will-change: transform;
+}
+
+/* ── Image zoom on hover — desktop only ── */
+@media (hover: hover) and (min-width: 768px) {
+    .gift-card:hover .gift-card__img {
+        transform: scale(1.07);       /* Smooth zoom in */
+    }
+}
+
+/* ── Dark overlay on the image (for text readability) ── */
+.gift-card__overlay {
+    position: absolute;
+    inset: 0;                   /* Covers entire card */
+    border-radius: 14px;
+    background: linear-gradient(
+        160deg,
+        rgba(0,0,0,0.28) 0%,
+        rgba(0,0,0,0.10) 50%,
+        rgba(0,0,0,0.05) 100%
+    );
+    pointer-events: none;       /* Click-through */
+}
+
+/* ── Text content block (sits over the image) ── */
+.gift-card__content {
+    position: absolute;
+    inset: 0;
+    padding: 1.4rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 14px;
+}
+
+/* Top area: category label + badge */
+.gift-card__top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+/* "Holiday Gifts" italic label */
+.gift-card__category {
+    font-family: 'Fraunces', Georgia, serif;     /* Fraunces — same heading font */
+    font-size: 0.85rem;                   /* Same size family as .reviewer-status */
+    font-style: italic;
+    font-weight: 400;
+    color: #ffffff;
+    line-height: 1.3;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.25);
+}
+
+/* "Save X%" circular badge */
+.gift-card__badge {
+    background-color: rgba(255, 255, 255, 0.92);
+    color: #0b2e3e;          /* Same dark color as Review section */
+    font-family: 'Figtree', system-ui, -apple-system, sans-serif;        /* Figtree */
+    font-size: 0.78rem;
+    font-weight: 600;
+    border-radius: 50%;                   /* Perfect circle */
+    width: 58px;
+    height: 58px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    line-height: 1.2;
+    flex-shrink: 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+}
+
+.gift-card__badge-save {
+    font-size: 0.62rem;
+    font-weight: 500;
+    opacity: 0.75;
+}
+
+.gift-card__badge-pct {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #0b2e3e;
+}
+
+/* Bottom area: heading + Shop Now button */
+.gift-card__bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.9rem;
+}
+
+/* Product heading */
+.gift-card__heading {
+    font-family: 'Fraunces', Georgia, serif;    /* Fraunces — same as .reviews-title */
+    font-size: 1.6rem;                   /* Visually similar to reference image */
+    font-weight: 600;
+    line-height: 1.25;
+    color: #ffffff;
+    letter-spacing: -0.01em;            /* Same as .reviews-title */
+    text-shadow: 0 1px 6px rgba(0,0,0,0.3);
+    margin: 0;
+}
+
+/* ══════════════════════════════════════════════════════
+   SHOP NOW BUTTON — same style system as .show-more-btn
+   but white background with dark text (as per image)
+   ══════════════════════════════════════════════════════ */
+.shop-now-btn {
+    position: relative;
+    background-color: #ffffff;
+    color: #0b2e3e;        /* Same primary dark color */
+    border: none;
+    padding: 9px 24px;
+    border-radius: 50px;               /* Pill shape — same as .show-more-btn */
+    font-family: 'Figtree', system-ui, -apple-system, sans-serif;     /* Figtree — same as .show-more-btn */
+    font-size: 0.875rem;               /* Same size family as review text */
+    font-weight: 600;
+    cursor: pointer;
+    overflow: hidden;
+    z-index: 1;
+    display: inline-block;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+/* Left-to-right background fill — same animation as .show-more-btn::before */
+.shop-now-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #0b2e3e;   /* Dark fill on hover */
+    z-index: -1;
+    transform: scaleX(0);
+    transform-origin: bottom left;             /* Fills left → right */
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Desktop hover — same pattern as .show-more-btn */
+@media (hover: hover) and (min-width: 768px) {
+    .shop-now-btn:hover {
+        color: #ffffff;
+    }
+    .shop-now-btn:hover::before {
+        transform: scaleX(1);
+    }
+}
+
+/* Mobile tap feedback */
+.shop-now-btn:active {
+    background-color: #0b2e3e;
+    color: #ffffff;
+}
+
+/* ══════════════════════════════════════════════════════
+   SLIDER ARROWS
+   ══════════════════════════════════════════════════════ */
+.slider-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    background-color: #ffffff;
+    color: #0b2e3e;
+    border: none;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+    /* Hidden by default — JS shows them only when slider is active */
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+}
+
+.slider-arrow--prev { left: 10px; }
+.slider-arrow--next { right: 10px; }
+
+/* Show arrows only when slider is active (class added by JS) */
+.gifts-slider-wrapper.slider-active .slider-arrow {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Disabled arrow state */
+.slider-arrow:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+}
+
+/* Desktop hover on arrows — same left-to-right system */
+@media (hover: hover) and (min-width: 768px) {
+    .slider-arrow:not(:disabled):hover {
+        background-color: #0b2e3e;
+        color: #ffffff;
+    }
+}
+
+/* ══════════════════════════════════════════════════════
+   DOT INDICATORS
+   ══════════════════════════════════════════════════════ */
+.slider-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 18px;
+    /* Hidden by default — JS shows when slider active */
+    visibility: hidden;
+    height: 12px;
+}
+
+.slider-dots.slider-active {
+    visibility: visible;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #d0cdc9;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.dot.dot--active {
+    background-color: #0b2e3e;
+    transform: scale(1.3);
+}
+
+/* ══════════════════════════════════════════════════════
+   RESPONSIVE — ALL MEDIA QUERY POINTS
+   ══════════════════════════════════════════════════════ */
+
+/* ── Extra-Small phones: < 576px ── */
+@media (max-width: 575.98px) {
+    .gift-card__img {
+        height: 220px;
+    }
+
+    .gift-card__heading {
+        font-size: 1.15rem;
+    }
+
+    .gift-card__badge {
+        width: 48px;
+        height: 48px;
+    }
+
+    .gift-card__badge-pct {
+        font-size: 0.95rem;
+    }
+
+    .shop-now-btn {
+        padding: 7px 18px;
+        font-size: 0.8rem;
+    }
+
+    /* On very small screens slider shows 1 card at a time */
+    .gifts-track.slider-active .gift-card {
+        flex-basis: 100%;
+    }
+}
+
+/* ── Small: 576px – 767px ── */
+@media (min-width: 576px) and (max-width: 767.98px) {
+    .gift-card__img {
+        height: 250px;
+    }
+
+    .gift-card__heading {
+        font-size: 1.3rem;
+    }
+}
+
+/* ── Medium: 768px – 991px ── */
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .gift-card__img {
+        height: 290px;
+    }
+
+    .gift-card__heading {
+        font-size: 1.45rem;
+    }
+}
+
+/* ── Large: 992px – 1199px ── */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+    .gift-card__img {
+        height: 310px;
+    }
+}
+
+/* ── Extra-Large: ≥ 1200px ── */
+@media (min-width: 1200px) {
+    .gift-card__img {
+        height: 340px;
+    }
+
+    .gift-card__heading {
+        font-size: 1.75rem;
+    }
+}

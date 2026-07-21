@@ -1,0 +1,7 @@
+<div class="feature-card">
+	<div class="feature-icon">
+		<img src="{{= &collectionimg == '' ? 'https://placehold.co/100x100' : 'https://cdn.flicksell.com/'.&collectionimg}}" alt="{{= &title}}" />
+	</div>
+	<h3 class="feature-title">{{= &title}}</h3>
+	<p class="feature-text">{{= &description}}</p>
+</div>

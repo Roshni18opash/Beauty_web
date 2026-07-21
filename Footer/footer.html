@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Footer Preview</title>
+
+<!-- Bootstrap 5 -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+<!-- Google Fonts (matching Fraunces + Figtree used in your theme) -->
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+	:root{
+		--footer-bg: #0f2027;
+		--footer-text: #ffffff;
+		--accent: #6fcf97;
+	}
+
+	body{
+		margin:0;
+		font-family:"Figtree", sans-serif;
+	}
+
+	/* =============================================
+	   FOOTER BASE
+	============================================= */
+	.site-footer{
+		background-color: var(--footer-bg);
+		color: var(--footer-text);
+		padding: 40px 0 24px;
+	}
+
+	.site-footer a{
+		color: var(--footer-text);
+		text-decoration: none;
+	}
+	.site-footer a:hover{ opacity: .75; }
+
+	/* =============================================
+	   TOP INFO BAR
+	============================================= */
+	.footer-top{
+		border-bottom: 1px solid rgba(255,255,255,.15);
+		padding-bottom: 28px;
+		margin-bottom: 32px;
+	}
+
+	.footer-top-item{
+		display:flex;
+		align-items:flex-start;
+		gap:12px;
+	}
+
+	.footer-top-icon{
+		font-size: 22px;
+		color: var(--accent);
+		margin-top: 2px;
+		flex-shrink: 0;
+	}
+
+	.footer-top-title{
+		font-weight:600;
+		font-size:15px;
+		margin-bottom:2px;
+	}
+
+	.footer-top-sub{
+		font-size:13.5px;
+		color: rgba(255,255,255,.65);
+	}
+
+	/* =============================================
+	   NEWSLETTER
+	============================================= */
+	.footer-newsletter h3{
+		font-family:"Fraunces", serif;
+		font-size: 28px;
+		font-weight: 600;
+		margin-bottom: 10px;
+	}
+
+	.footer-newsletter p{
+		font-size:14px;
+		color: rgba(255,255,255,.7);
+		margin-bottom: 18px;
+	}
+
+	.newsletter-form input{
+		background: rgba(255,255,255,.08);
+		border: 1px solid rgba(255,255,255,.2);
+		border-radius: 50px 0 0 50px;
+		padding: 12px 20px;
+		color:#fff;
+		font-size:14px;
+	}
+	.newsletter-form input::placeholder{ color: rgba(255,255,255,.55); }
+	.newsletter-form input:focus{
+		box-shadow:none;
+		background: rgba(255,255,255,.08);
+		border-color: rgba(255,255,255,.35);
+		color:#fff;
+	}
+
+	.newsletter-form button{
+		background:#ffffff;
+		color:#0f2027;
+		border:none;
+		border-radius: 0 50px 50px 0;
+		padding: 12px 30px;
+		font-weight:600;
+		font-size:14px;
+		white-space:nowrap;
+		transition: opacity .3s ease;
+	}
+	.newsletter-form button:hover{ opacity:.85; color:#0f2027; }
+
+	.newsletter-terms{
+		font-size:12.5px;
+		color: rgba(255,255,255,.6);
+	}
+	.newsletter-terms a{ text-decoration: underline; }
+
+	/* =============================================
+	   LINK COLUMNS
+	============================================= */
+	.footer-links-col h4{
+		font-family:"Fraunces", serif;
+		font-size:17px;
+		font-weight:600;
+		margin-bottom:16px;
+	}
+
+	.footer-links-col ul{
+		list-style:none;
+		padding:0;
+		margin:0;
+	}
+
+	.footer-links-col ul li{
+		margin-bottom: 12px;
+	}
+
+	.footer-links-col ul li a{
+		font-size:14px;
+		color: rgba(255,255,255,.8);
+	}
+
+	/* =============================================
+	   BOTTOM BAR
+	============================================= */
+	.footer-bottom{
+		border-top: 1px solid rgba(255,255,255,.08);
+		padding-top: 24px;
+		margin-top: 16px;
+	}
+
+	.footer-country{
+		display:inline-flex;
+		align-items:center;
+		gap:8px;
+		font-size:14px;
+		font-weight:500;
+		cursor:pointer;
+		margin-bottom:16px;
+	}
+	.footer-country img{
+		width:20px;
+		height:14px;
+		object-fit:cover;
+		border-radius:2px;
+	}
+
+	.footer-payments{
+		display:flex;
+		gap:8px;
+		flex-wrap:wrap;
+		margin-bottom:10px;
+	}
+	.footer-payments .pay-icon{
+		height:24px;
+		width:38px;
+		background:#fff;
+		border-radius:4px;
+		display:flex;
+		align-items:center;
+		justify-content:center;
+		font-size:9px;
+		font-weight:700;
+		color:#0f2027;
+	}
+
+	.footer-copyright{
+		font-size:13px;
+		color: rgba(255,255,255,.6);
+	}
+
+	.footer-socials{
+		display:flex;
+		gap:12px;
+		margin-bottom:16px;
+	}
+	.footer-socials a{
+		width:38px;
+		height:38px;
+		border:1px solid rgba(255,255,255,.3);
+		border-radius:50%;
+		display:flex;
+		align-items:center;
+		justify-content:center;
+		font-size:16px;
+		transition: background .3s ease;
+	}
+	.footer-socials a:hover{ background: rgba(255,255,255,.1); }
+
+	.footer-legal{
+		display:flex;
+		gap:24px;
+		font-size:13px;
+	}
+
+	@media (max-width: 767px){
+		.footer-top-item{ margin-bottom: 18px; }
+		.newsletter-form{ flex-direction: column; }
+		.newsletter-form input{ border-radius:50px; margin-bottom:10px; }
+		.newsletter-form button{ border-radius:50px; width:100%; }
+		.footer-bottom .text-md-end{ text-align:left !important; }
+		.footer-socials, .footer-legal{ justify-content:flex-start !important; }
+	}
+</style>
+</head>
+<body>
+
+<!-- =============================================
+	 FOOTER — HTML STRUCTURE (Bootstrap grid)
+============================================= -->
+<footer class="site-footer">
+	<div class="container">
+
+		<!-- TOP INFO BAR -->
+		<div class="row footer-top gy-3">
+			<div class="col-12 col-sm-6 col-lg-3">
+				<div class="footer-top-item">
+					<i class="bi bi-chat-dots footer-top-icon"></i>
+					<div>
+						<div class="footer-top-title">Customer Service</div>
+						<div class="footer-top-sub">Mon-Sat, 9am-6pm EST.</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-12 col-sm-6 col-lg-3">
+				<div class="footer-top-item">
+					<i class="bi bi-telephone footer-top-icon"></i>
+					<div>
+						<div class="footer-top-title">Call Us</div>
+						<div class="footer-top-sub">+1 888-234-1234 (tool-free)</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-12 col-sm-6 col-lg-3">
+				<div class="footer-top-item">
+					<i class="bi bi-send footer-top-icon"></i>
+					<div>
+						<div class="footer-top-title">Get in Touch</div>
+						<div class="footer-top-sub">touch@garacestore.com</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-12 col-sm-6 col-lg-3">
+				<div class="footer-top-item">
+					<i class="bi bi-geo-alt footer-top-icon"></i>
+					<div>
+						<div class="footer-top-title">Address</div>
+						<div class="footer-top-sub">382 NE 191st St # 87394 Miami</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- MAIN GRID -->
+		<div class="row gy-4 pb-4">
+
+			<!-- Newsletter -->
+			<div class="col-12 col-lg-4 footer-newsletter">
+				<h3>Join Our Newsletter</h3>
+				<p>Sign up to our newsletter &amp; receive 10% off your first order.</p>
+
+				<form class="newsletter-form d-flex mb-3" id="newsletterForm" style="max-width:460px;">
+					<input type="email" class="form-control" placeholder="Enter your email" required>
+					<button type="submit" class="btn">Sign Up</button>
+				</form>
+
+				<div class="newsletter-terms">
+					By subscribing you agree to the <a href="#">Terms of Use</a> &amp; <a href="#">Privacy Policy.</a>
+				</div>
+			</div>
+
+			<!-- Company -->
+			<div class="col-6 col-md-3 col-lg-2 offset-lg-1 footer-links-col">
+				<h4>Company</h4>
+				<ul>
+					<li><a href="#">Our Story</a></li>
+					<li><a href="#">Contact</a></li>
+					<li><a href="#">FAQs</a></li>
+					<li><a href="#">Blog</a></li>
+					<li><a href="#">Find a Store</a></li>
+				</ul>
+			</div>
+
+			<!-- Collection -->
+			<div class="col-6 col-md-3 col-lg-2 footer-links-col">
+				<h4>Collection</h4>
+				<ul>
+					<li><a href="#">Shipping</a></li>
+					<li><a href="#">Returns &amp; Refunds</a></li>
+					<li><a href="#">Warranty</a></li>
+					<li><a href="#">Track Order</a></li>
+					<li><a href="#">Secure Payment</a></li>
+				</ul>
+			</div>
+
+			<!-- Shop -->
+			<div class="col-6 col-md-3 col-lg-2 footer-links-col">
+				<h4>Shop</h4>
+				<ul>
+					<li><a href="#">Skin Care</a></li>
+					<li><a href="#">Makeup</a></li>
+					<li><a href="#">Body Care</a></li>
+					<li><a href="#">Hair Care</a></li>
+					<li><a href="#">Moisturizer</a></li>
+					<li><a href="#">Accessories</a></li>
+				</ul>
+			</div>
+
+		</div>
+
+		<!-- BOTTOM BAR -->
+		<div class="row footer-bottom align-items-start">
+
+			<div class="col-12 col-md-6">
+				<div class="footer-country" id="countryToggle">
+					<img src="https://flagcdn.com/w40/us.png" alt="US Flag">
+					<span>United States (USD $)</span>
+					<i class="bi bi-chevron-up" id="countryArrow" style="font-size:11px;"></i>
+				</div>
+
+				<div class="footer-payments">
+					<span class="pay-icon">VISA</span>
+					<span class="pay-icon" style="background:linear-gradient(90deg,#eb001b,#f79e1b);color:#fff;">MC</span>
+					<span class="pay-icon" style="background:#2557d6;color:#fff;">AMEX</span>
+					<span class="pay-icon" style="background:#003087;color:#fff;">PayPal</span>
+					<span class="pay-icon">Diners</span>
+					<span class="pay-icon">Disc</span>
+				</div>
+
+				<div class="footer-copyright">
+					&copy; 2026 Hyper Ceramide. Powered by Shopify
+				</div>
+			</div>
+
+			<div class="col-12 col-md-6 text-md-end mt-3 mt-md-0">
+				<div class="footer-socials justify-content-md-end">
+					<a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+					<a href="#" aria-label="X"><i class="bi bi-twitter-x"></i></a>
+					<a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+					<a href="#" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
+				</div>
+
+				<div class="footer-legal justify-content-md-end">
+					<a href="#">Terms of Service</a>
+					<a href="#">Privacy Policy</a>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+
+<script>
+	// Newsletter form submit
+	document.getElementById("newsletterForm").addEventListener("submit", function (e) {
+		e.preventDefault();
+		var email = this.querySelector("input[type='email']").value;
+		console.log("Newsletter signup:", email);
+		alert("Thanks for subscribing!");
+		this.reset();
+	});
+
+	// Country dropdown arrow toggle (visual only — hook up real dropdown as needed)
+	var countryToggle = document.getElementById("countryToggle");
+	var countryArrow = document.getElementById("countryArrow");
+	var isOpen = true;
+
+	countryToggle.addEventListener("click", function () {
+		isOpen = !isOpen;
+		countryArrow.className = isOpen ? "bi bi-chevron-up" : "bi bi-chevron-down";
+	});
+</script>
+
+</body>
+</html>

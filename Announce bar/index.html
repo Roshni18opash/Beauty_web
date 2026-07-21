@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Announcement Bar</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- Announcement bar -->
+    <div class="announce-bar">
+      <div class="announce-inner">
+        <nav class="left">
+          <a href="#">Help Center</a>
+          <a href="#">Find a Store</a>
+          <a href="#">Contact</a>
+        </nav>
+
+        <div class="center">
+          <span class="emoji">✌️</span>
+          <span class="message">Free Express Shipping on orders $120!</span>
+        </div>
+
+        <div class="right">
+          <div class="country">
+            <img class="flag" src="https://flagcdn.com/us.svg" alt="US flag" width="22" height="14">
+            <select id="country-select" aria-label="Select country">
+              <option value="us">United States (USD $)</option>
+              <option value="ca">Canada (CAD $)</option>
+              <option value="uk">United Kingdom (GBP £)</option>
+            </select>
+          </div>
+
+          <div class="socials" aria-hidden="false">
+            <a href="#" class="social facebook" aria-label="facebook" title="Facebook">
+              <img src="icons/facebook.svg" alt="Facebook">
+            </a>
+
+            <a href="#" class="social x" aria-label="x" title="X">
+              <img src="icons/x.svg" alt="X">
+            </a>
+
+            <a href="#" class="social instagram" aria-label="instagram" title="Instagram">
+              <img src="icons/instagram.svg" alt="Instagram">
+            </a>
+
+            <a href="#" class="social tiktok" aria-label="tiktok" title="TikTok">
+              <img src="icons/tiktok.svg" alt="TikTok">
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

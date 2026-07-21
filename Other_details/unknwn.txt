@@ -1,0 +1,377 @@
+<style>
+	$_section{
+
+		/* html scroll-behavior: smooth; } */
+
+		.faq-section {
+			background-color:{{= &section_bg}};
+			padding: 60px 0;
+		}
+
+		{{if &p_l_r == 'custom'}}
+			.faq-section {
+				padding-left: {{= &custom_padding}}px !important;
+				padding-right: {{= &custom_padding}}px !important;
+			}
+		{{endif}}
+
+		.faq-card {
+			position: relative;
+			border-radius:{{= &img_radius}}px;
+			overflow: hidden;
+			cursor: pointer;
+		}
+
+		/* Full background image — in normal flow, gives card its height */
+		.faq-card-bg {
+			width: 100%;
+			height: auto;
+			display: block;
+			transform: scale(1);
+			border-radius:{{= &img_radius}}px;
+			transition: transform 0.65s ease;
+		}
+
+		/* Zoom IN on hover */
+		@media (hover: hover) {
+			.faq-card:hover .faq-card-bg {
+				transform: scale(1.08);
+			}
+		}
+
+		/* Text overlaid at top of card */
+		.faq-card-content {
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			text-align: center;
+			padding: 40px 28px 0 28px;
+		}
+
+		.faq-card-title {
+			font-family: "Fraunces", serif;
+			font-size:{{= &title_size}}px;
+			font-weight:{{= &title_weight}};
+			color:{{= &title_clr}};
+			line-height: 1.25;
+			margin-bottom: 14px;
+			letter-spacing: -0.2px;
+		}
+
+
+
+		{{if &title_hs != 'y'}}
+			.faq-card-title  {
+				visibility: hidden !important;
+			}
+		{{endif}}
+
+
+		{{if &description != 'y'}}
+			.faq-card-subtitle {
+				visibility: hidden !important;
+			}
+		{{endif}}
+
+		.faq-card-subtitle {
+			font-family: "Figtree", sans-serif;
+			font-size:{{= &des_size}}px;
+			font-weight:{{= &des_weight}};
+			color:{{= &des_clr}};
+			line-height: 1.65;
+			margin-bottom: 26px;
+			max-width: 240px;
+			margin-left: auto;
+			margin-right: auto;
+		}
+
+		/* ===== CONTACT US BUTTON — left-to-right black fill ===== */
+		.btn-contact {
+			display: inline-block;
+			position: relative;
+			overflow: hidden;
+			font-family: "Figtree", sans-serif;
+			font-size:{{= &btn_size}}px;
+			font-weight:{{= &btn_weight}};
+			color:{{= &btn_clr}};
+			background-color:{{= &btn_bg}};
+			border: 1.5px solid {{= &btn_border}};
+			border-radius:{{= &btn_radius}}px;
+			padding: 11px 36px;
+			text-decoration: none;
+			cursor: pointer;
+			letter-spacing: 0.3px;
+			transition: color 0.4s ease;
+			z-index: 0;
+		}
+
+		.btn-contact::before {
+			content: "";
+			position: absolute;
+			top: 0; left: 0; right: 0; bottom: 0;
+			background-color:{{= &btn_clr}};
+			border-radius: 50px;
+			transform: translateX(-100%);
+			transition: transform 0.4s ease;
+			z-index: -1;
+		}
+
+		@media (hover: hover) {
+			.btn-contact:hover::before { transform: translateX(0); }
+			.btn-contact:hover {
+				color:{{= &btn_bg}};
+				border-color: #000000;
+			}
+		}
+
+		/* ===== RIGHT — FAQ TITLE ===== */
+		.faq-main-title {
+			font-family: "DM Serif Display", serif;
+			font-size: 40px;
+			font-weight: 400;
+			color: #1a1a2e;
+			line-height: 1.2;
+			margin-bottom: 28px;
+			letter-spacing: -0.5px;
+		}
+
+		/* ===== ACCORDION ===== */
+		.faq-accordion .accordion-item {
+			background: transparent;
+			border: none;
+			border-top: 1px solid #c8c8c8;
+		}
+
+		.faq-accordion .accordion-item:last-child {
+			border-bottom: 1px solid #c8c8c8;
+		}
+
+		.faq-accordion .accordion-button {
+			font-family: "Inter", sans-serif;
+			font-size: 16px;
+			font-weight: 400;
+			color: #2d2d2d;
+			background-color: transparent;
+			padding: 20px 0;
+			box-shadow: none;
+			border: none;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+		}
+
+		.faq-accordion .accordion-button::after { display: none; }
+
+		.faq-accordion .accordion-button:not(.collapsed) {
+			color: #2d2d2d;
+			background-color: transparent;
+			box-shadow: none;
+		}
+
+		.faq-icon {
+			font-size: 22px;
+			font-weight: 300;
+			color: #2d2d2d;
+			line-height: 1;
+			flex-shrink: 0;
+			margin-left: 16px;
+		}
+
+		.faq-accordion .accordion-body {
+			font-family: "Inter", sans-serif;
+			font-size: 14px;
+			font-weight: 400;
+			color: #4a4a4a;
+			line-height: 1.7;
+			padding: 0 0 20px 0;
+		}
+
+		.faq-accordion .accordion-body .accent {
+			color: #4b3fa0;
+			font-weight: 500;
+		}
+
+		.faq-accordion .accordion-collapse {
+			transition: height 0.35s ease;
+		}
+
+		/* =========================
+		DESKTOP (992px and above)
+		========================= */
+		@media (min-width: 992px) {
+			.faq-main-title {
+				font-size: 44px;
+			}
+
+			.faq-card-title {
+				font-size: 32px;
+			}
+		}
+
+		/* =========================
+		TABLET (768px - 991px)
+		========================= */
+		@media (min-width: 768px) and (max-width: 991px) {
+			.faq-section {
+				padding: 48px 0;
+			}
+
+			.faq-main-title {
+				font-size: 32px;
+			}
+
+			.faq-card-title {
+				font-size: 26px;
+			}
+
+			.faq-accordion .accordion-button {
+				font-size: 15px;
+			}
+		}
+
+		/* =========================
+		MOBILE (767px and below)
+		========================= */
+		@media (max-width: 767px) {
+
+			{{if &p_l_r == 'custom'}}
+				.faq-section {
+					padding-left: {{= &custom_padding}}px !important;
+					padding-right: {{= &custom_padding}}px !important;
+				}
+			{{endif}}
+
+			.faq-section {
+				padding: 32px 0;
+			}
+
+			.faq-main-title {
+				font-size: 28px;
+				margin-top: 32px;
+				margin-bottom: 20px;
+			}
+
+			.faq-card-title {
+				font-size: 24px;
+			}
+
+			.faq-card-subtitle {
+				font-size: 13px;
+			}
+
+			.faq-card-content {
+				padding: 28px 20px 0;
+			}
+
+			.faq-accordion .accordion-button {
+				font-size: 14px;
+				padding: 16px 0;
+			}
+
+			.faq-accordion .accordion-body {
+				font-size: 13px;
+			}
+
+			.btn-contact::before {
+				display: none;
+			}
+
+			.btn-contact:hover {
+				color: #2d2d2d;
+				border-color: #2d2d2d;
+				background-color: #ffffff;
+			}
+		}
+	}
+	$_section{
+		{{= &custom_css}}
+	}
+</style>
+
+
+<section class="faq-section" aria-label="FAQ Section">
+	<div class="{{= &section_spacing}}">
+		<div class="row align-items-start g-4">
+
+			<!-- ===== LEFT CARD ===== -->
+			<div class="col-12 col-md-5 col-lg-4">
+				<div class="faq-card">
+
+					<!-- Image in NORMAL FLOW → gives card auto height naturally -->
+					<!-- <img -->
+					<!-- class="faq-card-bg" -->
+					<!-- src="Images/s-c-image-card-7.webp" -->
+					<!-- alt="Laboratorio Olfattivo perfume bottle with lemon and flower" -->
+					<!-- /> -->
+					<img
+					class="faq-card-bg"
+					src="{{= &img == '' ? 'https://placehold.co/1920x630' : 'https://cdn.flicksell.com/'.&img}}"
+					alt="Banner Image"
+					/>
+
+					<!-- Text OVERLAID on top of the image (absolute) -->
+					<div class="faq-card-content">
+						<h2 class="faq-card-title">Still need help?</h2>
+						<p class="faq-card-subtitle">
+							Shoot our team an email &amp; we'll get back to you ASAP
+						</p>
+						<a href="#contact" class="btn-contact" id="btn-contact-us" role="button">
+							Contact Us
+						</a>
+					</div>
+
+				</div>
+			</div>
+
+			<!-- ===== RIGHT FAQ ===== -->
+			<div class="col-12 col-md-7 col-lg-8">
+				<h1 class="faq-main-title">{{= &faqtitle}}</h1>
+
+				<div class="accordion faq-accordion" id="faqAccordion">
+					{{with each &collection as $content}}
+						{{use component $content}}
+					{{endwith}}
+					<!-- Q1 open by default -->
+					<!-- 	<div class="accordion-item"> -->
+					<!-- 			<h3 class="accordion-header" id="headingOne"> -->
+					<!-- 				<button class="accordion-button" type="button" -->
+					<!-- 				data-bs-toggle="collapse" data-bs-target="#collapseOne" -->
+					<!-- 				aria-expanded="true" aria-controls="collapseOne" id="faq-btn-1"> -->
+					<!-- 				How long does it take to process an order? -->
+					<!-- 				<span class="faq-icon" aria-hidden="true">&#8722;</span> -->
+					<!-- 			</button> -->
+					<!-- 		</h3> -->
+					<!-- 		<div id="collapseOne" class="accordion-collapse collapse show" -->
+					<!-- 		aria-labelledby="headingOne" data-bs-parent="#faqAccordion"> -->
+					<!-- 		<div class="accordion-body"> -->
+					<!-- 			Our 24/7 Lace Contour Plunge Bra combines -->
+					<!-- 			<span class="accent">gorgeous floral lace</span> with sheer overlay -->
+					<!-- 			straps that hold you in and eliminates gaping. Removable pads let -->
+					<!-- 			<span class="accent">you</span> customize you -->
+					<!-- 		</div> -->
+					<!-- 	</div> -->
+					<!-- </div> -->
+
+
+				</div>
+			</div>
+
+		</div>
+	</div>
+</section>
+
+<!-- JS: Toggle +/- icon -->
+<script>
+	var acc = document.getElementById("faqAccordion");
+
+	acc.addEventListener("show.bs.collapse", function (e) {
+		var btn = document.querySelector('[data-bs-target="#' + e.target.id + '"]');
+		if (btn) btn.querySelector(".faq-icon").innerHTML = "&#8722;";
+	});
+
+	acc.addEventListener("hide.bs.collapse", function (e) {
+		var btn = document.querySelector('[data-bs-target="#' + e.target.id + '"]');
+		if (btn) btn.querySelector(".faq-icon").textContent = "+";
+	});
+</script>

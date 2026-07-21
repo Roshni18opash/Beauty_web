@@ -1,0 +1,580 @@
+<style>
+	$_section{
+
+		/* =============================================
+		SECTION BACKGROUND & PADDING
+		============================================= */
+		.faq-section {
+			background-color: {{= &section_bg}};
+			padding: 24px 0;
+		}
+
+		/* Custom left/right padding (only if admin sets it to "custom") */
+		{{if &p_l_r == 'custom'}}
+			.faq-section {
+				padding-left:  {{= &custom_padding}}px !important;
+				padding-right: {{= &custom_padding}}px !important;
+			}
+		{{endif}}
+
+
+		/* =============================================
+		LEFT IMAGE CARD
+		============================================= */
+
+		/* Card wrapper — position:relative so text can overlap image */
+		.faq-card {
+			position: relative;
+			height: 100%;
+			border-radius: {{= &img_radius}}px;
+			overflow: hidden;
+			cursor: pointer;
+		}
+
+		/* Image fills the full card height */
+		.faq-card-bg {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			display: block;
+			transform: scale(1);
+			border-radius: {{= &img_radius}}px;
+			transition: transform 0.65s ease;
+		}
+
+		/* Zoom image slightly when hovering the card */
+		@media (hover: hover) {
+			.faq-card:hover .faq-card-bg {
+				transform: scale(1.08);
+			}
+		}
+
+		/* Text block placed on top of the image */
+		.faq-card-content {
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			text-align: center;
+			padding: 40px 28px 0 28px;
+		}
+
+		/* Card heading — "Still need help?" */
+		.faq-card-title {
+			font-family: "Fraunces", serif;
+			font-size: {{= &ctitle_size}}px!important;
+			font-weight: {{= &ctitle_weight}};
+			color: {{= &ctitle_clr}};
+			line-height: 1.25;
+			margin-bottom: 14px;
+			letter-spacing: -0.2px;
+		}
+
+		/* Hide title if admin turns it off */
+		{{if &ctitle_hs != 'y'}}
+			.faq-card-title { visibility: hidden !important; }
+		{{endif}}
+
+		/* Card subtitle — short description below heading */
+		.faq-card-subtitle {
+			font-family: "Figtree", sans-serif;
+			font-size: {{= &des_size}}px;
+			font-weight: {{= &des_weight}};
+			color: {{= &des_clr}};
+			line-height: 1.65;
+			margin-bottom: 26px;
+			max-width: 240px;
+			margin-left: auto;
+			margin-right: auto;
+		}
+
+		/* Hide subtitle if admin turns it off */
+		{{if &description != 'y'}}
+			.faq-card-subtitle { visibility: hidden !important; }
+		{{endif}}
+
+
+		/* =============================================
+		CONTACT US BUTTON
+		Fills with dark color from left on hover
+		============================================= */
+		.btn-contact {
+			display: inline-block;
+			position: relative;
+			overflow: hidden;
+			font-family: "Figtree", sans-serif;
+			font-size: {{= &btn_size}}px;
+			font-weight: {{= &btn_weight}};
+			color: {{= &btn_clr}};
+			background-color: {{= &btn_bg}};
+			border: 1.5px solid {{= &btn_border}};
+			border-radius: {{= &btn_radius}}px;
+			padding: 11px 36px;
+			text-decoration: none;
+			cursor: pointer;
+			letter-spacing: 0.3px;
+			transition: color 0.4s ease;
+			z-index: 0;
+		}
+
+		/* Dark fill that slides in from the left on hover */
+		.btn-contact::before {
+			content: "";
+			position: absolute;
+			top: 0; left: 0; right: 0; bottom: 0;
+			background-color: {{= &btn_clr}};
+			border-radius: 50px;
+			transform: translateX(-100%); /* starts hidden off-screen left */
+			transition: transform 0.4s ease;
+			z-index: -1;
+		}
+
+		@media (hover: hover) {
+			.btn-contact:hover::before { transform: translateX(0); } /* slide in */
+			.btn-contact:hover {
+				color: {{= &btn_bg}};
+				border-color: #000000;
+			}
+		}
+
+
+		/* =============================================
+		SHOW MORE / SHOW LESS BUTTON
+		============================================= */
+		.btn-show-more {
+			display: inline-flex;
+			align-items: center;
+			gap: 8px;
+			position: relative;
+			overflow: hidden;
+			font-family: "Figtree", sans-serif;
+			font-size:{{= &sbtn_size}}px;
+			font-weight:{{= &sbtn_weight}};
+			color:{{= &sbtn_clr}};
+			background-color:{{= &sbtn_bg}};
+			border: 1.5px solid {{= &sbtn_border}};
+			border-radius:{{= &sbtn_radius}}px;
+			padding: 11px 36px;
+			cursor: pointer;
+			letter-spacing: 0.3px;
+			transition: color 0.4s ease;
+			z-index: 0;
+		}
+
+		/* Dark fill that slides in on hover */
+		.btn-show-more::before {
+			content: "";
+			position: absolute;
+			top: 0; left: 0; right: 0; bottom: 0;
+			background-color: #2d2d2d;
+			border-radius: 50px;
+			transform: translateX(-100%);
+			transition: transform 0.4s ease;
+			z-index: -1;
+		}
+
+		@media (hover: hover) {
+			.btn-show-more:hover::before { transform: translateX(0); }
+			.btn-show-more:hover { color: #ffffff; }
+		}
+
+		/* Arrow icon inside the Show More button */
+		.show-more-arrow {
+			font-size: 16px;
+			transition: transform 0.3s ease;
+		}
+
+
+		/* =============================================
+		FAQ TITLE (right side heading)
+		============================================= */
+		.faq-main-title {
+			font-family: "Fraunces", serif;
+			font-size:{{= &title_size}}px !important;
+			font-weight:{{= &title_weight}};
+			color:{{= &title_clr}};
+			line-height: 1.2;
+			margin-top: 0;
+			margin-bottom: 28px;
+			letter-spacing: -0.5px;
+		}
+
+
+		/* =============================================
+		ACCORDION (FAQ list)
+		============================================= */
+
+		/* Each FAQ row has a top border */
+		.faq-accordion .accordion-item {
+			background: transparent;
+			border: none;
+			border-top: 1px solid #c8c8c8;
+		}
+
+		/* Last row also gets a bottom border */
+		.faq-accordion .accordion-item:last-child {
+			border-bottom: 1px solid #c8c8c8;
+		}
+
+		/* FAQ question button */
+		.faq-accordion .accordion-button {
+			font-family: "Fraunces",serif;
+			font-size:{{= &que}}px;
+			font-weight:{{= &que_weight}};
+			color:{{= &que_clr}};
+			background-color: transparent;
+			padding: 20px 32px 20px 0;
+			box-shadow: none;
+			border: none;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+		}
+
+		/* Remove Bootstrap's default arrow icon */
+		.faq-accordion .accordion-button::after { display: none; }
+
+		/* Keep same color when FAQ is open (Bootstrap changes it by default) */
+		.faq-accordion .accordion-button:not(.collapsed) {
+			color:{{= &que_clr}};
+			background-color: transparent;
+			box-shadow: none;
+		}
+
+		/* The +/- icon on the right side of each question */
+		.faq-icon {
+			font-size:{{= &icon_size}}px;
+			font-weight:{{= &icon_weight}};
+			color:{{= &icon_clr}};
+			line-height: 1;
+			flex-shrink: 0;
+			margin-left: 16px;
+			font-family: "Figtree", sans-serif;
+		}
+
+		/* FAQ answer text */
+		.faq-accordion .accordion-body {
+			font-family: "Figtree", sans-serif;
+			font-size:{{= &ans}}px;
+			font-weight:{{= &ans_weight}};
+			color:{{= &ans_clr}};
+			line-height: 1.7;
+			padding: 0 0 20px 0;
+		}
+
+		/* Highlighted text inside answer */
+		.faq-accordion .accordion-body .accent {
+			color: #A09D3F;
+			font-weight: 500;
+		}
+
+		/* Smooth height animation when opening/closing */
+		.faq-accordion .accordion-collapse {
+			transition: height 0.35s ease;
+		}
+
+
+		/* Gap between image card and right FAQ section */
+		@media (min-width: 768px) {
+			.faq-right-col { padding-left: 32px; }
+			.faq-card      { min-height: 480px; }
+		}
+
+		/* =============================================
+		RESPONSIVE — DESKTOP (992px and above)
+		============================================= */
+		@media (min-width: 992px) {
+			.faq-main-title  { font-size: 44px; }
+			.faq-card-title  { font-size: 32px; }
+			.faq-right-col   { padding-left: 48px; }
+			.faq-card        { min-height: 520px; }
+		}
+
+		/* =============================================
+		RESPONSIVE — TABLET (768px to 991px)
+		============================================= */
+		@media (min-width: 768px) and (max-width: 991px) {
+			.faq-section                     { padding: 28px 0; }
+			.faq-main-title                  { font-size: 32px; }
+			.faq-card-title                  { font-size: 26px; }
+			.faq-accordion .accordion-button { font-size: 15px; }
+		}
+
+		/* =============================================
+		RESPONSIVE — MOBILE (767px and below)
+		============================================= */
+		@media (max-width: 767px) {
+
+			/* Custom padding on mobile too */
+			{{if &p_l_r == 'm_custom'}}
+				.faq-section {
+					padding-left:  {{= &m_custom_padding}}px !important;
+					padding-right: {{= &m_custom_padding}}px !important;
+				}
+			{{endif}}
+
+			/* Prevent horizontal scrolling on the whole section */
+			.faq-section{ padding: 20px 0; overflow-x: hidden; }
+
+			/* Cap the image card height on mobile so it doesn't overflow the layout */
+			.faq-card{ max-height: 280px; }
+			.faq-card-bg{ width: 100%; height: 280px; object-fit: cover; }
+			.faq-card-title {
+				font-size:{{= &m_card_title}}px;
+			};
+			.faq-main-title{ font-size:{{= &m_main_title}}px; margin-top: 32px; margin-bottom: 20px; }
+			.faq-card-subtitle {
+			font-size: {{= &sub_size}}px;
+			}
+			.btn-contact {
+				font-size:{{= &mbtn_size}}px;
+			}
+			/* .faq-card-title                  font-size: 24px; } */
+			/* .faq-card-subtitle                font-size: 13px; } */
+			.faq-card-content                { padding: 28px 20px 0; }
+			.faq-accordion .accordion-button { font-size:{{= &m_que}}px; padding: 16px 0; }
+			.faq-accordion .accordion-body   { font-size:{{= &m_ans}}px; }
+
+			/* Disable hover fill effect on mobile (no hover on touch) */
+			.btn-contact::before             { display: none; }
+			.btn-contact:hover               { color: #2d2d2d; border-color: #2d2d2d; background-color: #ffffff; }
+		}
+
+	}
+
+	/* Admin custom CSS goes here (added from theme builder) */
+	$_section{
+		{{= &custom_css}}
+	}
+</style>
+
+
+<!-- =============================================
+FAQ SECTION — HTML STRUCTURE
+============================================= -->
+<section class="faq-section" aria-label="FAQ Section">
+	<div class="{{= &section_spacing}}">
+		<div class="row align-items-stretch g-4">
+
+			<!-- LEFT: Image card with text overlay -->
+			<div class="col-12 col-md-5 col-lg-4 d-flex">
+				<div class="faq-card w-100">
+
+					<!-- Background image — fills full card height -->
+					<img
+					class="faq-card-bg"
+					src="{{= &img == '' ? 'https://placehold.co/1920x630' : 'https://cdn.flicksell.com/'.&img}}"
+					alt="Banner Image"
+					/>
+
+					<!-- Text on top of the image -->
+					<div class="faq-card-content">
+						<h2 class="faq-card-title">{{= &card_title}}</h2>
+						<p class="faq-card-subtitle">
+							{{= &faqdes}}
+						</p>
+						<a href="#contact" class="btn-contact" id="btn-contact-us" role="button">
+							Contact Us
+						</a>
+					</div>
+
+				</div>
+			</div>
+
+			<!-- RIGHT: FAQ title + accordion list -->
+			<div class="col-12 col-md-7 col-lg-8 ps-md-4 ps-lg-4 d-flex flex-column justify-content-center">
+
+				<!-- Section heading -->
+				<h1 class="faq-main-title">{{= &faqtitle}}</h1>
+
+				<!-- FAQ accordion — items are added here by faqcomp.fire -->
+				<div class="accordion faq-accordion" id="faqAccordion">
+					{{with each &collection as $content}}
+						{{use component $content}}
+					{{endwith}}
+				</div>
+
+				<!-- Show More button — hidden by default.
+				JavaScript shows it automatically if there are more than 5 FAQs. -->
+				<div id="faq-show-more-wrap" style="display:none; text-align:center; margin-top:24px;">
+					<button id="faq-show-more-btn" class="btn-show-more" type="button">
+						Show More <span class="show-more-arrow">&#8595;</span>
+					</button>
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+</section>
+
+
+<!-- =============================================
+FAQ JAVASCRIPT
+- Manually handles open/close (bypasses Bootstrap
+accordion because all items share the same ID)
+- Hides FAQs after the 5th one
+- Shows "Show More" button if FAQs > 5
+============================================= -->
+<script>
+	(function () {
+
+		// ---- Settings ----
+		var LIMIT    = 5;      // Show only first 5 FAQs
+		var expanded = false;  // Track if "Show More" was clicked
+		var inited   = false;  // Make sure setup runs only once
+
+		// ---- Main setup function ----
+		function initFAQ() {
+
+			// Stop if already initialized
+			if (inited) return;
+
+			// Get the accordion container and Show More button
+			var accordion   = document.getElementById("faqAccordion");
+			var showMoreBox = document.getElementById("faq-show-more-wrap");
+			var showMoreBtn = document.getElementById("faq-show-more-btn");
+
+			// Stop if accordion not found in DOM yet
+			if (!accordion) return;
+
+			// Get all FAQ items inside the accordion
+			var items = accordion.querySelectorAll(".accordion-item");
+
+			// Stop if items haven't loaded yet (platform renders them async)
+			if (items.length === 0) return;
+
+			// Mark as initialized so this function won't run again
+			inited = true;
+
+			// ---- Loop through each FAQ item ----
+			items.forEach(function (item, index) {
+
+				var btn      = item.querySelector(".accordion-button");
+				var collapse = item.querySelector(".accordion-collapse");
+
+				// Skip if button or collapse panel is missing
+				if (!btn || !collapse) return;
+
+				// Remove Bootstrap's click handling (it breaks with duplicate IDs)
+				btn.removeAttribute("data-bs-toggle");
+				btn.removeAttribute("data-bs-target");
+				btn.removeAttribute("data-bs-parent");
+				collapse.removeAttribute("data-bs-parent");
+
+				// --- Set initial open/closed state ---
+				if (index === 0) {
+					// First FAQ: open by default
+					collapse.classList.add("show");
+					btn.classList.remove("collapsed");
+					btn.setAttribute("aria-expanded", "true");
+					btn.querySelector(".faq-icon").innerHTML = "&#8722;"; // minus sign
+				} else {
+					// All other FAQs: closed by default
+					collapse.classList.remove("show");
+					btn.classList.add("collapsed");
+					btn.setAttribute("aria-expanded", "false");
+					btn.querySelector(".faq-icon").textContent = "+";
+				}
+
+				// --- Hide FAQs beyond the limit (e.g. 6th, 7th...) ---
+				if (index >= LIMIT) {
+					item.style.display = "none";
+					item.setAttribute("data-faq-hidden", "true"); // mark as hidden
+				}
+
+				// --- Handle click on each FAQ question ---
+				btn.addEventListener("click", function () {
+
+					// Check if this FAQ is currently open
+					var isCurrentlyOpen = collapse.classList.contains("show");
+
+					// Step 1: Close ALL FAQs
+					items.forEach(function (otherItem) {
+						var otherBtn      = otherItem.querySelector(".accordion-button");
+						var otherCollapse = otherItem.querySelector(".accordion-collapse");
+						if (!otherBtn || !otherCollapse) return;
+
+						otherCollapse.classList.remove("show");
+						otherBtn.classList.add("collapsed");
+						otherBtn.setAttribute("aria-expanded", "false");
+						otherBtn.querySelector(".faq-icon").textContent = "+";
+					});
+
+					// Step 2: If this FAQ was closed before clicking, open it now
+					if (!isCurrentlyOpen) {
+						collapse.classList.add("show");
+						btn.classList.remove("collapsed");
+						btn.setAttribute("aria-expanded", "true");
+						btn.querySelector(".faq-icon").innerHTML = "&#8722;"; // minus sign
+					}
+					// If it was already open, Step 1 already closed it → toggle done!
+				});
+
+			}); // end forEach
+
+			// ---- Show More Button (only if FAQs exceed LIMIT) ----
+			if (items.length > LIMIT && showMoreBox && showMoreBtn) {
+
+				// Make the button visible
+				showMoreBox.style.display = "block";
+
+				// Handle Show More / Show Less click
+				showMoreBtn.addEventListener("click", function () {
+
+					if (!expanded) {
+						// --- Show hidden FAQs ---
+						items.forEach(function (item) {
+							if (item.getAttribute("data-faq-hidden") === "true") {
+								item.style.display = "block";
+							}
+						});
+						showMoreBtn.innerHTML = "Show Less &#8593;"; // up arrow
+						expanded = true;
+
+					} else {
+						// --- Hide FAQs beyond limit again ---
+						items.forEach(function (item, index) {
+							if (index >= LIMIT) {
+								item.style.display = "none";
+
+								// Also close it if it was open
+								var b = item.querySelector(".accordion-button");
+								var c = item.querySelector(".accordion-collapse");
+								if (b && c) {
+									c.classList.remove("show");
+									b.classList.add("collapsed");
+									b.setAttribute("aria-expanded", "false");
+									b.querySelector(".faq-icon").textContent = "+";
+								}
+							}
+						});
+						showMoreBtn.innerHTML = "Show More &#8595;"; // down arrow
+						expanded = false;
+					}
+
+				}); // end showMoreBtn click
+
+			} // end if items.length > LIMIT
+
+		} // end initFAQ()
+
+
+		// ---- Wait for FAQ items to load ----
+		// The platform renders items via template engine after the script runs.
+		// We poll every 50ms (up to 5 seconds) until items appear in the DOM.
+
+		var attempts = 0;
+		var timer = setInterval(function () {
+			attempts++;
+			initFAQ();
+			if (inited || attempts > 100) clearInterval(timer); // stop when done
+		}, 50);
+
+		// Also try right away and on page load
+		initFAQ();
+		window.addEventListener("load", initFAQ);
+
+	})();
+
+</script>

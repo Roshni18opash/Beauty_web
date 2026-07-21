@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Customer reviews for our top beauty products. Over 2000 positive reviews from client hubs.">
+    <title>Customer Reviews - Client Hubs</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Fraunces:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <section class="reviews-section" id="reviews-section" aria-label="Customer Reviews">
+
+        <!-- Heading -->
+        <div class="container">
+            <h1 class="reviews-title">
+                Over 2000 Positive Reviews <br> From Client Hubs
+            </h1>
+        </div>
+
+        <!-- ══════════════════════════════════════════════
+             CAROUSEL — cards are injected here by script.js
+             ══════════════════════════════════════════════ -->
+        <div class="carousel-wrapper">
+            <!-- Fade edges (left & right) -->
+            <div class="carousel-fade carousel-fade--left"></div>
+            <div class="carousel-fade carousel-fade--right"></div>
+
+            <!-- The moving track — JS fills this with cards + clones -->
+            <div class="carousel-track" id="carousel-track"></div>
+        </div>
+
+    </section>
+
+    <!-- script.js -->
+    <script src="script.js"></script>
+</body>
+</html>

@@ -483,6 +483,13 @@ body {
 /* Mobile */
 @media (max-width: 768px) {
 
+  .new-arrivals {
+    overflow-x: hidden;
+  }
+
+  .slider-footer {
+    display: none !important;
+  }
 
   .section-header {
     flex-direction: column;

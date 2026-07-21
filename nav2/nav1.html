@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Top Header Preview</title>
+
+<!-- Bootstrap 5 -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+<!-- Google Fonts: Fraunces for logo, Figtree for rest (matches your theme) -->
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+	body{
+		margin:0;
+		font-family:"Figtree", sans-serif;
+	}
+
+	/* =============================================
+	   TOP HEADER BAR
+	   height: auto -> no fixed height, size adjusts
+	   automatically to its content
+	============================================= */
+	.top-header{
+		background-color: #ffffff;
+		height: auto;
+		padding: 18px 0;
+
+		/* Sticks to the top of the page once you scroll to it */
+		position: sticky;
+		top: 0;
+		z-index: 999;
+
+		border-bottom: 1px solid #eee;
+	}
+
+	.top-header .container-inner{
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		flex-wrap: wrap;
+		gap: 16px;
+	}
+
+	/* ---- Search box ---- */
+	.search-box{
+		flex: 1 1 260px;
+		max-width: 320px;
+		order: 1;
+	}
+
+	.search-box .input-group{
+		border: 1px solid #d9d9d9;
+		border-radius: 50px;
+		overflow: hidden;
+	}
+
+	.search-box input{
+		border: none;
+		padding: 10px 20px;
+		font-size: 14px;
+		color: #333;
+	}
+	.search-box input:focus{
+		box-shadow: none;
+	}
+	.search-box input::placeholder{
+		color: #999;
+	}
+
+	.search-box .btn-search{
+		background: #ffffff;
+		border: none;
+		padding: 0 18px;
+		color: #0f2027;
+	}
+
+	/* ---- Logo (center) ---- */
+	.site-logo{
+		order: 2;
+		text-align: center;
+		flex: 1 1 200px;
+	}
+
+	.site-logo .logo-title{
+		font-family: "Fraunces", serif;
+		font-size: 28px;
+		font-weight: 700;
+		color: #0f2027;
+		line-height: 1.1;
+		margin: 0;
+	}
+
+	.site-logo .logo-subtitle{
+		font-family: "Fraunces", serif;
+		font-size: 14px;
+		font-style: italic;
+		color: #0f2027;
+		margin: 0;
+	}
+
+	/* ---- Right side icons ---- */
+	.header-actions{
+		order: 3;
+		display: flex;
+		align-items: center;
+		gap: 24px;
+		flex: 1 1 260px;
+		justify-content: flex-end;
+	}
+
+	.header-actions a{
+		color: #0f2027;
+		text-decoration: none;
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		font-size: 14px;
+		font-weight: 500;
+		white-space: nowrap;
+	}
+	.header-actions a:hover{
+		opacity: 0.7;
+	}
+	.header-actions i{
+		font-size: 18px;
+	}
+
+	/* Cart icon with count badge */
+	.cart-icon-wrap{
+		position: relative;
+		width: 42px;
+		height: 42px;
+		border: 1px solid #d9d9d9;
+		border-radius: 50%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.cart-count{
+		position: absolute;
+		top: -6px;
+		right: -6px;
+		background: #c0392b;
+		color: #fff;
+		font-size: 11px;
+		font-weight: 700;
+		width: 18px;
+		height: 18px;
+		border-radius: 50%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	/* =============================================
+	   RESPONSIVE — TABLET & MOBILE
+	============================================= */
+	@media (max-width: 991px){
+		.top-header .container-inner{
+			justify-content: center;
+		}
+
+		/* Logo comes first on top */
+		.site-logo{ order: 1; flex: 1 1 100%; }
+
+		/* Search box full width, below logo */
+		.search-box{ order: 2; flex: 1 1 100%; max-width: 100%; }
+
+		/* Actions row below search */
+		.header-actions{ order: 3; flex: 1 1 100%; justify-content: center; }
+	}
+
+	@media (max-width: 575px){
+		/* Hide text labels on very small screens, keep only icons */
+		.header-actions .action-text{
+			display: none;
+		}
+		.header-actions{
+			gap: 18px;
+		}
+	}
+</style>
+</head>
+<body>
+
+<!-- =============================================
+	 TOP HEADER — HTML STRUCTURE
+============================================= -->
+<header class="top-header">
+	<div class="container">
+		<div class="container-inner">
+
+			<!-- Search -->
+			<div class="search-box">
+				<div class="input-group">
+					<input type="text" class="form-control" placeholder="What are you looking for?">
+					<button class="btn btn-search" type="button">
+						<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+							<circle cx="11" cy="11" r="8"></circle>
+							<line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+						</svg>
+					</button>
+				</div>
+			</div>
+
+			<!-- Logo -->
+			<div class="site-logo">
+				<p class="logo-title">Ceramide</p>
+				<p class="logo-subtitle">Cosmetic</p>
+			</div>
+
+			<!-- Right actions -->
+			<div class="header-actions">
+				<a href="#">
+					<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+						<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+						<circle cx="12" cy="10" r="3"></circle>
+					</svg>
+					<span class="action-text">Find a Store</span>
+				</a>
+
+				<a href="#">
+					<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+						<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+						<circle cx="12" cy="7" r="4"></circle>
+					</svg>
+					<span class="action-text">Sign in/ Register</span>
+				</a>
+
+				<a href="#" class="cart-icon-wrap">
+					<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+						<path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path>
+						<path d="M3 6h18"></path>
+						<path d="M16 10a4 4 0 0 1-8 0"></path>
+					</svg>
+					<span class="cart-count">2</span>
+				</a>
+			</div>
+
+		</div>
+	</div>
+</header>
+
+<!-- dummy content below to test the sticky scroll behavior -->
+<div style="padding:60px 20px;">
+	<div style="max-width:700px; margin:0 auto;">
+		<h2>Dummy Section 1</h2>
+		<p>Scroll down and notice the header stays stuck to the top of the page.</p>
+		<div style="height:600px; background:#f8f8f8; border-radius:10px; margin:20px 0;"></div>
+
+		<h2>Dummy Section 2</h2>
+		<p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+		<div style="height:600px; background:#f8f8f8; border-radius:10px; margin:20px 0;"></div>
+	</div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

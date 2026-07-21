@@ -1,0 +1,833 @@
+<style>
+	html {
+		scroll-behavior: smooth;
+	}
+	$_section{
+
+		/* ── Section Wrapper ───────────────────────────────────── */
+		.blog-section {
+			padding: 56px 0 60px;
+			background-color: #fff;
+		}
+
+		.blog-container {
+			width: 100%;
+			max-width: 1300px;
+			margin: 0 auto;
+			padding: 0 40px;
+		}
+
+		/* ── Section Header ────────────────────────────────────── */
+		.blog-header {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			margin-bottom: 28px;
+			gap: 12px;
+		}
+
+		/* Section Title — Playfair Display, matches screenshot exactly */
+		.blog-section-title {
+			font-family: 'Playfair Display', serif;
+			font-size: 32px;
+			font-weight: 400;
+			color: #1a2c3a;
+			line-height: 1.2;
+		}
+
+		/* "View All Posts >" link — underline left→right on hover, reverse on leave */
+		.blog-view-all {
+			font-family: 'Figtree', sans-serif;
+			font-size: 14px;
+			font-weight: 600;
+			color: #1a2c3a;
+			text-decoration: none;
+			white-space: nowrap;
+			display: inline-flex;
+			align-items: center;
+			gap: 4px;
+			position: relative;
+			padding-bottom: 3px;
+		}
+
+		.blog-view-all::after {
+			content: '';
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			width: 100%;
+			height: 1px;
+			background-color: #1a2c3a;
+			/* Start collapsed from right side */
+			transform: scaleX(0);
+			transform-origin: right center;
+			transition: transform 0.35s ease;
+		}
+
+		/* Hover → expand from left to right */
+		.blog-view-all:hover::after {
+			transform: scaleX(1);
+			transform-origin: left center;
+		}
+
+		.blog-arrow {
+			font-size: 12px;
+			display: inline-block;
+		}
+
+		/* ── Cards Outer (Slider wrapper) ──────────────────────── */
+		.blog-cards-outer {
+			position: relative;
+			width: 100%;
+		}
+
+		/* ── Cards Track ───────────────────────────────────────── */
+		/* DEFAULT = GRID mode */
+		.blog-cards-track {
+			display: grid;
+			grid-template-columns: repeat(3, 1fr);
+			gap: 24px;
+		}
+
+		/* ── Individual Card ───────────────────────────────────── */
+		.blog-card {
+			display: flex;
+			flex-direction: column;
+			background: #fff;
+			border-radius: 10px;
+			overflow: hidden;
+			cursor: pointer;
+		}
+
+		/* ── Image Wrapper ─────────────────────────────────────── */
+		/* NO aspect-ratio used. Height is auto via padding-bottom trick.
+		This keeps images same visual height without locking ratio unit. */
+		.blog-img-wrapper {
+			width: 100%;
+			overflow: hidden;
+			border-radius: 10px;
+			/* Use padding-bottom to create a consistent image area without aspect-ratio property */
+			position: relative;
+			padding-bottom: 66%;   /* ~3:2 feel — same for every card */
+		}
+
+		.blog-img {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			object-position: center;
+			border-radius: 10px;
+			display: block;
+			/* Smooth zoom on hover */
+			transition: transform 0.45s ease;
+		}
+
+		/* ── Image Zoom on hover (desktop only) ─────────────────── */
+		.blog-card:hover .blog-img {
+			transform: scale(1.06);
+		}
+
+		/* ── Card Body ─────────────────────────────────────────── */
+		.blog-card-body {
+			padding: 14px 2px 4px;
+			display: flex;
+			flex-direction: column;
+			gap: 6px;
+			flex: 1;
+		}
+
+		/* ── Card Title ────────────────────────────────────────── */
+		.blog-card-title {
+			font-family: 'Playfair Display', serif;
+			font-size: 18px;
+			font-weight: 500;
+			line-height: 1.35;
+			margin: 0;
+		}
+
+		/* Title link — teal color, underline left→right, reverse on leave */
+		.blog-title-link {
+			font-family: 'Playfair Display', serif;
+			font-size: 18px;
+			font-weight: 500;
+			color: #4a8b7f;       /* teal — matches screenshot */
+			text-decoration: none;
+			position: relative;
+			padding-bottom: 2px;
+			display: inline;
+		}
+
+		.blog-title-link::after {
+			content: '';
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			width: 100%;
+			height: 1px;
+			background-color: #4a8b7f;
+			transform: scaleX(0);
+			transform-origin: right center;
+			transition: transform 0.35s ease;
+		}
+
+		/* Hover → underline expands left to right */
+		.blog-title-link:hover::after {
+			transform: scaleX(1);
+			transform-origin: left center;
+		}
+
+		/* ── Card Meta (date • brand) ──────────────────────────── */
+		.blog-meta {
+			font-family: 'Figtree', sans-serif;
+			font-size: 13px;
+			font-weight: 400;
+			color: #888;
+			display: flex;
+			align-items: center;
+			gap: 6px;
+			margin: 0;
+			line-height: 1;
+		}
+
+		.blog-date,
+		.blog-brand {
+			color: #888;
+			font-size: 13px;
+		}
+
+		.blog-sep {
+			color: #aaa;
+			font-size: 12px;
+		}
+
+		/* ── Slider Nav Buttons (hidden in grid mode) ──────────── */
+		.blog-slider-btn {
+			display: none;  /* Hidden in grid mode — JS shows them in slider mode */
+			position: absolute;
+			top: 50%;
+			transform: translateY(-50%);
+			z-index: 10;
+			background: #fff;
+			border: 1px solid #e0e0e0;
+			border-radius: 50%;
+			width: 40px;
+			height: 40px;
+			align-items: center;
+			justify-content: center;
+			cursor: pointer;
+			color: #1a2c3a;
+			box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+			transition: background 0.25s ease, box-shadow 0.25s ease;
+		}
+
+		.blog-slider-btn:hover {
+			background: #f5f5f3;
+			box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+		}
+
+		.blog-slider-prev { left: -20px; }
+		.blog-slider-next { right: -20px; }
+
+		/* ── Slider Dots (hidden in grid mode) ────────────────── */
+		.blog-dots {
+			display: none;          /* Hidden in grid mode — JS shows in slider mode */
+			justify-content: center;
+			gap: 8px;
+			margin-top: 20px;
+		}
+
+		.blog-dot {
+			width: 8px;
+			height: 8px;
+			border-radius: 50%;
+			background: #ccc;
+			border: none;
+			cursor: pointer;
+			padding: 0;
+			transition: background 0.25s ease, transform 0.25s ease;
+		}
+
+		.blog-dot.active {
+			background: #1a2c3a;
+			transform: scale(1.3);
+		}
+
+		/* ════════════════════════════════════════════════════════
+		SLIDER MODE — toggled by JS adding class="slider-mode"
+		to .blog-section
+		════════════════════════════════════════════════════════ */
+		.blog-section.slider-mode .blog-cards-track {
+			display: flex;
+			overflow-x: auto;
+			scroll-snap-type: x mandatory;
+			-webkit-overflow-scrolling: touch;
+			scrollbar-width: none;
+			gap: 24px;
+			padding-bottom: 4px;
+		}
+
+		.blog-section.slider-mode .blog-cards-track::-webkit-scrollbar {
+			display: none;
+		}
+
+		.blog-section.slider-mode .blog-card {
+			flex: 0 0 calc(33.333% - 16px);
+			scroll-snap-align: start;
+			min-width: 260px;
+		}
+
+		.blog-section.slider-mode .blog-slider-btn {
+			display: flex;
+		}
+
+		.blog-section.slider-mode .blog-dots {
+			display: flex;
+		}
+
+		/* ════════════════════════════════════════════════════════
+		RESPONSIVE BREAKPOINTS — all media query points
+		════════════════════════════════════════════════════════ */
+
+		/* ── XL ≥1400px ────────────────────────────────────────── */
+		@media (min-width: 1400px) {
+			.blog-container {
+				padding: 0 60px;
+			}
+
+			.blog-section-title {
+				font-size: 34px;
+			}
+		}
+
+		/* ── LG 1200–1399px ────────────────────────────────────── */
+		@media (max-width: 1399px) and (min-width: 1200px) {
+			.blog-cards-track {
+				grid-template-columns: repeat(3, 1fr);
+				gap: 22px;
+			}
+		}
+
+		/* ── MD 992–1199px (Tablet landscape) ─────────────────── */
+		@media (max-width: 1199px) and (min-width: 992px) {
+			.blog-section {
+				padding: 44px 0 48px;
+			}
+
+			.blog-container {
+				padding: 0 28px;
+			}
+
+			.blog-section-title {
+				font-size: 28px;
+			}
+
+			.blog-cards-track {
+				grid-template-columns: repeat(3, 1fr);
+				gap: 18px;
+			}
+
+			.blog-title-link {
+				font-size: 17px;
+			}
+		}
+
+		/* ── SM 768–991px (Tablet portrait) ───────────────────── */
+		@media (max-width: 991px) and (min-width: 768px) {
+			.blog-section {
+				padding: 36px 0 40px;
+			}
+
+			.blog-container {
+				padding: 0 24px;
+			}
+
+			.blog-section-title {
+				font-size: 26px;
+			}
+
+			.blog-header {
+				margin-bottom: 22px;
+			}
+
+			/* 2 columns on tablet portrait */
+			.blog-cards-track {
+				grid-template-columns: repeat(2, 1fr);
+				gap: 16px;
+			}
+
+			/* Slider mode: show 2 cards */
+			.blog-section.slider-mode .blog-card {
+				flex: 0 0 calc(50% - 12px);
+			}
+
+			.blog-title-link {
+				font-size: 17px;
+			}
+
+			.blog-view-all {
+				font-size: 13px;
+			}
+
+			/* No hover on tablet */
+			.blog-card:hover .blog-img {
+				transform: none;
+			}
+
+			.blog-title-link:hover::after {
+				transform: scaleX(0);
+			}
+
+			.blog-view-all:hover::after {
+				transform: scaleX(0);
+			}
+		}
+
+		/* ── XS 576–767px (Mobile landscape) ──────────────────── */
+		@media (max-width: 767px) and (min-width: 576px) {
+			.blog-section {
+				padding: 28px 0 32px;
+			}
+
+			.blog-container {
+				padding: 0 16px;
+			}
+
+			.blog-section-title {
+				font-size: 22px;
+			}
+
+			.blog-header {
+				margin-bottom: 18px;
+			}
+
+			/* 2 columns */
+			.blog-cards-track {
+				grid-template-columns: repeat(2, 1fr);
+				gap: 14px;
+			}
+
+			/* Slider: show 1.5 cards */
+			.blog-section.slider-mode .blog-card {
+				flex: 0 0 calc(80% - 12px);
+			}
+
+			.blog-title-link {
+				font-size: 16px;
+			}
+
+			.blog-view-all {
+				font-size: 13px;
+			}
+
+			/* ── NO hover on mobile ── */
+			.blog-card:hover .blog-img {
+				transform: none;
+			}
+
+			.blog-title-link:hover::after {
+				transform: scaleX(0);
+				transition: none;
+			}
+
+			.blog-view-all:hover::after {
+				transform: scaleX(0);
+				transition: none;
+			}
+		}
+
+		/* ── XXS ≤575px (Mobile portrait) ─────────────────────── */
+		@media (max-width: 575px) {
+			.blog-section {
+				padding: 24px 0 28px;
+			}
+
+			.blog-container {
+				padding: 0 14px;
+			}
+
+			.blog-section-title {
+				font-size: 20px;
+			}
+
+			.blog-header {
+				flex-wrap: wrap;
+				gap: 10px;
+				margin-bottom: 16px;
+			}
+
+			.blog-view-all {
+				font-size: 12px;
+			}
+
+			/* 1 column stacked */
+			.blog-cards-track {
+				grid-template-columns: 1fr;
+				gap: 20px;
+			}
+
+			.blog-img-wrapper {
+				padding-bottom: 60%;   /* slightly shorter on small screens */
+			}
+
+			.blog-title-link {
+				font-size: 16px;
+			}
+
+			.blog-meta {
+				font-size: 12px;
+			}
+
+			.blog-date,
+			.blog-brand {
+				font-size: 12px;
+			}
+
+			/* Slider: 1 card full width */
+			.blog-section.slider-mode .blog-card {
+				flex: 0 0 100%;
+				min-width: unset;
+			}
+
+			.blog-slider-prev { left: -14px; }
+			.blog-slider-next { right: -14px; }
+
+			/* ── NO hover on mobile ── */
+			.blog-card:hover .blog-img {
+				transform: none;
+			}
+
+			.blog-title-link:hover::after {
+				transform: scaleX(0);
+				transition: none;
+			}
+
+			.blog-view-all:hover::after {
+				transform: scaleX(0);
+				transition: none;
+			}
+		}
+
+		/* ── Media hover check: only apply hover on true pointer devices ── */
+		/* This is the cleanest way to disable hover on touch devices */
+		@media (hover: none) {
+			.blog-card:hover .blog-img {
+				transform: none !important;
+			}
+
+			.blog-title-link:hover::after {
+				transform: scaleX(0) !important;
+				transition: none !important;
+			}
+
+			.blog-view-all:hover::after {
+				transform: scaleX(0) !important;
+				transition: none !important;
+			}
+		}
+
+	}
+
+	$_section { {{= &custom_css}} }
+
+</style>
+
+<section class="blog-section" id="blog-section" aria-label="Our Blog Posts">
+	<div class="blog-container">
+
+		<!-- ── Section Header ── -->
+		<div class="blog-header">
+			<h2 class="blog-section-title">Our Blog Posts</h2>
+			<a href="#" class="blog-view-all" id="blog-view-all-link" aria-label="View all blog posts">
+				View All Posts <span class="blog-arrow" aria-hidden="true">&#10095;</span>
+			</a>
+		</div>
+
+		<!-- ── Cards Outer Wrapper ── -->
+		<!-- In GRID mode:  cards sit in a CSS grid, prev/next hidden -->
+		<!-- In SLIDER mode: cards scroll horizontally, prev/next visible -->
+		<div class="blog-cards-outer" id="blog-cards-outer">
+
+			<!-- Prev Button (slider mode only) -->
+			<button class="blog-slider-btn blog-slider-prev" id="blog-slider-prev" aria-label="Previous slide">
+				<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+				stroke-linecap="round" stroke-linejoin="round" width="18" height="18">
+				<polyline points="15 18 9 12 15 6"></polyline>
+			</svg>
+		</button>
+
+		<!-- Cards Track -->
+		<div class="blog-cards-track" id="blog-cards-track">
+
+
+        <article class="blog-card" id="blog-card-2">
+				<div class="blog-img-wrapper">
+					<img
+					src="Images/blog02_34effc15-af83-4999-850d-077c3cb75f9f.webp"
+					alt="Everything You Need to Know - beauty portrait close-up"
+					class="blog-img"
+					loading="lazy">
+				</div>
+				<div class="blog-card-body">
+					<h3 class="blog-card-title">
+						<a href="#" class="blog-title-link" id="blog-title-link-2">
+							Everything You Need to Know
+						</a>
+					</h3>
+					<p class="blog-meta">
+						<span class="blog-date">Apr 25, 2025</span>
+						<span class="blog-sep" aria-hidden="true">&bull;</span>
+						<span class="blog-brand">FOXECOM</span>
+					</p>
+				</div>
+			</article>
+
+                
+
+			</div>
+
+			<!-- Next Button (slider mode only) -->
+			<button class="blog-slider-btn blog-slider-next" id="blog-slider-next" aria-label="Next slide">
+				<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+				stroke-linecap="round" stroke-linejoin="round" width="18" height="18">
+				<polyline points="9 18 15 12 9 6"></polyline>
+			</svg>
+		</button>
+
+		</div><!-- /blog-cards-outer -->
+
+		<!-- Slider Dot Indicators (slider mode only) -->
+		<div class="blog-dots" id="blog-dots" role="tablist" aria-label="Slide indicators"></div>
+
+		</div><!-- /blog-container -->
+	</section>
+
+
+
+
+
+	<script>
+		/* ============================================================
+		BLOG POST SECTION — script.js
+		Dynamic slider / grid toggle.
+		- GRID mode  : default for ≤3 cards or desktop
+		- SLIDER mode: auto-enabled when cards > GRID_THRESHOLD
+		OR user's screen is ≤768px with many cards
+		To switch manually, call: BlogPosts.setMode('slider') or 'grid'
+		============================================================ */
+
+		(function () {
+			'use strict';
+
+			/* ── Configuration ─────────────────────────────────────── */
+			const CONFIG = {
+				// Cards per view in slider mode by breakpoint
+				CARDS_PER_VIEW: {
+					DESKTOP: 3,    // ≥992px
+					TABLET: 2,     // 576–991px
+					MOBILE: 1      // <576px
+				},
+				// Auto-switch to slider when card count exceeds this
+				GRID_THRESHOLD: 3,
+				// Scroll duration in ms
+				SCROLL_DURATION: 400
+			};
+
+			/* ── DOM References ────────────────────────────────────── */
+			const section   = document.getElementById('blog-section');
+			const track     = document.getElementById('blog-cards-track');
+			const prevBtn   = document.getElementById('blog-slider-prev');
+			const nextBtn   = document.getElementById('blog-slider-next');
+			const dotsWrap  = document.getElementById('blog-dots');
+
+			if (!section || !track) return;  // Guard: section not on page
+
+			/* ── State ─────────────────────────────────────────────── */
+			let currentIndex = 0;
+			let totalSlides  = 0;
+			let mode         = 'grid';    // 'grid' | 'slider'
+			let isAnimating  = false;
+
+			/* ── Utility: get cards per view based on viewport ──────── */
+			function getCardsPerView() {
+				const w = window.innerWidth;
+				if (w >= 992) return CONFIG.CARDS_PER_VIEW.DESKTOP;
+				if (w >= 576) return CONFIG.CARDS_PER_VIEW.TABLET;
+				return CONFIG.CARDS_PER_VIEW.MOBILE;
+			}
+
+			/* ── Utility: get all blog cards ───────────────────────── */
+			function getCards() {
+				return Array.from(track.querySelectorAll('.blog-card'));
+			}
+
+			/* ── Build Dots ────────────────────────────────────────── */
+			function buildDots(count) {
+				dotsWrap.innerHTML = '';
+				for (let i = 0; i < count; i++) {
+					const btn = document.createElement('button');
+					btn.className = 'blog-dot' + (i === 0 ? ' active' : '');
+					btn.setAttribute('role', 'tab');
+					btn.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+					btn.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
+					btn.dataset.index = i;
+					btn.addEventListener('click', function () {
+						goTo(parseInt(this.dataset.index, 10));
+					});
+					dotsWrap.appendChild(btn);
+				}
+			}
+
+			/* ── Update Active Dot ──────────────────────────────────── */
+			function updateDots(index) {
+				const dots = dotsWrap.querySelectorAll('.blog-dot');
+				dots.forEach(function (d, i) {
+					d.classList.toggle('active', i === index);
+					d.setAttribute('aria-selected', i === index ? 'true' : 'false');
+				});
+			}
+
+			/* ── Go To Slide ────────────────────────────────────────── */
+			function goTo(index) {
+				if (mode !== 'slider' || isAnimating) return;
+				const cards = getCards();
+				if (!cards.length) return;
+
+				const perView = getCardsPerView();
+				const maxIndex = Math.max(0, totalSlides - perView);
+				index = Math.max(0, Math.min(index, maxIndex));
+
+				currentIndex = index;
+				const cardWidth = cards[0].offsetWidth;
+				const gap = 24; // matches CSS gap
+				const scrollLeft = index * (cardWidth + gap);
+
+				isAnimating = true;
+				track.scrollTo({ left: scrollLeft, behavior: 'smooth' });
+
+				setTimeout(function () { isAnimating = false; }, CONFIG.SCROLL_DURATION + 50);
+
+				updateDots(index);
+				updateNavButtons();
+			}
+
+			/* ── Update Nav Button States ──────────────────────────── */
+			function updateNavButtons() {
+				const perView = getCardsPerView();
+				const maxIndex = Math.max(0, totalSlides - perView);
+				prevBtn.disabled = currentIndex <= 0;
+				nextBtn.disabled = currentIndex >= maxIndex;
+				prevBtn.style.opacity = prevBtn.disabled ? '0.35' : '1';
+				nextBtn.style.opacity = nextBtn.disabled ? '0.35' : '1';
+			}
+
+			/* ── Set Mode: 'grid' or 'slider' ──────────────────────── */
+			function setMode(newMode) {
+				mode = newMode;
+				if (newMode === 'slider') {
+					section.classList.add('slider-mode');
+					totalSlides = getCards().length;
+					const perView = getCardsPerView();
+					const dotsCount = Math.max(1, totalSlides - perView + 1);
+					buildDots(dotsCount);
+					currentIndex = 0;
+					track.scrollLeft = 0;
+					updateNavButtons();
+				} else {
+					section.classList.remove('slider-mode');
+					currentIndex = 0;
+					dotsWrap.innerHTML = '';
+				}
+			}
+
+			/* ── Auto-decide mode based on card count + viewport ─────── */
+			function autoDecideMode() {
+				const cards = getCards();
+				const count = cards.length;
+				const perView = getCardsPerView();
+
+				// Switch to slider if more cards than fit in grid, or if
+				// user is on mobile/tablet with >1 card
+				if (count > CONFIG.GRID_THRESHOLD || (window.innerWidth < 768 && count > 1)) {
+					setMode('slider');
+				} else {
+					setMode('grid');
+				}
+			}
+
+			/* ── Sync dot on scroll (without snapping conflicts) ────── */
+			let scrollTimer;
+			track.addEventListener('scroll', function () {
+				if (mode !== 'slider') return;
+				clearTimeout(scrollTimer);
+				scrollTimer = setTimeout(function () {
+					const cards = getCards();
+					if (!cards.length) return;
+					const cardWidth = cards[0].offsetWidth;
+					const gap = 24;
+					const approxIndex = Math.round(track.scrollLeft / (cardWidth + gap));
+					if (approxIndex !== currentIndex) {
+						currentIndex = approxIndex;
+						updateDots(currentIndex);
+						updateNavButtons();
+					}
+				}, 80);
+			});
+
+			/* ── Button Events ──────────────────────────────────────── */
+			prevBtn.addEventListener('click', function () {
+				goTo(currentIndex - 1);
+			});
+
+			nextBtn.addEventListener('click', function () {
+				goTo(currentIndex + 1);
+			});
+
+			/* ── Touch/Swipe Support ────────────────────────────────── */
+			let touchStartX = 0;
+			let touchEndX   = 0;
+
+			track.addEventListener('touchstart', function (e) {
+				touchStartX = e.changedTouches[0].screenX;
+		}, { passive: true });
+
+			track.addEventListener('touchend', function (e) {
+				if (mode !== 'slider') return;
+				touchEndX = e.changedTouches[0].screenX;
+				const diff = touchStartX - touchEndX;
+				if (Math.abs(diff) > 40) {
+					goTo(diff > 0 ? currentIndex + 1 : currentIndex - 1);
+				}
+		}, { passive: true });
+
+			/* ── Keyboard Accessibility ────────────────────────────── */
+			track.addEventListener('keydown', function (e) {
+				if (mode !== 'slider') return;
+				if (e.key === 'ArrowLeft')  goTo(currentIndex - 1);
+				if (e.key === 'ArrowRight') goTo(currentIndex + 1);
+			});
+
+			/* ── Resize Handler ─────────────────────────────────────── */
+			let resizeTimer;
+			window.addEventListener('resize', function () {
+				clearTimeout(resizeTimer);
+				resizeTimer = setTimeout(function () {
+					autoDecideMode();
+				}, 200);
+			});
+
+			/* ── Init ───────────────────────────────────────────────── */
+			autoDecideMode();
+
+			/* ── Public API (optional manual control) ───────────────── */
+			window.BlogPosts = {
+				setMode: setMode,
+				goTo: goTo,
+				refresh: autoDecideMode
+			};
+
+		})();
+
+	</script>

@@ -1,0 +1,657 @@
+/* ==========================================================================
+   DAILY ESSENTIALS SECTION STYLES
+   - Beginner Friendly, Clean & Documented
+   - Simple CSS (No :root/CSS variables)
+   - No aspect-ratio property used
+   - Responsive design with breakpoints
+   ========================================================================== */
+
+/* ─── GENERAL STYLES ─── */
+body {
+    background-color: #ffffff;
+    font-family: 'Figtree', sans-serif;
+    color: #1a1a1a;
+    margin: 0;
+    padding: 0;
+}
+
+/* ─── SECTION WRAPPER ─── */
+.daily-essentials-section {
+    background-color: #ffffff;
+    padding-top: 60px;
+    padding-bottom: 60px;
+    overflow-x: hidden;
+}
+
+/* ─── SECTION HEADER ─── */
+.section-header {
+    margin-bottom: 30px;
+}
+
+.section-title {
+    font-family: 'Fraunces', serif;
+    font-size: 38px;
+    font-weight: 700;
+    color: #0f2e3c;
+    margin-bottom: 10px;
+}
+
+.section-desc {
+    font-family: 'Figtree', sans-serif;
+    font-size: 16px;
+    color: #596b73;
+    margin: 0;
+}
+
+/* Shop All Products Link */
+.shop-all-link {
+    font-family: 'Figtree', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: #0f2e3c;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+    padding-bottom: 4px;
+    transition: color 0.3s ease;
+}
+
+.shop-all-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #0f2e3c;
+    transform: scaleX(0);
+    transform-origin: right center;
+    transition: transform 0.35s ease;
+}
+
+.shop-all-link:hover {
+    color: #000000;
+}
+
+.shop-all-link:hover::after {
+    transform-origin: left center;
+    transform: scaleX(1);
+}
+
+/* ─── SLIDER CONTAINER & PRODUCTS TRACK ─── */
+.slider-container {
+    position: relative;
+    width: 100%;
+}
+
+.products-track {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none; /* Hide default scrollbar for Firefox */
+    padding-bottom: 15px;
+    margin-bottom: 10px;
+}
+
+/* Hide default scrollbar for Chrome, Safari and Opera */
+.products-track::-webkit-scrollbar {
+    display: none;
+}
+
+/* ─── CARDS RESPONSIVE WIDTHS (Desktop & Tablet) ─── */
+/* Default for Desktop View (screens larger than 991px) */
+@media (min-width: 992px) {
+    .product-card,
+    .banner-card {
+        flex: 0 0 calc((100% - (16px * 5)) / 5.5);
+        width: calc((100% - (16px * 5)) / 5.5);
+    }
+}
+
+/* Tablet View (screens between 576px and 991px) */
+@media (min-width: 576px) and (max-width: 991px) {
+    .product-card,
+    .banner-card {
+        flex: 0 0 calc((100% - (16px * 2)) / 2.6);
+        width: calc((100% - (16px * 2)) / 2.6);
+    }
+}
+
+/* Mobile View (screens smaller than 576px) */
+@media (max-width: 575px) {
+    .product-card,
+    .banner-card {
+        flex: 0 0 calc((100% - (16px * 1)) / 1.4);
+        width: calc((100% - (16px * 1)) / 1.4);
+    }
+}
+
+/* ─── 1. BANNER CARD (First card in the track) ─── */
+.banner-card {
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* Push text content to the bottom */
+    background-color: #3d6b5e; /* Fallback green background */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    height: 380px; /* Fixed height instead of aspect-ratio */
+}
+
+/* Background image filling banner */
+.banner-bg-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    z-index: 0;
+}
+
+/* Dark gradient overlay for text readability */
+.banner-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.02) 0%, rgba(0, 0, 0, 0.55) 100%);
+    z-index: 1;
+}
+
+/* Content block */
+.banner-content {
+    position: relative;
+    z-index: 2;
+    padding: 24px 20px;
+    color: #ffffff;
+}
+
+.banner-eyebrow {
+    font-family: 'Figtree', sans-serif;
+    font-size: 14px;
+    font-style: italic;
+    font-weight: 400;
+    margin-bottom: 6px;
+    opacity: 0.9;
+}
+
+.banner-headline {
+    font-family: 'Fraunces', serif;
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1.25;
+    margin-bottom: 20px;
+}
+
+.banner-cta {
+    font-family: 'Figtree', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: #ffffff;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+    padding-bottom: 3px;
+}
+
+.banner-cta::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1.5px;
+    background-color: #ffffff;
+    transform: scaleX(0);
+    transform-origin: right center;
+    transition: transform 0.35s ease;
+}
+
+.banner-cta:hover::after {
+    transform-origin: left center;
+    transform: scaleX(1);
+}
+
+/* ─── 2. PRODUCT CARD ─── */
+.product-card {
+    background-color: #ffffff;
+    border: 1px solid #f0f0f0;
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 12px 40px rgba(15, 46, 60, 0.04);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 380px; /* Matching banner card height */
+}
+
+.product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 45px rgba(15, 46, 60, 0.08);
+}
+
+/* Image Container */
+.card-image-box {
+    position: relative;
+    height: 250px; /* Explicit height for layout consistency */
+    background-color: #f7f7f7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    overflow: hidden;
+}
+
+/* Image wrapper to manage transitions */
+.image-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Main & Hover image rules */
+.img-main,
+.img-hover {
+    max-width: 90%;
+    max-height: 190px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    transition: opacity 0.4s ease;
+}
+
+.img-hover {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    z-index: 0;
+}
+
+/* Hover Image Swap */
+.product-card:hover .img-main {
+    opacity: 0;
+}
+
+.product-card:hover .img-hover {
+    opacity: 1;
+    z-index: 1;
+}
+
+/* Status Badges (New, Sale) */
+.badge-status {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    color: #ffffff;
+    font-family: 'Figtree', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 5px 12px;
+    border-radius: 50px;
+    z-index: 2;
+    text-transform: uppercase;
+}
+
+.badge-new {
+    background-color: #82b1a5; /* Pastel Green */
+}
+
+.badge-sale {
+    background-color: #d92f24; /* Red */
+}
+
+/* ─── HOVER BUTTONS ON CARD IMAGE ─── */
+
+/* Quick View search button */
+.btn-quick-view {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 36px;
+    height: 36px;
+    border: none;
+    border-radius: 50%;
+    background-color: #ffffff;
+    color: #0f2e3c;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    transform: translate(8px, -8px);
+    transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+    z-index: 3;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.btn-quick-view:hover {
+    background-color: #0f2e3c;
+    color: #ffffff;
+}
+
+/* Add to Cart button (slides up from bottom) */
+.btn-add-cart {
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    background-color: #0f2e3c;
+    color: #ffffff;
+    font-family: 'Figtree', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
+    z-index: 3;
+}
+
+.btn-add-cart::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: #ffffff;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+    z-index: 0;
+}
+
+.btn-add-cart span {
+    position: relative;
+    z-index: 1;
+    transition: color 0.3s ease;
+}
+
+.btn-add-cart:hover::before {
+    transform: scaleX(1);
+}
+
+.btn-add-cart:hover span {
+    color: #0f2e3c;
+}
+
+/* Show buttons on Card Image Hover (Desktop Only) */
+@media (min-width: 769px) {
+    .card-image-box:hover .btn-quick-view {
+        opacity: 1;
+        transform: translate(0, 0);
+    }
+    
+    .card-image-box:hover .btn-add-cart {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* Shift Cart Button up slightly if marquee is active */
+    .card-image-box:has(.selling-fast-badge):hover .btn-add-cart {
+        bottom: 36px;
+    }
+}
+
+/* ─── MARQUEE "SELLING FAST" BADGE ─── */
+.selling-fast-badge {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ffffff;
+    padding: 6px 0;
+    z-index: 1;
+    overflow: hidden;
+    border-top: 1px solid #f0f0f0;
+}
+
+.marquee-track {
+    display: flex;
+    width: max-content;
+    animation: run-marquee 15s linear infinite;
+}
+
+.marquee-track span {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding-right: 8px;
+    font-family: 'Figtree', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    color: #0f2e3c;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+@keyframes run-marquee {
+    0% {
+        transform: translateX(0%);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+/* ─── CARD TEXT INFO ─── */
+.card-info {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.product-category {
+    font-family: 'Figtree', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #8c9fa6;
+    letter-spacing: 0.08em;
+    margin-bottom: 6px;
+    /* Underline animation setup */
+    display: inline-block;
+    position: relative;
+    padding-bottom: 2px;
+    width: fit-content;
+    cursor: pointer;
+}
+
+/* Animated underline for category — grows from right to left on hover */
+.product-category::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0.5px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: right center;
+    transition: transform 0.35s ease;
+}
+
+.product-category:hover::after {
+    transform-origin: left center;
+    transform: scaleX(1);
+}
+
+.product-name {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: #0f2e3c;
+    margin: 0 0 8px 0;
+    line-height: 1.35;
+    /* Underline animation setup */
+    display: inline-block;
+    position: relative;
+    padding-bottom: 2px;
+    width: fit-content;
+    max-width: 100%;
+    cursor: pointer;
+}
+
+/* Animated underline for product name — grows from right to left on hover */
+.product-name::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0.5px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: right center;
+    transition: transform 0.35s ease;
+}
+
+.product-name:hover::after {
+    transform-origin: left center;
+    transform: scaleX(1);
+}
+
+.product-price-row {
+    margin-top: auto; /* Push price to bottom */
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.current-price {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: #0f2e3c;
+}
+
+.current-price-sale {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: #d92f24; /* Sale red color */
+}
+
+.original-price {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    text-decoration: line-through;
+    color: #8c9fa6;
+}
+
+/* ─── SLIDER FOOTER: PROGRESS & NAVIGATION ─── */
+.slider-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 25px;
+}
+
+/* Progress bar wrapper */
+.scroll-bar-wrap {
+    flex: 1;
+    position: relative;
+    height: 4px;
+    margin-right: 24px;
+}
+
+.scroll-track {
+    width: 100%;
+    height: 2px;
+    background-color: #e5e5e5;
+    border-radius: 2px;
+}
+
+.scroll-thumb {
+    position: absolute;
+    left: 0;          /* Always anchored to left — never moves */
+    top: 50%;
+    transform: translateY(-50%);
+    height: 3px;
+    width: 15%;       /* Grows wider as you scroll — controlled by JS */
+    background-color: #0f2e3c;
+    border-radius: 3px;
+    transition: width 0.2s ease-out; /* Only width animates, not left */
+}
+
+/* Navigation Round Buttons */
+.nav-btn {
+    width: 44px;
+    height: 44px;
+    border: 1px solid #e2e8f0;
+    border-radius: 50%;
+    background-color: #ffffff;
+    color: #0f2e3c;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, opacity 0.3s ease;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+}
+
+.nav-btn:hover:not(:disabled) {
+    background-color: #0f2e3c;
+    border-color: #0f2e3c;
+    color: #ffffff;
+}
+
+.nav-btn:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+}
+
+/* ─── MOBILE VIEW STYLING UPDATES ─── */
+@media (max-width: 768px) {
+    .daily-essentials-section {
+        padding-top: 40px;
+        padding-bottom: 40px;
+    }
+    
+    .section-title {
+        font-size: 28px;
+    }
+
+    .section-desc {
+        font-size: 14px;
+    }
+
+    /* Disable hover cards lifting on mobile */
+    .product-card:hover {
+        transform: none;
+        box-shadow: 0 10px 30px rgba(15, 46, 60, 0.04);
+    }
+
+    /* Always hide hover buttons on touch screens to prevent interference */
+    .btn-quick-view,
+    .btn-add-cart {
+        display: none !important;
+    }
+
+    /* Adjust cards height slightly for mobile */
+    .product-card,
+    .banner-card {
+        height: 360px;
+    }
+
+    .card-image-box {
+        height: 230px;
+    }
+
+    .img-main,
+    .img-hover {
+        max-height: 170px;
+    }
+}

@@ -1,0 +1,82 @@
+
+    <!-- Section Wrapper -->
+    <section class="daily-essentials-section pt-md-{{= &p_md_top}} pb-md-{{= &p_md_bottom}} {{if p_l_r_md != 'custom'}}px-md-{{= &p_l_r_md}}{{endif}} pt-{{= &p_top}} pb-{{= &p_bottom}} {{if p_l_r != 'm_custom'}}px-{{= &p_l_r}}{{endif}}">
+        <div class="{{= &section_spacing}}">
+            
+            <!-- Section Header: Title & Subtitle on left, Shop Link on right -->
+            <header class="section-header d-flex flex-column flex-md-row justify-content-between align-items-md-end mb-4">
+                <div class="header-left">
+                    <h2 class="section-title">{{= &title}}</h2>
+                    <p class="section-desc">{{= &desc}}</p>
+                </div>
+                <div class="header-right mt-3 mt-md-0">
+                    <a href="#" class="shop-all-link">
+                        Shop All Products
+                        <svg class="ms-1" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </a>
+                </div>
+            </header>
+
+            <!-- Carousel Slider Wrapper -->
+            <div class="slider-container">
+                <!-- Products Track (Horizontal Scroll Container) -->
+                <div class="products-track" id="productsTrack">
+                    
+                    <!-- 1st Card: Banner Card (Promo Banner) -->
+                    <div class="banner-card">
+                        <!-- Cover Image -->
+                        <img class="banner-bg-img" src="../Images/s-fc-banner-3.webp" alt="Holiday Sets Promo">
+                        
+                        <!-- Content Overlay -->
+                        <div class="banner-content">
+                            <p class="banner-eyebrow">Big Saving</p>
+                            <h3 class="banner-headline">On Holiday Sets</h3>
+                            <a href="#" class="banner-cta">
+                                Explore Now 
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="9 18 15 12 9 6"></polyline>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- 2nd Card: Product Card (Hydrate Smoothing Serum) -->
+                   {{with each &collection as $img at $i}}
+					{{$pass_val=[$a,$i]}}
+					{{use component $img pass on [$pass_val]}}
+				{{endwith}}
+
+               
+
+                </div>
+            </div>
+
+            <!-- Slider Footer: Progress Bar and Navigation Buttons -->
+            <footer class="slider-footer d-flex align-items-center justify-content-between mt-4">
+                <!-- Scroll Progress Bar -->
+                <div class="scroll-bar-wrap">
+                    <div class="scroll-track"></div>
+                    <div class="scroll-thumb" id="scrollThumb"></div>
+                </div>
+
+                <!-- Circular Navigation Buttons -->
+                <div class="slider-navigation d-flex gap-2">
+                    <button class="nav-btn" id="prevBtn" type="button" aria-label="Previous Slide" disabled>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="15 18 9 12 15 6"></polyline>
+                        </svg>
+                    </button>
+                    <button class="nav-btn" id="nextBtn" type="button" aria-label="Next Slide">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </button>
+                </div>
+            </footer>
+
+        </div>
+    </section>
+
+

@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="See what's trending on social media - real beauty lovers sharing their favourite products.">
+    <title>What Trending On Social</title>
+
+    <!-- Google Fonts: Figtree (body/UI) + Fraunces (title serif) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700&family=Fraunces:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap"
+        rel="stylesheet">
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- ══════════════════════════════════════════════════════
+     WHAT TRENDING ON SOCIAL  —  Section
+     ══════════════════════════════════════════════════════ -->
+<section class="social-section" id="social-section" aria-label="What Trending On Social">
+    <div class="social-container">
+
+        <!-- ── Section Header ── -->
+        <header class="section-header">
+            <h2 class="section-title">What Trending On Social</h2>
+        </header>
+
+        <!-- ── Slider Wrap ── -->
+        <div class="slider-wrap">
+            <div class="products-track" id="productsTrack">
+
+                <!-- ════════════════════════════════
+                     CARD 1
+                ════════════════════════════════ -->
+                <article class="social-card" id="social-card-1">
+                    <!-- User Header -->
+                    <div class="card-user-header">
+                        <div class="user-avatar" aria-hidden="true">
+                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&h=80&fit=crop" class="avatar-img" alt="Stephanie" />
+                        </div>
+                        <div class="user-info">
+                            <span class="user-name">Stephanie</span>
+                            <span class="user-handle">@glamourgirl</span>
+                        </div>
+                        <div class="tiktok-icon" aria-label="TikTok">
+                            <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
+                                <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.34 6.34 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.77a4.85 4.85 0 0 1-1.01-.08z"/>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- Video / Media -->
+                    <div class="card-media-wrap">
+                        <video
+                            class="card-video"
+                            src="Videos/791c3eef45424653a89be9cbc40d89fa.HD-1080p-2.5Mbps-45290425.mp4"
+                            loop
+                            muted
+                            playsinline
+                            preload="metadata"
+                            poster="Images/img1.webp"
+                            aria-label="Stephanie's trending video - Facial Serum">
+                        </video>
+                        <!-- Play/Pause Button overlay -->
+                        <button class="play-btn" aria-label="Play video" data-state="paused">
+                            <svg class="icon-play" viewBox="0 0 24 24" fill="white" width="28" height="28">
+                                <path d="M8 5v14l11-7z"/>
+                            </svg>
+                            <svg class="icon-pause" viewBox="0 0 24 24" fill="white" width="28" height="28" style="display:none;">
+                                <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <!-- Card Footer -->
+                    <div class="card-footer-info">
+                        <div class="product-label">
+                            <img class="product-image" src="Purifyingfacewash-3.webp" alt="Facial Serum" />
+                            <span class="product-name">Facial Serum</span>
+                        </div>
+                        <a href="#" class="product-arrow" aria-label="View Facial Serum">&#8250;</a>
+                    </div>
+                </article>
+
+                <!-- ════════════════════════════════
+                     CARD 2
+                ════════════════════════════════ -->
+                <article class="social-card" id="social-card-2">
+                    <div class="card-user-header">
+                        <div class="user-avatar" aria-hidden="true">
+                            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=80&h=80&fit=crop" class="avatar-img" alt="Ella Kate" />
+                        </div>
+                        <div class="user-info">
+                            <span class="user-name">Ella Kate</span>
+                            <span class="user-handle">@fashionista</span>
+                        </div>
+                        <div class="tiktok-icon" aria-label="TikTok">
+                            <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
+                                <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.34 6.34 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.77a4.85 4.85 0 0 1-1.01-.08z"/>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div class="card-media-wrap">
+                        <video
+                            class="card-video"
+                            src="Videos/93614359c6244c85a7bdaae932862220.HD-1080p-3.3Mbps-45290426.mp4"
+                            loop
+                            muted
+                            playsinline
+                            preload="metadata"
+                            poster="Images/img2.webp"
+                            aria-label="Ella Kate's trending video - Body Scrub">
+                        </video>
+                        <button class="play-btn" aria-label="Play video" data-state="paused">
+                            <svg class="icon-play" viewBox="0 0 24 24" fill="white" width="28" height="28">
+                                <path d="M8 5v14l11-7z"/>
+                            </svg>
+                            <svg class="icon-pause" viewBox="0 0 24 24" fill="white" width="28" height="28" style="display:none;">
+                                <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div class="card-footer-info">
+                        <div class="product-label">
+                            <img class="product-image" src="body_cleanser-67.webp" alt="Body Scrub" />
+                            <span class="product-name">Body Scrub</span>
+                        </div>
+                        <a href="#" class="product-arrow" aria-label="View Body Scrub">&#8250;</a>
+                    </div>
+                </article>
+
+                <!-- ════════════════════════════════
+                     CARD 3
+                ════════════════════════════════ -->
+                <article class="social-card" id="social-card-3">
+                    <div class="card-user-header">
+                        <div class="user-avatar" aria-hidden="true">
+                            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=80&h=80&fit=crop" class="avatar-img" alt="Sara Jana" />
+                        </div>
+                        <div class="user-info">
+                            <span class="user-name">Sara Jana</span>
+                            <span class="user-handle">@makeupdiva</span>
+                        </div>
+                        <div class="tiktok-icon" aria-label="TikTok">
+                            <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
+                                <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.34 6.34 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.77a4.85 4.85 0 0 1-1.01-.08z"/>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div class="card-media-wrap">
+                        <video
+                            class="card-video"
+                            src="Videos/e36c34b5ad724380a1f0184e199acb1b.HD-1080p-2.5Mbps-45290427.mp4"
+                            loop
+                            muted
+                            playsinline
+                            preload="metadata"
+                            poster="Images/img3.webp"
+                            aria-label="Sara Jana's trending video - Deep Thirst Serum">
+                        </video>
+                        <button class="play-btn" aria-label="Play video" data-state="paused">
+                            <svg class="icon-play" viewBox="0 0 24 24" fill="white" width="28" height="28">
+                                <path d="M8 5v14l11-7z"/>
+                            </svg>
+                            <svg class="icon-pause" viewBox="0 0 24 24" fill="white" width="28" height="28" style="display:none;">
+                                <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div class="card-footer-info">
+                        <div class="product-label">
+                            <img class="product-image" src="MoistureRepairShampoo-35a.webp" alt="Deep Thirst Serum" />
+                            <span class="product-name">Deep Thirst Serum</span>
+                        </div>
+                        <a href="#" class="product-arrow" aria-label="View Deep Thirst Serum">&#8250;</a>
+                    </div>
+                </article>
+
+                <!-- ════════════════════════════════
+                     CARD 4
+                ════════════════════════════════ -->
+                <article class="social-card" id="social-card-4">
+                    <div class="card-user-header">
+                        <div class="user-avatar" aria-hidden="true">
+                            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=80&h=80&fit=crop" class="avatar-img" alt="Lucy Belle" />
+                        </div>
+                        <div class="user-info">
+                            <span class="user-name">Lucy Belle</span>
+                            <span class="user-handle">@trendygirl</span>
+                        </div>
+                        <div class="tiktok-icon" aria-label="TikTok">
+                            <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
+                                <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.34 6.34 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.77a4.85 4.85 0 0 1-1.01-.08z"/>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div class="card-media-wrap">
+                        <video
+                            class="card-video"
+                            src="Videos/8c57b0618ebd44c299af12975bbccfac.HD-1080p-2.5Mbps-45290428.mp4"
+                            loop
+                            muted
+                            playsinline
+                            preload="metadata"
+                            aria-label="Lucy Belle's trending video - Facial Serum">
+                        </video>
+                        <button class="play-btn" aria-label="Play video" data-state="paused">
+                            <svg class="icon-play" viewBox="0 0 24 24" fill="white" width="28" height="28">
+                                <path d="M8 5v14l11-7z"/>
+                            </svg>
+                            <svg class="icon-pause" viewBox="0 0 24 24" fill="white" width="28" height="28" style="display:none;">
+                                <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div class="card-footer-info">
+                        <div class="product-label">
+                            <img class="product-image" src="Purifyingfacewash-3.webp" alt="Facial Serum" />
+                            <span class="product-name">Facial Serum</span>
+                        </div>
+                        <a href="#" class="product-arrow" aria-label="View Facial Serum">&#8250;</a>
+                    </div>
+                </article>
+
+                <!-- ════════════════════════════════
+                     CARD 5
+                ════════════════════════════════ -->
+                <article class="social-card" id="social-card-5">
+                    <div class="card-user-header">
+                        <div class="user-avatar" aria-hidden="true">
+                            <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=80&h=80&fit=crop" class="avatar-img" alt="Ava Marie" />
+                        </div>
+                        <div class="user-info">
+                            <span class="user-name">Ava Marie</span>
+                            <span class="user-handle">@lovelyvibes</span>
+                        </div>
+                        <div class="tiktok-icon" aria-label="TikTok">
+                            <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
+                                <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.34 6.34 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.77a4.85 4.85 0 0 1-1.01-.08z"/>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div class="card-media-wrap">
+                        <video
+                            class="card-video"
+                            src="Videos/4136efee4adb4350b3ba05e09a886fc3.HD-1080p-2.5Mbps-45290429.mp4"
+                            loop
+                            muted
+                            playsinline
+                            preload="metadata"
+                            aria-label="Ava Marie's trending video - Brighten & Clear">
+                        </video>
+                        <button class="play-btn" aria-label="Play video" data-state="paused">
+                            <svg class="icon-play" viewBox="0 0 24 24" fill="white" width="28" height="28">
+                                <path d="M8 5v14l11-7z"/>
+                            </svg>
+                            <svg class="icon-pause" viewBox="0 0 24 24" fill="white" width="28" height="28" style="display:none;">
+                                <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div class="card-footer-info">
+                        <div class="product-label">
+                            <img class="product-image" src="fav.webp" alt="Brighten & Clear" />
+                            <span class="product-name">Brighten &amp; Clear</span>
+                        </div>
+                        <a href="#" class="product-arrow" aria-label="View Brighten and Clear">&#8250;</a>
+                    </div>
+                </article>
+
+                <!--
+                ╔════════════════════════════════════════════════════════════╗
+                ║  ADD MORE CARDS HERE — copy any <article class="social-card"> ║
+                ║  block. Assign a new id="social-card-N".                   ║
+                ║  Slider auto-updates. Design stays intact.                 ║
+                ╚════════════════════════════════════════════════════════════╝
+                -->
+
+            </div><!-- /products-track -->
+        </div><!-- /slider-wrap -->
+
+        <!-- ── Slider Footer (scroll bar + nav buttons) — EXACT same as provided code ── -->
+        <div class="slider-footer">
+            <div class="scroll-bar-wrap">
+                <div class="scroll-track"></div>
+                <div class="scroll-thumb" id="scrollThumb"></div>
+            </div>
+            <div class="slider-nav">
+                <button class="nav-btn" id="prevBtn" type="button" aria-label="Previous">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2">
+                        <path d="m15 18-6-6 6-6"/>
+                    </svg>
+                </button>
+                <button class="nav-btn" id="nextBtn" type="button" aria-label="Next">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2">
+                        <path d="m9 18 6-6-6-6"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+    </div><!-- /social-container -->
+</section>
+
+<!-- Bootstrap JS Bundle -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Custom JS -->
+<script src="script.js"></script>
+
+</body>
+</html>

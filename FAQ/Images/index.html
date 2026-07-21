@@ -1,0 +1,395 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FAQ - Discover More</title>
+  <meta name="description" content="Frequently asked questions - shipping, returns, sizing and more." />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+
+  <style>
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: "Inter", sans-serif;
+      background-color: #e8e4ef;
+      margin: 0;
+      padding: 0;
+    }
+
+    .faq-section {
+      background-color: #e8e4ef;
+      padding: 60px 0;
+    }
+
+    /* ===== LEFT CARD ===== */
+    /* Card is position:relative + overflow:hidden
+       The IMG is in normal flow → drives card height automatically
+       Text content is absolute on top of image */
+    .faq-card {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    /* Full background image — in normal flow, gives card its height */
+    .faq-card-bg {
+      width: 100%;
+      height: auto;
+      display: block;
+      transform: scale(1);
+      transition: transform 0.65s ease;
+    }
+
+    /* Zoom IN on hover */
+    @media (hover: hover) {
+      .faq-card:hover .faq-card-bg {
+        transform: scale(1.08);
+      }
+    }
+
+    /* Text overlaid at top of card */
+    .faq-card-content {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      text-align: center;
+      padding: 40px 28px 0 28px;
+    }
+
+    .faq-card-title {
+      font-family: "DM Serif Display", serif;
+      font-size: 30px;
+      font-weight: 400;
+      color: #ffffff;
+      line-height: 1.25;
+      margin-bottom: 14px;
+      letter-spacing: -0.2px;
+    }
+
+    .faq-card-subtitle {
+      font-family: "Inter", sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      color: #ffffff;
+      line-height: 1.65;
+      margin-bottom: 26px;
+      max-width: 240px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* ===== CONTACT US BUTTON — left-to-right black fill ===== */
+    .btn-contact {
+      display: inline-block;
+      position: relative;
+      overflow: hidden;
+      font-family: "Inter", sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      color: #2d2d2d;
+      background-color: #ffffff;
+      border: 1.5px solid #2d2d2d;
+      border-radius: 50px;
+      padding: 11px 36px;
+      text-decoration: none;
+      cursor: pointer;
+      letter-spacing: 0.3px;
+      transition: color 0.4s ease;
+      z-index: 0;
+    }
+
+    .btn-contact::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: #000000;
+      border-radius: 50px;
+      transform: translateX(-100%);
+      transition: transform 0.4s ease;
+      z-index: -1;
+    }
+
+    @media (hover: hover) {
+      .btn-contact:hover::before { transform: translateX(0); }
+      .btn-contact:hover {
+        color: #ffffff;
+        border-color: #000000;
+      }
+    }
+
+    /* ===== RIGHT — FAQ TITLE ===== */
+    .faq-main-title {
+      font-family: "DM Serif Display", serif;
+      font-size: 40px;
+      font-weight: 400;
+      color: #1a1a2e;
+      line-height: 1.2;
+      margin-bottom: 28px;
+      letter-spacing: -0.5px;
+    }
+
+    /* ===== ACCORDION ===== */
+    .faq-accordion .accordion-item {
+      background: transparent;
+      border: none;
+      border-top: 1px solid #c8c8c8;
+    }
+
+    .faq-accordion .accordion-item:last-child {
+      border-bottom: 1px solid #c8c8c8;
+    }
+
+    .faq-accordion .accordion-button {
+      font-family: "Inter", sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      color: #2d2d2d;
+      background-color: transparent;
+      padding: 20px 0;
+      box-shadow: none;
+      border: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .faq-accordion .accordion-button::after { display: none; }
+
+    .faq-accordion .accordion-button:not(.collapsed) {
+      color: #2d2d2d;
+      background-color: transparent;
+      box-shadow: none;
+    }
+
+    .faq-icon {
+      font-size: 22px;
+      font-weight: 300;
+      color: #2d2d2d;
+      line-height: 1;
+      flex-shrink: 0;
+      margin-left: 16px;
+    }
+
+    .faq-accordion .accordion-body {
+      font-family: "Inter", sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      color: #4a4a4a;
+      line-height: 1.7;
+      padding: 0 0 20px 0;
+    }
+
+    .faq-accordion .accordion-body .accent {
+      color: #4b3fa0;
+      font-weight: 500;
+    }
+
+    .faq-accordion .accordion-collapse {
+      transition: height 0.35s ease;
+    }
+
+    /* ===== BREAKPOINTS ===== */
+
+    /* XL (>=1200px) */
+    @media (min-width: 1200px) {
+      .faq-main-title { font-size: 44px; }
+      .faq-card-title { font-size: 32px; }
+    }
+
+    /* LG (992-1199px) */
+    @media (min-width: 992px) and (max-width: 1199px) {
+      .faq-main-title { font-size: 36px; }
+      .faq-card-title { font-size: 28px; }
+    }
+
+    /* MD (768-991px) */
+    @media (min-width: 768px) and (max-width: 991px) {
+      .faq-section { padding: 48px 0; }
+      .faq-main-title { font-size: 32px; }
+      .faq-card-title { font-size: 26px; }
+      .faq-accordion .accordion-button { font-size: 15px; }
+    }
+
+    /* SM (576-767px) */
+    @media (min-width: 576px) and (max-width: 767px) {
+      .faq-section { padding: 40px 0; }
+      .faq-main-title { font-size: 30px; margin-top: 32px; }
+      .faq-card-title { font-size: 26px; }
+      .faq-accordion .accordion-button { font-size: 15px; padding: 18px 0; }
+    }
+
+    /* XS / Mobile (<576px) */
+    @media (max-width: 575px) {
+      .faq-section { padding: 32px 0; }
+      .faq-main-title { font-size: 28px; margin-top: 32px; margin-bottom: 20px; }
+      .faq-card-title { font-size: 24px; }
+      .faq-card-subtitle { font-size: 13px; }
+      .faq-card-content { padding: 28px 20px 0 20px; }
+      .faq-accordion .accordion-button { font-size: 14px; padding: 16px 0; }
+      .faq-accordion .accordion-body { font-size: 13px; }
+      /* No hover on mobile */
+      .btn-contact::before { display: none; }
+      .btn-contact:hover {
+        color: #2d2d2d;
+        border-color: #2d2d2d;
+        background-color: #ffffff;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <section class="faq-section" aria-label="FAQ Section">
+    <div class="container">
+      <div class="row align-items-start g-4">
+
+        <!-- ===== LEFT CARD ===== -->
+        <div class="col-12 col-md-5 col-lg-4">
+          <div class="faq-card">
+
+            <!-- Image in NORMAL FLOW → gives card auto height naturally -->
+            <img
+              class="faq-card-bg"
+              src="Images/s-c-image-card-7.webp"
+              alt="Laboratorio Olfattivo perfume bottle with lemon and flower"
+            />
+
+            <!-- Text OVERLAID on top of the image (absolute) -->
+            <div class="faq-card-content">
+              <h2 class="faq-card-title">Still need help?</h2>
+              <p class="faq-card-subtitle">
+                Shoot our team an email &amp; we'll get back to you ASAP
+              </p>
+              <a href="#contact" class="btn-contact" id="btn-contact-us" role="button">
+                Contact Us
+              </a>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ===== RIGHT FAQ ===== -->
+        <div class="col-12 col-md-7 col-lg-8">
+          <h1 class="faq-main-title">Discover more in our FAQ</h1>
+
+          <div class="accordion faq-accordion" id="faqAccordion">
+
+            <!-- Q1 open by default -->
+            <div class="accordion-item">
+              <h3 class="accordion-header" id="headingOne">
+                <button class="accordion-button" type="button"
+                  data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                  aria-expanded="true" aria-controls="collapseOne" id="faq-btn-1">
+                  How long does it take to process an order?
+                  <span class="faq-icon" aria-hidden="true">&#8722;</span>
+                </button>
+              </h3>
+              <div id="collapseOne" class="accordion-collapse collapse show"
+                aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                  Our 24/7 Lace Contour Plunge Bra combines
+                  <span class="accent">gorgeous floral lace</span> with sheer overlay
+                  straps that hold you in and eliminates gaping. Removable pads let
+                  <span class="accent">you</span> customize you
+                </div>
+              </div>
+            </div>
+
+            <!-- Q2 -->
+            <div class="accordion-item">
+              <h3 class="accordion-header" id="headingTwo">
+                <button class="accordion-button collapsed" type="button"
+                  data-bs-toggle="collapse" data-bs-target="#collapseTwo"
+                  aria-expanded="false" aria-controls="collapseTwo" id="faq-btn-2">
+                  Do you ship internationally?
+                  <span class="faq-icon" aria-hidden="true">+</span>
+                </button>
+              </h3>
+              <div id="collapseTwo" class="accordion-collapse collapse"
+                aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                  Yes! We ship to over 50 countries worldwide. International shipping
+                  typically takes 7-14 business days. Duties and taxes may apply
+                  depending on your location.
+                </div>
+              </div>
+            </div>
+
+            <!-- Q3 -->
+            <div class="accordion-item">
+              <h3 class="accordion-header" id="headingThree">
+                <button class="accordion-button collapsed" type="button"
+                  data-bs-toggle="collapse" data-bs-target="#collapseThree"
+                  aria-expanded="false" aria-controls="collapseThree" id="faq-btn-3">
+                  What is your return policy?
+                  <span class="faq-icon" aria-hidden="true">+</span>
+                </button>
+              </h3>
+              <div id="collapseThree" class="accordion-collapse collapse"
+                aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                  We offer a 30-day hassle-free return policy. Items must be unworn,
+                  unwashed, and in original condition with tags attached. Simply
+                  contact us to initiate a return.
+                </div>
+              </div>
+            </div>
+
+            <!-- Q4 -->
+            <div class="accordion-item">
+              <h3 class="accordion-header" id="headingFour">
+                <button class="accordion-button collapsed" type="button"
+                  data-bs-toggle="collapse" data-bs-target="#collapseFour"
+                  aria-expanded="false" aria-controls="collapseFour" id="faq-btn-4">
+                  What are your sizing options?
+                  <span class="faq-icon" aria-hidden="true">+</span>
+                </button>
+              </h3>
+              <div id="collapseFour" class="accordion-collapse collapse"
+                aria-labelledby="headingFour" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                  We offer sizes from XS to 3XL across all our collections. Each
+                  product page includes a detailed size guide to help you find your
+                  perfect fit.
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- JS: Toggle +/- icon -->
+  <script>
+    var acc = document.getElementById("faqAccordion");
+
+    acc.addEventListener("show.bs.collapse", function (e) {
+      var btn = document.querySelector('[data-bs-target="#' + e.target.id + '"]');
+      if (btn) btn.querySelector(".faq-icon").innerHTML = "&#8722;";
+    });
+
+    acc.addEventListener("hide.bs.collapse", function (e) {
+      var btn = document.querySelector('[data-bs-target="#' + e.target.id + '"]');
+      if (btn) btn.querySelector(".faq-icon").textContent = "+";
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,48 @@
+i want to make same section font size,font-family,colr size image size same to same image me vesa krke do ,,,using html css bootstrap,,js ,,me ek dynamic website bna rhi hu so aese set krna ki user aur bhi card add kr ske show more button bhi ho 6 card k bad ,image me dikhaya he i ,,mobile view me koi bhi hover nai dena he,,,section responsive ho all media query points ho,,,aspect ratio use nai krna he,,,,height auto hi rkhna lekin design same ho,,,,jb me product pe hover kru to underline aaye left to right transition hoke,,and hover htaye to reverse jaye,,I want beginner friendly code ,easy to understand simple js button me hover effect ho,,,hover pe backround ho left to right animation k sath
+
+
+
+{{if &p_l_r_md == 'custom'}}
+				padding-left: {{= &custom_padding}}px !important;
+				padding-right: {{= &custom_padding}}px !important;
+			{{endif}}
+
+{{if &p_l_r == 'm_custom'}}
+				.hero{
+					padding-left: {{= &m_custom_padding}}px !important;
+					padding-right: {{= &m_custom_padding}}px !important;
+				}
+			{{endif}}
+
+
+@media (min-width:769px){
+			{{if &desktop != 'y'}}
+				.blog-section{
+					display: none !important;
+					}
+			{{endif}}
+
+
+
+
+{{if &mobile != 'y'}}
+				.blog-section{
+					display:none;
+				}
+			{{endif}}
+
+
+
+pt-md-{{= &p_md_top}} pb-md-{{= &p_md_bottom }} {{if p_l_r_md != 'custom'}} px-md-{{= &p_l_r_md }} {{endif}} pt-{{= &p_top }}  pb-{{= &p_bottom }} {{if p_l_r != 'm_custom'}} px-{{= &p_l_r }} {{endif}}"
+
+
+
+indicator_options = 'arrow' | indicator_options = 'both' 
+indicator_options = 'indicator' | indicator_options = 'both' 
+
+
+Arrow hover fill animation (.trending-bottom-btn::before)
+✅ Bullet progress animation (.progress + .animate class + JS)  animation
+
+
+undeline effect = growing effect

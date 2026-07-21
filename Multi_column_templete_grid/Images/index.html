@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Beauty Section with Swiper</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Swiper CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f8f9fa;
+      color: #1f2d3d;
+    }
+
+    .feature-section {
+      padding: 60px 20px;
+      background-color: #ffffff;
+    }
+
+    .feature-section h2 {
+      text-align: center;
+      margin-bottom: 24px;
+      font-size: 2rem;
+      font-weight: 600;
+    }
+
+    .feature-card {
+      background: #ffffff;
+      border: 1px solid #e8edf0;
+      border-radius: 18px;
+      padding: 28px 20px;
+      text-align: center;
+      height: auto;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 18px 40px rgba(31, 45, 61, 0.08);
+    }
+
+    .feature-icon {
+      width: 92px;
+      height: 92px;
+      border-radius: 50%;
+      background-color: #eef6f2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      margin: 0 auto 18px;
+    }
+
+    .feature-icon img {
+      width: 66px;
+      height: 66px;
+      object-fit: contain;
+      display: block;
+    }
+
+    .feature-title {
+      font-size: 1.12rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: #163a45;
+    }
+
+    .feature-text {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: #4f6070;
+      margin: 0;
+    }
+
+    .swiper {
+      padding: 10px 0 40px;
+    }
+
+    .swiper-wrapper {
+      display: grid;
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .swiper-slide {
+      width: 100%;
+      height: auto;
+    }
+
+    @media (min-width: 576px) {
+      .swiper-wrapper {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (min-width: 992px) {
+      .swiper-wrapper {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+    }
+
+    .swiper-button-prev,
+    .swiper-button-next,
+    .swiper-pagination {
+      display: none;
+    }
+
+    .swiper-button-prev,
+    .swiper-button-next {
+      color: #163a45;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: rgba(22, 58, 69, 0.08);
+    }
+
+    .swiper-button-prev::after,
+    .swiper-button-next::after {
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .swiper-pagination {
+      margin-top: 16px;
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .swiper-pagination-bullet {
+      width: 10px;
+      height: 10px;
+      background: #d2dce2;
+      opacity: 1;
+      border-radius: 50%;
+    }
+
+    .swiper-pagination-bullet-active {
+      background: #163a45;
+      width: 16px;
+      border-radius: 999px;
+    }
+
+    @media (max-width: 767.98px) {
+      .feature-section {
+        padding: 40px 12px;
+      }
+
+      .feature-card {
+        padding: 22px 16px;
+      }
+
+      .feature-card:hover {
+        transform: none;
+        box-shadow: none;
+      }
+
+      .swiper-button-prev,
+      .swiper-button-next {
+        display: none;
+      }
+    }
+
+    @media (min-width: 768px) and (max-width: 991.98px) {
+      .feature-section {
+        padding: 48px 18px;
+      }
+    }
+
+    @media (min-width: 992px) {
+      .feature-section {
+        padding: 70px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <section class="feature-section">
+    <div class="container">
+      <h2>Why Customers Choose Our Products</h2>
+
+      <div class="swiper mySwiper">
+        <div class="swiper-wrapper">
+
+          <div class="swiper-slide">
+            <div class="feature-card">
+              <div class="feature-icon">
+                <img src="Images/img1.avif" alt="Vegan icon" />
+              </div>
+              <h3 class="feature-title">Vegan, Cruelty-Free</h3>
+              <p class="feature-text">We have always used vegan and cruelty-free ingredients.</p>
+            </div>
+          </div>
+
+          <div class="swiper-slide">
+            <div class="feature-card">
+              <div class="feature-icon">
+                <img src="Images/img2.avif" alt="Gluten free icon" />
+              </div>
+              <h3 class="feature-title">Gluten Free</h3>
+              <p class="feature-text">We continuously use vegan and cruelty-free formulas.</p>
+            </div>
+          </div>
+
+          <div class="swiper-slide">
+            <div class="feature-card">
+              <div class="feature-icon">
+                <img src="Images/s-mc-icon-3.avif" alt="Paraben free icon" />
+              </div>
+              <h3 class="feature-title">Paraben Free</h3>
+              <p class="feature-text">We’ve always selected vegan and cruelty-free ingredients.</p>
+            </div>
+          </div>
+
+          <div class="swiper-slide">
+            <div class="feature-card">
+              <div class="feature-icon">
+                <img src="Images/s-mc-icon-4.avif" alt="Packaging icon" />
+              </div>
+              <h3 class="feature-title">Packaging</h3>
+              <p class="feature-text">We have consistently made vegan and cruelty-free choices.</p>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-pagination"></div>
+      </div>
+    </div>
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const swiperContainer = document.querySelector('.mySwiper');
+      const slideCount = swiperContainer?.querySelectorAll('.swiper-slide').length ?? 0;
+      const pagination = swiperContainer?.querySelector('.swiper-pagination');
+      const prevButton = swiperContainer?.querySelector('.swiper-button-prev');
+      const nextButton = swiperContainer?.querySelector('.swiper-button-next');
+
+      if (slideCount > 4) {
+        if (pagination) pagination.style.display = 'flex';
+        if (prevButton) prevButton.style.display = 'inline-flex';
+        if (nextButton) nextButton.style.display = 'inline-flex';
+
+        new Swiper('.mySwiper', {
+          slidesPerView: 1.05,
+          spaceBetween: 18,
+          watchOverflow: true,
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+          },
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+          breakpoints: {
+            576: {
+              slidesPerView: 2,
+              spaceBetween: 18,
+            },
+            992: {
+              slidesPerView: 4,
+              spaceBetween: 24,
+            }
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,486 @@
+<style>
+	$_section{
+
+		
+		:root {
+			--font-heading: 'Fraunces', Georgia, serif;
+			--font-body: 'Figtree', system-ui, -apple-system, sans-serif;
+
+			--color-primary: #0b2e3e;         /* Deep slate-blue for headings and fills */
+			--color-border: rgba(11, 46, 62, 0.12); /* Light slate-blue border */
+			--color-dot-inactive: #d0cdc9;
+			--color-dot-active: #0b2e3e;
+
+			--transition-speed: 0.35s;
+			--transition-timing: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+		}
+
+	
+
+		/* ══════════════════════════════════════════════════════
+		SECTION HEADING
+		══════════════════════════════════════════════════════ */
+		.features-section {
+			background-color: #ffffff;
+			overflow: hidden;
+		}
+
+		.features-title {
+			font-family: var(--font-heading);
+			font-size: 2.25rem;
+			font-weight: 500;
+			line-height: 1.35;
+			color: var(--color-primary);
+			max-width: 850px;
+			margin-bottom: 2.5rem;
+		}
+
+		/* ── Highlight Oval Overlay ── */
+		.highlight-wrapper {
+			position: relative;
+			display: inline-block;
+		}
+
+		.highlight-text {
+			font-family: var(--font-heading);
+			font-style: italic;
+			font-weight: 400;
+			position: relative;
+			z-index: 2;
+		}
+
+		.oval-stroke {
+			position: absolute;
+			top: -15%;
+			left: -8%;
+			width: 116%;
+			height: 135%;
+			z-index: 1;
+			pointer-events: none;
+		}
+
+		/* ══════════════════════════════════════════════════════
+		CHECK BUTTONS GRID & TRACK
+		══════════════════════════════════════════════════════ */
+		.features-slider-wrapper {
+			position: relative;
+			width: 100%;
+			max-width: 1200px;
+			padding: 10px 0;
+		}
+
+		.features-track {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			flex-wrap: wrap; /* Wraps by default if not a slider */
+			gap: 15px 18px;
+			width: 100%;
+			margin: 0 auto;
+		}
+
+		/* Override flex-wrap and gaps when Swiper slider is active */
+		.features-track.swiper-wrapper {
+			flex-wrap: nowrap !important;
+			justify-content: flex-start !important;
+			gap: 0 !important;
+		}
+
+		/* When slider mode is activated by JS — Swiper clips slides inside */
+		.features-slider-wrapper.slider-active {
+			overflow: hidden;              /* Hides slides outside the visible area */
+			padding: 10px 48px;            /* Room for the prev/next arrow buttons */
+		}
+
+		/* ══════════════════════════════════════════════════════
+		CHECK BUTTON STYLING
+		══════════════════════════════════════════════════════ */
+		.check-btn {
+			position: relative;
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			gap: 10px;
+			background-color: #ffffff;
+			border: 1px solid var(--color-border);
+			border-radius: 50px;
+			padding: 12px 24px;
+			font-family: var(--font-body);
+			font-size: 0.95rem;
+			font-weight: 500;
+			color:  #0b2e3e;
+			text-decoration: none;
+			cursor: pointer;
+			overflow: hidden;
+			z-index: 1;
+			white-space: nowrap;
+			height: auto; /* Required: auto height */
+			box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+			transition: color var(--transition-speed) ease, border-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+		}
+
+		.check-icon {
+			flex-shrink: 0;
+			position: relative;
+			z-index: 2;
+			transition: stroke var(--transition-speed) ease;
+		}
+
+		.check-btn span {
+			position: relative;
+			z-index: 2;
+		}
+
+		/* Background overlay helper for left-to-right hover fill */
+		.check-btn::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background-color: var(--color-primary);
+			z-index: 1; /* Render in front of white parent bg, behind z-index 2 text */
+			transform: scaleX(0);
+			transform-origin: left center; /* Fills from left to right */
+			border-radius: 50px;
+			transition: transform var(--transition-speed) var(--transition-timing);
+		}
+
+		/* ══════════════════════════════════════════════════════
+		DESKTOP HOVER STYLES ONLY (Disabled on Mobile)
+		══════════════════════════════════════════════════════ */
+		@media (min-width: 768px) {
+			/* Left-to-right background fill transition */
+			.check-btn:hover {
+				color: #ffffff;
+				border-color: var(--color-primary);
+				box-shadow: 0 4px 12px rgba(11, 46, 62, 0.15);
+			}
+
+			.check-btn:hover::before {
+				transform: scaleX(1);
+			}
+
+			/* Slider arrow hovers */
+			.slider-arrow:not(:disabled):hover {
+				background-color: var(--color-primary);
+				color: #ffffff;
+				border-color: var(--color-primary);
+				box-shadow: 0 4px 10px rgba(11, 46, 62, 0.15);
+			}
+		}
+
+		/* Mobile Tapping state fallback (no persistent hover) */
+		.check-btn:active {
+			background-color: var(--color-primary);
+			color: #ffffff;
+			border-color: var(--color-primary);
+		}
+
+		/* ══════════════════════════════════════════════════════
+		SLIDER NAVIGATION ARROWS
+		══════════════════════════════════════════════════════ */
+		.slider-arrow {
+			position: absolute;
+			top: 50%;
+			transform: translateY(-50%);
+			z-index: 10;
+			background-color: #ffffff;
+			color: var(--color-primary);
+			border: 1px solid var(--color-border);
+			width: 40px;
+			height: 40px;
+			border-radius: 50%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			cursor: pointer;
+			box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+			opacity: 0;
+			pointer-events: none;
+			transition: opacity 0.3s ease, background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+		}
+
+		.slider-arrow--prev { left: 0px; }
+		.slider-arrow--next { right: 0px; }
+
+		/* Show arrows only when active slider class exists */
+		.features-slider-wrapper.slider-active .slider-arrow {
+			opacity: 1;
+			pointer-events: auto;
+		}
+
+		.slider-arrow:disabled {
+			opacity: 0.3;
+			cursor: not-allowed;
+			box-shadow: none;
+		}
+
+		/* ══════════════════════════════════════════════════════
+		DOT INDICATORS
+		══════════════════════════════════════════════════════ */
+		.slider-dots {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			gap: 8px;
+			margin-top: 1.8rem;
+			visibility: hidden;
+			height: 10px;
+		}
+
+		.slider-dots.slider-active {
+			visibility: visible;
+		}
+
+		/* Base style for custom dot and Swiper bullet */
+		.dot,
+		.swiper-pagination-bullet {
+			width: 8px !important;
+			height: 8px !important;
+			border-radius: 50% !important;
+			background-color: var(--color-dot-inactive) !important;
+			border: none !important;
+			cursor: pointer !important;
+			padding: 0 !important;
+			margin: 0 !important;
+			opacity: 1 !important;
+			transition: background-color 0.3s ease, transform 0.3s ease !important;
+		}
+
+		/* Active style for custom dot and Swiper bullet */
+		.dot.dot--active,
+		.swiper-pagination-bullet-active {
+			background-color: var(--color-dot-active) !important;
+			transform: scale(1.25) !important;
+		}
+
+		/* ══════════════════════════════════════════════════════
+		RESPONSIVE BREAKPOINTS (ALL MEDIA QUERY POINTS)
+		══════════════════════════════════════════════════════ */
+
+		/* ── Large screens (992px to 1199.98px) ── */
+		@media (max-width: 1199.98px) {
+			.features-title {
+				font-size: 2rem;
+				max-width: 750px;
+			}
+		}
+
+		/* ── Small screens / Mobile Landscape (576px to 767.98px) ── */
+		@media (max-width: 767.98px) {
+			.features-title {
+				font-size: 1.75rem;
+				margin-bottom: 2rem;
+			}
+
+			.check-btn {
+				padding: 10px 20px;
+				font-size: 0.9rem;
+			}
+		}
+
+		/* ── Extra Small screens / Mobile Portrait (< 576px) ── */
+		@media (max-width: 575.98px) {
+			.features-title {
+				font-size: 1.5rem;
+				line-height: 1.3;
+			}
+
+			.features-slider-wrapper.slider-active {
+				padding: 10px 38px; /* Tighter navigation padding on mobile */
+			}
+		}
+
+
+	}
+
+	$_section { {{= &custom_css}} }
+</style>
+
+<section class="features-section py-5" id="features-section" aria-label="Store Benefits">
+	<div class="container text-center">
+
+		<!-- Section Title / Heading -->
+		<h1 class="features-title mx-auto">
+			Take the time you
+			<span class="highlight-wrapper">
+				<em class="highlight-text">deserve</em>
+				<svg class="oval-stroke" viewBox="0 0 100 40" fill="none" preserveAspectRatio="none" aria-hidden="true">
+					<!-- Custom hand-drawn style peach/rose loop path -->
+					<path d="M 5,22 C 3,12 25,4 65,4 C 95,4 98,12 95,20 C 90,28 55,36 25,36 C 8,36 3,28 15,20 C 25,12 60,6 90,8" stroke="#fbc5c0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+				</svg>
+			</span>, and let beauty shine within you
+		</h1>
+
+		<!-- ── Buttons/Cards Wrapper ── -->
+		<div class="features-slider-wrapper mx-auto">
+
+			<!-- Prev Navigation Button (Shown in slider mode only) -->
+			<button class="slider-arrow slider-arrow--prev" id="btn-slider-prev" aria-label="Previous slide">
+				<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+					<polyline points="15 18 9 12 15 6"></polyline>
+				</svg>
+			</button>
+
+			<!-- ── Flex Track Container (Dynamic items injected here) ── -->
+			<div class="features-track" id="features-track">
+				<!-- Buttons are dynamically generated from script.js -->
+			</div>
+
+			<!-- Next Navigation Button (Shown in slider mode only) -->
+			<button class="slider-arrow slider-arrow--next" id="btn-slider-next" aria-label="Next slide">
+				<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+					<polyline points="9 18 15 12 9 6"></polyline>
+				</svg>
+			</button>
+
+		</div>
+
+		<!-- Page Indicators / Dots (Shown in slider mode only) -->
+		<div class="slider-dots" id="features-dots" aria-label="Carousel pagination"></div>
+
+	</div>
+</section>
+
+<script>
+	// ══════════════════════════════════════════════════════
+	// CHECK BUTTONS DATA ARRAY
+	// ══════════════════════════════════════════════════════
+	// You can add more check buttons here.
+	// The section will automatically initialize a Swiper slider if total buttons > 5.
+	const checkButtonsData = [
+	{ text: "Free Shipping" },
+	{ text: "Money Guarantee" },
+	{ text: "Flexible Payment" },
+	{ text: "Online Support" },
+	{ text: "Return Within 7 Days" }
+	// ──────────────────────────────────────────────────
+	// ADD A 6th BUTTON HERE TO AUTOMATICALLY ENABLE SLIDER
+	// Example:  , { text: "Premium Quality" }
+	//           , { text: "Easy Refunds" }
+	// ──────────────────────────────────────────────────
+	];
+
+	// ══════════════════════════════════════════════════════
+	// DOM REFERENCES
+	// ══════════════════════════════════════════════════════
+	const track = document.getElementById("features-track");
+	const wrapper = track.parentElement;
+	const prevBtn = document.getElementById("btn-slider-prev");
+	const nextBtn = document.getElementById("btn-slider-next");
+	const dotsContainer = document.getElementById("features-dots");
+
+	// Keep track of the Swiper instance
+	let swiperInstance = null;
+
+	// ══════════════════════════════════════════════════════
+	// STEP 1: RENDER THE BUTTON CARDS DYNAMICALLY
+	// ══════════════════════════════════════════════════════
+	function renderCheckButtons() {
+		track.innerHTML = ""; // Clear existing track content
+
+		checkButtonsData.forEach((btn) => {
+			// Create check button container
+			const button = document.createElement("div");
+			// We will add 'swiper-slide' class dynamically if slider is active
+			button.className = "check-btn";
+			button.setAttribute("role", "button");
+			button.setAttribute("tabindex", "0");
+			button.setAttribute("aria-label", btn.text);
+
+			// Inject SVG Check Icon and the text
+			button.innerHTML = `
+			<svg class="check-icon" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.8" fill="none" stroke-linecap="round" stroke-linejoin="round">
+			<polyline points="20 6 9 17 4 12"></polyline>
+			</svg>
+			<span>${btn.text}</span>
+			`;
+
+			track.appendChild(button);
+		});
+	}
+
+	// ══════════════════════════════════════════════════════
+	// STEP 2: SETUP AND INITIALIZE SWIPER
+	// ══════════════════════════════════════════════════════
+	function setupSlider() {
+		const totalButtons = checkButtonsData.length;
+
+		// The slider activates ONLY if total buttons > 5
+		const isSliderRequired = totalButtons > 5;
+
+		if (isSliderRequired) {
+			// 1. Add Swiper structure classes
+			wrapper.classList.add("swiper", "slider-active");
+			track.classList.add("swiper-wrapper");
+			dotsContainer.classList.add("swiper-pagination", "slider-active");
+
+			const cards = track.querySelectorAll(".check-btn");
+			cards.forEach((card) => {
+				card.classList.add("swiper-slide");
+			});
+
+			// 2. Initialize Swiper.js if not already initialized
+			if (!swiperInstance) {
+				swiperInstance = new Swiper(wrapper, {
+					slidesPerView: 5,
+					spaceBetween: 18,
+					navigation: {
+						nextEl: "#btn-slider-next",
+						prevEl: "#btn-slider-prev",
+					},
+					pagination: {
+						el: dotsContainer,
+						clickable: true,
+						bulletClass: 'dot swiper-pagination-bullet',
+						bulletActiveClass: 'dot--active swiper-pagination-bullet-active'
+					},
+					breakpoints: {
+						0: { slidesPerView: 1, spaceBetween: 12 },
+						576: { slidesPerView: 2, spaceBetween: 15 },
+						768: { slidesPerView: 3, spaceBetween: 18 },
+						992: { slidesPerView: 4, spaceBetween: 18 },
+						1200: { slidesPerView: 5, spaceBetween: 18 }
+					}
+				});
+			} else {
+				// Update Swiper layout if already running
+				swiperInstance.update();
+			}
+
+		} else {
+			// 1. Destroy Swiper instance if active
+			if (swiperInstance) {
+				swiperInstance.destroy(true, true);
+				swiperInstance = null;
+			}
+
+			// 2. Remove Swiper structure classes to revert to simple flex row
+			wrapper.classList.remove("swiper", "slider-active");
+			track.classList.remove("swiper-wrapper");
+			dotsContainer.classList.remove("swiper-pagination", "slider-active");
+			dotsContainer.innerHTML = "";
+
+			const cards = track.querySelectorAll(".check-btn");
+			cards.forEach((card) => {
+				card.classList.remove("swiper-slide");
+				// Clean up any Swiper inline styles
+				card.style.width = "";
+				card.style.marginRight = "";
+			});
+
+			track.style.transform = "";
+		}
+	}
+
+	// ══════════════════════════════════════════════════════
+	// INITIALIZE ON DOM LOAD
+	// ══════════════════════════════════════════════════════
+	document.addEventListener("DOMContentLoaded", () => {
+		renderCheckButtons();
+		setupSlider();
+	});
+
+</script>

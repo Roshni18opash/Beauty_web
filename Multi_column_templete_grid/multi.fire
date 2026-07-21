@@ -1,0 +1,490 @@
+<style>
+	$_section{
+
+		.feature-section {
+			background-color:{{= &section_bg}};
+			{{if &p_l_r_md == 'custom'}}
+				padding-left: {{= &custom_padding}}px !important;
+				padding-right: {{= &custom_padding}}px !important;
+			{{endif}}
+		}
+
+		.feature-section h2 {
+			text-align: center;
+			margin-bottom: 24px;
+			font-size: 2rem;
+			font-weight: 600;
+		}
+
+		.feature-card {
+			background: transparent;
+			border: none;
+			border-radius: 0;
+			padding: 48px 10px;
+			text-align: center;
+			height: auto;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: flex-start;
+		}
+
+		.feature-icon {
+			width: auto;
+			height: auto;
+			min-height: 80px;
+			background-color:{{= &card_bg}};
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			margin: 0 auto 28px;
+			border-radius:{{= &img_radius}}px;
+		}
+
+		.feature-icon img {
+			width: 80px !important;
+			height: 80px !important;
+			object-fit: contain !important;
+			display: block;
+			border-radius:{{= &img_radius}}px;
+		}
+
+		.feature-title {
+			font-size:{{= &title_size}}px;
+			font-weight:{{= &title_weight}};
+			margin-bottom: 10px;
+			color:{{= &title_clr}};
+			font-family:'Figtree',sans-serif;
+		}
+
+		{{if &title_hs != 'y'}}
+			.feature-title { visibility: hidden !important; }
+		{{endif}}
+
+		.feature-text {
+			font-family: 'Fraunces',serif;
+			font-size:{{= &des_size}}px;
+			line-height: 1.7;
+			color:{{= &des_clr}};
+			font-weight:{{= &des_weight}};
+			margin: 0;
+			display: -webkit-box;
+			-webkit-line-clamp: 2;
+			-webkit-box-orient: vertical;
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
+
+		{{if &description != 'y'}}
+			.feature-text { visibility: hidden !important; }
+		{{endif}}
+
+		.swiper {
+			position: relative;
+			padding: 10px 0 40px;
+		}
+
+		.swiper-wrapper {
+			display: flex !important;
+			flex-wrap: nowrap !important;
+		}
+
+		.swiper-slide {
+			width: calc((100% - ({{= &spacebetween}}px * ({{= &slidepreview}} - 1))) / {{= &slidepreview}}) !important;
+			height: auto;
+		}
+
+		/* When locked (fewer slides than slidesPerView) — equal space between all cards */
+		.swiper:has(.swiper-button-lock) .swiper-wrapper,
+		.swiper:has(.swiper-pagination-lock) .swiper-wrapper {
+			justify-content: space-evenly !important;
+		}
+
+		/* ============ LOCK STATES (fewer slides than slidesPerView) ============ */
+		.swiper-button-prev.swiper-button-lock,
+		.swiper-button-next.swiper-button-lock {
+			display: none !important;
+		}
+
+		.swiper-pagination.swiper-pagination-lock {
+			display: none !important;
+		}
+
+		/* ============ DESKTOP ARROWS ============ */
+		.swiper-button-prev,
+		.swiper-button-next {
+			display: none !important;
+			width: 42px;
+			height: 42px;
+			border-radius: 50%;
+			background-color: rgb(from {{= &arw_bg}} r g b / {{= &arw_opacity}}%) !important;
+			color: {{= &arw_color}} !important;
+			align-items: center;
+			justify-content: center;
+			position: absolute !important;
+			top: 50% !important;
+			margin-top: -21px !important;
+			overflow: hidden;
+			z-index: 10;
+			transition: left .4s ease, right .4s ease, opacity .4s ease;
+		}
+
+		{{if &indicator_options == "arrow" || &indicator_options == "both"}}
+			.swiper-button-prev,
+			.swiper-button-next {
+				display: flex !important;
+			}
+		{{endif}}
+
+		/* Hidden by default, slide in on container hover (desktop only) */
+		.swiper-button-prev {
+			left: 0 !important;
+			opacity: 0;
+		}
+
+		.swiper-button-next {
+			right: 0 !important;
+			opacity: 0;
+		}
+
+		@media (min-width: 768px) {
+			.swiper:hover .swiper-button-prev {
+				left: 10px !important;
+				opacity: calc({{= &arw_opacity}} / 100);
+			}
+
+			.swiper:hover .swiper-button-next {
+				right: 10px !important;
+				opacity: calc({{= &arw_opacity}} / 100);
+			}
+
+			.swiper:hover .swiper-button-prev.swiper-button-disabled,
+			.swiper:hover .swiper-button-next.swiper-button-disabled {
+				opacity: .5 !important;
+				pointer-events: auto !important;
+				cursor: not-allowed;
+			}
+		}
+
+		.swiper-button-prev::after,
+		.swiper-button-next::after {
+			font-size: 18px !important;
+			font-weight: 700;
+			color: {{= &arw_color}} !important;
+			position: relative;
+			z-index: 3;
+			transition: color .3s ease;
+		}
+
+		/* Hover fill animation (desktop only) */
+		.swiper-button-prev::before,
+		.swiper-button-next::before {
+			content: '';
+			position: absolute;
+			inset: 0;
+			background-color: {{= &arw_color}} !important;
+			transform: translateX(-100%);
+			transition: transform .4s ease;
+			z-index: 1;
+		}
+
+		@media (min-width: 768px) {
+			.swiper-button-prev:hover::before,
+			.swiper-button-next:hover::before {
+				transform: translateX(0);
+			}
+
+			.swiper-button-prev:hover::after,
+			.swiper-button-next:hover::after {
+				color: {{= &arw_bg}} !important;
+			}
+		}
+
+		.blocked-icon {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			font-size: 16px;
+			font-weight: bold;
+			color: red;
+			z-index: 20;
+			pointer-events: none;
+		}
+
+		/* ============ DESKTOP PAGINATION ============ */
+		.swiper-pagination {
+			position: static !important;
+			margin-top: 16px;
+			display: none;
+			justify-content: center;
+			gap: 8px;
+		}
+
+		{{if &indicator_options == "indicator" || &indicator_options == "both"}}
+			.swiper-pagination { display: flex !important; }
+		{{endif}}
+
+		.swiper-pagination .swiper-pagination-bullet {
+			width: 10px !important;
+			height: 10px !important;
+			min-height: 10px !important;
+			border-radius: 50% !important;
+			background: {{= &bullet_bg}} !important;
+			opacity: 0.25 !important;
+			position: relative;
+			overflow: hidden;
+			display: flex !important;
+			align-items: center;
+			margin: 0 !important;
+			transition: width 0.3s ease, border-radius 0.3s ease, background 0.3s ease, opacity 0.3s ease;
+		}
+
+		.swiper-pagination .swiper-pagination-bullet-active {
+			background: #163a45 !important;
+			width: 32px !important;
+			border-radius: 999px !important;
+			opacity: 1 !important;
+		}
+
+		.swiper-pagination .swiper-pagination-bullet .progress {
+			position: absolute;
+			top: 0; left: 0;
+			height: 100%;
+			width: 0%;
+			border-radius: inherit;
+			background: {{= &bullet_bg}} !important;
+			opacity: 1;
+		}
+
+		.swiper-pagination .swiper-pagination-bullet-active.animate .progress {
+			width: 100%;
+			{{if &auto_play == 'y'}}
+				transition: width {{= &auto_play_speed}}s linear;
+			{{else}}
+				transition: width 5s linear;
+			{{endif}}
+		}
+
+		@media (max-width: 767px) {
+
+			.feature-section {
+				{{if &p_l_r == 'm_custom'}}
+					padding-left: {{= &m_custom_padding}}px !important;
+					padding-right: {{= &m_custom_padding}}px !important;
+				{{endif}}
+			}
+
+			{{if &mobile != 'y'}}
+				.feature-section { display:none; }
+			{{endif}}
+
+			.feature-card { padding: 32px 16px; }
+
+			.swiper-slide {
+				width: calc((100% - ({{= &spacebetween}}px * ({{= &m_slideperview}} - 1))) / {{= &m_slideperview}}) !important;
+			}
+
+			.swiper:has(.swiper-button-lock) .swiper-wrapper,
+			.swiper:has(.swiper-pagination-lock) .swiper-wrapper {
+				justify-content: space-evenly !important;
+			}
+
+			/* ============ MOBILE ARROWS (always visible, no hover needed) ============ */
+			.swiper-button-prev,
+			.swiper-button-next {
+				display: none !important;
+				width: 32px !important;
+				height: 32px !important;
+				margin-top: -16px !important;
+				background-color: rgb(from {{= &m_arrow_back_color}} r g b / {{= &m_arrow_back_opacity}}%) !important;
+			}
+
+			{{if &m_indicator_options == "arrow" || &m_indicator_options == "both"}}
+				.swiper-button-prev,
+				.swiper-button-next {
+					display: flex !important;
+				}
+			{{endif}}
+
+			.swiper-button-prev,
+			.swiper-button-prev:hover {
+				left: 0 !important;
+				opacity: calc({{= &m_arrow_back_opacity}} / 100) !important;
+			}
+
+			.swiper-button-next,
+			.swiper-button-next:hover {
+				right: 0 !important;
+				opacity: calc({{= &m_arrow_back_opacity}} / 100) !important;
+			}
+
+			.swiper-button-prev.swiper-button-disabled,
+			.swiper-button-next.swiper-button-disabled {
+				opacity: 0.5 !important;
+				cursor: not-allowed !important;
+			}
+
+			.swiper-button-prev::after,
+			.swiper-button-next::after {
+				font-size: 14px !important;
+				color: {{= &m_arrow_color}} !important;
+			}
+
+			.swiper-button-prev::before,
+			.swiper-button-next::before {
+				background-color: {{= &m_arrow_color}} !important;
+			}
+
+			/* No hover/active fill effect on mobile — force default state always */
+			.swiper-button-prev:hover::before,
+			.swiper-button-next:hover::before,
+			.swiper-button-prev:active::before,
+			.swiper-button-next:active::before {
+				transform: translateX(-100%) !important;
+			}
+
+			.swiper-button-prev:hover::after,
+			.swiper-button-next:hover::after,
+			.swiper-button-prev:active::after,
+			.swiper-button-next:active::after {
+				color: {{= &m_arrow_color}} !important;
+			}
+
+			/* ============ MOBILE PAGINATION ============ */
+			.swiper-pagination { display: none; }
+
+			{{if &m_indicator_options == "indicator" || &m_indicator_options == "both"}}
+				.swiper-pagination { display: flex !important; }
+			{{endif}}
+
+			.swiper-pagination .swiper-pagination-bullet {
+				background: {{= &m_indicator_background_color}} !important;
+			}
+
+			.swiper-pagination .swiper-pagination-bullet .progress {
+				background: {{= &m_indicator_color}} !important;
+			}
+
+			.swiper-pagination .swiper-pagination-bullet-active {
+				background: #163a45 !important;
+				opacity: 1 !important;
+			}
+		}
+
+		@media (min-width: 768px) and (max-width: 991px) {
+			.feature-section { padding: 64px 24px; }
+		}
+
+		@media (min-width: 992px) {
+			.feature-section { padding: 90px 40px; }
+			{{if &desktop != 'y'}}
+				.feature-section { display:none; }
+			{{endif}}
+		}
+	}
+
+	$_section{
+		{{= &custom_css}}
+	}
+</style>
+
+
+<section class="feature-section pt-md-{{= &p_md_top}} pb-md-{{= &p_md_bottom}} {{if p_l_r_md != 'custom'}}px-md-{{= &p_l_r_md}}{{endif}} pt-{{= &p_top}} pb-{{= &p_bottom}} {{if p_l_r != 'm_custom'}}px-{{= &p_l_r}}{{endif}}">
+
+	<div class="{{= &section_spacing}} position-relative">
+
+		<div class="swiper $_s_class-mySwiper">
+			<div class="swiper-wrapper">
+				{{with each &collection as $img}}
+					<div class="swiper-slide">
+						{{use component $img}}
+					</div>
+				{{endwith}}
+			</div>
+
+			{{if &indicator_options == "arrow" || &indicator_options == "both"
+				|| &m_indicator_options == "arrow" || &m_indicator_options == "both"}}
+				<div class="$_s_class-swiper-button-prev swiper-button-prev"></div>
+				<div class="$_s_class-swiper-button-next swiper-button-next"></div>
+			{{endif}}
+
+			{{if &indicator_options == "indicator" || &indicator_options == "both"
+				|| &m_indicator_options == "indicator" || &m_indicator_options == "both"}}
+				<div class="$_s_class-swiper-pagination swiper-pagination"></div>
+			{{endif}}
+		</div>
+	</div>
+</section>
+
+<script>
+	document.addEventListener('DOMContentLoaded', function () {
+
+		const swiperContainer = document.querySelector('.$_s_class-mySwiper');
+
+		const swiper = new Swiper('.$_s_class-mySwiper', {
+			slidesPerView: {{= &slidepreview}},
+			spaceBetween: {{= &spacebetween}},
+			watchOverflow: true,
+			loop: {{= &slide_looping == 'y' ? "true" : "false"}},
+
+			autoplay: {{= &auto_play == 'y'
+				? "{ delay: " + (&auto_play_speed * 1000) + ", disableOnInteraction: false }"
+				: "false"
+			}},
+
+			pagination: {
+				el: '.$_s_class-swiper-pagination',
+				clickable: true,
+				renderBullet: (index, className) =>
+					`<span class="${className}"><span class="progress"></span></span>`
+			},
+			navigation: {
+				nextEl: '.$_s_class-swiper-button-next',
+				prevEl: '.$_s_class-swiper-button-prev',
+			},
+
+			on: {
+				init() {
+					setTimeout(() => {
+						const activeEl = this.pagination?.el?.querySelector('.swiper-pagination-bullet-active');
+						if (activeEl) activeEl.classList.add('animate');
+					}, 10);
+				},
+				slideChange() {
+					const bullets = this.pagination?.el?.querySelectorAll('.swiper-pagination-bullet');
+					bullets?.forEach(b => b.classList.remove('animate'));
+					setTimeout(() => {
+						const activeEl = this.pagination?.el?.querySelector('.swiper-pagination-bullet-active');
+						if (activeEl) activeEl.classList.add('animate');
+					}, 10);
+				}
+			},
+
+			breakpoints: {
+				0: {
+					slidesPerView: {{= &m_slideperview}},
+					spaceBetween: 18,
+				},
+				768: {
+					slidesPerView: {{= &slidepreview}},
+					spaceBetween: {{= &spacebetween}},
+				}
+			}
+		});
+
+		// ── Disabled arrow click → blocked icon (scoped to this section) ──
+		swiperContainer?.addEventListener('click', e => {
+			const button = e.target.closest('.$_s_class-swiper-button-prev, .$_s_class-swiper-button-next');
+			if (!button || !button.classList.contains('swiper-button-disabled')) return;
+			if (button.querySelector('.blocked-icon')) return;
+
+			const icon = document.createElement('span');
+			icon.className = 'blocked-icon';
+			icon.innerHTML = '⊘';
+			button.appendChild(icon);
+
+			setTimeout(() => icon.remove(), 700);
+		});
+	});
+</script>

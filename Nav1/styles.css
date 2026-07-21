@@ -1,0 +1,622 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: "Figtree", "Poppins", sans-serif;
+  background: #fff;
+  color: #1f2937;
+}
+
+/* ================================================
+   HEADER WRAPPER — fixed at the top of the viewport
+================================================ */
+#site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1100;
+  background: #ffffff;
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Spacer element to prevent content from jumping under the fixed header */
+#site-header-spacer {
+  display: block;
+  width: 100%;
+  height: 160px; /* fallback value, JS will update dynamically */
+}
+
+/* ================================================
+   BAR 1 — ANNOUNCEMENT BAR (slides up on collapse)
+================================================ */
+#announce-bar {
+  background: #fdeef0;
+  border-bottom: 1px solid rgba(0,0,0,0.04);
+  font-size: 14px;
+  font-family: "Poppins", sans-serif;
+  position: relative;
+  z-index: 1001;
+  transition: margin-top 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.4s ease;
+  overflow: hidden;
+}
+
+.header-collapsed #announce-bar {
+  margin-top: calc(-1 * var(--announce-height, 44px));
+  opacity: 0;
+}
+
+.announce-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.ann-left a {
+  color: #234;
+  text-decoration: none;
+  margin-right: 16px;
+  font-weight: 400;
+}
+.ann-left a:hover { text-decoration: underline; }
+.ann-center {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  justify-content: center;
+}
+.ann-center .emoji { font-size: 18px; }
+.ann-center .message { font-weight: 600; color: #102027; }
+.ann-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.country { display: flex; align-items: center; gap: 8px; }
+.country img.flag {
+  display: inline-block;
+  vertical-align: middle;
+  width: 22px; height: 14px;
+  object-fit: cover;
+  border-radius: 2px;
+}
+.country select {
+  border: none;
+  background: transparent;
+  font-size: 14px;
+  padding: 4px;
+  appearance: none;
+  cursor: pointer;
+}
+.socials { display: flex; gap: 8px; }
+.social {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 6px;
+  text-decoration: none;
+  color: #102027;
+}
+.social img { width: 16px; height: 16px; display: block; }
+.social.facebook img { width: 18px; height: 18px; }
+.social:hover { opacity: 0.75; }
+
+/* ================================================
+   BAR 2 — LOGO / SEARCH HEADER (always visible)
+================================================ */
+#top-header {
+  background: #ffffff;
+  border-bottom: 1px solid #eee;
+  padding: 8px 0;
+  position: relative;
+  z-index: 1002;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+.top-header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+.search-box {
+  flex: 1 1 260px;
+  max-width: 320px;
+  order: 1;
+}
+.search-box .input-group {
+  border: 1px solid #d9d9d9;
+  border-radius: 50px;
+  overflow: hidden;
+}
+.search-box input {
+  border: none;
+  padding: 6px 18px;
+  font-size: 14px;
+  color: #333;
+}
+.search-box input:focus { box-shadow: none; outline: none; }
+.search-box input::placeholder { color: #999; }
+.search-box .btn-search {
+  background: #fff;
+  border: none;
+  padding: 0 12px;
+  color: #0f2027;
+  cursor: pointer;
+}
+.site-logo {
+  order: 2;
+  text-align: center;
+  flex: 1 1 200px;
+}
+.site-logo p {
+  margin: 0;
+  padding: 0;
+}
+.site-logo .logo-title {
+  font-family: "Fraunces", serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: #0f2027;
+  line-height: 1;
+  margin-bottom: 2px;
+}
+.site-logo .logo-subtitle {
+  font-family: "Fraunces", serif;
+  font-size: 10px;
+  font-style: italic;
+  color: #0f2027;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  line-height: 1;
+}
+.header-actions {
+  order: 3;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex: 1 1 260px;
+  justify-content: flex-end;
+}
+.header-actions a {
+  color: #0f2027;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.header-actions a:hover { opacity: 0.7; }
+.cart-icon-wrap {
+  position: relative;
+  width: 36px; height: 36px;
+  border: 1px solid #d9d9d9;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.cart-count {
+  position: absolute;
+  top: -5px; right: -5px;
+  background: #c0392b;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ================================================
+   BAR 3 — CATEGORY NAV (collapses and fades)
+================================================ */
+#main-navbar {
+  background-color: #0f2027;
+  padding: 14px 0;
+  position: relative;
+  z-index: 999;
+  max-height: 120px;
+  opacity: 1;
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), padding 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.3s ease;
+}
+
+.header-collapsed #main-navbar {
+  max-height: 0;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  opacity: 0;
+  pointer-events: none;
+}
+.main-navbar-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+#main-navbar .nav-link {
+  color: #ffffff !important;
+  font-weight: 600;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 16px !important;
+}
+#main-navbar .nav-link:hover { opacity: 0.8; }
+#main-navbar .nav-link::after { display: none; }
+.dropdown-arrow {
+  font-size: 9px;
+  margin-left: 6px;
+  display: inline-block;
+  vertical-align: middle;
+}
+.btn-on-sale {
+  background-color: #c0392b;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 8px 22px;
+  border-radius: 50px;
+  border: none;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.btn-on-sale:hover { background-color: #a83224; color: #fff; }
+#main-navbar .dropdown-menu {
+  border: none;
+  border-radius: 10px;
+  margin-top: 10px;
+  padding: 10px 0;
+}
+#main-navbar .dropdown-item { font-size: 14px; padding: 8px 20px; }
+#main-navbar .dropdown-item:hover { background-color: #f2f2f2; }
+#main-navbar .navbar-toggler { border-color: rgba(255,255,255,0.4); }
+#main-navbar .navbar-toggler-icon { filter: invert(1); }
+
+/* ==========================================================================
+   RESPONSIVE DESIGN SYSTEM
+   ========================================================================== */
+
+/* ── 1. DESKTOP & LAPTOP DEVICES (min-width: 992px) ─────────────────────── */
+@media (min-width: 992px) {
+  /* Prevent horizontal wrapping on large screens and keep elements aligned in one row */
+  .top-header-inner {
+    flex-wrap: nowrap;
+  }
+}
+
+/* ── 2. TABLET DEVICES (min-width: 768px) and (max-width: 991.98px) ───────── */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  /* Make search box and account/cart actions more compact to fit on tablet screens */
+  .search-box {
+    max-width: 250px;
+    flex: 1 1 200px;
+  }
+  .header-actions {
+    gap: 14px;
+    flex: 1 1 200px;
+  }
+  .header-actions a {
+    font-size: 13px;
+  }
+  .site-logo .logo-title {
+    font-size: 20px;
+  }
+}
+
+/* ── 3. MOBILE DEVICES (max-width: 767.98px) ────────────────────────────── */
+@media (max-width: 767.98px) {
+  /* 
+     A. Announcement Bar (Top pink bar): 
+     Stack columns vertically on mobile and center-align content.
+  */
+  .announce-inner {
+    flex-direction: column;
+    gap: 8px;
+    padding: 8px 12px;
+    text-align: center;
+  }
+  .ann-left {
+    order: 2;
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+  }
+  .ann-left a {
+    margin-right: 0;
+    font-size: 12px;
+  }
+  .ann-center {
+    order: 1;
+    width: 100%;
+    margin: 4px 0;
+  }
+  .ann-center .message {
+    font-size: 13px;
+  }
+  .ann-right {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+    gap: 16px;
+  }
+
+  /* 
+     B. Middle Logo & Search Header:
+     Stack items vertically: Logo on top, Search box in middle, Action icons at bottom.
+  */
+  .top-header-inner {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 16px;
+  }
+  .site-logo {
+    order: 1;
+    width: 100%;
+    margin-bottom: 4px;
+  }
+  .search-box {
+    order: 2;
+    width: 100%;
+    max-width: 100%;
+  }
+  .header-actions {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+    gap: 18px;
+  }
+  /* Hide the text label descriptions on mobile to save space, keeping icons visible */
+  .header-actions .action-text {
+    display: none;
+  }
+  .header-actions a i, 
+  .header-actions a svg {
+    font-size: 20px;
+  }
+
+  /* 
+     C. Category Navbar:
+     Styling collapsed navbar list menu items on mobile screen.
+  */
+  #main-navbar .navbar-nav {
+    padding-top: 8px;
+    gap: 4px;
+  }
+  .btn-on-sale {
+    display: inline-block;
+    margin-top: 8px;
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* Demo content */
+.demo-content { padding: 60px 20px; max-width: 700px; margin: 0 auto; }
+.demo-content h2 { margin-bottom: 12px; font-family: "Fraunces", serif; color: #0f2027; }
+.demo-block {
+  height: 500px;
+  background: #f3f4f6;
+  border-radius: 12px;
+  margin: 20px 0 40px;
+}
+
+/* ================================================
+   MEGA MENU — SHOP BY CATEGORIES
+   Matches the Ceramide Cosmetic screenshot design:
+   Left panel = category list, Right panel = product image grid
+================================================ */
+
+/* The li that holds the mega menu — no overflow clipping */
+.mega-dropdown {
+  position: static !important;
+}
+
+/* Mega menu — hidden by default, full-width below navbar */
+.mega-menu {
+  display: none;
+  position: fixed;
+  left: 0;
+  right: 0;
+  width: 100vw;
+  max-width: 100vw;
+  margin: 0;
+  border-radius: 0 0 14px 14px;
+  border: none;
+  border-top: 2px solid #f0f0f0;
+  padding: 0;
+  box-shadow: 0 16px 48px rgba(0,0,0,0.14);
+  background: #ffffff;
+  z-index: 1200;
+  opacity: 0;
+  transform: translateY(-8px);
+  transition: opacity 0.22s ease, transform 0.22s ease;
+  pointer-events: none;
+  /* Height: compact ~280px so all 8 cards fit and main page stays visible below */
+  max-height: calc(100vh - 140px);
+  overflow-y: auto;
+}
+
+/* Visible state — toggled by JS */
+.mega-menu.mega-open {
+  display: flex;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: all;
+  animation: megaSlideIn 0.22s ease forwards;
+}
+
+@keyframes megaSlideIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Arrow rotate when open */
+.mega-toggle .dropdown-arrow {
+  transition: transform 0.22s ease;
+}
+.mega-toggle[aria-expanded="true"] .dropdown-arrow {
+  transform: rotate(180deg);
+}
+
+/* Active nav-link highlight */
+.mega-toggle[aria-expanded="true"] {
+  opacity: 1 !important;
+  color: #ffffff;
+}
+
+/* ── LEFT PANEL: Category list ── */
+.mega-categories {
+  width: 190px;
+  min-width: 190px;
+  background: #f9f9f9;
+  border-right: 1px solid #efefef;
+  padding: 10px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.mega-cat-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 18px;
+  text-decoration: none;
+  color: #2d2d2d;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: "Figtree", "Poppins", sans-serif;
+  border-left: 3px solid transparent;
+  transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+}
+
+.mega-cat-item i {
+  font-size: 11px;
+  color: #aaa;
+  transition: color 0.18s ease;
+}
+
+.mega-cat-item:hover,
+.mega-cat-item.active {
+  background: #ffffff;
+  border-left-color: #0f2027;
+  color: #0f2027;
+  font-weight: 700;
+  box-shadow: inset 0 0 0 0 transparent;
+}
+
+.mega-cat-item:hover i,
+.mega-cat-item.active i {
+  color: #0f2027;
+}
+
+/* ── RIGHT PANEL: Product image grid ── */
+.mega-products {
+  flex: 1;
+  padding: 12px 18px;
+  background: #ffffff;
+}
+
+.mega-product-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px 12px;
+  animation: megaFadeIn 0.22s ease;
+}
+
+@keyframes megaFadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0);   }
+}
+
+/* Individual product card */
+.mega-prod-card {
+  text-decoration: none;
+  color: #2d2d2d;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.mega-prod-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+}
+
+/* Image wrapper — sleek compact ratio so both rows fit easily */
+.mega-prod-img {
+  width: 100%;
+  aspect-ratio: 16 / 8.5;
+  max-height: 85px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #f3f4f6;
+}
+
+.mega-prod-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.35s ease;
+}
+
+.mega-prod-card:hover .mega-prod-img img {
+  transform: scale(1.05);
+}
+
+/* Label below each image */
+.mega-prod-label {
+  font-size: 12px;
+  font-weight: 600;
+  font-family: "Figtree", "Poppins", sans-serif;
+  color: #1f2937;
+  padding: 0 2px;
+  text-align: center;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── Responsive: hide mega grid on mobile, show simple list ── */
+@media (max-width: 991.98px) {
+  #main-navbar .mega-dropdown .dropdown-menu {
+    position: static !important;
+    box-shadow: none !important;
+    width: 100% !important;
+  }
+  .mega-menu {
+    flex-direction: column;
+  }
+  .mega-categories {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #efefef;
+    padding: 8px 0;
+  }
+  .mega-products {
+    padding: 16px;
+  }
+  .mega-product-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+}
